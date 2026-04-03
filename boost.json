@@ -1,0 +1,15 @@
+{
+    "agents": [
+        "claude_code"
+    ],
+    "editors": [
+        "claude_code",
+        "cursor",
+        "phpstorm"
+    ],
+    "guidelines": [
+        "inertiajs/inertia-laravel",
+        "laravel/wayfinder"
+    ],
+    "herd_mcp": true
+}
