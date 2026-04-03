@@ -21,8 +21,20 @@ return [
         'enabled' => true,
         'url' => 'http://127.0.0.1:13714',
         // 'bundle' => base_path('bootstrap/ssr/ssr.mjs'),
-
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Script Element for Initial Page
+    |--------------------------------------------------------------------------
+    |
+    | When enabled, the initial page data will be rendered in a <script> tag
+    | instead of a data attribute on the root element. This is required by
+    | newer versions of the Inertia client-side adapters.
+    |
+    */
+
+    'use_script_element_for_initial_page' => true,
 
     /*
     |--------------------------------------------------------------------------

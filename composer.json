@@ -98,7 +98,7 @@
             "@test:types"
         ],
         "test:types": [
-            "phpstan",
+            "phpstan --memory-limit=512M",
             "npm run test:types"
         ],
         "test": [

@@ -14,7 +14,7 @@ createServer((page) =>
             resolvePageComponent(
                 `./pages/${name}.tsx`,
                 import.meta.glob('./pages/**/*.tsx'),
-            ),
+            ) as Promise<React.ComponentType>,
         setup: ({ App, props }) => {
             return <App {...props} />;
         },
