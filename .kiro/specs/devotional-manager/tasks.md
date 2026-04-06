@@ -25,7 +25,7 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Factory with default and expired states
     - _Requirements: Email OTP login_
 
-  - [ ] 1.4 Create `Theme` model, migration, and factory
+  - [x] 1.4 Create `Theme` model, migration, and factory
     - Migration: `themes` table per design schema (id, created_by FK to users, name unique, description nullable, status default 'draft', timestamps)
     - Model: `final` class with `entries()` hasMany, `creator()` belongsTo, `scopePublished()` query scope, property annotations, casts
     - Factory with draft and published states
