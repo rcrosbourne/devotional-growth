@@ -19,7 +19,7 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Factory with states for google, apple, github providers
     - _Requirements: Social login_
 
-  - [ ] 1.3 Create `EmailOtp` model, migration, and factory
+  - [x] 1.3 Create `EmailOtp` model, migration, and factory
     - Migration: `email_otps` table per design schema (id, email index, code_hash, attempts default 0, expires_at, timestamps)
     - Model: `final` class with property annotations, casts, `isExpired()` and `hasExceededAttempts()` helpers
     - Factory with default and expired states
