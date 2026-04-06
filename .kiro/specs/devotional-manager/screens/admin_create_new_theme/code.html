@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Create New Theme - The Digital Curator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary": "#000000",
+                      "secondary-fixed-dim": "#bdce89",
+                      "error": "#ba1a1a",
+                      "surface-dim": "#dcdad3",
+                      "surface-container-high": "#ebe8e1",
+                      "outline": "#75777d",
+                      "on-tertiary-fixed": "#0d1c2f",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-highest": "#e5e2db",
+                      "on-primary-fixed-variant": "#3c475d",
+                      "tertiary-container": "#0d1c2f",
+                      "background": "#fcf9f2",
+                      "on-error-container": "#93000a",
+                      "primary-container": "#101c30",
+                      "on-tertiary-fixed-variant": "#3a485c",
+                      "on-surface": "#1c1c18",
+                      "on-primary-fixed": "#101c30",
+                      "outline-variant": "#c5c6cd",
+                      "on-secondary-fixed-variant": "#3f4c15",
+                      "inverse-on-surface": "#f3f0e9",
+                      "surface": "#fcf9f2",
+                      "on-surface-variant": "#45474d",
+                      "surface-bright": "#fcf9f2",
+                      "primary-fixed-dim": "#bbc7e2",
+                      "tertiary-fixed": "#d5e3fd",
+                      "secondary-container": "#d6e7a0",
+                      "on-background": "#1c1c18",
+                      "surface-variant": "#e5e2db",
+                      "on-secondary-fixed": "#161e00",
+                      "inverse-surface": "#31312c",
+                      "secondary-fixed": "#d9eaa3",
+                      "error-container": "#ffdad6",
+                      "surface-container-low": "#f6f3ec",
+                      "on-tertiary-container": "#76859b",
+                      "surface-tint": "#535f76",
+                      "secondary": "#56642b",
+                      "primary-fixed": "#d7e2ff",
+                      "on-primary-container": "#78849d",
+                      "on-error": "#ffffff",
+                      "on-secondary-container": "#5a682f",
+                      "surface-container": "#f1eee7",
+                      "tertiary-fixed-dim": "#b9c7e0",
+                      "primary": "#000000",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "inverse-primary": "#bbc7e2"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Newsreader", "serif"],
+                      "body": ["Inter", "sans-serif"],
+                      "label": ["Inter", "sans-serif"]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-shadow {
+            box-shadow: 0 40px 60px -20px rgba(28, 28, 24, 0.05);
+        }
+      </style>
+</head>
+<body class="bg-background text-on-surface font-body min-h-screen">
+<!-- SideNavBar Shell -->
+<aside class="flex flex-col h-screen fixed left-0 top-0 py-8 px-6 h-full w-64 border-r-0 bg-[#FCF9F2] dark:bg-stone-950 z-50">
+<div class="mb-10">
+<h1 class="text-2xl font-bold tracking-tight font-serif text-black dark:text-stone-100">The Curator</h1>
+<p class="text-[10px] uppercase tracking-widest text-stone-400 mt-1 font-label">Editorial Admin</p>
+</div>
+<nav class="flex-1 space-y-2">
+<!-- Dashboard -->
+<a class="flex items-center gap-3 py-3 text-stone-500 dark:text-stone-400 font-medium hover:text-black dark:hover:text-stone-100 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-sm">Dashboard</span>
+</a>
+<!-- Content Library - Active for Theme Creation Context -->
+<a class="flex items-center gap-3 py-3 text-black dark:text-white font-bold border-r-2 border-black dark:border-white transition-all opacity-90" href="#">
+<span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span>
+<span class="text-sm">Content Library</span>
+</a>
+<a class="flex items-center gap-3 py-3 text-stone-500 dark:text-stone-400 font-medium hover:text-black dark:hover:text-stone-100 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="text-sm">User Insights</span>
+</a>
+<a class="flex items-center gap-3 py-3 text-stone-500 dark:text-stone-400 font-medium hover:text-black dark:hover:text-stone-100 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span class="text-sm">Devotionals</span>
+</a>
+<a class="flex items-center gap-3 py-3 text-stone-500 dark:text-stone-400 font-medium hover:text-black dark:hover:text-stone-100 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-sm">Settings</span>
+</a>
+</nav>
+<div class="mt-auto space-y-4 pt-8 border-t border-surface-container">
+<button class="w-full bg-primary text-on-primary py-3 px-4 rounded-lg font-medium text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                New Entry
+            </button>
+<div class="space-y-1">
+<a class="flex items-center gap-3 py-2 text-stone-500 text-sm font-medium hover:text-black transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+                    Account
+                </a>
+<a class="flex items-center gap-3 py-2 text-stone-500 text-sm font-medium hover:text-black transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                    Logout
+                </a>
+</div>
+</div>
+</aside>
+<!-- Main Canvas -->
+<div class="pl-64 min-h-screen">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full pl-8 pr-8 h-20 bg-[#FCF9F2]/80 dark:bg-stone-950/80 backdrop-blur-xl sticky top-0 z-40">
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-stone-400 text-lg" data-icon="search">search</span>
+<input class="bg-surface-container border-none rounded-full py-2 pl-10 pr-4 text-sm w-64 focus:ring-1 focus:ring-primary transition-all" placeholder="Search archives..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 p-2 rounded-lg transition-all active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 p-2 rounded-lg transition-all active:scale-95">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden bg-stone-200">
+<img alt="Admin profile avatar" class="w-full h-full object-cover" data-alt="professional headshot of a curator with glasses, soft cinematic lighting, neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8wwe-Z4WZFBRIDa9zKx67kHeKdH3LyB7-vdHxe6jeoPSWP5OE_9yNZnRQDNkqR7ZdBHBIrbzv82mIXcUcHgkRGj0iKW9Io_dIBXFCnyMpRJPUpvRlEdhPgwiI1UCRQ7HDhvAyqqWKicETyh5ijMzHdVE17Bn9deI8NZRJ49y6a-DSTe4fQBb3_PQ-ghJOiVoMf4nvAPUbd61l_BTkMm80A64TKPiI0zcD9yUwh3R8YtlK7mGVloEo5upKW0F9WLnjQrGOf1ngXHY"/>
+</div>
+</div>
+</header>
+<!-- Main Content Workspace -->
+<main class="max-w-7xl mx-auto px-8 py-12">
+<!-- Editorial Header Section -->
+<div class="mb-12">
+<nav class="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-stone-400 font-label mb-4">
+<a class="hover:text-primary transition-colors" href="#">Admin</a>
+<span class="material-symbols-outlined text-[12px]" data-icon="chevron_right">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Themes</a>
+<span class="material-symbols-outlined text-[12px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-primary font-bold">New</span>
+</nav>
+<h2 class="text-5xl font-headline font-medium tracking-tight text-primary">Create New Theme</h2>
+</div>
+<div class="grid grid-cols-12 gap-12 items-start">
+<!-- Left Column: Primary Form -->
+<div class="col-span-12 lg:col-span-8 space-y-12">
+<!-- Cover Image Upload Area -->
+<section>
+<label class="block text-[10px] uppercase tracking-widest text-stone-400 font-label mb-4">Theme Visual Narrative</label>
+<div class="group relative aspect-[21/9] w-full rounded-xl overflow-hidden bg-surface-container-high border-2 border-dashed border-outline-variant/30 flex flex-col items-center justify-center text-stone-400 hover:bg-surface-container-highest hover:border-outline-variant transition-all cursor-pointer">
+<span class="material-symbols-outlined text-4xl mb-2" data-icon="cloud_upload">cloud_upload</span>
+<p class="font-label text-sm">Drop cover image or <span class="text-primary font-semibold">browse files</span></p>
+<p class="text-xs mt-2 opacity-60 italic">Suggested size: 2400 x 1000px</p>
+</div>
+</section>
+<!-- Core Metadata -->
+<section class="space-y-8">
+<div>
+<label class="block text-[10px] uppercase tracking-widest text-stone-400 font-label mb-2" for="theme-title">Theme Title</label>
+<input class="w-full bg-transparent border-t-0 border-x-0 border-b border-outline-variant/30 py-4 text-3xl font-headline focus:ring-0 focus:border-primary transition-colors placeholder:text-stone-300" id="theme-title" placeholder="The Architecture of Silence" type="text"/>
+</div>
+<div>
+<label class="block text-[10px] uppercase tracking-widest text-stone-400 font-label mb-4" for="theme-description">Editorial Description</label>
+<div class="bg-surface-container-low rounded-xl p-1">
+<div class="flex gap-2 p-2 border-b border-surface-container">
+<button class="p-1.5 hover:bg-surface-container-high rounded transition-colors text-stone-600"><span class="material-symbols-outlined text-xl" data-icon="format_bold">format_bold</span></button>
+<button class="p-1.5 hover:bg-surface-container-high rounded transition-colors text-stone-600"><span class="material-symbols-outlined text-xl" data-icon="format_italic">format_italic</span></button>
+<button class="p-1.5 hover:bg-surface-container-high rounded transition-colors text-stone-600"><span class="material-symbols-outlined text-xl" data-icon="format_list_bulleted">format_list_bulleted</span></button>
+<div class="w-px h-6 bg-surface-container-highest mx-1"></div>
+<button class="p-1.5 hover:bg-surface-container-high rounded transition-colors text-stone-600"><span class="material-symbols-outlined text-xl" data-icon="link">link</span></button>
+</div>
+<textarea class="w-full bg-transparent border-none focus:ring-0 p-6 text-lg leading-relaxed font-body text-on-surface-variant placeholder:text-stone-300" id="theme-description" placeholder="Begin the narrative journey..." rows="12"></textarea>
+</div>
+</div>
+</section>
+<!-- Sticky Footer Actions (Mobile/Tablet visible) -->
+<div class="flex items-center gap-4 lg:hidden pt-8">
+<button class="flex-1 bg-surface-container-highest text-on-surface py-4 rounded-xl font-medium text-sm transition-all hover:bg-surface-dim">Save as Draft</button>
+<button class="flex-1 bg-primary text-on-primary py-4 rounded-xl font-medium text-sm transition-all hover:opacity-90">Publish Theme</button>
+</div>
+</div>
+<!-- Right Column: AI Assistant & Settings -->
+<div class="col-span-12 lg:col-span-4 space-y-8 sticky top-32">
+<!-- Status & Meta Card -->
+<div class="bg-surface-container p-8 rounded-xl editorial-shadow">
+<label class="block text-[10px] uppercase tracking-widest text-stone-400 font-label mb-6">Publication Status</label>
+<div class="space-y-6">
+<div class="flex items-center justify-between group cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="w-2.5 h-2.5 rounded-full bg-stone-300"></span>
+<span class="font-medium text-sm">Draft</span>
+</div>
+<span class="material-symbols-outlined text-secondary opacity-0 group-hover:opacity-100 transition-opacity" data-icon="check_circle">check_circle</span>
+</div>
+<div class="flex items-center justify-between group cursor-pointer border-t border-surface-container-high pt-6">
+<div class="flex items-center gap-3">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span class="font-medium text-sm">Published</span>
+</div>
+<span class="material-symbols-outlined text-secondary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<div class="mt-10 space-y-3">
+<button class="w-full bg-primary text-on-primary py-4 rounded-lg font-medium text-sm transition-all hover:opacity-90 active:scale-95">Publish Theme</button>
+<button class="w-full bg-surface-container-highest text-on-surface py-4 rounded-lg font-medium text-sm transition-all hover:bg-surface-dim active:scale-95">Save as Draft</button>
+</div>
+</div>
+<!-- AI Assistant Panel -->
+<div class="bg-primary-container text-on-primary-container p-8 rounded-xl editorial-shadow overflow-hidden relative">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-6xl" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-sm" data-icon="auto_awesome">auto_awesome</span>
+<label class="block text-[10px] uppercase tracking-widest text-on-primary-container/60 font-label">AI Theme Generation</label>
+</div>
+<h3 class="text-xl font-headline italic mb-4">Stuck on a concept?</h3>
+<p class="text-sm text-on-primary-container/70 mb-6 leading-relaxed">Enter a keyword or mood, and let the assistant curate a title and description for you.</p>
+<div class="space-y-4">
+<input class="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-sm placeholder:text-white/20 focus:ring-1 focus:ring-white/30 focus:border-transparent transition-all" placeholder="e.g. Desert Solitude" type="text"/>
+<button class="w-full bg-white text-primary py-3 rounded-lg font-semibold text-xs tracking-widest uppercase hover:bg-stone-100 transition-all">Generate Draft</button>
+</div>
+</div>
+</div>
+<!-- Pull Quote Decorative -->
+<div class="py-8 px-4 text-center">
+<span class="text-secondary text-5xl font-headline leading-none block mb-2 opacity-40">“</span>
+<p class="text-lg font-headline italic text-on-surface-variant leading-relaxed">
+                            Simplicity is the ultimate sophistication in editorial design.
+                        </p>
+<span class="text-secondary text-5xl font-headline leading-none block mt-2 opacity-40">”</span>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

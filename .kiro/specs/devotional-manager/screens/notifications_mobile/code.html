@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary": "#56642b",
+                    "surface-tint": "#535f76",
+                    "on-tertiary-container": "#76859b",
+                    "on-tertiary": "#ffffff",
+                    "on-background": "#1c1c18",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed-variant": "#3c475d",
+                    "on-surface": "#1c1c18",
+                    "on-surface-variant": "#45474d",
+                    "on-secondary-fixed": "#161e00",
+                    "on-primary": "#ffffff",
+                    "surface-container-low": "#f6f3ec",
+                    "surface-container-high": "#ebe8e1",
+                    "inverse-surface": "#31312c",
+                    "surface-container-highest": "#e5e2db",
+                    "on-secondary-fixed-variant": "#3f4c15",
+                    "primary": "#000000",
+                    "tertiary-fixed": "#d5e3fd",
+                    "tertiary": "#000000",
+                    "surface-variant": "#e5e2db",
+                    "error": "#ba1a1a",
+                    "tertiary-container": "#0d1c2f",
+                    "background": "#fcf9f2",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-container": "#78849d",
+                    "inverse-primary": "#bbc7e2",
+                    "inverse-on-surface": "#f3f0e9",
+                    "on-tertiary-fixed-variant": "#3a485c",
+                    "on-primary-fixed": "#101c30",
+                    "surface-bright": "#fcf9f2",
+                    "surface-container": "#f1eee7",
+                    "secondary-container": "#d6e7a0",
+                    "surface": "#fcf9f2",
+                    "secondary-fixed-dim": "#bdce89",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed-dim": "#b9c7e0",
+                    "outline-variant": "#c5c6cd",
+                    "error-container": "#ffdad6",
+                    "primary-fixed": "#d7e2ff",
+                    "outline": "#75777d",
+                    "on-secondary-container": "#5a682f",
+                    "surface-dim": "#dcdad3",
+                    "primary-fixed-dim": "#bbc7e2",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed": "#d9eaa3",
+                    "on-tertiary-fixed": "#0d1c2f",
+                    "primary-container": "#101c30"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Newsreader"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Newsreader', serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#FCF9F2]/80 backdrop-blur-xl">
+<div class="flex justify-between items-center px-6 h-16 w-full max-w-screen-xl mx-auto">
+<button class="hover:opacity-70 transition-opacity scale-95 duration-200">
+<span class="material-symbols-outlined text-black">menu</span>
+</button>
+<h1 class="font-serif italic text-2xl tracking-tight text-black">Devotional</h1>
+<div class="h-8 w-8 rounded-full bg-surface-container-highest overflow-hidden">
+<img alt="User profile icon" class="w-full h-full object-cover" data-alt="Soft focused portrait of a professional woman with a calm expression against a warm neutral studio background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_OuqQAkJgwQQkwXkeVxqwfjOZnbeCzbzErN5qHYYnwSeiaLSCQdC5Gf_TOMQBNqXtd9v9AfLb38_gHqOPC_LN7oY6xinkSXN3lFRO_073tTb9oKwIT2RQA-t_ly8YqnjVL6NhsvZT3TgOKdIv6myC_eotxTsAkGNbRHk8k6wOkxGF0xCkxyOVNj5V1JXX1_JbZ3lwjS9k_JB3okdpvHEJgqdlzgJTzicEdIfBBDOhXPATPxcui8BehM59VphrC5iHxOIksNP7h50"/>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-lg mx-auto">
+<!-- Page Header -->
+<div class="mb-10">
+<p class="font-sans uppercase text-[10px] tracking-[0.2em] font-semibold text-secondary mb-2">Correspondence</p>
+<h2 class="text-4xl font-serif text-primary leading-tight">Notifications</h2>
+</div>
+<!-- Notification Feed -->
+<div class="space-y-12">
+<!-- Group: Journal Streaks -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-xs font-sans font-bold uppercase tracking-widest text-on-surface-variant">Journal streaks</h3>
+<span class="text-[10px] font-sans text-outline uppercase tracking-tighter">Newest</span>
+</div>
+<div class="space-y-4">
+<div class="bg-surface-container-lowest p-5 rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.02)] border-l-4 border-secondary">
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<p class="font-body font-semibold text-sm leading-tight text-primary">A 10-day milestone awaits</p>
+<span class="text-[10px] text-outline font-medium">2m ago</span>
+</div>
+<p class="text-sm text-on-surface-variant mt-1 leading-relaxed">Your consistency is creating a masterpiece. Complete today's entry to reach double digits.</p>
+<button class="mt-4 px-4 py-2 bg-primary text-on-primary rounded-lg text-xs font-semibold hover:opacity-90 transition-opacity">
+                                    Open Journal
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Group: Partner Activity -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-xs font-sans font-bold uppercase tracking-widest text-on-surface-variant">Partner activity</h3>
+<span class="text-[10px] font-sans text-outline uppercase tracking-tighter">Today</span>
+</div>
+<div class="space-y-4">
+<!-- Notification Item -->
+<div class="bg-surface-container p-5 rounded-xl transition-all hover:bg-surface-container-high cursor-pointer">
+<div class="flex gap-4">
+<div class="relative flex-shrink-0">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Portrait of a creative professional man in a minimal studio setting with soft side lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBopHCLkh8WR55YVk2FBUSrGAeAMyBJlAggOfIK-Co9JPFXqjrllKYNZ38KupzY6TD5EuKhVgcP4ZNWtoCoPlzdqTRmrvJ48-A1DFTWwPzb-OBZTsBRSR1pGXDFJ_2TV5mkg4_YyE-Re0PLr68ar1b6nhjcnJeXxI8DGLW2zf1IBXJoUuMQo63MdVODQpfhMN_uEFyDESGXgqqEDLJDQdHY_cZBCLH7XEkX-QTSFzg-meuSCvRrmfVzr9SxvqMx6C3_dyc97md5Pfo"/>
+<div class="absolute -bottom-1 -right-1 w-4 h-4 bg-secondary rounded-full flex items-center justify-center border-2 border-surface-container">
+<span class="material-symbols-outlined text-[10px] text-white" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<p class="font-body text-sm leading-tight text-primary">
+<span class="font-bold">Elias Thorne</span> shared a new reflection with you
+                                    </p>
+<span class="text-[10px] text-outline font-medium">4h ago</span>
+</div>
+<p class="text-sm italic font-serif text-secondary mt-2 border-l-2 border-secondary/20 pl-3">"The stillness of the morning is where my best work begins..."</p>
+<div class="mt-4 flex gap-2">
+<button class="px-4 py-2 bg-surface-container-highest text-on-surface rounded-lg text-xs font-semibold hover:bg-outline-variant/20 transition-colors">
+                                        Read Reflection
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Notification Item -->
+<div class="bg-surface-container p-5 rounded-xl transition-all hover:bg-surface-container-high cursor-pointer">
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-outline">group_add</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<p class="font-body text-sm leading-tight text-primary">
+<span class="font-bold">Sarah Jenkins</span> joined your library circle
+                                    </p>
+<span class="text-[10px] text-outline font-medium">6h ago</span>
+</div>
+<p class="text-sm text-on-surface-variant mt-1">You can now view each other's curated collections.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Group: New Theme Published -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-xs font-sans font-bold uppercase tracking-widest text-on-surface-variant">New theme published</h3>
+<span class="text-[10px] font-sans text-outline uppercase tracking-tighter">Yesterday</span>
+</div>
+<div class="space-y-4">
+<div class="relative overflow-hidden bg-primary-container p-5 rounded-xl text-white">
+<div class="relative z-10 flex gap-4">
+<div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 backdrop-blur-md">
+<span class="material-symbols-outlined text-tertiary-fixed">palette</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div>
+<p class="font-body font-bold text-sm leading-tight">Brutalist Zen Edition</p>
+<p class="text-[10px] text-on-tertiary-container uppercase tracking-widest mt-0.5">Limited Release</p>
+</div>
+<span class="text-[10px] text-white/50 font-medium">1d ago</span>
+</div>
+<p class="text-sm text-white/80 mt-3 leading-relaxed">A stark, high-contrast aesthetic designed for deep focus and digital minimalism.</p>
+<div class="mt-4 flex items-center gap-3">
+<button class="px-4 py-2 bg-white text-black rounded-lg text-xs font-bold hover:bg-opacity-90 transition-opacity">
+                                        Preview Theme
+                                    </button>
+<button class="text-xs text-white underline underline-offset-4 font-medium">
+                                        Dismiss
+                                    </button>
+</div>
+</div>
+</div>
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary/20 blur-3xl -mr-16 -mt-16 rounded-full"></div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50">
+<div class="bg-[#FCF9F2]/90 backdrop-blur-lg rounded-t-2xl shadow-[0_-4px_40px_rgba(0,0,0,0.04)] fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3">
+<a class="flex flex-col items-center justify-center text-stone-400 px-4 py-1.5 hover:text-black transition-all duration-300 ease-out" href="#">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="font-sans uppercase text-[10px] tracking-[0.1em] font-semibold mt-1">Today</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 px-4 py-1.5 hover:text-black transition-all duration-300 ease-out" href="#">
+<span class="material-symbols-outlined">self_improvement</span>
+<span class="font-sans uppercase text-[10px] tracking-[0.1em] font-semibold mt-1">Reflect</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 px-4 py-1.5 hover:text-black transition-all duration-300 ease-out" href="#">
+<span class="material-symbols-outlined">local_library</span>
+<span class="font-sans uppercase text-[10px] tracking-[0.1em] font-semibold mt-1">Library</span>
+</a>
+<!-- Active Tab: Journal (Context of Notifications) -->
+<a class="flex flex-col items-center justify-center text-black bg-[#F1EEE7] rounded-xl px-4 py-1.5 transition-all duration-300 ease-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">edit_note</span>
+<span class="font-sans uppercase text-[10px] tracking-[0.1em] font-semibold mt-1">Journal</span>
+</a>
+</div>
+</nav>
+</body></html>

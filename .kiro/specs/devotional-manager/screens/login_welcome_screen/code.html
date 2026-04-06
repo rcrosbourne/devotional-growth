@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Curator | Login</title>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#d9eaa3",
+                    "error-container": "#ffdad6",
+                    "on-secondary-container": "#5a682f",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-container": "#78849d",
+                    "inverse-primary": "#bbc7e2",
+                    "on-secondary": "#ffffff",
+                    "surface-bright": "#fcf9f2",
+                    "inverse-on-surface": "#f3f0e9",
+                    "outline-variant": "#c5c6cd",
+                    "on-background": "#1c1c18",
+                    "surface-dim": "#dcdad3",
+                    "surface-container-low": "#f6f3ec",
+                    "surface-variant": "#e5e2db",
+                    "primary-container": "#101c30",
+                    "on-surface": "#1c1c18",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#d5e3fd",
+                    "on-primary-fixed": "#101c30",
+                    "primary": "#1a1c18",
+                    "secondary-fixed-dim": "#bdce89",
+                    "tertiary-container": "#0d1c2f",
+                    "surface-container-high": "#ebe8e1",
+                    "secondary-container": "#d6e7a0",
+                    "on-primary-fixed-variant": "#3c475d",
+                    "on-error-container": "#93000a",
+                    "outline": "#75777d",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed": "#0d1c2f",
+                    "on-tertiary-container": "#76859b",
+                    "background": "#fdfcf9",
+                    "primary-fixed": "#d7e2ff",
+                    "on-secondary-fixed": "#161e00",
+                    "on-secondary-fixed-variant": "#3f4c15",
+                    "tertiary": "#000000",
+                    "on-tertiary-fixed-variant": "#3a485c",
+                    "on-surface-variant": "#444744",
+                    "on-tertiary": "#ffffff",
+                    "surface": "#fdfcf9",
+                    "inverse-surface": "#31312c",
+                    "surface-container": "#f1eee7",
+                    "secondary": "#56642b",
+                    "error": "#ba1a1a",
+                    "surface-tint": "#535f76",
+                    "surface-container-highest": "#e5e2db",
+                    "tertiary-fixed-dim": "#b9c7e0",
+                    "primary-fixed-dim": "#bbc7e2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Newsreader", "serif"],
+                    "body": ["Inter", "sans-serif"],
+                    "label": ["Inter", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+      .headline-serif {
+        font-family: 'Newsreader', serif;
+      }
+      .bg-nature-overlay {
+        background: linear-gradient(to right, rgba(0,0,0,0.1), transparent);
+      }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex selection:bg-secondary-container">
+<div class="flex w-full min-h-screen">
+<div class="hidden lg:block lg:w-1/2 relative overflow-hidden">
+<img alt="Serene misty forest landscape" class="absolute inset-0 w-full h-full object-cover grayscale-[20%] brightness-95" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtZSzuvvu8oexztLlWr6nZxVZWjbbdg6Ih4KBoWoC878H662KCHU_Zk58rE4Cb-CEGAc5gbya0mTia_ZvPLQe8NCcoqXLGC_Wfy8Fez9k_jv_O_dyY9K9ySbHqUiwwUwsu8YLqMNcV04nKgz0Lit-Amyv8KZrhxaJeA-iP1-sJbPcIrDmW3hMLLFcHVmVTdOS4eqgSj1wh6dLurJENtOjvIloK9FXkhmAlkHxuG7hVUpRVQzb52LIKWSxRN9doxElrh77gzPgYf6Q"/>
+<div class="absolute inset-0 bg-nature-overlay"></div>
+<div class="absolute bottom-12 left-12">
+<p class="headline-serif text-white/80 text-xl italic font-light tracking-wide">Where focus meets serenity.</p>
+</div>
+</div>
+<div class="w-full lg:w-1/2 flex flex-col justify-between bg-surface relative">
+<main class="flex-grow flex flex-col items-center justify-center w-full max-w-md mx-auto px-8 py-16">
+<header class="text-center mb-10">
+<span class="label-md uppercase tracking-[0.3em] text-[10px] text-on-surface-variant/60 font-semibold mb-4 block">Welcome back</span>
+<h1 class="headline-serif text-4xl md:text-5xl font-light italic text-primary leading-tight">Continue Your Journey</h1>
+<p class="text-on-surface-variant text-sm mt-4 font-light max-w-[280px] mx-auto leading-relaxed opacity-80">
+                        Enter your sanctuary to continue your daily reflections.
+                    </p>
+</header>
+<div class="w-full space-y-3">
+<button class="w-full flex items-center justify-center gap-3 bg-white border border-outline-variant/30 text-on-surface py-3 px-6 rounded-lg transition-all duration-300 hover:bg-surface-container-low hover:border-outline-variant group">
+<img alt="Google Icon" class="w-4 h-4 opacity-70 group-hover:opacity-100 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClYWk_j284HrEYMDWS7G-zs_Nxnz29wHuYUQguhlt-toJZQ1ePAAUoT3aEpsNQGHP_NfFbyRW1mXOT6pW_jt2CDtD75k_Zqm9VB0RvcVNUz0RTKs6INSL-Muna_rW0o15W4Lp5Mc2dF_6XDTDoA9UofyVFLXhPCoVZWYO9EkMVzkh5MQaXnWe6xdS6B9vuG7wjd4o3-rVhb99GshW8-pPOvslOqcWZYnBrJqBka-LRvg8KCGq8F4gLPDLEIqkRZw_7Arrc_HLPgcI"/>
+<span class="text-xs font-medium tracking-tight">Continue with Google</span>
+</button>
+<button class="w-full flex items-center justify-center gap-3 bg-black text-white py-3 px-6 rounded-lg transition-all duration-300 hover:bg-stone-900 group">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">ios</span>
+<span class="text-xs font-medium tracking-tight">Continue with Apple</span>
+</button>
+<button class="w-full flex items-center justify-center gap-3 bg-[#24292e] text-white py-3 px-6 rounded-lg transition-all duration-300 hover:bg-[#1b1f23] group">
+<span class="material-symbols-outlined text-[18px]">code</span>
+<span class="text-xs font-medium tracking-tight">Continue with GitHub</span>
+</button>
+</div>
+<div class="w-full flex items-center my-8 space-x-4">
+<div class="flex-grow h-[1px] bg-outline-variant/20"></div>
+<span class="label-md text-[10px] font-serif italic text-on-surface-variant/50 lowercase">or</span>
+<div class="flex-grow h-[1px] bg-outline-variant/20"></div>
+</div>
+<div class="w-full">
+<button class="w-full flex items-center justify-center gap-3 bg-[#101c30] text-white py-3.5 px-6 rounded-lg transition-all duration-300 hover:bg-[#1a2b45] shadow-sm">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+<span class="text-xs font-semibold tracking-wider uppercase">Login with Email</span>
+</button>
+<p class="text-center mt-8 text-[11px] text-on-surface-variant/60 tracking-tight">
+                        New curator? <a class="text-primary font-semibold underline underline-offset-4 decoration-outline-variant hover:decoration-primary transition-colors" href="#">Request access</a>
+</p>
+</div>
+</main>
+<footer class="w-full py-8 px-8">
+<div class="flex flex-col md:flex-row justify-between items-center gap-4 border-t border-outline-variant/10 pt-8">
+<p class="font-sans uppercase tracking-widest text-[9px] text-stone-400">© 2024 The Curator</p>
+<div class="flex items-center gap-6">
+<a class="font-sans uppercase tracking-widest text-[9px] text-stone-400 hover:text-black transition-colors" href="#">Privacy</a>
+<a class="font-sans uppercase tracking-widest text-[9px] text-stone-400 hover:text-black transition-colors" href="#">Terms</a>
+</div>
+</div>
+</footer>
+<div aria-hidden="true" class="absolute inset-0 -z-10 pointer-events-none opacity-[0.03]">
+<div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/natural-paper.png')]"></div>
+</div>
+</div>
+</div>
+
+</body></html>

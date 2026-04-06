@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Devotional - Secure Sign In</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "vault-navy": "#0A192F",
+                    "secondary-fixed": "#d9eaa3",
+                    "error-container": "#ffdad6",
+                    "on-secondary-container": "#5a682f",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-container": "#78849d",
+                    "inverse-primary": "#bbc7e2",
+                    "on-secondary": "#ffffff",
+                    "surface-bright": "#fcf9f2",
+                    "inverse-on-surface": "#f3f0e9",
+                    "outline-variant": "#c5c6cd",
+                    "on-background": "#1c1c18",
+                    "surface-dim": "#dcdad3",
+                    "surface-container-low": "#f6f3ec",
+                    "surface-variant": "#e5e2db",
+                    "primary-container": "#101c30",
+                    "on-surface": "#1c1c18",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#d5e3fd",
+                    "on-primary-fixed": "#101c30",
+                    "primary": "#000000",
+                    "secondary-fixed-dim": "#bdce89",
+                    "tertiary-container": "#0d1c2f",
+                    "surface-container-high": "#ebe8e1",
+                    "secondary-container": "#d6e7a0",
+                    "on-primary-fixed-variant": "#3c475d",
+                    "on-error-container": "#93000a",
+                    "outline": "#75777d",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed": "#0d1c2f",
+                    "on-tertiary-container": "#76859b",
+                    "background": "#fcf9f2",
+                    "primary-fixed": "#d7e2ff",
+                    "on-secondary-fixed": "#161e00",
+                    "on-secondary-fixed-variant": "#3f4c15",
+                    "tertiary": "#000000",
+                    "on-tertiary-fixed-variant": "#3a485c",
+                    "on-surface-variant": "#45474d",
+                    "on-tertiary": "#ffffff",
+                    "surface": "#fcf9f2",
+                    "inverse-surface": "#31312c",
+                    "surface-container": "#f1eee7",
+                    "secondary": "#56642b",
+                    "error": "#ba1a1a",
+                    "surface-tint": "#535f76",
+                    "surface-container-highest": "#e5e2db",
+                    "tertiary-fixed-dim": "#b9c7e0",
+                    "primary-fixed-dim": "#bbc7e2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Newsreader", "serif"],
+                    "body": ["Inter", "sans-serif"],
+                    "label": ["Inter", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            vertical-align: middle;
+        }
+        .vault-card {
+            background-color: #fdfcf9;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body min-h-screen flex flex-col">
+<header class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-8 py-6 w-full bg-[#FCF9F2]/80 dark:bg-stone-950/80 backdrop-blur-xl">
+<div class="flex items-center gap-4">
+<a class="flex items-center space-x-2 transition-opacity duration-300 hover:opacity-70" href="/">
+<span class="font-serif italic text-2xl text-black dark:text-stone-100">Devotional</span>
+</a>
+</div>
+</header>
+<main class="flex-grow flex flex-col items-center justify-center px-6 relative py-20">
+<div class="absolute top-1/2 left-4 md:left-24 -translate-y-1/2 opacity-20 pointer-events-none hidden lg:block">
+<p class="font-headline italic text-[12vw] leading-none text-surface-container-highest select-none">
+            Curate
+        </p>
+</div>
+<div class="w-full max-w-[520px] z-10">
+<div class="vault-card p-10 md:p-16 rounded-2xl">
+<div class="text-center mb-10">
+<div class="flex justify-center mb-6">
+<span class="material-symbols-outlined text-outline text-3xl">lock_open</span>
+</div>
+<span class="block font-label uppercase tracking-[0.2em] text-[9px] text-secondary mb-4">Secure Access</span>
+<h1 class="font-headline text-4xl md:text-5xl text-primary tracking-tight mb-4 leading-tight">Enter Your Email</h1>
+<p class="text-on-surface-variant max-w-[280px] mx-auto text-xs leading-relaxed opacity-80">
+                    A unique 6-digit verification code will be dispatched to your registered inbox.
+                </p>
+</div>
+<form class="space-y-10">
+<div class="relative group">
+<input class="peer w-full bg-transparent border-0 border-b border-outline py-3 px-0 focus:ring-0 focus:border-vault-navy transition-all duration-300 placeholder-transparent text-lg" id="email" placeholder=" " required="" type="email"/>
+<label class="absolute left-0 -top-4 text-on-surface-variant text-[10px] uppercase tracking-widest transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:tracking-normal peer-placeholder-shown:text-outline peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-vault-navy peer-focus:text-[10px] peer-focus:tracking-widest" for="email">
+                        Email Address
+                    </label>
+</div>
+<button class="w-full bg-vault-navy text-white py-5 rounded-lg font-label font-semibold tracking-[0.1em] text-xs uppercase transition-all duration-300 hover:bg-black active:scale-[0.99] flex justify-center items-center gap-3 group" type="submit">
+                    Send Code
+                    <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</form>
+<div class="mt-12 pt-8 border-t border-black/5 text-center">
+<a class="inline-flex items-center gap-2 font-label uppercase tracking-widest text-[10px] text-on-surface-variant hover:text-vault-navy transition-colors duration-300" href="/auth">
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+                    Back to social login
+                </a>
+</div>
+</div>
+<div class="mt-12 flex justify-center items-center gap-4 opacity-30">
+<div class="h-[1px] w-6 bg-outline"></div>
+<span class="font-headline italic text-base">The Digital Curator</span>
+<div class="h-[1px] w-6 bg-outline"></div>
+</div>
+</div>
+</main>
+<footer class="bg-[#FCF9F2] dark:bg-stone-950 flex flex-col md:flex-row justify-between items-center px-12 w-full max-w-7xl mx-auto pb-12 pt-12">
+<div class="mb-8 md:mb-0">
+<p class="font-sans uppercase tracking-widest text-[10px] text-stone-400 dark:text-stone-600">© 2024 Devotional Curator. Protected &amp; Verified.</p>
+</div>
+<nav class="flex gap-8">
+<a class="font-sans uppercase tracking-widest text-[10px] text-stone-400 dark:text-stone-600 hover:text-black dark:hover:text-stone-100 transition-colors duration-300" href="#">Privacy Policy</a>
+<a class="font-sans uppercase tracking-widest text-[10px] text-stone-400 dark:text-stone-600 hover:text-black dark:hover:text-stone-100 transition-colors duration-300" href="#">Terms of Service</a>
+</nav>
+</footer>
+<div class="fixed inset-0 pointer-events-none opacity-[0.03] mix-blend-multiply bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')]"></div>
+
+</body></html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Edit Entry: The Quiet Morning | The Curator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-container": "#76859b",
+                    "on-tertiary-fixed-variant": "#3a485c",
+                    "background": "#fcf9f2",
+                    "primary-fixed": "#d7e2ff",
+                    "outline": "#75777d",
+                    "error-container": "#ffdad6",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#1c1c18",
+                    "tertiary": "#000000",
+                    "on-error-container": "#93000a",
+                    "surface-bright": "#fcf9f2",
+                    "surface-container-high": "#ebe8e1",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed": "#161e00",
+                    "tertiary-container": "#0d1c2f",
+                    "on-secondary-container": "#5a682f",
+                    "on-primary-fixed": "#101c30",
+                    "secondary-fixed-dim": "#bdce89",
+                    "surface-container-highest": "#e5e2db",
+                    "tertiary-fixed-dim": "#b9c7e0",
+                    "primary": "#000000",
+                    "surface": "#fcf9f2",
+                    "surface-dim": "#dcdad3",
+                    "on-tertiary-fixed": "#0d1c2f",
+                    "on-primary": "#ffffff",
+                    "inverse-surface": "#31312c",
+                    "secondary-fixed": "#d9eaa3",
+                    "secondary-container": "#d6e7a0",
+                    "primary-container": "#101c30",
+                    "outline-variant": "#c5c6cd",
+                    "surface-variant": "#e5e2db",
+                    "tertiary-fixed": "#d5e3fd",
+                    "on-surface-variant": "#45474d",
+                    "on-background": "#1c1c18",
+                    "on-primary-fixed-variant": "#3c475d",
+                    "secondary": "#56642b",
+                    "inverse-on-surface": "#f3f0e9",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#bbc7e2",
+                    "on-primary-container": "#78849d",
+                    "surface-container-low": "#f6f3ec",
+                    "error": "#ba1a1a",
+                    "surface-tint": "#535f76",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#f1eee7",
+                    "primary-fixed-dim": "#bbc7e2",
+                    "on-secondary-fixed-variant": "#3f4c15"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Newsreader"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .serif { font-family: 'Newsreader', serif; }
+        .glass-nav {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- SideNavBar (Execution from JSON) -->
+<aside class="h-screen w-72 fixed left-0 top-0 z-50 bg-[#F1EEE7] dark:bg-slate-900 flex flex-col justify-between py-10">
+<div class="px-8">
+<div class="mb-12">
+<span class="text-xl font-serif italic text-black dark:text-white">The Curator</span>
+<p class="text-xs font-sans tracking-widest text-slate-500 mt-1 uppercase">Editorial Admin</p>
+</div>
+<nav class="space-y-2">
+<a class="flex items-center text-slate-500 dark:text-slate-400 px-4 py-3 hover:bg-[#FCF9F2]/50 dark:hover:bg-slate-800/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="dashboard">dashboard</span>
+<span class="font-sans tracking-tight">Dashboard</span>
+</a>
+<a class="flex items-center text-black dark:text-white font-semibold border-r-2 border-[#56642B] bg-[#FCF9F2] dark:bg-slate-800 px-4 py-3" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="auto_stories">auto_stories</span>
+<span class="font-sans tracking-tight">Devotionals</span>
+</a>
+<a class="flex items-center text-slate-500 dark:text-slate-400 px-4 py-3 hover:bg-[#FCF9F2]/50 dark:hover:bg-slate-800/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="menu_book">menu_book</span>
+<span class="font-sans tracking-tight">Contributors</span>
+</a>
+<a class="flex items-center text-slate-500 dark:text-slate-400 px-4 py-3 hover:bg-[#FCF9F2]/50 dark:hover:bg-slate-800/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="collections_bookmark">collections_bookmark</span>
+<span class="font-sans tracking-tight">Library</span>
+</a>
+<a class="flex items-center text-slate-500 dark:text-slate-400 px-4 py-3 hover:bg-[#FCF9F2]/50 dark:hover:bg-slate-800/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="settings">settings</span>
+<span class="font-sans tracking-tight">Settings</span>
+</a>
+</nav>
+</div>
+<div class="px-8 space-y-4">
+<a class="flex items-center text-slate-500 dark:text-slate-400 px-4 py-3 hover:bg-[#FCF9F2]/50 dark:hover:bg-slate-800/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="account_circle">account_circle</span>
+<span class="font-sans tracking-tight">Account Profile</span>
+</a>
+<a class="flex items-center text-slate-500 dark:text-slate-400 px-4 py-3 hover:bg-[#FCF9F2]/50 dark:hover:bg-slate-800/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="logout">logout</span>
+<span class="font-sans tracking-tight">Sign Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-72 min-h-screen">
+<!-- TopAppBar (Execution from JSON) -->
+<header class="sticky top-0 w-full z-40 bg-[#FCF9F2]/80 backdrop-blur-xl border-b border-black/5 flex justify-between items-center h-20 px-12">
+<div>
+<h1 class="text-2xl font-serif text-black">Dashboard Overview</h1>
+</div>
+<div class="flex items-center gap-8">
+<nav class="flex items-center gap-6">
+<a class="text-slate-400 font-sans text-xs uppercase tracking-widest hover:text-black transition-opacity" href="#">Analytics</a>
+<a class="text-black font-bold border-b border-[#56642B] font-sans text-xs uppercase tracking-widest" href="#">Drafts</a>
+<a class="text-slate-400 font-sans text-xs uppercase tracking-widest hover:text-black transition-opacity" href="#">Archive</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-slate-400 hover:text-black transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-slate-400 hover:text-black transition-colors">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-highest">
+<img alt="Administrator Profile" data-alt="professional portrait of a creative director in a minimalist studio setting with soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzTbOB2q0D-PtRj-BT7kGfQANhOC71Rw1QtAiorlEFN7uL2s5t6HdIuwt2qR5xZRfXpELe9kGUQGjJj1H5vM8luDsfiw1F-BMZQi-N8eT6cYDlqbbL_f0VZHQsLjVY2duXVxvgVBCJFQm5Uf_3VHvp_FcD0h8ZFJ-DJU5qSWwYfjvUjJQr_UnlhMpW44DDCEdsV0t5EHW0XBDUAiEkVJ6pvKO5ynplvspEXYpUGzmKGpE8Pn02APUpi9Y2fgzXTT2vmU-wDcq615c"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Editorial Content Area -->
+<div class="max-w-5xl mx-auto px-12 py-16">
+<!-- Breadcrumb / Meta -->
+<div class="flex items-center justify-between mb-8">
+<div class="flex items-center gap-2 text-xs font-sans uppercase tracking-widest text-secondary">
+<span>Themes</span>
+<span class="material-symbols-outlined text-[10px]" data-icon="chevron_right">chevron_right</span>
+<span>Quietude</span>
+<span class="material-symbols-outlined text-[10px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-on-surface">Edit Entry</span>
+</div>
+<div class="text-right">
+<p class="text-[10px] uppercase tracking-tighter text-outline">Last updated</p>
+<p class="text-sm font-medium">October 24, 2023 • 14:32 PM</p>
+</div>
+</div>
+<!-- Page Header -->
+<div class="mb-16">
+<p class="label-md font-sans text-[11px] uppercase tracking-[0.2em] text-secondary mb-2">Edit Devotional Entry</p>
+<h2 class="text-6xl font-serif leading-tight">The Quiet Morning</h2>
+</div>
+<!-- Form Content -->
+<form class="space-y-16">
+<!-- Main Identity Section -->
+<div class="grid grid-cols-12 gap-12">
+<div class="col-span-12 lg:col-span-8 space-y-12">
+<!-- Title Field -->
+<div class="group">
+<label class="block font-sans text-xs uppercase tracking-widest text-outline mb-4">Entry Title</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant py-4 text-3xl font-serif focus:ring-0 focus:border-primary transition-all placeholder-surface-dim" placeholder="Enter title..." type="text" value="The Quiet Morning"/>
+</div>
+<!-- Scripture Field -->
+<div class="group bg-surface-container-low p-8 rounded-xl">
+<label class="block font-sans text-xs uppercase tracking-widest text-secondary mb-4">Scripture Reference</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant py-2 text-xl italic font-serif focus:ring-0 focus:border-secondary transition-all" placeholder="e.g. Psalm 23:1" type="text" value="Psalm 46:10"/>
+<textarea class="w-full bg-transparent border-0 mt-4 text-on-surface-variant font-serif italic text-lg leading-relaxed focus:ring-0 resize-none" placeholder="Enter the scripture text..." rows="3">"Be still, and know that I am God; I will be exalted among the nations, I will be exalted in the earth."</textarea>
+</div>
+<!-- Body Field -->
+<div class="group">
+<label class="block font-sans text-xs uppercase tracking-widest text-outline mb-4">Devotional Body</label>
+<div class="bg-surface-container-lowest rounded-xl p-10 shadow-sm min-h-[400px]">
+<textarea class="w-full bg-transparent border-0 text-lg leading-[1.8] font-body text-on-surface focus:ring-0 resize-none" placeholder="Begin writing your devotional content here..." rows="15">The dawn light filtered through the heavy linen curtains, casting long, pale shadows across the room. In these moments, before the world begins its collective hum of productivity and worry, there is a sacred silence that speaks of eternal things. 
+
+True stillness is not merely the absence of noise, but the presence of peace. It is the active choice to quiet the internal dialogue that insists we must be doing, achieving, or fixing. To 'be still' is an act of trust—a recognition that the universe continues its rhythm without our frantic intervention.
+
+As you sit in this quiet morning, notice the weight of your breath. Feel the coolness of the air. These are physical anchors to a spiritual reality: you are sustained by a grace that precedes your best efforts.</textarea>
+</div>
+</div>
+</div>
+<!-- Sidebar / Action Metadata -->
+<div class="col-span-12 lg:col-span-4 space-y-12">
+<!-- Media Upload / Feature Image -->
+<div class="bg-surface-container p-6 rounded-xl space-y-4">
+<label class="block font-sans text-xs uppercase tracking-widest text-outline">Header Image</label>
+<div class="relative group cursor-pointer overflow-hidden rounded-lg">
+<img alt="Morning mist" class="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-105" data-alt="ethereal morning mist over a calm lake with soft golden sunrise light and silhouettes of pine trees" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBslDontiW_t6xnTHIARucqewVwq0X_99BoIZfJ70mxFIp8fC56n7WFj7TajBizyNOKXo6AJQ4rZYqlbTKtb2xINMozZlA9fqNdmjpR-56COfszboqy17MsLN_2DVkUpl1rhTdmJABwpSih1yYSXCKdl0uauDnz5Kuw21nugy9UEHWTu7FdkIMACHO5pQj029OgCmyv3kGUar0IFebuDUO2Z90PRgGmV6oorUW_EL6rC0IWjcpeSOA8h4Ai1mUcZ-tnPEdk6GuFCCU"/>
+<div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="text-white text-xs uppercase tracking-widest font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="edit">edit</span> Replace Image
+                                    </span>
+</div>
+</div>
+</div>
+<!-- Prompts Section -->
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<label class="block font-sans text-xs uppercase tracking-widest text-outline">Reflection Prompts</label>
+<button class="text-secondary text-[10px] font-bold uppercase tracking-widest" type="button">+ Add</button>
+</div>
+<div class="space-y-3">
+<div class="flex gap-3 items-start bg-surface-container-low p-4 rounded-lg">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="circle">circle</span>
+<textarea class="w-full bg-transparent border-0 p-0 text-sm focus:ring-0 resize-none">What does silence feel like in your body right now?</textarea>
+</div>
+<div class="flex gap-3 items-start bg-surface-container-low p-4 rounded-lg">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="circle">circle</span>
+<textarea class="w-full bg-transparent border-0 p-0 text-sm focus:ring-0 resize-none">Identify one thing you are trying to control today.</textarea>
+</div>
+</div>
+</div>
+<!-- Insights Section -->
+<div class="space-y-4">
+<label class="block font-sans text-xs uppercase tracking-widest text-outline">Curator Insights</label>
+<div class="bg-secondary-container/30 p-6 rounded-xl">
+<textarea class="w-full bg-transparent border-0 p-0 text-sm italic text-on-secondary-container leading-relaxed focus:ring-0 resize-none" placeholder="Add internal curation notes..." rows="4">This entry performs best when scheduled for early Monday mornings to set the tone for the week's pace.</textarea>
+</div>
+</div>
+<!-- Danger Zone -->
+<div class="pt-8 mt-8 border-t border-black/5">
+<button class="w-full flex items-center justify-center gap-2 text-error text-xs font-bold uppercase tracking-widest py-4 border border-error/20 rounded-lg hover:bg-error-container/20 transition-colors" type="button">
+<span class="material-symbols-outlined text-lg" data-icon="delete">delete</span>
+                                Delete Entry
+                            </button>
+</div>
+</div>
+</div>
+<!-- Footer Action Bar -->
+<div class="sticky bottom-8 left-0 right-0 z-40">
+<div class="max-w-xl mx-auto glass-nav bg-white/70 border border-outline-variant/15 p-2 rounded-full flex items-center justify-between shadow-2xl">
+<button class="px-8 py-3 text-xs font-bold uppercase tracking-widest text-on-surface-variant hover:text-on-surface transition-colors" type="button">Discard Changes</button>
+<div class="flex gap-2">
+<button class="px-8 py-3 text-xs font-bold uppercase tracking-widest bg-surface-container-highest rounded-full hover:bg-surface-dim transition-colors" type="button">Save Draft</button>
+<button class="px-10 py-3 text-xs font-bold uppercase tracking-widest bg-primary text-on-primary rounded-full hover:opacity-90 transition-opacity" type="submit">Publish Update</button>
+</div>
+</div>
+</div>
+</form>
+<!-- Spacing for bottom nav -->
+<div class="h-24"></div>
+</div>
+</main>
+</body></html>

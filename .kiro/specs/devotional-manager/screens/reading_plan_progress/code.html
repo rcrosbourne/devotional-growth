@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reading Plan Progress | The Sanctuary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#3a485c",
+                        "secondary": "#56642b",
+                        "primary-container": "#101c30",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#78849d",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#000000",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#fcf9f2",
+                        "surface-container-high": "#ebe8e1",
+                        "on-secondary-fixed-variant": "#3f4c15",
+                        "secondary-fixed": "#d9eaa3",
+                        "on-tertiary-fixed": "#0d1c2f",
+                        "on-primary-fixed": "#101c30",
+                        "on-background": "#1c1c18",
+                        "on-secondary-fixed": "#161e00",
+                        "surface-dim": "#dcdad3",
+                        "on-surface-variant": "#45474d",
+                        "on-error": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#5a682f",
+                        "tertiary-fixed-dim": "#b9c7e0",
+                        "surface-container-low": "#f6f3ec",
+                        "primary-fixed": "#d7e2ff",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e5e2db",
+                        "on-surface": "#1c1c18",
+                        "surface-container-highest": "#e5e2db",
+                        "surface-tint": "#535f76",
+                        "outline-variant": "#c5c6cd",
+                        "inverse-surface": "#31312c",
+                        "surface-bright": "#fcf9f2",
+                        "primary": "#000000",
+                        "inverse-on-surface": "#f3f0e9",
+                        "secondary-container": "#d6e7a0",
+                        "outline": "#75777d",
+                        "secondary-fixed-dim": "#bdce89",
+                        "primary-fixed-dim": "#bbc7e2",
+                        "surface": "#fcf9f2",
+                        "on-primary-fixed-variant": "#3c475d",
+                        "inverse-primary": "#bbc7e2",
+                        "tertiary-container": "#0d1c2f",
+                        "surface-container": "#f1eee7",
+                        "tertiary-fixed": "#d5e3fd",
+                        "on-tertiary-container": "#76859b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Newsreader"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .serif-text { font-family: 'Newsreader', serif; }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-secondary/20">
+<!-- Shell Container -->
+<div class="flex min-h-screen">
+<!-- SideNavBar (JSON Component) -->
+<aside class="hidden lg:flex flex-col h-screen w-64 bg-[#FCF9F2] dark:bg-slate-950 py-8 px-6 border-r-0 fixed left-0 top-0 z-40">
+<div class="mb-10">
+<h1 class="text-2xl font-serif italic text-slate-900 dark:text-slate-100">The Sanctuary</h1>
+<p class="text-[10px] font-sans uppercase tracking-widest text-on-surface-variant mt-1">Daily Devotion</p>
+</div>
+<nav class="flex-1 space-y-4">
+<a class="flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-900 hover:bg-[#F1EEE7] dark:hover:bg-slate-800 transition-colors duration-300 py-2 px-3 rounded-lg group" href="#">
+<span class="material-symbols-outlined mr-3">menu_book</span>
+<span class="text-sm font-medium tracking-wide">Devotionals</span>
+</a>
+<a class="relative flex items-center text-slate-900 dark:text-white font-medium after:content-[''] after:absolute after:right-0 after:h-8 after:w-1 after:bg-slate-900 after:rounded-l-full py-2 px-3 bg-[#F1EEE7] dark:bg-slate-900 rounded-lg" href="#">
+<span class="material-symbols-outlined mr-3">auto_stories</span>
+<span class="text-sm tracking-wide">Scripture</span>
+</a>
+<a class="flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-900 hover:bg-[#F1EEE7] dark:hover:bg-slate-800 transition-colors duration-300 py-2 px-3 rounded-lg" href="#">
+<span class="material-symbols-outlined mr-3">edit_note</span>
+<span class="text-sm tracking-wide">Journal</span>
+</a>
+<a class="flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-900 hover:bg-[#F1EEE7] dark:hover:bg-slate-800 transition-colors duration-300 py-2 px-3 rounded-lg" href="#">
+<span class="material-symbols-outlined mr-3">self_improvement</span>
+<span class="text-sm tracking-wide">Reflection</span>
+</a>
+<a class="flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-900 hover:bg-[#F1EEE7] dark:hover:bg-slate-800 transition-colors duration-300 py-2 px-3 rounded-lg" href="#">
+<span class="material-symbols-outlined mr-3">groups</span>
+<span class="text-sm tracking-wide">Community</span>
+</a>
+</nav>
+<div class="mt-auto pt-6">
+<button class="w-full bg-primary text-on-primary py-3 rounded-lg text-sm font-medium hover:opacity-90 active:opacity-80 transition-all mb-6">
+                    New Entry
+                </button>
+<a class="flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-900 py-2 px-3" href="#">
+<span class="material-symbols-outlined mr-3">settings</span>
+<span class="text-sm tracking-wide">Settings</span>
+</a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 lg:ml-64 pb-24 lg:pb-10">
+<!-- TopAppBar (JSON Component) -->
+<header class="flex justify-between items-center w-full px-6 py-4 lg:px-12 bg-[#FCF9F2]/80 dark:bg-slate-950/80 backdrop-blur-md sticky top-0 z-30 border-b border-slate-200/20">
+<div class="lg:hidden">
+<h1 class="text-xl font-serif italic text-slate-900">The Sanctuary</h1>
+</div>
+<div class="hidden lg:flex gap-8">
+<a class="text-slate-500 hover:text-slate-900 transition-all text-xs uppercase tracking-widest" href="#">Today</a>
+<a class="text-slate-900 border-b border-slate-900 pb-1 text-xs uppercase tracking-widest font-bold" href="#">Library</a>
+<a class="text-slate-500 hover:text-slate-900 transition-all text-xs uppercase tracking-widest" href="#">Archive</a>
+</div>
+<div class="flex items-center gap-5">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">search</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">notifications</span>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="Close-up portrait of a woman with a gentle expression in soft, natural morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvV9YDVx9JGkWTR_0PgZwoDmNidt9cPAxvW_WFz_JnWCSCWA5cgJXmCRQB4J3PgvMNbAFQtKqh_Mzk5rSYxhjpEe-wkLps6XpD2orWFp1zfKDQdlVwJYg5AK9Exp57k0sJNTjqpeL7SiPQy4VnJJ-N71mXd8A3B6MENY5zWqCO6Dx93fiKuuDVqR8G-pM0ardNJfNS_-yrTVqpzL197nEdW0pOJwX_z9LG-aDGimbCjv-Orl0oNMayH_hvlePEoKezBDLhfixcH7Y"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<section class="max-w-6xl mx-auto px-6 py-10 lg:py-16">
+<!-- Hero Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+<div class="flex-1">
+<span class="text-[10px] font-sans uppercase tracking-[0.3em] text-secondary font-semibold mb-3 block">Current Journey</span>
+<h2 class="text-4xl md:text-6xl serif-text font-light tracking-tight text-on-surface">The New Testament <span class="italic font-normal">in 90 Days</span></h2>
+<p class="mt-6 text-on-surface-variant max-w-xl leading-relaxed font-light">
+                            A focused path through the Gospels, the Acts, and the Epistles. Designed for deep daily engagement and rhythmic spiritual discipline.
+                        </p>
+</div>
+<!-- Circular Progress Visualization -->
+<div class="relative w-40 h-40 flex items-center justify-center shrink-0">
+<svg class="w-full h-full -rotate-90">
+<circle class="text-surface-container-high" cx="80" cy="80" fill="transparent" r="70" stroke="currentColor" stroke-width="2"></circle>
+<circle class="text-primary" cx="80" cy="80" fill="transparent" r="70" stroke="currentColor" stroke-dasharray="440" stroke-dashoffset="140" stroke-width="3"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-3xl serif-text font-semibold">68%</span>
+<span class="text-[9px] uppercase tracking-widest text-on-surface-variant">Completed</span>
+</div>
+</div>
+</div>
+<!-- Bento Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left: Daily Readings (Primary Task) -->
+<div class="lg:col-span-8 space-y-12">
+<div class="bg-surface-container-low rounded-3xl p-8 lg:p-10 border border-outline-variant/10">
+<div class="flex items-center justify-between mb-8">
+<h3 class="serif-text text-2xl">Daily Reading List</h3>
+<div class="flex gap-2">
+<button class="p-2 rounded-full hover:bg-surface-container transition-colors"><span class="material-symbols-outlined">filter_list</span></button>
+<button class="p-2 rounded-full hover:bg-surface-container transition-colors"><span class="material-symbols-outlined">more_vert</span></button>
+</div>
+</div>
+<div class="space-y-2">
+<!-- Reading Item: Completed -->
+<div class="group flex items-center gap-6 p-4 rounded-2xl hover:bg-surface-container transition-all duration-300">
+<div class="flex flex-col items-center w-12 shrink-0">
+<span class="text-[10px] font-sans font-bold uppercase text-on-surface-variant">Day</span>
+<span class="serif-text text-xl">54</span>
+</div>
+<div class="flex-1">
+<h4 class="text-on-surface-variant line-through text-sm font-medium tracking-wide">Acts 14 - 15</h4>
+<p class="text-xs text-secondary italic">Completed Apr 12</p>
+</div>
+<div class="w-8 h-8 rounded-full bg-secondary text-on-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-lg" data-weight="fill">check</span>
+</div>
+</div>
+<!-- Reading Item: Today -->
+<div class="group flex items-center gap-6 p-6 rounded-2xl bg-surface-container-highest shadow-sm border border-outline-variant/20 scale-[1.02] transform transition-all">
+<div class="flex flex-col items-center w-12 shrink-0">
+<span class="text-[10px] font-sans font-bold uppercase text-secondary">Today</span>
+<span class="serif-text text-2xl font-bold">55</span>
+</div>
+<div class="flex-1">
+<h4 class="serif-text text-lg font-medium">Acts 16:16 - 17:34</h4>
+<p class="text-xs text-on-surface-variant font-medium uppercase tracking-tighter mt-1">St. Paul in Athens</p>
+</div>
+<button class="w-10 h-10 rounded-full border-2 border-primary hover:bg-primary hover:text-on-primary flex items-center justify-center transition-all group-active:scale-95">
+<span class="material-symbols-outlined text-xl">play_arrow</span>
+</button>
+</div>
+<!-- Reading Item: Upcoming -->
+<div class="group flex items-center gap-6 p-4 rounded-2xl hover:bg-surface-container transition-all duration-300">
+<div class="flex flex-col items-center w-12 shrink-0 opacity-40">
+<span class="text-[10px] font-sans font-bold uppercase">Day</span>
+<span class="serif-text text-xl">56</span>
+</div>
+<div class="flex-1">
+<h4 class="text-on-surface text-sm font-medium tracking-wide">Acts 18 - 19</h4>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest mt-1">Tomorrow</p>
+</div>
+<div class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center text-outline-variant group-hover:border-primary group-hover:text-primary transition-all">
+<span class="material-symbols-outlined text-lg">radio_button_unchecked</span>
+</div>
+</div>
+<div class="group flex items-center gap-6 p-4 rounded-2xl hover:bg-surface-container transition-all duration-300">
+<div class="flex flex-col items-center w-12 shrink-0 opacity-40">
+<span class="text-[10px] font-sans font-bold uppercase">Day</span>
+<span class="serif-text text-xl">57</span>
+</div>
+<div class="flex-1">
+<h4 class="text-on-surface text-sm font-medium tracking-wide">Acts 20 - 21</h4>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest mt-1">Thursday</p>
+</div>
+<div class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center text-outline-variant transition-all">
+<span class="material-symbols-outlined text-lg">radio_button_unchecked</span>
+</div>
+</div>
+</div>
+<button class="mt-10 w-full py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant hover:text-primary border-t border-outline-variant/10 flex items-center justify-center gap-2 transition-colors">
+                                View full schedule <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Right: Catch Up & Meta Info -->
+<div class="lg:col-span-4 space-y-8">
+<!-- Missed Days Section -->
+<div class="bg-primary-container text-on-primary-container rounded-3xl p-8 shadow-xl">
+<div class="flex items-start justify-between mb-6">
+<div>
+<h3 class="serif-text text-xl text-on-tertiary">Grace Period</h3>
+<p class="text-xs text-on-primary-container/60 mt-1 uppercase tracking-tighter">Missed Readings</p>
+</div>
+<span class="material-symbols-outlined text-secondary-fixed text-3xl">history</span>
+</div>
+<div class="space-y-4 mb-8">
+<div class="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/5 hover:bg-white/10 transition-colors cursor-pointer group">
+<div>
+<span class="text-[10px] uppercase tracking-widest opacity-60">Day 51</span>
+<p class="text-on-tertiary text-sm">Acts 8-10</p>
+</div>
+<span class="material-symbols-outlined text-on-tertiary group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/5 hover:bg-white/10 transition-colors cursor-pointer group">
+<div>
+<span class="text-[10px] uppercase tracking-widest opacity-60">Day 52</span>
+<p class="text-on-tertiary text-sm">Acts 11-13</p>
+</div>
+<span class="material-symbols-outlined text-on-tertiary group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+</div>
+<button class="w-full bg-secondary text-white py-3 rounded-xl text-sm font-medium hover:brightness-110 active:scale-95 transition-all">
+                                Catch Up Now
+                            </button>
+</div>
+<!-- Reflection Prompt -->
+<div class="bg-surface-container rounded-3xl p-8 relative overflow-hidden group">
+<div class="relative z-10">
+<span class="text-[9px] uppercase tracking-widest text-secondary font-bold">Daily Reflection</span>
+<blockquote class="serif-text text-xl italic mt-4 leading-snug">
+                                    "What does Paul's resilience in Athens reveal about your current challenges?"
+                                </blockquote>
+<button class="mt-8 flex items-center gap-2 text-sm font-medium hover:underline">
+                                    Open Journal <span class="material-symbols-outlined text-sm">edit_note</span>
+</button>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
+<span class="material-symbols-outlined text-[120px]" data-weight="fill">self_improvement</span>
+</div>
+</div>
+<!-- Stats Card -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-high rounded-2xl p-6 flex flex-col items-center">
+<span class="text-2xl serif-text font-bold">12</span>
+<span class="text-[9px] uppercase tracking-widest text-on-surface-variant text-center mt-1">Day Streak</span>
+</div>
+<div class="bg-surface-container-high rounded-2xl p-6 flex flex-col items-center">
+<span class="text-2xl serif-text font-bold">34</span>
+<span class="text-[9px] uppercase tracking-widest text-on-surface-variant text-center mt-1">Remaining</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (JSON Component - Mobile Only) -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-[#FCF9F2]/90 backdrop-blur-lg rounded-t-3xl border-t border-slate-200/10 shadow-[0_-4px_20px_rgba(0,0,0,0.03)]">
+<a class="flex flex-col items-center justify-center text-slate-400 hover:opacity-70 transition-all" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] uppercase tracking-tighter mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-slate-900 text-[#FCF9F2] rounded-full w-12 h-12 shadow-lg active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined">book_5</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 hover:opacity-70 transition-all" href="#">
+<span class="material-symbols-outlined">stylus_note</span>
+<span class="text-[10px] uppercase tracking-tighter mt-1">Journal</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 hover:opacity-70 transition-all" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] uppercase tracking-tighter mt-1">Profile</span>
+</a>
+</nav>
+</div>
+</body></html>

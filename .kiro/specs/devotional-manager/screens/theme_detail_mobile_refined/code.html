@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>The Architecture of Silence - Devotional</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,700;1,6..72,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#bdce89",
+                        "surface": "#fcf9f2",
+                        "on-tertiary-fixed-variant": "#3a485c",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#e5e2db",
+                        "outline-variant": "#c5c6cd",
+                        "inverse-on-surface": "#f3f0e9",
+                        "inverse-primary": "#bbc7e2",
+                        "on-secondary-container": "#5a682f",
+                        "surface-dim": "#dcdad3",
+                        "surface-container-low": "#f6f3ec",
+                        "surface-bright": "#fcf9f2",
+                        "on-secondary-fixed": "#161e00",
+                        "surface-container-high": "#ebe8e1",
+                        "secondary-fixed": "#d9eaa3",
+                        "primary-fixed": "#d7e2ff",
+                        "on-primary-container": "#78849d",
+                        "primary-fixed-dim": "#bbc7e2",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#0d1c2f",
+                        "tertiary-fixed": "#d5e3fd",
+                        "on-tertiary-fixed": "#0d1c2f",
+                        "on-secondary-fixed-variant": "#3f4c15",
+                        "on-error-container": "#93000a",
+                        "primary": "#000000",
+                        "outline": "#75777d",
+                        "surface-variant": "#e5e2db",
+                        "on-primary-fixed": "#101c30",
+                        "on-background": "#1c1c18",
+                        "secondary-container": "#d6e7a0",
+                        "background": "#fcf9f2",
+                        "surface-tint": "#535f76",
+                        "on-tertiary-container": "#76859b",
+                        "on-surface-variant": "#45474d",
+                        "on-surface": "#1c1c18",
+                        "on-primary-fixed-variant": "#3c475d",
+                        "primary-container": "#101c30",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#31312c",
+                        "surface-container": "#f1eee7",
+                        "tertiary": "#000000",
+                        "on-primary": "#ffffff",
+                        "secondary": "#56642b",
+                        "tertiary-fixed-dim": "#b9c7e0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Newsreader", "serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-secondary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full flex items-center justify-between px-6 py-4 bg-[#FCF9F2]/80 dark:bg-[#051125]/80 backdrop-blur-xl z-50">
+<div class="flex items-center gap-4">
+<button class="text-[#000000] dark:text-[#FCF9F2] hover:opacity-70 transition-opacity active:scale-95 duration-150">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="text-2xl font-headline font-bold tracking-tighter text-[#000000] dark:text-[#FCF9F2]">Curator</span>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden ring-1 ring-outline-variant/30">
+<img alt="User profile avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKFI4S9vjzem0IYlSOZ85OsKjuZ_wLsjy2Zd51FI9XCxnii7s_8Ue1zXb6F5NQvOWNAiRy4EA4a8AzMRXTts0d6YBGeBkaFhSQw9QladLMGzWSydK_2N7pbVWWZZjzoEJyDOvSHcZJoRPJN0S7R3gkFdkeikWyO_hdheeQ0M3Eus9fu0n6VPmO3hWbn5UELBq9imH2nV4sj65fwFpZaEkGVzBCXAW_746oSvkz9ecVG_4jXuxugFS5sDRb2dLJPv9VquE3shmX5BA"/>
+</div>
+</header>
+<!-- Main Content -->
+<main class="pt-24 pb-32 md:pl-0 min-h-screen max-w-md mx-auto">
+<!-- Header Section -->
+<header class="px-6 mb-10">
+<div class="flex flex-col gap-6">
+<div class="space-y-1">
+<span class="font-sans uppercase tracking-widest text-[10px] text-secondary font-bold">Featured Series</span>
+<h1 class="text-4xl font-headline font-bold leading-tight text-primary">The Architecture of Silence</h1>
+</div>
+<div class="relative w-full aspect-[4/5] overflow-hidden rounded-3xl bg-surface-container shadow-2xl shadow-black/5 group">
+<img alt="The Architecture of Silence" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Minimalist architectural detail of a concrete structure with dramatic shadows and light play, high contrast monochrome style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjGDIBPzJgzpCqWpsnhFBkb0Si8bJo-5YjBCfVrLgb7k5Z38ou867fu-jDN3JWwS8muTwEZew9VjZNZ77XkK-W2CCkM6uWya3wWmGz0cpk5kgaTWSV-sde58hED8y7Vd1t6wz6CylpqGjval0hx-iKB3SB-uZydHQNAb1sld8Tnjl8q1MrxnaFTSa2u4zvGhQkBph41sbK71s_rMWE01eKFyb6DtciMERV9Xbo2D-JPRZT6vA64UUGd0jWXEng1QlE_fABN3F8QRo"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full">
+<button class="w-full py-4 px-6 bg-white text-black rounded-xl font-sans font-semibold text-sm hover:bg-surface-container-highest transition-all flex items-center justify-center gap-2 active:scale-95 duration-150">
+<span class="material-symbols-outlined text-sm">play_arrow</span>
+                        Resume Journey
+                    </button>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-2xl">
+<p class="font-headline italic text-xl text-on-surface-variant leading-relaxed text-center">
+                    "In the void between sounds, the soul begins its most profound dialogue."
+                </p>
+</div>
+</div>
+</header>
+<!-- Entry List Section -->
+<section class="px-6">
+<div class="flex items-center justify-between mb-6 border-b border-outline-variant/10 pb-4">
+<h2 class="text-[10px] font-sans uppercase tracking-widest text-on-surface-variant font-bold">Chapters</h2>
+<span class="text-[10px] font-sans uppercase tracking-widest text-secondary font-bold">04 / 12 Complete</span>
+</div>
+<div class="space-y-3">
+<!-- Completed Entry -->
+<div class="group flex items-center gap-4 py-4 px-5 bg-surface-container-low rounded-2xl transition-all active:scale-[0.98]">
+<div class="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-secondary/10 text-secondary">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex-grow">
+<span class="block text-[10px] uppercase tracking-widest text-stone-400 font-bold">Day 01</span>
+<h3 class="text-lg font-headline text-stone-500 line-through">Defining the Void</h3>
+</div>
+<span class="material-symbols-outlined text-stone-300">chevron_right</span>
+</div>
+<!-- Completed Entry -->
+<div class="group flex items-center gap-4 py-4 px-5 bg-surface-container-low rounded-2xl transition-all active:scale-[0.98]">
+<div class="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-secondary/10 text-secondary">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex-grow">
+<span class="block text-[10px] uppercase tracking-widest text-stone-400 font-bold">Day 02</span>
+<h3 class="text-lg font-headline text-stone-500 line-through">The First Threshold</h3>
+</div>
+<span class="material-symbols-outlined text-stone-300">chevron_right</span>
+</div>
+<!-- Next Entry (Active) -->
+<div class="group flex items-center gap-4 py-5 px-5 bg-surface-container-highest rounded-2xl transition-all active:scale-[0.98] ring-1 ring-primary/5">
+<div class="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full border-2 border-secondary text-secondary">
+<span class="material-symbols-outlined text-[20px]">radio_button_unchecked</span>
+</div>
+<div class="flex-grow">
+<span class="block text-[10px] uppercase tracking-widest text-secondary font-bold">Day 03 • Current</span>
+<h3 class="text-xl font-headline font-bold text-primary">Shadows in the Nave</h3>
+</div>
+<span class="material-symbols-outlined text-primary font-bold">chevron_right</span>
+</div>
+<!-- Future Entry -->
+<div class="group flex items-center gap-4 py-4 px-5 bg-surface-container-low rounded-2xl transition-all active:scale-[0.98]">
+<div class="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full border border-stone-300 text-stone-300">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+</div>
+<div class="flex-grow">
+<span class="block text-[10px] uppercase tracking-widest text-stone-400 font-bold">Day 04</span>
+<h3 class="text-lg font-headline text-on-surface-variant">Weight of Stone</h3>
+</div>
+<span class="material-symbols-outlined text-stone-300">chevron_right</span>
+</div>
+<!-- Future Entry -->
+<div class="group flex items-center gap-4 py-4 px-5 bg-surface-container-low rounded-2xl transition-all active:scale-[0.98]">
+<div class="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full border border-stone-300 text-stone-300">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+</div>
+<div class="flex-grow">
+<span class="block text-[10px] uppercase tracking-widest text-stone-400 font-bold">Day 05</span>
+<h3 class="text-lg font-headline text-on-surface-variant">Resonance and Echo</h3>
+</div>
+<span class="material-symbols-outlined text-stone-300">chevron_right</span>
+</div>
+</div>
+<!-- More Content Indicator -->
+<div class="py-12 flex flex-col items-center justify-center text-stone-400">
+<div class="w-px h-12 bg-outline-variant/30 mb-4"></div>
+<p class="text-[10px] font-sans uppercase tracking-widest font-bold">Scroll for Days 07—12</p>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pt-3 pb-8 bg-[#FCF9F2]/80 dark:bg-[#051125]/80 backdrop-blur-xl shadow-[0_-4px_40px_rgba(0,0,0,0.04)] z-50 rounded-t-2xl">
+<!-- Themes Tab (Active based on context of SCREEN_31 reference) -->
+<a class="flex flex-col items-center justify-center bg-[#56642B]/10 dark:bg-[#56642B]/20 text-[#56642B] dark:text-[#FCF9F2] rounded-xl px-4 py-1 translate-y-[-2px] transition-transform duration-300" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_stories</span>
+<span class="font-sans text-[11px] font-medium tracking-tight mt-1">Themes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#000000]/40 dark:text-[#F1EEE7]/40 px-4 py-1 hover:text-[#56642B] dark:hover:text-[#FCF9F2] transition-colors" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-sans text-[11px] font-medium tracking-tight mt-1">Study</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#000000]/40 dark:text-[#F1EEE7]/40 px-4 py-1 hover:text-[#56642B] dark:hover:text-[#FCF9F2] transition-colors" href="#">
+<span class="material-symbols-outlined">bookmark</span>
+<span class="font-sans text-[11px] font-medium tracking-tight mt-1">Saved</span>
+</a>
+</nav>
+</body></html>

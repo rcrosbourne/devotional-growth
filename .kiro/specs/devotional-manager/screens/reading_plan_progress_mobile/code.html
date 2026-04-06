@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Devotional | Reading Plan Progress</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "secondary": "#56642b",
+            "surface-tint": "#535f76",
+            "on-tertiary-container": "#76859b",
+            "on-tertiary": "#ffffff",
+            "on-background": "#1c1c18",
+            "on-secondary": "#ffffff",
+            "on-primary-fixed-variant": "#3c475d",
+            "on-surface": "#1c1c18",
+            "on-surface-variant": "#45474d",
+            "on-secondary-fixed": "#161e00",
+            "on-primary": "#ffffff",
+            "surface-container-low": "#f6f3ec",
+            "surface-container-high": "#ebe8e1",
+            "inverse-surface": "#31312c",
+            "surface-container-highest": "#e5e2db",
+            "on-secondary-fixed-variant": "#3f4c15",
+            "primary": "#000000",
+            "tertiary-fixed": "#d5e3fd",
+            "tertiary": "#000000",
+            "surface-variant": "#e5e2db",
+            "error": "#ba1a1a",
+            "tertiary-container": "#0d1c2f",
+            "background": "#fcf9f2",
+            "surface-container-lowest": "#ffffff",
+            "on-primary-container": "#78849d",
+            "inverse-primary": "#bbc7e2",
+            "inverse-on-surface": "#f3f0e9",
+            "on-tertiary-fixed-variant": "#3a485c",
+            "on-primary-fixed": "#101c30",
+            "surface-bright": "#fcf9f2",
+            "surface-container": "#f1eee7",
+            "secondary-container": "#d6e7a0",
+            "surface": "#fcf9f2",
+            "secondary-fixed-dim": "#bdce89",
+            "on-error": "#ffffff",
+            "tertiary-fixed-dim": "#b9c7e0",
+            "outline-variant": "#c5c6cd",
+            "error-container": "#ffdad6",
+            "primary-fixed": "#d7e2ff",
+            "outline": "#75777d",
+            "on-secondary-container": "#5a682f",
+            "surface-dim": "#dcdad3",
+            "primary-fixed-dim": "#bbc7e2",
+            "on-error-container": "#93000a",
+            "secondary-fixed": "#d9eaa3",
+            "on-tertiary-fixed": "#0d1c2f",
+            "primary-container": "#101c30"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "fontFamily": {
+            "headline": ["Newsreader"],
+            "body": ["Inter"],
+            "label": ["Inter"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+    }
+    .custom-scroll-hide::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#FCF9F2]/80 dark:bg-stone-950/80 backdrop-blur-xl">
+<div class="flex justify-between items-center px-6 h-16 w-full max-w-screen-xl mx-auto">
+<button class="hover:opacity-70 transition-opacity">
+<span class="material-symbols-outlined text-black dark:text-stone-100" data-icon="menu">menu</span>
+</button>
+<h1 class="font-serif italic text-2xl tracking-tight text-black dark:text-stone-100">Devotional</h1>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container">
+<img alt="User Profile" data-alt="Close-up portrait of a woman with a serene expression in soft, natural window lighting with neutral tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAezl7iFSv7KdF-ge4_bIJTdWReHrBspzJbSjVmO-WFarMcuCRI4BWQDCqSP3XDoMg5xtBW5_kV2Ch0Bb08hXcfrw6s5wqK9NJ7MZUiqLFu0hnzSc3icT0KEB23N-PG9_XC2LgN6-RKWGnzwXE8ho8sdReK6zdqpGcAuYnrqjIe-wyK1qkLzH69Y-9QvjEFIua4phKkLPi3Up4vbVkJJiv99i4IF2EYxGJGezpr-LHGrz2tJz6UJd44EqlRrI1ki4BFDEo_caLAEbc"/>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-lg mx-auto">
+<!-- Hero / Progress Section -->
+<section class="mb-12 flex flex-col items-center">
+<span class="font-label uppercase text-[10px] tracking-[0.2em] text-secondary font-semibold mb-2">Current Journey</span>
+<h2 class="font-headline text-3xl font-bold text-center mb-10 leading-tight">The New Testament in 90 Days</h2>
+<!-- Circular Progress Chart -->
+<div class="relative w-48 h-48 flex items-center justify-center">
+<!-- Background Path -->
+<svg class="absolute inset-0 w-full h-full -rotate-90">
+<circle class="text-surface-container" cx="96" cy="96" fill="transparent" r="88" stroke="currentColor" stroke-width="6"></circle>
+<!-- Progress Path -->
+<circle class="text-primary" cx="96" cy="96" fill="transparent" r="88" stroke="currentColor" stroke-dasharray="552.92" stroke-dashoffset="193.52" stroke-width="6"></circle>
+</svg>
+<div class="text-center">
+<div class="font-headline italic text-5xl font-light">65%</div>
+<div class="font-label uppercase text-[9px] tracking-widest text-outline">Day 58 of 90</div>
+</div>
+</div>
+</section>
+<!-- Daily Reading List -->
+<section class="mb-12">
+<div class="flex justify-between items-end mb-6">
+<h3 class="font-headline text-2xl">Today's Reflection</h3>
+<span class="font-label text-[11px] text-outline">MARCH 14</span>
+</div>
+<div class="space-y-4">
+<!-- Active Reading Item -->
+<div class="bg-surface-container-lowest p-5 rounded-xl shadow-[0_4px_24px_rgba(0,0,0,0.03)] border border-outline-variant/10">
+<div class="flex justify-between items-start mb-3">
+<div>
+<p class="font-label uppercase text-[9px] tracking-widest text-secondary font-bold mb-1">Passage 01</p>
+<h4 class="font-headline text-xl">Romans 8:1-17</h4>
+</div>
+<button class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[20px]" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-4">
+            A meditation on Life through the Spirit and the hope of future glory.
+          </p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-secondary" data-icon="schedule">schedule</span>
+<span class="font-label text-[11px] text-on-surface-variant">8 MINUTE READ</span>
+</div>
+</div>
+<!-- Upcoming / To Do Item -->
+<div class="bg-surface-container p-5 rounded-xl flex items-center justify-between opacity-80">
+<div>
+<p class="font-label uppercase text-[9px] tracking-widest text-outline font-bold mb-1">Passage 02</p>
+<h4 class="font-headline text-lg">Romans 8:18-39</h4>
+</div>
+<button class="w-6 h-6 rounded border border-outline flex items-center justify-center">
+<!-- Hidden Check -->
+</button>
+</div>
+</div>
+</section>
+<!-- Grace Period Section -->
+<section class="mb-12">
+<div class="bg-surface-container-high rounded-2xl overflow-hidden">
+<div class="p-6">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-secondary" data-icon="history_toggle_off">history_toggle_off</span>
+<h3 class="font-headline text-xl">Grace Period</h3>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">
+            You have 2 pending readings from earlier this week. Take a moment to catch up at your own pace—there is no rush in reflection.
+          </p>
+<div class="space-y-3">
+<div class="flex items-center justify-between py-2 border-b border-outline-variant/20">
+<span class="font-headline text-base italic">Acts 28:1-31</span>
+<span class="font-label text-[10px] bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded-full">DAY 56</span>
+</div>
+<div class="flex items-center justify-between py-2 border-b border-outline-variant/20">
+<span class="font-headline text-base italic">Romans 1:1-17</span>
+<span class="font-label text-[10px] bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded-full">DAY 57</span>
+</div>
+</div>
+</div>
+<div class="h-32 w-full relative">
+<img alt="Library" class="w-full h-full object-cover grayscale opacity-30 mix-blend-multiply" data-alt="A tranquil, minimalist study room with tall windows, soft afternoon light, and stacks of linen-bound books on a wooden table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCe24xq-hvy9PomctWMa8zXLRGdAX2iMbibmoyjwWKZg6uP4L5keYjonGgYt28mUX79D8uhI1HTeSMsVUFkFAfEuOr3BeyrngWoZaXIQCCo7CG8bCSOGEMplrIwtQ_uXJJapKde4FyHFLCxvXxghPYFGGm7hdJQd-nBtxwSb6HR6Z4i4YSsfe_yxbxlfJ4XjA9yNEQRAAI6LUwjJiN93gE5s7emjub7tfCw8Xj2m6k33nNtcJRACuqcDD9jeQW1br4Mz-az_-eiPvM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-high to-transparent"></div>
+</div>
+</div>
+</section>
+<!-- Upcoming Days (Horizontal) -->
+<section>
+<h3 class="font-headline text-2xl mb-6">Looking Ahead</h3>
+<div class="flex gap-4 overflow-x-auto custom-scroll-hide pb-4">
+<div class="flex-shrink-0 w-32 bg-surface-container-low p-4 rounded-xl text-center">
+<span class="font-label text-[10px] text-outline block mb-2">FRI</span>
+<span class="font-headline text-2xl block mb-2">15</span>
+<span class="font-label text-[9px] text-on-surface-variant uppercase tracking-tighter">Romans 9-10</span>
+</div>
+<div class="flex-shrink-0 w-32 bg-surface-container-low p-4 rounded-xl text-center">
+<span class="font-label text-[10px] text-outline block mb-2">SAT</span>
+<span class="font-headline text-2xl block mb-2">16</span>
+<span class="font-label text-[9px] text-on-surface-variant uppercase tracking-tighter">Romans 11-12</span>
+</div>
+<div class="flex-shrink-0 w-32 bg-surface-container-low p-4 rounded-xl text-center">
+<span class="font-label text-[10px] text-outline block mb-2">SUN</span>
+<span class="font-headline text-2xl block mb-2">17</span>
+<span class="font-label text-[9px] text-on-surface-variant uppercase tracking-tighter">Sabbath Rest</span>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 md:hidden bg-[#FCF9F2]/90 dark:bg-stone-950/90 backdrop-blur-lg rounded-t-2xl shadow-[0_-4px_40px_rgba(0,0,0,0.04)]">
+<div class="flex justify-around items-center px-4 pb-6 pt-3">
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 px-4 py-1.5 transition-all duration-300 ease-out hover:text-black dark:hover:text-stone-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="auto_stories">auto_stories</span>
+<span class="font-sans uppercase text-[10px] tracking-[0.1em] font-semibold">Today</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 px-4 py-1.5 transition-all duration-300 ease-out hover:text-black dark:hover:text-stone-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="self_improvement">self_improvement</span>
+<span class="font-sans uppercase text-[10px] tracking-[0.1em] font-semibold">Reflect</span>
+</a>
+<a class="flex flex-col items-center justify-center text-black dark:text-white bg-[#F1EEE7] dark:bg-stone-800 rounded-xl px-4 py-1.5 transition-all duration-300 ease-out" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="local_library">local_library</span>
+<span class="font-sans uppercase text-[10px] tracking-[0.1em] font-semibold">Library</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 px-4 py-1.5 transition-all duration-300 ease-out hover:text-black dark:hover:text-stone-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="edit_note">edit_note</span>
+<span class="font-sans uppercase text-[10px] tracking-[0.1em] font-semibold">Journal</span>
+</a>
+</div>
+</nav>
+</body></html>

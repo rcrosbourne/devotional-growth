@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed-variant": "#3a485c",
+                    "secondary": "#56642b",
+                    "primary-container": "#101c30",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#78849d",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#000000",
+                    "error": "#ba1a1a",
+                    "on-error-container": "#93000a",
+                    "surface-container-lowest": "#ffffff",
+                    "background": "#fcf9f2",
+                    "surface-container-high": "#ebe8e1",
+                    "on-secondary-fixed-variant": "#3f4c15",
+                    "secondary-fixed": "#d9eaa3",
+                    "on-tertiary-fixed": "#0d1c2f",
+                    "on-primary-fixed": "#101c30",
+                    "on-background": "#1c1c18",
+                    "on-secondary-fixed": "#161e00",
+                    "surface-dim": "#dcdad3",
+                    "on-surface-variant": "#45474d",
+                    "on-error": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-container": "#5a682f",
+                    "tertiary-fixed-dim": "#b9c7e0",
+                    "surface-container-low": "#f6f3ec",
+                    "primary-fixed": "#d7e2ff",
+                    "on-primary": "#ffffff",
+                    "surface-variant": "#e5e2db",
+                    "on-surface": "#1c1c18",
+                    "surface-container-highest": "#e5e2db",
+                    "surface-tint": "#535f76",
+                    "outline-variant": "#c5c6cd",
+                    "inverse-surface": "#31312c",
+                    "surface-bright": "#fcf9f2",
+                    "primary": "#000000",
+                    "inverse-on-surface": "#f3f0e9",
+                    "secondary-container": "#d6e7a0",
+                    "outline": "#75777d",
+                    "secondary-fixed-dim": "#bdce89",
+                    "primary-fixed-dim": "#bbc7e2",
+                    "surface": "#fcf9f2",
+                    "on-primary-fixed-variant": "#3c475d",
+                    "inverse-primary": "#bbc7e2",
+                    "tertiary-container": "#0d1c2f",
+                    "surface-container": "#f1eee7",
+                    "tertiary-fixed": "#d5e3fd",
+                    "on-tertiary-container": "#76859b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Newsreader"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body { background-color: #FCF9F2; }
+    </style>
+</head>
+<body class="font-body text-on-surface selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- TopNavBar -->
+<header class="bg-[#FCF9F2]/80 dark:bg-slate-950/80 backdrop-blur-md fixed top-0 w-full z-50 flex justify-between items-center px-6 py-4 lg:px-12">
+<div class="flex items-center gap-8">
+<span class="text-xl font-serif italic text-slate-900 dark:text-slate-100">The Sanctuary</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-slate-500 dark:text-slate-400 font-label uppercase text-[10px] tracking-widest hover:text-slate-900 transition-all" href="#">Today</a>
+<a class="text-slate-500 dark:text-slate-400 font-label uppercase text-[10px] tracking-widest hover:text-slate-900 transition-all" href="#">Library</a>
+<a class="text-slate-500 dark:text-slate-400 font-label uppercase text-[10px] tracking-widest hover:text-slate-900 transition-all" href="#">Archive</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">search</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">notifications</span>
+<div class="h-8 w-8 rounded-full overflow-hidden bg-surface-container-highest ring-1 ring-outline-variant/20">
+<img alt="User profile" class="h-full w-full object-cover" data-alt="Portrait of a serene curator in a sunlit art studio, wearing minimalist linen clothing, soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBM38XV4s-TDUJrtPHt_KNxYNNT-ufDX24cmsSSxeAKWKq_dh1O3zkzFie_enkpKYAaRw19wlJ064F5ARmsi_Rq0QTvQ7jc-hPojLERM3b3zgTnIMx7CgSI-GHBEZJ6RqHYRG6Du_Iop3xiHjMmS_0lso8ZX7wbeU2oPCe6MiZJPQhX8DMeWuyUQhdP1edA77HLEwo9iO3EGLJsPg8ipZxGxuy2KzsMC6s_55pYItA-qohd78s5zr5R8BHmhhKojW17JvFyd5Zo_2Q"/>
+</div>
+</div>
+</header>
+<div class="flex min-h-screen pt-20">
+<!-- SideNavBar (Desktop) -->
+<aside class="hidden lg:flex flex-col h-full py-8 px-6 bg-[#FCF9F2] dark:bg-slate-950 w-64 fixed left-0 top-20 border-r-0">
+<div class="space-y-6">
+<div class="px-2">
+<span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant block mb-4">Navigation</span>
+<nav class="space-y-4">
+<a class="flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-900 transition-colors duration-300 gap-3" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label uppercase text-[11px] tracking-widest">Devotionals</span>
+</a>
+<a class="flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-900 transition-colors duration-300 gap-3" href="#">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="font-label uppercase text-[11px] tracking-widest">Scripture</span>
+</a>
+<a class="flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-900 transition-colors duration-300 gap-3" href="#">
+<span class="material-symbols-outlined">edit_note</span>
+<span class="font-label uppercase text-[11px] tracking-widest">Journal</span>
+</a>
+</nav>
+</div>
+<div class="px-2 pt-8">
+<span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant block mb-4">System</span>
+<nav class="space-y-4">
+<a class="relative flex items-center text-slate-900 dark:text-white font-medium after:content-[''] after:absolute after:-right-6 after:h-8 after:w-1 after:bg-slate-900 after:rounded-l-full gap-3" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label uppercase text-[11px] tracking-widest">Settings</span>
+</a>
+</nav>
+</div>
+</div>
+<div class="mt-auto px-2">
+<button class="w-full bg-primary text-on-primary py-3 rounded-lg font-label text-[11px] uppercase tracking-widest hover:opacity-90 transition-opacity">
+                    New Entry
+                </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 lg:ml-64 px-6 py-12 lg:px-24">
+<div class="max-w-4xl mx-auto">
+<!-- Page Header -->
+<header class="mb-16">
+<span class="font-label text-xs uppercase tracking-[0.25em] text-secondary font-medium mb-3 block">Account Configuration</span>
+<h1 class="font-headline text-5xl md:text-6xl font-light tracking-tight text-primary">Settings</h1>
+</header>
+<div class="space-y-20">
+<!-- Profile Section -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+<div class="md:col-span-4">
+<h2 class="font-headline text-2xl text-primary mb-2">Profile</h2>
+<p class="text-on-surface-variant text-sm leading-relaxed font-light">Manage your public identity and personal details.</p>
+</div>
+<div class="md:col-span-8 bg-surface-container-low rounded-xl p-8 space-y-8">
+<div class="flex items-center gap-6">
+<div class="relative h-20 w-20 rounded-full bg-surface-container-highest group cursor-pointer overflow-hidden">
+<img class="h-full w-full object-cover" data-alt="Close up of a woman's face with calm expression in an airy studio environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdQ625Eop7WB2_gX-12ZRHQ_QMak2o55leD1HFzlYno5-WEqkfzPg7Ah3_7JHCQAZDYC29XImwohgN9L6yrzd8Ae6kXs6CKB1sXV7-I94t7Q64gfeUV3gHanBx-AZ3zcVnsC8XFm0QActKUS6WTkv3tmDPD1j1wgusx1vAFXwMPSCBCStuXtMqlRGwBxuslbs5PyT-nWuCvQf3Ok_T5nwFkvS16YqkM2oM43lGo5lMasLtxKpm0UTSmvgld5ZpORf16BOO7f_i9ys"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+<span class="material-symbols-outlined text-white">photo_camera</span>
+</div>
+</div>
+<div>
+<h4 class="font-label text-xs uppercase tracking-widest text-on-surface font-semibold">Profile Photo</h4>
+<p class="text-on-surface-variant text-[11px] mt-1">Recommended 400x400px</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Full Name</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant/30 py-2 focus:ring-0 focus:border-primary transition-all font-body text-sm placeholder:text-outline" type="text" value="Elena Vance"/>
+</div>
+<div class="space-y-2">
+<label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Email Address</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant/30 py-2 focus:ring-0 focus:border-primary transition-all font-body text-sm placeholder:text-outline" type="email" value="elena@sanctuary.io"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Partner Linking Section -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+<div class="md:col-span-4">
+<h2 class="font-headline text-2xl text-primary mb-2">Partner Linking</h2>
+<p class="text-on-surface-variant text-sm leading-relaxed font-light">Share your devotion journey with a companion or spiritual mentor.</p>
+</div>
+<div class="md:col-span-8">
+<div class="relative overflow-hidden rounded-xl bg-primary text-on-primary p-10">
+<div class="absolute top-0 right-0 -mr-16 -mt-16 h-64 w-64 bg-secondary/20 rounded-full blur-3xl"></div>
+<div class="relative z-10 flex flex-col items-start gap-6">
+<div class="h-12 w-12 rounded-full bg-on-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary-fixed">diversity_1</span>
+</div>
+<div class="space-y-2">
+<h3 class="font-headline text-2xl">Connect Your Sanctuary</h3>
+<p class="text-on-primary-container text-sm font-light leading-relaxed max-w-sm">Link with a partner to enable shared reflection prompts and collaborative prayer journals.</p>
+</div>
+<button class="bg-on-primary text-primary px-8 py-3 rounded-lg font-label text-[11px] uppercase tracking-[0.2em] font-bold hover:bg-secondary-container hover:text-on-secondary-container transition-all">
+                                        Link Partner
+                                    </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Notifications Section -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+<div class="md:col-span-4">
+<h2 class="font-headline text-2xl text-primary mb-2">Notifications</h2>
+<p class="text-on-surface-variant text-sm leading-relaxed font-light">Determine how and when The Sanctuary reaches out to you.</p>
+</div>
+<div class="md:col-span-8 bg-surface-container-low rounded-xl p-8 space-y-6">
+<div class="flex items-center justify-between py-2">
+<div class="space-y-1">
+<h4 class="text-sm font-medium text-on-surface">Daily Reflection Reminders</h4>
+<p class="text-xs text-on-surface-variant">Gentle morning prompts to start your day.</p>
+</div>
+<div class="h-5 w-10 bg-secondary rounded-full relative flex items-center px-1">
+<div class="h-3 w-3 bg-white rounded-full ml-auto"></div>
+</div>
+</div>
+<div class="flex items-center justify-between py-2 border-t border-outline-variant/10">
+<div class="space-y-1">
+<h4 class="text-sm font-medium text-on-surface">Community Highlights</h4>
+<p class="text-xs text-on-surface-variant">Weekly digests of shared insights.</p>
+</div>
+<div class="h-5 w-10 bg-outline-variant/30 rounded-full relative flex items-center px-1">
+<div class="h-3 w-3 bg-white rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between py-2 border-t border-outline-variant/10">
+<div class="space-y-1">
+<h4 class="text-sm font-medium text-on-surface">Partner Activity</h4>
+<p class="text-xs text-on-surface-variant">Notifications when your partner posts a journal entry.</p>
+</div>
+<div class="h-5 w-10 bg-secondary rounded-full relative flex items-center px-1">
+<div class="h-3 w-3 bg-white rounded-full ml-auto"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- App Preferences Section -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start mb-24">
+<div class="md:col-span-4">
+<h2 class="font-headline text-2xl text-primary mb-2">App Preferences</h2>
+<p class="text-on-surface-variant text-sm leading-relaxed font-light">Tailor the visual and functional experience of the interface.</p>
+</div>
+<div class="md:col-span-8 bg-surface-container-low rounded-xl p-8">
+<div class="space-y-8">
+<div class="space-y-4">
+<label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Default Interface Mode</label>
+<div class="grid grid-cols-3 gap-4">
+<button class="bg-surface-container-highest p-4 rounded-lg flex flex-col items-center gap-2 ring-2 ring-primary">
+<span class="material-symbols-outlined text-primary">light_mode</span>
+<span class="text-[10px] font-label uppercase tracking-wider">Parchment</span>
+</button>
+<button class="bg-surface-container p-4 rounded-lg flex flex-col items-center gap-2 hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">dark_mode</span>
+<span class="text-[10px] font-label uppercase tracking-wider">Shadow</span>
+</button>
+<button class="bg-surface-container p-4 rounded-lg flex flex-col items-center gap-2 hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">routine</span>
+<span class="text-[10px] font-label uppercase tracking-wider">System</span>
+</button>
+</div>
+</div>
+<div class="space-y-4">
+<label class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Typography Focus</label>
+<select class="w-full bg-transparent border-0 border-b border-outline-variant/30 py-2 focus:ring-0 focus:border-primary font-body text-sm">
+<option>Modern Serif (Newsreader)</option>
+<option>Classic Mono (Space Mono)</option>
+<option>Pure Minimalist (Inter)</option>
+</select>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+</div>
+<!-- BottomNavBar (Mobile) -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-[#FCF9F2]/90 dark:bg-slate-950/90 backdrop-blur-lg border-t border-slate-200/10 shadow-[0_-4px_20px_rgba(0,0,0,0.03)]">
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:opacity-70" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-sans text-[10px] uppercase tracking-tighter mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:opacity-70" href="#">
+<span class="material-symbols-outlined">book_5</span>
+<span class="font-sans text-[10px] uppercase tracking-tighter mt-1">Read</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:opacity-70" href="#">
+<span class="material-symbols-outlined">stylus_note</span>
+<span class="font-sans text-[10px] uppercase tracking-tighter mt-1">Journal</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-slate-900 dark:bg-slate-100 text-[#FCF9F2] dark:text-slate-900 rounded-full w-12 h-12" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+</a>
+</nav>
+</body></html>

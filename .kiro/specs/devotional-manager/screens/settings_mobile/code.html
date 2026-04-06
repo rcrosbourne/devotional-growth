@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settings — Devotional</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300..800;1,300..800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FCF9F2;
+        }
+        .serif-headline {
+            font-family: 'Newsreader', serif;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#56642b",
+                        "surface-tint": "#535f76",
+                        "on-tertiary-container": "#76859b",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#1c1c18",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#3c475d",
+                        "on-surface": "#1c1c18",
+                        "on-surface-variant": "#45474d",
+                        "on-secondary-fixed": "#161e00",
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#f6f3ec",
+                        "surface-container-high": "#ebe8e1",
+                        "inverse-surface": "#31312c",
+                        "surface-container-highest": "#e5e2db",
+                        "on-secondary-fixed-variant": "#3f4c15",
+                        "primary": "#000000",
+                        "tertiary-fixed": "#d5e3fd",
+                        "tertiary": "#000000",
+                        "surface-variant": "#e5e2db",
+                        "error": "#ba1a1a",
+                        "tertiary-container": "#0d1c2f",
+                        "background": "#fcf9f2",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-container": "#78849d",
+                        "inverse-primary": "#bbc7e2",
+                        "inverse-on-surface": "#f3f0e9",
+                        "on-tertiary-fixed-variant": "#3a485c",
+                        "on-primary-fixed": "#101c30",
+                        "surface-bright": "#fcf9f2",
+                        "surface-container": "#f1eee7",
+                        "secondary-container": "#d6e7a0",
+                        "surface": "#fcf9f2",
+                        "secondary-fixed-dim": "#bdce89",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#b9c7e0",
+                        "outline-variant": "#c5c6cd",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#d7e2ff",
+                        "outline": "#75777d",
+                        "on-secondary-container": "#5a682f",
+                        "surface-dim": "#dcdad3",
+                        "primary-fixed-dim": "#bbc7e2",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#d9eaa3",
+                        "on-tertiary-fixed": "#0d1c2f",
+                        "primary-container": "#101c30"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Newsreader"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#FCF9F2]/80 dark:bg-stone-950/80 backdrop-blur-xl">
+<div class="flex justify-between items-center px-6 h-16 w-full max-w-screen-xl mx-auto">
+<div class="flex items-center gap-4">
+<button class="text-black dark:text-stone-100 hover:opacity-70 transition-opacity">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-serif italic text-2xl tracking-tight text-black dark:text-stone-100">Devotional</h1>
+</div>
+<div class="h-8 w-8 rounded-full overflow-hidden">
+<img alt="Julianne Reed" class="h-full w-full object-cover" data-alt="portrait of a professional woman with a calm expression in soft daylight, minimalist aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlm85wERdX9ONKN3vfhd3BGWI2K1gw_4kKRjMyTDY5cgJrVjdEtS632pkJ0-NkiUalLQqUWIJUz_-5U742_RDjvmafroKmWWsID5LDdXLzt3FESQAOxxyu382Gzco8kUrxPt85A8clR32ssp7pe9uysDYc2ZHSZT74nlQxl7bCtw95dk_CR9I96IZU3quMlQfJBblP9-P7k6ct_x-WAO5OF-jmPBNC0tyHBExAU_rTNX3nwnhyvsm5JQOFzcIvUvnDEHUwPrID16Q"/>
+</div>
+</div>
+</header>
+<main class="pt-24 px-6 max-w-xl mx-auto space-y-12">
+<!-- Header Section -->
+<header>
+<p class="text-[10px] uppercase tracking-[0.2em] font-semibold text-secondary mb-2">Account Settings</p>
+<h2 class="font-serif text-4xl text-primary leading-none">Settings</h2>
+</header>
+<!-- Profile Section -->
+<section class="space-y-6">
+<div class="flex items-center gap-6">
+<div class="relative">
+<img alt="User profile" class="h-24 w-24 rounded-2xl object-cover shadow-sm" data-alt="Close up portrait of a elegant woman in high-end studio lighting, soft cream tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYJmzGUXCMtPhDy9ZEEvrLchnOnLdGLm3OZFoeNHXZA5LWVvoBurjki1k2kzFoRsM47a0AKvPBmYjaEJ5Yr9cxBWxJkGfu2YDM-njahsG3uNo1FUCX_wzXDpl-htKAysCG0dFcoxpb_ASHbtuKgxjNSzDJLvfqSo3Z2Gd3JEkyV_jrV3Cr2fi7g43q1J7YILkC4ruvEvKcMVU7Y4s6zD4Jdqpr46e_ZTZi8Bfhn9NqtkpheAqfPBMfG_srFkp5RU9zZNIAD4jxBqY"/>
+<button class="absolute -bottom-2 -right-2 bg-primary text-white h-8 w-8 rounded-full flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+</button>
+</div>
+<div>
+<h3 class="font-serif text-2xl text-primary">Julianne Reed</h3>
+<p class="text-sm text-outline">julianne.reed@curator.io</p>
+</div>
+</div>
+<div class="bg-surface-container rounded-3xl p-6 space-y-4">
+<div class="flex justify-between items-center border-b border-outline-variant/10 pb-4">
+<span class="text-sm font-medium">Display Name</span>
+<span class="text-sm text-outline">Julianne Reed</span>
+</div>
+<div class="flex justify-between items-center border-b border-outline-variant/10 pb-4">
+<span class="text-sm font-medium">Email Address</span>
+<span class="text-sm text-outline">julianne.reed@curator.io</span>
+</div>
+<div class="flex justify-between items-center pt-2">
+<span class="text-sm font-medium">Account Type</span>
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Premium Member</span>
+</div>
+</div>
+</section>
+<!-- Partner Linking Section -->
+<section>
+<h3 class="text-[10px] uppercase tracking-[0.2em] font-bold text-outline mb-4">Connections</h3>
+<div class="bg-surface-container-highest rounded-3xl p-8 text-center space-y-4">
+<div class="flex justify-center -space-x-4">
+<div class="h-12 w-12 rounded-full border-4 border-surface-container-highest overflow-hidden bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</div>
+<div class="h-12 w-12 rounded-full border-4 border-surface-container-highest overflow-hidden bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined" data-icon="link">link</span>
+</div>
+</div>
+<div class="max-w-[240px] mx-auto">
+<h4 class="font-serif text-xl mb-2">Partner Linking</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-6">Synchronize your journey with a partner to share reflections and streaks.</p>
+<button class="w-full bg-primary text-on-primary py-4 rounded-xl font-medium tracking-tight hover:opacity-90 transition-all">Link a Partner</button>
+</div>
+</div>
+</section>
+<!-- Notifications Section -->
+<section>
+<h3 class="text-[10px] uppercase tracking-[0.2em] font-bold text-outline mb-4">Notifications</h3>
+<div class="bg-surface-container rounded-3xl overflow-hidden divide-y divide-outline-variant/10">
+<div class="p-6 flex items-center justify-between">
+<div>
+<p class="font-medium text-sm">Daily Reminders</p>
+<p class="text-xs text-outline">Morning reflection alerts</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+<div class="p-6 flex items-center justify-between">
+<div>
+<p class="font-medium text-sm">Journal Digests</p>
+<p class="text-xs text-outline">Weekly summary of your entries</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+<div class="p-6 flex items-center justify-between">
+<div>
+<p class="font-medium text-sm">Streaks &amp; Milestones</p>
+<p class="text-xs text-outline">Celebrate your consistency</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+</div>
+</section>
+<!-- App Preferences Section -->
+<section>
+<h3 class="text-[10px] uppercase tracking-[0.2em] font-bold text-outline mb-4">App Preferences</h3>
+<div class="bg-surface-container rounded-3xl p-6">
+<p class="font-medium text-sm mb-4">Theme Selector</p>
+<div class="grid grid-cols-3 gap-4">
+<button class="flex flex-col items-center gap-2 p-4 rounded-2xl bg-white border-2 border-primary">
+<div class="w-full h-8 bg-background rounded shadow-inner"></div>
+<span class="text-[10px] font-bold uppercase tracking-widest">Light</span>
+</button>
+<button class="flex flex-col items-center gap-2 p-4 rounded-2xl bg-stone-900 border-2 border-transparent">
+<div class="w-full h-8 bg-stone-800 rounded shadow-inner"></div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-white">Dark</span>
+</button>
+<button class="flex flex-col items-center gap-2 p-4 rounded-2xl bg-stone-100 border-2 border-transparent">
+<div class="w-full h-8 bg-stone-200 rounded shadow-inner"></div>
+<span class="text-[10px] font-bold uppercase tracking-widest">System</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Footer Actions -->
+<footer class="pt-8 space-y-4">
+<button class="w-full text-sm font-medium text-error py-4">Delete Account</button>
+<p class="text-center text-[10px] text-outline uppercase tracking-widest font-bold">Devotional v2.4.1</p>
+</footer>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-[#FCF9F2]/90 dark:bg-stone-950/90 backdrop-blur-lg shadow-[0_-4px_40px_rgba(0,0,0,0.04)] rounded-t-2xl z-50">
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 px-4 py-1.5 transition-all duration-300 ease-out hover:text-black dark:hover:text-stone-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="auto_stories">auto_stories</span>
+<span class="font-sans uppercase text-[10px] tracking-[0.1em] font-semibold">Today</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 px-4 py-1.5 transition-all duration-300 ease-out hover:text-black dark:hover:text-stone-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="self_improvement">self_improvement</span>
+<span class="font-sans uppercase text-[10px] tracking-[0.1em] font-semibold">Reflect</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 px-4 py-1.5 transition-all duration-300 ease-out hover:text-black dark:hover:text-stone-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="local_library">local_library</span>
+<span class="font-sans uppercase text-[10px] tracking-[0.1em] font-semibold">Library</span>
+</a>
+<a class="flex flex-col items-center justify-center text-black dark:text-white bg-[#F1EEE7] dark:bg-stone-800 rounded-xl px-4 py-1.5 transition-all duration-300 ease-out" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="edit_note">edit_note</span>
+<span class="font-sans uppercase text-[10px] tracking-[0.1em] font-semibold">Journal</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Curator | AI Content Generation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-container": "#76859b",
+                    "on-tertiary-fixed-variant": "#3a485c",
+                    "background": "#fcf9f2",
+                    "primary-fixed": "#d7e2ff",
+                    "outline": "#75777d",
+                    "error-container": "#ffdad6",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#1c1c18",
+                    "tertiary": "#000000",
+                    "on-error-container": "#93000a",
+                    "surface-bright": "#fcf9f2",
+                    "surface-container-high": "#ebe8e1",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed": "#161e00",
+                    "tertiary-container": "#0d1c2f",
+                    "on-secondary-container": "#5a682f",
+                    "on-primary-fixed": "#101c30",
+                    "secondary-fixed-dim": "#bdce89",
+                    "surface-container-highest": "#e5e2db",
+                    "tertiary-fixed-dim": "#b9c7e0",
+                    "primary": "#000000",
+                    "surface": "#fcf9f2",
+                    "surface-dim": "#dcdad3",
+                    "on-tertiary-fixed": "#0d1c2f",
+                    "on-primary": "#ffffff",
+                    "inverse-surface": "#31312c",
+                    "secondary-fixed": "#d9eaa3",
+                    "secondary-container": "#d6e7a0",
+                    "primary-container": "#101c30",
+                    "outline-variant": "#c5c6cd",
+                    "surface-variant": "#e5e2db",
+                    "tertiary-fixed": "#d5e3fd",
+                    "on-surface-variant": "#45474d",
+                    "on-background": "#1c1c18",
+                    "on-primary-fixed-variant": "#3c475d",
+                    "secondary": "#56642b",
+                    "inverse-on-surface": "#f3f0e9",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#bbc7e2",
+                    "on-primary-container": "#78849d",
+                    "surface-container-low": "#f6f3ec",
+                    "error": "#ba1a1a",
+                    "surface-tint": "#535f76",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#f1eee7",
+                    "primary-fixed-dim": "#bbc7e2",
+                    "on-secondary-fixed-variant": "#3f4c15"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Newsreader"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .font-serif { font-family: 'Newsreader', serif; }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased">
+<!-- SideNavBar -->
+<aside class="h-screen w-72 fixed left-0 top-0 z-50 bg-[#F1EEE7] dark:bg-slate-900 flex flex-col justify-between py-10">
+<div>
+<div class="px-8 mb-12">
+<div class="flex items-center gap-3">
+<img alt="Curator Admin Logo" class="w-8 h-8 rounded-lg" data-alt="Minimalist geometric logo icon for a luxury editorial brand using black and bone white tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWfa9LpwzgQHpg645zTpMH5HEMPeTEyxmvcktsi1-0QZQDVigqwsnMFv7jAcGAWwZwEMPiptIRfNT25K2vqJG22HEfCkHuM5YqkNmXlvmsgwCUoh3tGpfXXWXCNx4Pomzk79cKbsNDSMIQqH3P_yisVsVh-Wf_IMZtacMZA6OdJRViTHNHnDMxer4VTCAmkIRTVPbN7_jQhcPFiBknL2CTHFCC9vQQDPti57arlZlDvYYPJcJ45NvM0q2mLvZEcHp6b5ECRK7jQBw"/>
+<div>
+<h1 class="text-xl font-serif italic text-black dark:text-white">The Curator</h1>
+<p class="text-[10px] uppercase tracking-[0.2em] text-secondary font-semibold">Editorial Admin</p>
+</div>
+</div>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center text-slate-500 dark:text-slate-400 px-8 py-3 hover:bg-[#FCF9F2]/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="dashboard">dashboard</span>
+<span class="font-sans tracking-tight">Dashboard</span>
+</a>
+<a class="flex items-center text-black dark:text-white font-semibold border-r-2 border-[#56642B] bg-[#FCF9F2] dark:bg-slate-800 px-8 py-3 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="auto_stories">auto_stories</span>
+<span class="font-sans tracking-tight">Devotionals</span>
+</a>
+<a class="flex items-center text-slate-500 dark:text-slate-400 px-8 py-3 hover:bg-[#FCF9F2]/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="menu_book">menu_book</span>
+<span class="font-sans tracking-tight">Contributors</span>
+</a>
+<a class="flex items-center text-slate-500 dark:text-slate-400 px-8 py-3 hover:bg-[#FCF9F2]/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="collections_bookmark">collections_bookmark</span>
+<span class="font-sans tracking-tight">Library</span>
+</a>
+<a class="flex items-center text-slate-500 dark:text-slate-400 px-8 py-3 hover:bg-[#FCF9F2]/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="settings">settings</span>
+<span class="font-sans tracking-tight">Settings</span>
+</a>
+</nav>
+</div>
+<div class="px-4">
+<div class="space-y-1">
+<a class="flex items-center text-slate-500 dark:text-slate-400 px-4 py-3 hover:bg-[#FCF9F2]/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="account_circle">account_circle</span>
+<span class="font-sans tracking-tight text-sm">Account Profile</span>
+</a>
+<a class="flex items-center text-slate-500 dark:text-slate-400 px-4 py-3 hover:bg-[#FCF9F2]/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="logout">logout</span>
+<span class="font-sans tracking-tight text-sm">Sign Out</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- TopAppBar -->
+<header class="sticky top-0 w-full z-40 bg-[#FCF9F2]/80 dark:bg-slate-950/80 backdrop-blur-xl flex justify-between items-center h-20 px-12 ml-72 border-b border-black/5 dark:border-white/5">
+<div class="flex items-center gap-8">
+<h2 class="text-2xl font-serif text-black dark:text-white">Dashboard Overview</h2>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-slate-400 hover:text-black transition-opacity font-sans text-xs uppercase tracking-widest" href="#">Analytics</a>
+<a class="text-black font-bold border-b border-[#56642B] font-sans text-xs uppercase tracking-widest" href="#">Drafts</a>
+<a class="text-slate-400 hover:text-black transition-opacity font-sans text-xs uppercase tracking-widest" href="#">Archive</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm" data-icon="search">search</span>
+<input class="bg-surface-container-high/50 border-none rounded-full pl-10 pr-4 py-2 text-sm focus:ring-1 focus:ring-secondary w-64" placeholder="Search entries..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-500 hover:text-black transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-slate-500 hover:text-black transition-colors">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-black/5">
+<img alt="Administrator Profile" class="w-full h-full object-cover" data-alt="Sophisticated headshot of a creative director in a neutral-toned studio setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCO9pUSLsOysLucioI5yzLOoJYrp9CIDD1aYwylBXtzuuqPAgFIrbMsZk06qm6rUSJutgsbtO86MySFdWWf-5jSlNPeLcNcXyase9pXINzdcMF2GaiLD2Jg6Tj6Q2teuu2jnCR0YsAU5rVpx0QbCJwYHuBQDB2AV_l9KlVVD21bQ_jJVmphIcxDBqZF67wUEdj94HsuAopz0Ac8xm9-UhjLrH0vWJkTPZ1gQcmT1upJf8rwpsFA3RQbisqPCFPf8_MxMR9IkO60tSE"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-72 min-h-[calc(100vh-5rem)] p-12">
+<div class="max-w-6xl mx-auto">
+<!-- Breadcrumbs / Eyebrow -->
+<div class="mb-8">
+<span class="label-md font-sans text-[10px] uppercase tracking-[0.25em] text-secondary font-bold block mb-2">Internal Tools</span>
+<h3 class="display-md font-serif text-4xl text-primary font-light">AI Content Assistant</h3>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+<!-- Left: Control Panel -->
+<section class="lg:col-span-5 space-y-8">
+<div class="bg-surface-container-low p-8 rounded-xl shadow-sm border border-black/5">
+<div class="mb-6">
+<label class="block font-sans text-xs uppercase tracking-widest text-on-surface-variant font-semibold mb-3">Generation Prompt</label>
+<textarea class="w-full h-48 bg-surface-container-lowest border-none rounded-lg p-5 font-body text-sm focus:ring-1 focus:ring-secondary resize-none placeholder:italic placeholder:text-slate-400" placeholder="e.g., 'A meditation on peace during uncertainty, drawing from stillness and natural landscapes. Maintain a tone of gentle authority.'"></textarea>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-xs font-sans text-on-surface-variant">Creativity Level</span>
+<span class="text-xs font-bold text-secondary">Balanced</span>
+</div>
+<div class="w-full bg-surface-container-high h-1 rounded-full overflow-hidden">
+<div class="bg-secondary w-1/2 h-full"></div>
+</div>
+</div>
+<button class="w-full mt-8 bg-primary text-on-primary py-4 rounded-lg font-sans text-sm font-bold tracking-widest uppercase hover:bg-slate-900 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="sparkles">auto_fix_high</span>
+                            Generate Content
+                        </button>
+</div>
+<div class="p-6 bg-secondary/5 rounded-lg border border-secondary/10">
+<h4 class="font-serif text-lg text-secondary mb-2 italic">Curator Tip</h4>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+                            For the most editorial results, specify a desired "voice" or "mood". Our models are trained on high-end boutique journals and theological monographs.
+                        </p>
+</div>
+</section>
+<!-- Right: Preview Canvas -->
+<section class="lg:col-span-7">
+<div class="relative bg-surface-container-lowest min-h-[600px] rounded-xl shadow-xl overflow-hidden border border-black/5">
+<!-- Glassy Toolbar -->
+<div class="sticky top-0 w-full h-14 bg-white/60 backdrop-blur-md border-b border-black/5 flex items-center justify-between px-6 z-10">
+<span class="text-[10px] uppercase tracking-widest font-bold text-slate-400">Preview Mode</span>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-1.5 text-[10px] uppercase tracking-widest font-bold text-slate-500 hover:text-secondary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="refresh">refresh</span>
+                                    Regenerate
+                                </button>
+<button class="bg-secondary text-white px-4 py-1.5 rounded-full text-[10px] uppercase tracking-widest font-bold hover:opacity-90 transition-opacity">
+                                    Approve &amp; Edit
+                                </button>
+</div>
+</div>
+<!-- Content Preview Area -->
+<div class="p-16 max-w-2xl mx-auto space-y-12 overflow-y-auto">
+<!-- Hero Image Mock -->
+<div class="aspect-[16/9] w-full bg-surface-container-high rounded-sm overflow-hidden mb-12">
+<img alt="Article Hero Preview" class="w-full h-full object-cover grayscale opacity-80" data-alt="Cinematic wide shot of a misty lake at dawn with a single wooden dock stretching into calm water, cool muted tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGBfPuSTzkyqfYPqRl3VvxiOtwI7P-CDsj9DRxC6Ol_GHghHoyPujE_H2UcvDVGxlVEyAENG6-qYFYsdcOeP1uDsapo72R1f5Kc5hsObJQfiEtVLIxpF9isS0wnM_TCClBK70XFEp17psk4SC8rqkC7ke7VYS8pvWYwWn8lL8sVtxw-XvdpBs2VJUY0ZvAXYEcL8kzwmTScNnwDGVa6E58YXH51fiyZkEkgOVYlZWCFoJGd_Nh6Wnq-t2r7KPb3y6o2b5RTZacP8A"/>
+</div>
+<div class="text-center space-y-4">
+<span class="label-md font-sans text-[10px] uppercase tracking-[0.4em] text-secondary font-bold">Volume IV • Serenity</span>
+<h1 class="font-serif text-5xl text-primary leading-tight font-extralight tracking-tight">The Architecture of Silence</h1>
+<div class="w-12 h-[1px] bg-secondary/30 mx-auto mt-8"></div>
+</div>
+<article class="space-y-8">
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-secondary text-4xl mb-4" data-icon="format_quote">format_quote</span>
+<p class="font-serif text-2xl text-on-surface-variant italic text-center leading-relaxed px-8">
+                                        "In the rush of the world, silence is not the absence of sound, but the presence of depth."
+                                    </p>
+</div>
+<div class="font-body text-on-surface text-lg leading-relaxed space-y-6 first-letter:text-7xl first-letter:font-serif first-letter:float-left first-letter:mr-3 first-letter:mt-2">
+<p>
+                                        The contemporary landscape is often defined by its velocity. We move through spaces with a frantic urgency, mistaking movement for progress and noise for engagement. Yet, there is a profound theology found in the quiet, a structural integrity that only reveals itself when the dust of the day begins to settle.
+                                    </p>
+<p>
+                                        Finding peace amidst uncertainty requires a radical reorientation of our internal compass. It is not about ignoring the storm, but rather about building a lighthouse within the spirit—a place of unshakeable foundations and focused light.
+                                    </p>
+</div>
+<!-- Scripture Section -->
+<div class="bg-surface-container-low p-10 border-l-2 border-secondary italic rounded-r-lg">
+<p class="font-serif text-xl text-secondary mb-4 leading-relaxed">
+                                        "He leads me beside still waters. He restores my soul."
+                                    </p>
+<span class="font-sans text-xs uppercase tracking-widest font-bold text-slate-500">— Psalm 23:2-3</span>
+</div>
+<!-- Reflection Prompts -->
+<div class="pt-12 border-t border-black/5">
+<h5 class="font-sans text-[10px] uppercase tracking-widest font-bold text-slate-400 mb-6">Reflection Prompts</h5>
+<ul class="space-y-6">
+<li class="flex items-start gap-4">
+<span class="text-secondary font-serif text-xl">01</span>
+<p class="text-sm font-body leading-relaxed text-on-surface-variant">Identify one 'loud' area of your life that could benefit from intentional stillness this week.</p>
+</li>
+<li class="flex items-start gap-4">
+<span class="text-secondary font-serif text-xl">02</span>
+<p class="text-sm font-body leading-relaxed text-on-surface-variant">What does 'restoration' look like for you in this current season of uncertainty?</p>
+</li>
+</ul>
+</div>
+</article>
+</div>
+<!-- Page Texture Overlay -->
+<div class="pointer-events-none absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/natural-paper.png')] opacity-20"></div>
+</div>
+</section>
+</div>
+</div>
+</main>
+</body></html>

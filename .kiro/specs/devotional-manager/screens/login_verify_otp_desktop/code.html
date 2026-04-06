@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3, .font-serif {
+            font-family: 'Newsreader', serif;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#0d1c2f",
+                        "surface": "#fcf9f2",
+                        "secondary-container": "#d6e7a0",
+                        "surface-container": "#f1eee7",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f6f3ec",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#f3f0e9",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#d5e3fd",
+                        "on-tertiary-container": "#76859b",
+                        "outline-variant": "#c5c6cd",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e5e2db",
+                        "secondary": "#56642b",
+                        "on-surface": "#1c1c18",
+                        "primary-fixed": "#d7e2ff",
+                        "surface-container-highest": "#e5e2db",
+                        "on-primary-fixed-variant": "#3c475d",
+                        "inverse-surface": "#31312c",
+                        "surface-tint": "#535f76",
+                        "secondary-fixed": "#d9eaa3",
+                        "on-primary-fixed": "#101c30",
+                        "on-surface-variant": "#45474d",
+                        "on-secondary-fixed": "#161e00",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "primary": "#000000",
+                        "on-secondary-fixed-variant": "#3f4c15",
+                        "on-secondary-container": "#5a682f",
+                        "primary-container": "#101c30",
+                        "tertiary-fixed-dim": "#b9c7e0",
+                        "on-tertiary-fixed": "#0d1c2f",
+                        "background": "#fcf9f2",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#000000",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#dcdad3",
+                        "surface-container-high": "#ebe8e1",
+                        "surface-bright": "#fcf9f2",
+                        "on-background": "#1c1c18",
+                        "secondary-fixed-dim": "#bdce89",
+                        "primary-fixed-dim": "#bbc7e2",
+                        "inverse-primary": "#bbc7e2",
+                        "outline": "#75777d",
+                        "on-primary-container": "#78849d",
+                        "on-tertiary-fixed-variant": "#3a485c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Newsreader"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col selection:bg-secondary-container">
+<!-- Top Navigation Suppression: Transactions/Verification hide main shell per UX Goal -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-8 h-20 bg-surface/80 backdrop-blur-xl">
+<div class="text-2xl font-bold font-serif text-black tracking-tighter">The Digital Curator</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-stone-400" data-icon="shield">shield</span>
+<span class="text-[10px] uppercase tracking-[0.2em] font-medium text-stone-400">Secure Access</span>
+</div>
+</header>
+<main class="flex-grow flex items-center justify-center px-6 pt-20 pb-12">
+<div class="max-w-xl w-full">
+<!-- Centered Card Structure using Surface Layers instead of Borders -->
+<div class="bg-surface-container-lowest p-12 lg:p-16 rounded-xl shadow-[0_40px_60px_-15px_rgba(28,28,24,0.05)] text-center relative overflow-hidden">
+<!-- Background Decorative Element (Subtle Editorial Signature) -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary/5 rounded-bl-full -mr-16 -mt-16"></div>
+<!-- Identity Header -->
+<header class="mb-10">
+<span class="inline-block px-3 py-1 bg-secondary-container/30 text-secondary text-[10px] uppercase tracking-widest font-semibold rounded-full mb-6">Security Check</span>
+<h1 class="text-4xl md:text-5xl font-serif text-primary tracking-tight mb-4">Verify Your Email</h1>
+<p class="text-on-surface-variant font-body leading-relaxed max-w-sm mx-auto">
+                        We've sent a 6-digit code to your email. Please enter it below to securely log in.
+                    </p>
+</header>
+<!-- OTP Input Section -->
+<form class="space-y-12">
+<div class="flex justify-center gap-3 md:gap-4">
+<!-- Discrete Input Boxes -->
+<input class="w-12 h-16 md:w-16 md:h-20 text-center text-2xl font-serif bg-surface-container border-b-2 border-transparent focus:border-primary focus:bg-surface-container-highest transition-all outline-none rounded-lg" maxlength="1" placeholder="•" type="text"/>
+<input class="w-12 h-16 md:w-16 md:h-20 text-center text-2xl font-serif bg-surface-container border-b-2 border-transparent focus:border-primary focus:bg-surface-container-highest transition-all outline-none rounded-lg" maxlength="1" placeholder="•" type="text"/>
+<input class="w-12 h-16 md:w-16 md:h-20 text-center text-2xl font-serif bg-surface-container border-b-2 border-transparent focus:border-primary focus:bg-surface-container-highest transition-all outline-none rounded-lg" maxlength="1" placeholder="•" type="text"/>
+<div class="w-2"></div> <!-- Visual Gap -->
+<input class="w-12 h-16 md:w-16 md:h-20 text-center text-2xl font-serif bg-surface-container border-b-2 border-transparent focus:border-primary focus:bg-surface-container-highest transition-all outline-none rounded-lg" maxlength="1" placeholder="•" type="text"/>
+<input class="w-12 h-16 md:w-16 md:h-20 text-center text-2xl font-serif bg-surface-container border-b-2 border-transparent focus:border-primary focus:bg-surface-container-highest transition-all outline-none rounded-lg" maxlength="1" placeholder="•" type="text"/>
+<input class="w-12 h-16 md:w-16 md:h-20 text-center text-2xl font-serif bg-surface-container border-b-2 border-transparent focus:border-primary focus:bg-surface-container-highest transition-all outline-none rounded-lg" maxlength="1" placeholder="•" type="text"/>
+</div>
+<div class="space-y-6">
+<!-- Primary Action -->
+<button class="w-full bg-primary text-on-primary py-4 px-8 rounded-lg font-medium tracking-wide hover:opacity-90 transition-opacity flex items-center justify-center gap-2" type="submit">
+<span>Verify Code</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<!-- Secondary Links -->
+<div class="flex flex-col gap-4 pt-4">
+<button class="text-sm font-body text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center gap-2 group" type="button">
+<span>Didn't receive it?</span>
+<span class="font-semibold underline underline-offset-4 decoration-secondary/30 group-hover:decoration-secondary">Resend Code</span>
+</button>
+<a class="text-xs uppercase tracking-widest text-stone-400 hover:text-primary transition-colors" href="#">
+                                Back to Login
+                            </a>
+</div>
+</div>
+</form>
+<!-- Status Decoration -->
+<div class="mt-12 flex items-center justify-center gap-8 opacity-40 grayscale">
+<img alt="Trust Logo" class="h-6 object-contain" data-alt="minimalist black and white seal of authenticity with elegant typography and clean lines" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxM1oth-eomG4BoTI2IqH5TiOHaTjMbpwFA5rVEFLJ0Ws4QC7ZKiBwNFgf6m_eXCtUsOj5UZP6lhrJujcqXzdEn7aFpZG1qqXcommw5FfBoMnz0A0sU9N5zBTHX33X7Or-fpEHlUs-dz-S0EgNA6NJI4nq_UYooYUMuziLhkBaTbguVbOaqrDA1xx6zk8QXsQBpBYMgi1fEUZ56HANhIAmpZIkaFCRZFkbNkLa1k63CzGUKFKptZYCUbYdgTDbnwdMNWxyFQZhSKI"/>
+<div class="h-4 w-[1px] bg-outline-variant"></div>
+<img alt="Security Logo" class="h-6 object-contain" data-alt="abstract geometric shield icon in solid black with minimalist professional aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUK-k_VbOWH2qe7sAGTSRxCQZJJA81mqRRxRwFClJAJ3i-DAih21vb5FCVQMmd3gXPhSkI3_yUeqwHO9BxBTV3KZj15-XOk9BHVY5cej14AcIW06VnWlNh25-sTzb1mwDZsQo3UgmImdwq2snoNChk0sQnj90_WfglH3lq_gbqfJuVdlPgicdxJPnMMX1za6PFdIqkxDBQWIzc7VhRE5hVJecEYe3HmpMJKw1MKnxXSsAPTjbFr-q5-SDXMrp0lUlpmmqJmafHoMo"/>
+</div>
+</div>
+<!-- Contextual Editorial Footer -->
+<div class="mt-12 flex flex-col items-center gap-8 opacity-50">
+<div class="max-w-md text-center">
+<p class="font-serif italic text-sm text-stone-500">
+                        "Curating security as meticulously as we curate content. Your digital safety is the foundation of our partnership."
+                    </p>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Segment -->
+<footer class="w-full py-12 flex flex-col items-center justify-center space-y-4 px-6 bg-surface-container">
+<p class="font-sans text-[11px] uppercase tracking-widest text-stone-500">© 2024 The Digital Curator. All rights reserved.</p>
+<nav class="flex space-x-8">
+<a class="font-sans text-[11px] uppercase tracking-widest text-stone-500 hover:text-black transition-colors" href="#">Privacy Policy</a>
+<a class="font-sans text-[11px] uppercase tracking-widest text-stone-500 hover:text-black transition-colors" href="#">Terms of Service</a>
+<a class="font-sans text-[11px] uppercase tracking-widest text-stone-500 hover:text-black transition-colors" href="#">Journal Archives</a>
+</nav>
+</footer>
+<!-- Background texture simulation using CSS gradient as requested -->
+<div class="fixed inset-0 -z-10 pointer-events-none opacity-[0.03]" style="background-image: radial-gradient(#1c1c18 0.5px, transparent 0.5px); background-size: 24px 24px;"></div>
+</body></html>

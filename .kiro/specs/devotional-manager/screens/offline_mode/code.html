@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Sanctuary | Offline</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed-variant": "#3a485c",
+                    "secondary": "#56642b",
+                    "primary-container": "#101c30",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#78849d",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#000000",
+                    "error": "#ba1a1a",
+                    "on-error-container": "#93000a",
+                    "surface-container-lowest": "#ffffff",
+                    "background": "#fcf9f2",
+                    "surface-container-high": "#ebe8e1",
+                    "on-secondary-fixed-variant": "#3f4c15",
+                    "secondary-fixed": "#d9eaa3",
+                    "on-tertiary-fixed": "#0d1c2f",
+                    "on-primary-fixed": "#101c30",
+                    "on-background": "#1c1c18",
+                    "on-secondary-fixed": "#161e00",
+                    "surface-dim": "#dcdad3",
+                    "on-surface-variant": "#45474d",
+                    "on-error": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-container": "#5a682f",
+                    "tertiary-fixed-dim": "#b9c7e0",
+                    "surface-container-low": "#f6f3ec",
+                    "primary-fixed": "#d7e2ff",
+                    "on-primary": "#ffffff",
+                    "surface-variant": "#e5e2db",
+                    "on-surface": "#1c1c18",
+                    "surface-container-highest": "#e5e2db",
+                    "surface-tint": "#535f76",
+                    "outline-variant": "#c5c6cd",
+                    "inverse-surface": "#31312c",
+                    "surface-bright": "#fcf9f2",
+                    "primary": "#000000",
+                    "inverse-on-surface": "#f3f0e9",
+                    "secondary-container": "#d6e7a0",
+                    "outline": "#75777d",
+                    "secondary-fixed-dim": "#bdce89",
+                    "primary-fixed-dim": "#bbc7e2",
+                    "surface": "#fcf9f2",
+                    "on-primary-fixed-variant": "#3c475d",
+                    "inverse-primary": "#bbc7e2",
+                    "tertiary-container": "#0d1c2f",
+                    "surface-container": "#f1eee7",
+                    "tertiary-fixed": "#d5e3fd",
+                    "on-tertiary-container": "#76859b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Newsreader"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+      }
+      .font-serif { font-family: 'Newsreader', serif; }
+      .font-sans { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-sans selection:bg-secondary-container">
+<!-- Top Navigation Bar -->
+<nav class="bg-[#FCF9F2]/80 backdrop-blur-md flex justify-between items-center w-full px-6 py-4 lg:px-12 fixed top-0 z-50">
+<div class="flex items-center gap-4">
+<span class="text-xl font-serif italic text-slate-900">The Sanctuary</span>
+<div class="flex items-center gap-2 px-3 py-1 bg-surface-container-high rounded-full">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">cloud_off</span>
+<span class="text-[10px] font-label font-medium uppercase tracking-widest text-on-surface-variant">Offline</span>
+</div>
+</div>
+<div class="hidden md:flex gap-8">
+<a class="text-slate-500 hover:text-slate-900 transition-all font-label uppercase text-[11px] tracking-widest" href="#">Today</a>
+<a class="text-slate-500 hover:text-slate-900 transition-all font-label uppercase text-[11px] tracking-widest" href="#">Library</a>
+<a class="text-slate-500 hover:text-slate-900 transition-all font-label uppercase text-[11px] tracking-widest" href="#">Archive</a>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined cursor-pointer hover:opacity-70 transition-opacity">search</span>
+<span class="material-symbols-outlined cursor-pointer hover:opacity-70 transition-opacity">notifications</span>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden">
+<img alt="User profile" data-alt="close-up portrait of a woman with a gentle expression in soft natural lighting with a minimalist background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSnhGBypGPt54Z2I9hzuzmwrWo6hxPTB8-xZGlHMnQwLdueyByA458zfRcYsmZ_eZUGkqZg_zY81LNLx7OzYfrnOjMl2z2sPUY5H9BaZRioi26xLvcPfoR3n0-pLoTzxMyeb7WkpNyWu8X8tMvzlv7eNfMxoVvnO2kbpglEOqvzJIFYALdSKO7wOQUj3E9xwMyxdIoz-ZLVKgLGY_18E_d9m0kwZ1YE9dkuclv0LPrfCmqR9h5-cXoZB2rfjECvh6zatAXVqp_tzY"/>
+</div>
+</div>
+</nav>
+<!-- Side Navigation (Desktop) -->
+<aside class="hidden lg:flex flex-col h-screen w-64 bg-[#FCF9F2] fixed left-0 top-0 py-24 px-8 z-40">
+<div class="space-y-8">
+<div class="flex flex-col gap-6">
+<a class="flex items-center gap-4 text-slate-500 hover:text-slate-900 transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label uppercase text-[11px] tracking-widest">Devotionals</span>
+</a>
+<a class="flex items-center gap-4 text-slate-500 hover:text-slate-900 transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="font-label uppercase text-[11px] tracking-widest">Scripture</span>
+</a>
+<a class="flex items-center gap-4 text-slate-500 hover:text-slate-900 transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">edit_note</span>
+<span class="font-label uppercase text-[11px] tracking-widest">Journal</span>
+</a>
+<a class="relative flex items-center gap-4 text-slate-900 font-medium after:content-[''] after:absolute after:-right-8 after:h-8 after:w-1 after:bg-slate-900 after:rounded-l-full" href="#">
+<span class="material-symbols-outlined">self_improvement</span>
+<span class="font-label uppercase text-[11px] tracking-widest">Reflection</span>
+</a>
+<a class="flex items-center gap-4 text-slate-500 hover:text-slate-900 transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label uppercase text-[11px] tracking-widest">Community</span>
+</a>
+</div>
+<div class="pt-8">
+<button class="w-full bg-primary text-on-primary py-3 rounded-lg font-label uppercase text-[11px] tracking-widest hover:opacity-90 transition-opacity">
+                    New Entry
+                </button>
+</div>
+</div>
+<div class="mt-auto">
+<a class="flex items-center gap-4 text-slate-500 hover:text-slate-900 transition-colors duration-300" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label uppercase text-[11px] tracking-widest">Settings</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:pl-64 pt-24 pb-32 min-h-screen">
+<div class="max-w-6xl mx-auto px-6 lg:px-12">
+<!-- Hero Hero State -->
+<section class="relative h-[614px] flex items-center justify-center rounded-[2rem] overflow-hidden mb-16">
+<div class="absolute inset-0 z-0">
+<img alt="Landscape" class="w-full h-full object-cover grayscale opacity-40" data-alt="minimalist mountain landscape shrouded in morning mist with soft textures and ethereal calm lighting in muted tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiBQMoZL1IUETYGpsbuzJB5YNziXW2Wx8V_DOy-3-6G7LCDm6NmdSOzbiJPCn-v1h5qI38a3DOObySdT1-88o9VuMBHuV-AQ9_FYHZf-CSHqAoKW0_NcFl1W7oxltezN7CgJUy6z7asIAb9FrJvPIHFXlTB-DNmxiSILbBZWlWEQOHPfA7kIlDkRotrNJlC31Yj6XEYmOK_yF3MJpA4QWGUB7JYNTpu56ykqQ7HJ2AtMm4LlriNaylN2HsD9OsamRnizSIymXBCgg"/>
+<div class="absolute inset-0 bg-gradient-to-b from-background/40 to-background"></div>
+</div>
+<div class="relative z-10 text-center px-4">
+<span class="font-label uppercase text-[12px] tracking-[0.3em] text-secondary mb-4 block">Quiet Moment</span>
+<h1 class="font-serif text-5xl md:text-7xl text-on-surface leading-tight mb-6">Pause and reflect.</h1>
+<p class="font-serif italic text-xl md:text-2xl text-on-surface-variant max-w-2xl mx-auto opacity-80">
+                        You're currently offline. Take this moment for breath and stillness while we wait for your connection to return.
+                    </p>
+</div>
+</section>
+<!-- Available Themes (Bento Grid Style) -->
+<section class="space-y-12 mb-24">
+<div class="flex flex-col md:flex-row justify-between items-end gap-4 border-b border-outline-variant/10 pb-8">
+<div>
+<span class="font-label uppercase text-[10px] tracking-widest text-on-surface-variant mb-2 block">Offline Access</span>
+<h2 class="font-serif text-3xl">Available From Cache</h2>
+</div>
+<p class="font-sans text-sm text-on-surface-variant max-w-xs text-right">
+                        The following themes have been saved for offline contemplation.
+                    </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Major Card -->
+<div class="md:col-span-8 group cursor-pointer">
+<div class="bg-surface-container-low p-8 rounded-[2rem] h-full flex flex-col justify-between hover:bg-surface-container transition-colors duration-500">
+<div>
+<span class="material-symbols-outlined text-secondary mb-6" data-weight="fill">spa</span>
+<h3 class="font-serif text-4xl mb-4 leading-tight">The Architecture of Silence</h3>
+<p class="text-on-surface-variant text-lg leading-relaxed max-w-md">A deep dive into finding internal quiet through external minimalism. Full text available.</p>
+</div>
+<div class="mt-12 flex items-center gap-4">
+<span class="bg-secondary-container/30 text-secondary px-4 py-1 rounded-full text-[10px] font-label uppercase tracking-widest">Philosophy</span>
+<span class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant">12 min read</span>
+</div>
+</div>
+</div>
+<!-- Side Card 1 -->
+<div class="md:col-span-4 group cursor-pointer">
+<div class="bg-surface-container-highest/30 p-8 rounded-[2rem] h-full flex flex-col hover:bg-surface-container-highest/50 transition-colors duration-500">
+<div class="aspect-square bg-surface-container rounded-2xl mb-6 overflow-hidden">
+<img alt="Texture" class="w-full h-full object-cover grayscale opacity-60 group-hover:scale-105 transition-transform duration-700" data-alt="top-down macro view of smooth river stones in shallow clear water with soft reflections" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzoUzLhqs0fZSghN2U0aRa6v0EFuOi5I3gwLqraTo-93tsZp3AqgJOo6v_lWbkhr-qYtbl10XBiZsn3DbUdR6sM_ZsCLe7p-z3j1SD-VkxU65Rhq9qAsfIYHi2SsYOo39dwxSmXhn582KMyrdM1AF3QbihqdjxxXdIRTc_2dvCV1MA3aD3a5ZAtiNJMN43THghPURQ-nTrqepduAjDWQhAwy2LoAJfru2xDANba_esNNnv5-kxcegns-MwUFG9LCLkWLEjIlUtakU"/>
+</div>
+<h4 class="font-serif text-2xl mb-2">Steady Ground</h4>
+<p class="text-on-surface-variant text-sm">Meditation on stability and patience during change.</p>
+</div>
+</div>
+<!-- Side Card 2 -->
+<div class="md:col-span-4 group cursor-pointer">
+<div class="bg-surface-container-low p-8 rounded-[2rem] h-full flex flex-col hover:bg-surface-container transition-colors duration-500">
+<h4 class="font-serif text-2xl mb-4">Morning Rhythms</h4>
+<div class="space-y-3">
+<div class="h-1 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-full"></div>
+</div>
+<div class="flex justify-between text-[10px] font-label uppercase tracking-widest text-on-surface-variant">
+<span>Cached</span>
+<span>100%</span>
+</div>
+</div>
+<div class="mt-auto pt-8">
+<p class="text-on-surface-variant text-sm italic">"The first hour of the day is the rudder of the soul."</p>
+</div>
+</div>
+</div>
+<!-- Wide Feature Card -->
+<div class="md:col-span-8 group cursor-pointer">
+<div class="bg-primary text-on-primary p-8 md:p-12 rounded-[2rem] flex flex-col md:flex-row gap-8 items-center justify-between">
+<div class="flex-1">
+<span class="bg-white/10 text-white/60 px-3 py-1 rounded-full text-[9px] font-label uppercase tracking-widest mb-4 inline-block">Classic Reflection</span>
+<h3 class="font-serif text-3xl mb-4">Meditations: Marcus Aurelius</h3>
+<p class="text-white/60 text-sm leading-relaxed">The foundational text on stoicism remains fully accessible while you are disconnected.</p>
+</div>
+<div class="w-32 h-32 flex-shrink-0 bg-white/5 rounded-full flex items-center justify-center border border-white/10">
+<span class="material-symbols-outlined text-4xl text-white/40">auto_stories</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Pull Quote Section -->
+<section class="py-24 text-center max-w-3xl mx-auto">
+<span class="text-6xl text-secondary opacity-30 font-serif leading-none">“</span>
+<blockquote class="font-serif text-3xl md:text-4xl text-on-surface leading-relaxed mb-6 -mt-8">
+                    In the silence of the heart, God speaks. If you face God in prayer and silence, God will speak to you.
+                </blockquote>
+<cite class="font-label uppercase text-[11px] tracking-[0.2em] text-on-surface-variant not-italic">— Mother Teresa</cite>
+</section>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Mobile) -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-[#FCF9F2]/90 backdrop-blur-lg shadow-[0_-4px_20px_rgba(0,0,0,0.03)] rounded-t-3xl border-t border-slate-200/10">
+<div class="flex flex-col items-center justify-center text-slate-400">
+<span class="material-symbols-outlined">home</span>
+<span class="font-sans text-[10px] uppercase tracking-tighter mt-1">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400">
+<span class="material-symbols-outlined">book_5</span>
+<span class="font-sans text-[10px] uppercase tracking-tighter mt-1">Read</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-slate-900 text-[#FCF9F2] rounded-full w-12 h-12">
+<span class="material-symbols-outlined">stylus_note</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400">
+<span class="material-symbols-outlined">person</span>
+<span class="font-sans text-[10px] uppercase tracking-tighter mt-1">Profile</span>
+</div>
+</nav>
+</body></html>

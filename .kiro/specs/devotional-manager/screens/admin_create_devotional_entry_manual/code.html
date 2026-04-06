@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Curator | Create Devotional Entry</title>
+<!-- Typography -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#76859b",
+                        "on-tertiary-fixed-variant": "#3a485c",
+                        "background": "#fcf9f2",
+                        "primary-fixed": "#d7e2ff",
+                        "outline": "#75777d",
+                        "error-container": "#ffdad6",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#1c1c18",
+                        "tertiary": "#000000",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#fcf9f2",
+                        "surface-container-high": "#ebe8e1",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#161e00",
+                        "tertiary-container": "#0d1c2f",
+                        "on-secondary-container": "#5a682f",
+                        "on-primary-fixed": "#101c30",
+                        "secondary-fixed-dim": "#bdce89",
+                        "surface-container-highest": "#e5e2db",
+                        "tertiary-fixed-dim": "#b9c7e0",
+                        "primary": "#000000",
+                        "surface": "#fcf9f2",
+                        "surface-dim": "#dcdad3",
+                        "on-tertiary-fixed": "#0d1c2f",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#31312c",
+                        "secondary-fixed": "#d9eaa3",
+                        "secondary-container": "#d6e7a0",
+                        "primary-container": "#101c30",
+                        "outline-variant": "#c5c6cd",
+                        "surface-variant": "#e5e2db",
+                        "tertiary-fixed": "#d5e3fd",
+                        "on-surface-variant": "#45474d",
+                        "on-background": "#1c1c18",
+                        "on-primary-fixed-variant": "#3c475d",
+                        "secondary": "#56642b",
+                        "inverse-on-surface": "#f3f0e9",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#bbc7e2",
+                        "on-primary-container": "#78849d",
+                        "surface-container-low": "#f6f3ec",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#535f76",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#f1eee7",
+                        "primary-fixed-dim": "#bbc7e2",
+                        "on-secondary-fixed-variant": "#3f4c15"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Newsreader"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fcf9f2;
+        }
+        .serif {
+            font-family: 'Newsreader', serif;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- SideNavBar (from JSON) -->
+<aside class="h-screen w-72 fixed left-0 top-0 z-50 bg-[#F1EEE7] dark:bg-slate-900 flex flex-col justify-between py-10 transition-all duration-300">
+<div>
+<div class="px-8 mb-12">
+<div class="text-xl font-serif italic text-black dark:text-white mb-1">The Curator</div>
+<div class="text-[10px] uppercase tracking-[0.2em] text-secondary font-semibold">Editorial Admin</div>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center text-slate-500 dark:text-slate-400 px-8 py-3 hover:bg-[#FCF9F2]/50 dark:hover:bg-slate-800/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="dashboard">dashboard</span>
+<span class="text-sm font-medium tracking-tight">Dashboard</span>
+</a>
+<a class="flex items-center text-black dark:text-white font-semibold border-r-2 border-[#56642B] bg-[#FCF9F2] dark:bg-slate-800 px-8 py-3 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="auto_stories">auto_stories</span>
+<span class="text-sm font-medium tracking-tight">Devotionals</span>
+</a>
+<a class="flex items-center text-slate-500 dark:text-slate-400 px-8 py-3 hover:bg-[#FCF9F2]/50 dark:hover:bg-slate-800/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="menu_book">menu_book</span>
+<span class="text-sm font-medium tracking-tight">Contributors</span>
+</a>
+<a class="flex items-center text-slate-500 dark:text-slate-400 px-8 py-3 hover:bg-[#FCF9F2]/50 dark:hover:bg-slate-800/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="collections_bookmark">collections_bookmark</span>
+<span class="text-sm font-medium tracking-tight">Library</span>
+</a>
+<a class="flex items-center text-slate-500 dark:text-slate-400 px-8 py-3 hover:bg-[#FCF9F2]/50 dark:hover:bg-slate-800/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="settings">settings</span>
+<span class="text-sm font-medium tracking-tight">Settings</span>
+</a>
+</nav>
+</div>
+<div class="px-4">
+<div class="px-4 py-6 border-t border-black/5 mx-4">
+<a class="flex items-center text-slate-500 dark:text-slate-400 px-4 py-2 hover:bg-[#FCF9F2]/50 dark:hover:bg-slate-800/50 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="account_circle">account_circle</span>
+<span class="text-xs font-medium tracking-tight">Account Profile</span>
+</a>
+<a class="flex items-center text-slate-500 dark:text-slate-400 px-4 py-2 hover:bg-[#FCF9F2]/50 dark:hover:bg-slate-800/50 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="logout">logout</span>
+<span class="text-xs font-medium tracking-tight">Sign Out</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<main class="ml-72 min-h-screen pb-24">
+<!-- TopAppBar (from JSON) -->
+<header class="sticky top-0 w-full z-40 bg-[#FCF9F2]/80 dark:bg-slate-950/80 backdrop-blur-xl border-b border-black/5 dark:border-white/5 h-20 px-12 flex justify-between items-center">
+<div class="flex items-center gap-6">
+<h1 class="text-2xl font-serif text-black dark:text-white">Dashboard Overview</h1>
+<nav class="hidden md:flex gap-8 ml-8">
+<a class="text-slate-400 dark:text-slate-500 text-xs uppercase tracking-widest hover:text-black dark:hover:text-white transition-opacity" href="#">Analytics</a>
+<a class="text-black dark:text-white font-bold border-b border-[#56642B] text-xs uppercase tracking-widest" href="#">Drafts</a>
+<a class="text-slate-400 dark:text-slate-500 text-xs uppercase tracking-widest hover:text-black dark:hover:text-white transition-opacity" href="#">Archive</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative group">
+<span class="material-symbols-outlined text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 text-sm" data-icon="search">search</span>
+<input class="bg-surface-container-low border-none rounded-full pl-10 pr-4 py-2 text-xs w-64 focus:ring-1 focus:ring-secondary/30" placeholder="Search entries..." type="text"/>
+</div>
+<div class="flex gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="notifications">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="help_outline">help_outline</button>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-secondary/20">
+<img alt="Administrator Profile" data-alt="professional portrait of a sophisticated male editor in a minimal studio setting, soft lighting, neutral tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-y-00fXJ3xbvICRdC6B1Z2KuR8NLwd7JTHk4lGg7jFnfiyh0YFcEmDCOb5mGi3ZJagkvpl9O3yuevc_XhqoL9G3hxY40lCFhBB2Dy7MRpD-BdzSNzoeuJZIDpoVB8vkGj9iOhEdP4ROGFObJDSEfr7c6yXDOyOeIpQchGXC53b1gyxodaLVQ8zPyy6cNa5kauLY46EtqvlXuFrLOq2LWXkS1ZuqbTMNj8Ef9LrCYnCBtL-o0KVFiDGsfpAyA-VmENHnaL8UgKDBw"/>
+</div>
+</div>
+</header>
+<!-- Editor Content -->
+<div class="max-w-5xl mx-auto px-12 pt-16">
+<!-- Page Header / Eyebrow -->
+<div class="mb-12">
+<span class="text-xs font-sans uppercase tracking-[0.3em] text-secondary font-bold block mb-3">Manual Entry</span>
+<h2 class="text-5xl serif font-medium text-primary tracking-tight">Create New Devotional</h2>
+</div>
+<div class="grid grid-cols-12 gap-12">
+<!-- Main Form Column -->
+<div class="col-span-8 space-y-12">
+<!-- Entry Title -->
+<div class="space-y-4">
+<label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant block">Entry Title</label>
+<input class="w-full text-4xl serif bg-transparent border-t-0 border-x-0 border-b border-outline-variant/30 focus:border-secondary focus:ring-0 px-0 pb-4 placeholder:text-surface-dim transition-all" placeholder="The Silence of the Morning..." type="text"/>
+</div>
+<!-- Scripture Reference -->
+<div class="space-y-4">
+<label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant block">Scripture Reference</label>
+<div class="flex items-center gap-4 bg-surface-container-low px-6 py-4 rounded-xl border border-outline-variant/10">
+<span class="material-symbols-outlined text-secondary" data-icon="auto_stories">auto_stories</span>
+<input class="bg-transparent border-none focus:ring-0 w-full text-lg serif italic text-secondary" placeholder="e.g., Psalm 46:10" type="text"/>
+</div>
+</div>
+<!-- Body Content (Editor Simulation) -->
+<div class="space-y-4">
+<label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant block">Body Content</label>
+<div class="bg-surface-container-low rounded-2xl overflow-hidden border border-outline-variant/10 shadow-sm">
+<!-- Editor Toolbar -->
+<div class="flex items-center gap-2 px-4 py-3 bg-surface-container-high/50 border-b border-outline-variant/20">
+<button class="p-2 hover:bg-surface-container-highest rounded-lg transition-colors"><span class="material-symbols-outlined text-sm" data-icon="format_bold">format_bold</span></button>
+<button class="p-2 hover:bg-surface-container-highest rounded-lg transition-colors"><span class="material-symbols-outlined text-sm" data-icon="format_italic">format_italic</span></button>
+<button class="p-2 hover:bg-surface-container-highest rounded-lg transition-colors"><span class="material-symbols-outlined text-sm" data-icon="format_quote">format_quote</span></button>
+<div class="w-px h-4 bg-outline-variant/30 mx-1"></div>
+<button class="p-2 hover:bg-surface-container-highest rounded-lg transition-colors"><span class="material-symbols-outlined text-sm" data-icon="format_list_bulleted">format_list_bulleted</span></button>
+<button class="p-2 hover:bg-surface-container-highest rounded-lg transition-colors"><span class="material-symbols-outlined text-sm" data-icon="link">link</span></button>
+</div>
+<textarea class="w-full bg-transparent border-none focus:ring-0 p-8 text-lg leading-relaxed font-body placeholder:text-surface-dim" placeholder="Begin your editorial journey here..." rows="16"></textarea>
+</div>
+</div>
+<!-- Reflection Prompts -->
+<div class="space-y-6">
+<div class="flex justify-between items-end border-b border-outline-variant/20 pb-2">
+<label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant block">Reflection Prompts</label>
+<button class="text-[10px] font-bold text-secondary flex items-center gap-1 hover:opacity-70">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span> ADD PROMPT
+                            </button>
+</div>
+<div class="space-y-4">
+<div class="flex items-start gap-4 bg-surface-container px-6 py-5 rounded-xl border border-outline-variant/10 group">
+<span class="text-secondary/40 font-serif text-2xl pt-1">01</span>
+<input class="bg-transparent border-none focus:ring-0 w-full text-on-surface font-body italic" placeholder="How does stillness change your perspective on current anxieties?" type="text"/>
+<button class="opacity-0 group-hover:opacity-100 material-symbols-outlined text-error/40 hover:text-error transition-all" data-icon="delete_outline">delete_outline</button>
+</div>
+<div class="flex items-start gap-4 bg-surface-container px-6 py-5 rounded-xl border border-outline-variant/10 group">
+<span class="text-secondary/40 font-serif text-2xl pt-1">02</span>
+<input class="bg-transparent border-none focus:ring-0 w-full text-on-surface font-body italic" placeholder="What part of today's scripture challenged your previous understanding?" type="text"/>
+<button class="opacity-0 group-hover:opacity-100 material-symbols-outlined text-error/40 hover:text-error transition-all" data-icon="delete_outline">delete_outline</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar Metadata / Actions Column -->
+<div class="col-span-4 space-y-10">
+<!-- Sticky Container -->
+<div class="sticky top-32 space-y-10">
+<!-- Publication Status -->
+<div class="bg-surface-container-highest/40 rounded-3xl p-8 space-y-6">
+<div class="flex justify-between items-center">
+<span class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Status</span>
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold uppercase rounded-full tracking-wider">Unsaved Draft</span>
+</div>
+<div class="space-y-4 pt-4">
+<button class="w-full bg-primary text-on-primary py-4 rounded-xl font-bold text-sm tracking-widest uppercase shadow-xl shadow-primary/10 hover:translate-y-[-2px] active:translate-y-0 transition-all duration-300">
+                                    Publish Entry
+                                </button>
+<button class="w-full bg-surface-container-highest text-on-surface py-4 rounded-xl font-bold text-sm tracking-widest uppercase hover:bg-surface-dim transition-all">
+                                    Save as Draft
+                                </button>
+</div>
+</div>
+<!-- Adventist Insights -->
+<div class="space-y-6">
+<label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant block">Adventist Insights</label>
+<div class="p-6 bg-secondary/5 rounded-2xl border border-secondary/10 space-y-4">
+<p class="text-xs text-secondary/70 leading-relaxed italic">
+                                    "Add theological context or historical Adventist perspective to enrich the reader's journey."
+                                </p>
+<textarea class="w-full bg-surface-container-lowest border-none rounded-xl p-4 text-sm font-body focus:ring-1 focus:ring-secondary/30 placeholder:text-surface-dim" placeholder="Type insights here..." rows="6"></textarea>
+</div>
+</div>
+<!-- Featured Image Slot -->
+<div class="space-y-4">
+<label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant block">Featured Image</label>
+<div class="relative group aspect-[4/3] rounded-2xl overflow-hidden bg-surface-container-highest cursor-pointer border-2 border-dashed border-outline-variant/30 flex flex-col items-center justify-center transition-all hover:bg-surface-container-high">
+<span class="material-symbols-outlined text-4xl text-outline-variant mb-2" data-icon="add_photo_alternate">add_photo_alternate</span>
+<span class="text-xs font-bold text-outline uppercase tracking-widest">Upload Artwork</span>
+</div>
+</div>
+<!-- Categories/Tags -->
+<div class="space-y-4">
+<label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant block">Categorization</label>
+<div class="flex flex-wrap gap-2">
+<span class="px-4 py-2 bg-surface-container-high rounded-full text-xs font-medium text-on-surface cursor-pointer hover:bg-secondary-container transition-colors">Hope</span>
+<span class="px-4 py-2 bg-secondary text-on-secondary rounded-full text-xs font-medium cursor-pointer">Sabbath Rest</span>
+<span class="px-4 py-2 bg-surface-container-high rounded-full text-xs font-medium text-on-surface cursor-pointer hover:bg-secondary-container transition-colors">Prophecy</span>
+<button class="w-8 h-8 rounded-full border border-outline-variant/30 flex items-center justify-center hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Page Footer Actions (Redundant for Flow) -->
+<div class="mt-24 pt-12 border-t border-outline-variant/10 flex justify-between items-center">
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors font-medium">
+<span class="material-symbols-outlined" data-icon="keyboard_backspace">keyboard_backspace</span>
+                    Return to Entries
+                </button>
+<div class="flex gap-4">
+<button class="text-xs uppercase tracking-widest font-bold text-on-surface-variant px-6 py-2 hover:text-primary transition-all">Preview Entry</button>
+<button class="text-xs uppercase tracking-widest font-bold text-error px-6 py-2 hover:bg-error/5 rounded-lg transition-all">Discard Changes</button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

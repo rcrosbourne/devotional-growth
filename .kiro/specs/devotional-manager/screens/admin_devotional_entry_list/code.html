@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Curator | Admin Devotional Entries</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Newsreader & Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-container": "#76859b",
+                    "on-tertiary-fixed-variant": "#3a485c",
+                    "background": "#fcf9f2",
+                    "primary-fixed": "#d7e2ff",
+                    "outline": "#75777d",
+                    "error-container": "#ffdad6",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#1c1c18",
+                    "tertiary": "#000000",
+                    "on-error-container": "#93000a",
+                    "surface-bright": "#fcf9f2",
+                    "surface-container-high": "#ebe8e1",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed": "#161e00",
+                    "tertiary-container": "#0d1c2f",
+                    "on-secondary-container": "#5a682f",
+                    "on-primary-fixed": "#101c30",
+                    "secondary-fixed-dim": "#bdce89",
+                    "surface-container-highest": "#e5e2db",
+                    "tertiary-fixed-dim": "#b9c7e0",
+                    "primary": "#000000",
+                    "surface": "#fcf9f2",
+                    "surface-dim": "#dcdad3",
+                    "on-tertiary-fixed": "#0d1c2f",
+                    "on-primary": "#ffffff",
+                    "inverse-surface": "#31312c",
+                    "secondary-fixed": "#d9eaa3",
+                    "secondary-container": "#d6e7a0",
+                    "primary-container": "#101c30",
+                    "outline-variant": "#c5c6cd",
+                    "surface-variant": "#e5e2db",
+                    "tertiary-fixed": "#d5e3fd",
+                    "on-surface-variant": "#45474d",
+                    "on-background": "#1c1c18",
+                    "on-primary-fixed-variant": "#3c475d",
+                    "secondary": "#56642b",
+                    "inverse-on-surface": "#f3f0e9",
+                    "on-secondary": "#ffffff",
+                    "inverse-primary": "#bbc7e2",
+                    "on-primary-container": "#78849d",
+                    "surface-container-low": "#f6f3ec",
+                    "error": "#ba1a1a",
+                    "surface-tint": "#535f76",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#f1eee7",
+                    "primary-fixed-dim": "#bbc7e2",
+                    "on-secondary-fixed-variant": "#3f4c15"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Newsreader", "serif"],
+                    "body": ["Inter", "sans-serif"],
+                    "label": ["Inter", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .serif { font-family: 'Newsreader', serif; }
+        .no-border { border: none !important; }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- SideNavBar (JSON Derived) -->
+<aside class="h-screen w-72 fixed left-0 top-0 z-50 bg-[#F1EEE7] dark:bg-slate-900 flex flex-col justify-between py-10 no-border">
+<div>
+<div class="px-8 mb-12">
+<h1 class="text-xl font-serif italic text-black dark:text-white">The Curator</h1>
+<p class="text-xs font-sans tracking-widest uppercase opacity-50 mt-1">Editorial Admin</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center text-slate-500 dark:text-slate-400 px-8 py-3 hover:bg-[#FCF9F2]/50 dark:hover:bg-slate-800/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="dashboard">dashboard</span>
+<span class="font-sans tracking-tight">Dashboard</span>
+</a>
+<a class="flex items-center text-black dark:text-white font-semibold border-r-2 border-[#56642B] bg-[#FCF9F2] dark:bg-slate-800 px-8 py-3 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="auto_stories">auto_stories</span>
+<span class="font-sans tracking-tight">Devotionals</span>
+</a>
+<a class="flex items-center text-slate-500 dark:text-slate-400 px-8 py-3 hover:bg-[#FCF9F2]/50 dark:hover:bg-slate-800/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="menu_book">menu_book</span>
+<span class="font-sans tracking-tight">Contributors</span>
+</a>
+<a class="flex items-center text-slate-500 dark:text-slate-400 px-8 py-3 hover:bg-[#FCF9F2]/50 dark:hover:bg-slate-800/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="collections_bookmark">collections_bookmark</span>
+<span class="font-sans tracking-tight">Library</span>
+</a>
+<a class="flex items-center text-slate-500 dark:text-slate-400 px-8 py-3 hover:bg-[#FCF9F2]/50 dark:hover:bg-slate-800/50 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="settings">settings</span>
+<span class="font-sans tracking-tight">Settings</span>
+</a>
+</nav>
+</div>
+<div class="px-4">
+<div class="px-4 py-4 mb-4 rounded-xl bg-surface-container-high/50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-200 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="portrait of a professional editor in a minimalist studio setting with soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvMJUtNXV5zjHWSEyUZt4oJEn6_UUjNBuOGfIlHRaahUZI4crpRdW1ymEBpw8doWMwW0JSVl7b4PsnqTO5uEF6Lu8WDcKOcGe8wcski6hk9BP4f3bg4yrB5z2p6qx5T7bNJezvw5TUEC6QzOmc-pCMgw8iOrOeRL86lR56Hxv1G-km_GX_DcbGYqsb9VNAHNIwOqSATSDP9Z82HOxbbAMbpTVZn9TgoiKTqAjX9BXYHVa1DUNG7hZORAKA_wtTuRhlGef1kqlzmgI"/>
+</div>
+<div>
+<p class="text-sm font-semibold">Julian Vane</p>
+<p class="text-[10px] uppercase tracking-tighter opacity-50">Chief Curator</p>
+</div>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center text-slate-500 px-4 py-2 hover:bg-[#FCF9F2]/50 transition-all" href="#">
+<span class="material-symbols-outlined mr-3 text-sm" data-icon="account_circle">account_circle</span>
+<span class="text-xs font-sans">Account Profile</span>
+</a>
+<a class="flex items-center text-slate-500 px-4 py-2 hover:bg-[#FCF9F2]/50 transition-all" href="#">
+<span class="material-symbols-outlined mr-3 text-sm" data-icon="logout">logout</span>
+<span class="text-xs font-sans">Sign Out</span>
+</a>
+</nav>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-72 min-h-screen">
+<!-- TopAppBar (JSON Derived) -->
+<header class="sticky top-0 w-full z-40 bg-[#FCF9F2]/80 dark:bg-slate-950/80 backdrop-blur-xl flex justify-between items-center h-20 px-12 border-b border-black/5 dark:border-white/5">
+<div class="flex items-center gap-4">
+<span class="text-2xl font-serif text-black dark:text-white">Dashboard Overview</span>
+<span class="h-4 w-[1px] bg-outline-variant mx-2"></span>
+<nav class="flex gap-8">
+<a class="text-black dark:text-white font-bold border-b border-[#56642B] font-sans text-xs uppercase tracking-widest" href="#">Analytics</a>
+<a class="text-slate-400 dark:text-slate-500 hover:text-black transition-opacity font-sans text-xs uppercase tracking-widest" href="#">Drafts</a>
+<a class="text-slate-400 dark:text-slate-500 hover:text-black transition-opacity font-sans text-xs uppercase tracking-widest" href="#">Archive</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-400 text-lg" data-icon="search">search</span>
+<input class="bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 text-sm w-64 focus:ring-1 focus:ring-secondary/30 placeholder:text-slate-400" placeholder="Search entries..." type="text"/>
+</div>
+<div class="flex gap-4 items-center">
+<button class="material-symbols-outlined text-slate-500 hover:text-black" data-icon="notifications">notifications</button>
+<button class="material-symbols-outlined text-slate-500 hover:text-black" data-icon="help_outline">help_outline</button>
+<div class="w-8 h-8 rounded-full bg-slate-200 overflow-hidden ml-2">
+<img class="w-full h-full object-cover" data-alt="Administrator Profile avatar photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDibK98gqFTbphiYzyKC8E_i2ZG7J-wGHDVHiMMwsoTQd1b3lMidrTPqTN7Snzb9MdfSWJya9xwZNAvESZFGGgZEmxVPo1nXpxFp08QVncTaarbX7be41x9zdeXd3YEuptAqUHbnCC_DaaS9a9XHibCRDQnJ4NNVsodTclG5PWP4Wp_UYjHeZg5g6-WPvaxCW-tX_JqsEDYbmvfwlEk5nLQ_DI9mac12r8rW-sMr48j4TwsoCqOxQsL22FbgjyE0DCdDM-zAfhvh7g"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="px-12 py-12 max-w-7xl mx-auto">
+<!-- Header Section -->
+<div class="mb-12 flex justify-between items-end">
+<div class="space-y-2">
+<span class="text-secondary font-sans text-[10px] uppercase tracking-[0.2em] font-bold">Theme Collection</span>
+<h2 class="text-5xl font-serif leading-tight">The Architecture of Silence</h2>
+<p class="text-on-surface-variant max-w-xl font-body text-sm leading-relaxed">
+                        A curated exploration of quietude, spatial resonance, and the spiritual dimensions of minimal environments. Currently managing 12 devotional entries.
+                    </p>
+</div>
+<button class="bg-primary text-on-primary px-8 py-4 rounded-lg flex items-center gap-3 hover:opacity-90 transition-all shadow-sm">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+<span class="font-sans font-medium">Add New Entry</span>
+</button>
+</div>
+<!-- Dashboard Table Section (Bento Inspired Container) -->
+<div class="bg-surface-container-lowest rounded-2xl p-1 overflow-hidden shadow-sm">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="px-8 py-5 text-[10px] uppercase tracking-widest font-bold text-slate-400 font-sans border-b border-surface-container-high">Entry Title</th>
+<th class="px-8 py-5 text-[10px] uppercase tracking-widest font-bold text-slate-400 font-sans border-b border-surface-container-high">Author</th>
+<th class="px-8 py-5 text-[10px] uppercase tracking-widest font-bold text-slate-400 font-sans border-b border-surface-container-high">Status</th>
+<th class="px-8 py-5 text-[10px] uppercase tracking-widest font-bold text-slate-400 font-sans border-b border-surface-container-high">Last Modified</th>
+<th class="px-8 py-5 text-[10px] uppercase tracking-widest font-bold text-slate-400 font-sans border-b border-surface-container-high"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-high/40">
+<!-- Entry 1 -->
+<tr class="group hover:bg-surface-container-low/30 transition-colors">
+<td class="px-8 py-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="minimalist room with light streaming through a single tall window hitting a concrete floor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1pirftZyAk_Be8S10sSWZK_lA8WbIbF_zLstR_IISn9XxANzM8qK8P3acyTV2BBzCcYP6h2Fve3nC-w-9aVE4d9ULzEmx1bVbNg6o1JMs-yyj9Tw1OBjpZG0vjxqxlNbBqXTego1wYc12IkQUtZRGfaoV0AG9iRl4RV4ddLzx9B98vVz1bdGQamKcPd3IMqR7BGjeCcusTm3HYHUhe7D1-5s62oX7bVhXwlZwehnL4vmYMSErUcL_zq1dq6fauNOUHYwEQt1hM7Y"/>
+</div>
+<div>
+<p class="font-serif text-lg leading-tight group-hover:text-secondary transition-colors">Vespers in Concrete</p>
+<p class="text-[10px] text-slate-400 font-sans uppercase tracking-tighter mt-1">Reflections on Brutalist Monasticism</p>
+</div>
+</div>
+</td>
+<td class="px-8 py-6">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="portrait of a man with a scholarly look" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQLDG324yV4esihXkiyeCOSCRX8v0grFGN2_dq-Jqz4MLPahlv8qu6zHxqPDHpY4q4-gQBDd4hLeAhD1qlEDleP244kpWFYgZ212G8Y9AtRLLFlDCs1uTQsr4pXDnO_0ZTc9VXSyc_sWU2rkcbLesFqYOKiwPl5pLGo3U3HfK0LoQkZcmAOX-QqiXLScQ6AvRUOSaNVpKLzg948KT8q364DvrqQKWVtNIWOHLb1J61nUUzgc3X-55486kl_8it_7BNjp5noUlKS1U"/>
+</span>
+<span class="text-sm font-medium">Elias Thorne</span>
+</div>
+</td>
+<td class="px-8 py-6">
+<span class="px-3 py-1 rounded-full bg-secondary-container/30 text-secondary text-[10px] font-bold uppercase tracking-widest">Published</span>
+</td>
+<td class="px-8 py-6 text-sm text-on-surface-variant font-sans">Oct 24, 2023</td>
+<td class="px-8 py-6 text-right">
+<button class="material-symbols-outlined text-slate-400 hover:text-black" data-icon="more_horiz">more_horiz</button>
+</td>
+</tr>
+<!-- Entry 2 -->
+<tr class="group hover:bg-surface-container-low/30 transition-colors">
+<td class="px-8 py-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="abstract architectural detail showing clean lines and soft shadow play" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqwysTwdLZnFO2n3sNvARFtbLNAMxzZAs80FLNIl00HFMs6Md-oLTsr7brDdfbF-_2lV-Cfu_mbNj05VFpMviUaf865qQDSzk5TsSJBTVeSjbzxr2-PMcw-wwUX10gUOIbIDwcVyPOtb-v9eJbXmOXc1lwt927i529ciGfD8aUriUFnV6C8S_MwVthSSKim9nyUqG23_nYtwASR1eIperdUfiANQdzMfetF1EaOoSWvRs41s6u7STGYF_-uG-CX2ELvz1C6ENRORk"/>
+</div>
+<div>
+<p class="font-serif text-lg leading-tight group-hover:text-secondary transition-colors">The Void as Vessel</p>
+<p class="text-[10px] text-slate-400 font-sans uppercase tracking-tighter mt-1">Understanding Negative Space</p>
+</div>
+</div>
+</td>
+<td class="px-8 py-6">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="portrait of a female author" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDx6x-s4BGeJ7ZGgUEWSfuQfHrTr6tgXF2L_tQfdOPtI4TyzqSze9nK2GOlidmBGG6G9QDc20RiO7xLdxH5aZiEgRF8_vlKPnSwprXAwEzYDufYuOMvN7HPcSvhmEhfz6VhCTzAhQjThQ2D7os8TOsP54pajQhhqLD0yXrQzAfJX3RA4AIx6a_xzGYu9GQRl4Zdsq6HahuVCYG2uqAe5Y0wXNZ1uui5nOiZJ3CVBZ78B72yX2L7uGAQWsqYl-d0sXICbLC-6qTB9Us"/>
+</span>
+<span class="text-sm font-medium">Sarah Chen</span>
+</div>
+</td>
+<td class="px-8 py-6">
+<span class="px-3 py-1 rounded-full bg-surface-container-high text-on-surface-variant text-[10px] font-bold uppercase tracking-widest">Draft</span>
+</td>
+<td class="px-8 py-6 text-sm text-on-surface-variant font-sans">Nov 02, 2023</td>
+<td class="px-8 py-6 text-right">
+<button class="material-symbols-outlined text-slate-400 hover:text-black" data-icon="more_horiz">more_horiz</button>
+</td>
+</tr>
+<!-- Entry 3 -->
+<tr class="group hover:bg-surface-container-low/30 transition-colors">
+<td class="px-8 py-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="serene lake landscape at dawn with still water reflecting the sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzmHsJ-C7QQWDRM_EfHUC_gT8USqXzyrKgx6gtt1shZqb7ZE5yy9wBK2Zx8XwmQdD59xCGd3HAq_L5QH1P9y3PDjp-6nf-krpsvfpmrR-H1h--Bo4vkRhkmo3yJs_i1o6kLFURJU7KfC4HCs3B3ko3_Miqw_5iSirpnmtOf36ToS4gLKdNVBOJMmsRd22XloB9M22237L3fpwjOaRixWGjsRzEhQswCRbTAfqBPcRv4uv6Xc82nJ5rkrfCMgqTd2SOYPElImhtDLY"/>
+</div>
+<div>
+<p class="font-serif text-lg leading-tight group-hover:text-secondary transition-colors">Stillness in Motion</p>
+<p class="text-[10px] text-slate-400 font-sans uppercase tracking-tighter mt-1">A Study of Nordic Minimalism</p>
+</div>
+</div>
+</td>
+<td class="px-8 py-6">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="portrait of a man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOnF51YPLHwlKvPaGbIYJgYLpi9rqpk-lFzSEOnUALhR_afs9XpTIuqAiYZvJDGkDaTsSJa9zRF5ZzvmhzqprLulh3GL0xxNbdaMPg3dvgqMUHWrMBUMqP08iVNcpGtPcdbFi4GJyCHebJ9BaLN18wbzjxFKD6e3zrOKdPQ-pSZD6WQqz4nV2af7FDWwmNODm5715-Oe5qLfQ2_wK7s3BFTOaKWtowDSMI8uUATFi58jWSltjktQdF9Ajm2WLxXNeG4Luv03N6KgQ"/>
+</span>
+<span class="text-sm font-medium">Julian Vane</span>
+</div>
+</td>
+<td class="px-8 py-6">
+<span class="px-3 py-1 rounded-full bg-secondary-container/30 text-secondary text-[10px] font-bold uppercase tracking-widest">Published</span>
+</td>
+<td class="px-8 py-6 text-sm text-on-surface-variant font-sans">Oct 12, 2023</td>
+<td class="px-8 py-6 text-right">
+<button class="material-symbols-outlined text-slate-400 hover:text-black" data-icon="more_horiz">more_horiz</button>
+</td>
+</tr>
+<!-- Entry 4 -->
+<tr class="group hover:bg-surface-container-low/30 transition-colors">
+<td class="px-8 py-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="macro photo of a single pebble on a smooth white surface with elegant shadow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAS3hXmw967UsosLaHwiXDLQBdyr1FzVPAgT2z5eE-rA3tFvhUPsIINJ0chNDy3L_m90_d2CeXMvRtI_HJyQq2elxpvzmPqPzx0oIpqBC8YftZVoMwnoxuclCNImYw93sraJMkprOVTZ7ZlLSCiAwlFdyOmWIQ2iyjExJuf1ymtuFcBJjHTmlVCQ_x3YeSwpu1cgpw7sHItPhqVrGc2DW_QYMPZTAZXsAYoWYRkfrLUW-YlSYZV41uC5qvWyFHU9XOxZaQA8QiM9A8"/>
+</div>
+<div>
+<p class="font-serif text-lg leading-tight group-hover:text-secondary transition-colors">Echoes of the Quarry</p>
+<p class="text-[10px] text-slate-400 font-sans uppercase tracking-tighter mt-1">The Materiality of Devotion</p>
+</div>
+</div>
+</td>
+<td class="px-8 py-6">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="portrait of a middle aged man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8WxzhizznbmjWCF0egN1HtwDlxhTfKshEFV16NGF_MPMKY_Oca1B7d71auPvou6_g6A4clCuRyreajDlmXSrOYq6B_St1-otaam8I-O-zT0dKVoqmrbSFTcE5rZnfJ9ebHlQNq2k9u34RxuU6MaBDan0v4CPvMOjDheDI0quLowTWynVwHzno45BsqSMEEVVmBAx6_iILxuML3H6mtIVCYeOsf9SCn0MiO9J5TKXhHPwini5qUvjIH-Prsz49CpXcYriwcla2NFo"/>
+</span>
+<span class="text-sm font-medium">Marcus Aurel</span>
+</div>
+</td>
+<td class="px-8 py-6">
+<span class="px-3 py-1 rounded-full bg-secondary-container/30 text-secondary text-[10px] font-bold uppercase tracking-widest">Published</span>
+</td>
+<td class="px-8 py-6 text-sm text-on-surface-variant font-sans">Sep 28, 2023</td>
+<td class="px-8 py-6 text-right">
+<button class="material-symbols-outlined text-slate-400 hover:text-black" data-icon="more_horiz">more_horiz</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination / Footer -->
+<div class="px-8 py-6 flex justify-between items-center bg-surface-container-low/20">
+<p class="text-xs text-slate-400 font-sans">Showing <span class="font-bold text-on-surface">1 - 4</span> of 12 entries</p>
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded-lg flex items-center justify-center border border-black/5 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-primary text-on-primary flex items-center justify-center shadow-sm">
+<span class="text-xs font-bold">1</span>
+</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center border border-black/5 hover:bg-surface-container-high transition-colors">
+<span class="text-xs font-bold">2</span>
+</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center border border-black/5 hover:bg-surface-container-high transition-colors">
+<span class="text-xs font-bold">3</span>
+</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center border border-black/5 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Summary Bento Grid Cards -->
+<div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-container rounded-2xl p-6 border border-white/40 shadow-sm">
+<p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">Editorial Health</p>
+<div class="flex items-end justify-between">
+<div>
+<p class="text-4xl font-serif">84%</p>
+<p class="text-xs text-secondary mt-1">Published Velocity</p>
+</div>
+<span class="material-symbols-outlined text-secondary opacity-50" data-icon="trending_up">trending_up</span>
+</div>
+</div>
+<div class="bg-surface-container rounded-2xl p-6 border border-white/40 shadow-sm">
+<p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">Total Wordcount</p>
+<div class="flex items-end justify-between">
+<div>
+<p class="text-4xl font-serif">18.4k</p>
+<p class="text-xs text-on-surface-variant mt-1">Across all entries</p>
+</div>
+<span class="material-symbols-outlined text-slate-400" data-icon="notes">notes</span>
+</div>
+</div>
+<div class="bg-secondary text-on-secondary rounded-2xl p-6 shadow-sm">
+<p class="text-[10px] font-bold uppercase tracking-widest text-secondary-fixed/60 mb-2">Next Milestone</p>
+<div class="flex items-end justify-between">
+<div>
+<p class="text-2xl font-serif italic">Archive Release</p>
+<p class="text-xs text-secondary-fixed/80 mt-1">Scheduled: Dec 12</p>
+</div>
+<span class="material-symbols-outlined text-secondary-fixed/50" data-icon="calendar_today">calendar_today</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Sanctuary | Bible Study Dashboard</title>
+<!-- Google Fonts: Newsreader & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed-variant": "#3a485c",
+                    "secondary": "#56642b",
+                    "primary-container": "#101c30",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#78849d",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#000000",
+                    "error": "#ba1a1a",
+                    "on-error-container": "#93000a",
+                    "surface-container-lowest": "#ffffff",
+                    "background": "#fcf9f2",
+                    "surface-container-high": "#ebe8e1",
+                    "on-secondary-fixed-variant": "#3f4c15",
+                    "secondary-fixed": "#d9eaa3",
+                    "on-tertiary-fixed": "#0d1c2f",
+                    "on-primary-fixed": "#101c30",
+                    "on-background": "#1c1c18",
+                    "on-secondary-fixed": "#161e00",
+                    "surface-dim": "#dcdad3",
+                    "on-surface-variant": "#45474d",
+                    "on-error": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-container": "#5a682f",
+                    "tertiary-fixed-dim": "#b9c7e0",
+                    "surface-container-low": "#f6f3ec",
+                    "primary-fixed": "#d7e2ff",
+                    "on-primary": "#ffffff",
+                    "surface-variant": "#e5e2db",
+                    "on-surface": "#1c1c18",
+                    "surface-container-highest": "#e5e2db",
+                    "surface-tint": "#535f76",
+                    "outline-variant": "#c5c6cd",
+                    "inverse-surface": "#31312c",
+                    "surface-bright": "#fcf9f2",
+                    "primary": "#000000",
+                    "inverse-on-surface": "#f3f0e9",
+                    "secondary-container": "#d6e7a0",
+                    "outline": "#75777d",
+                    "secondary-fixed-dim": "#bdce89",
+                    "primary-fixed-dim": "#bbc7e2",
+                    "surface": "#fcf9f2",
+                    "on-primary-fixed-variant": "#3c475d",
+                    "inverse-primary": "#bbc7e2",
+                    "tertiary-container": "#0d1c2f",
+                    "surface-container": "#f1eee7",
+                    "tertiary-fixed": "#d5e3fd",
+                    "on-tertiary-container": "#76859b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Newsreader", "serif"],
+                    "body": ["Inter", "sans-serif"],
+                    "label": ["Inter", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: #FCF9F2; }
+        .serif-headline { font-family: 'Newsreader', serif; }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-secondary/20">
+<div class="flex min-h-screen">
+<!-- SideNavBar Component -->
+<aside class="hidden lg:flex flex-col h-screen w-64 bg-[#FCF9F2] dark:bg-slate-950 py-8 px-6 sticky top-0 border-r-0">
+<div class="mb-12">
+<h1 class="text-2xl font-serif italic text-slate-900 dark:text-slate-100">The Sanctuary</h1>
+<p class="text-xs font-label uppercase tracking-widest text-on-surface-variant mt-1">Daily Devotion</p>
+</div>
+<nav class="flex-1 space-y-6">
+<div class="space-y-1">
+<a class="relative flex items-center text-slate-900 dark:text-white font-medium after:content-[''] after:absolute after:right-0 after:h-8 after:w-1 after:bg-slate-900 after:rounded-l-full py-2 hover:bg-[#F1EEE7] dark:hover:bg-slate-800 transition-colors duration-300" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="menu_book">menu_book</span>
+<span class="text-sm font-label uppercase tracking-widest">Devotionals</span>
+</a>
+<a class="flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-900 py-2 hover:bg-[#F1EEE7] dark:hover:bg-slate-800 transition-colors duration-300" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="auto_stories">auto_stories</span>
+<span class="text-sm font-label uppercase tracking-widest">Scripture</span>
+</a>
+<a class="flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-900 py-2 hover:bg-[#F1EEE7] dark:hover:bg-slate-800 transition-colors duration-300" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="edit_note">edit_note</span>
+<span class="text-sm font-label uppercase tracking-widest">Journal</span>
+</a>
+<a class="flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-900 py-2 hover:bg-[#F1EEE7] dark:hover:bg-slate-800 transition-colors duration-300" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="self_improvement">self_improvement</span>
+<span class="text-sm font-label uppercase tracking-widest">Reflection</span>
+</a>
+<a class="flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-900 py-2 hover:bg-[#F1EEE7] dark:hover:bg-slate-800 transition-colors duration-300" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="groups">groups</span>
+<span class="text-sm font-label uppercase tracking-widest">Community</span>
+</a>
+</div>
+<div class="pt-8">
+<button class="w-full bg-primary text-on-primary rounded-lg py-3 font-label uppercase tracking-widest text-xs font-bold active:opacity-80 transition-opacity">
+                        New Entry
+                    </button>
+</div>
+</nav>
+<div class="mt-auto pt-6 border-t border-surface-container">
+<a class="flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-900 py-2 hover:bg-[#F1EEE7] dark:hover:bg-slate-800 transition-colors duration-300" href="#">
+<span class="material-symbols-outlined mr-4" data-icon="settings">settings</span>
+<span class="text-sm font-label uppercase tracking-widest">Settings</span>
+</a>
+</div>
+</aside>
+<main class="flex-1 flex flex-col min-w-0">
+<!-- TopNavBar Component -->
+<header class="flex justify-between items-center w-full px-6 py-4 lg:px-12 bg-[#FCF9F2]/80 dark:bg-slate-950/80 backdrop-blur-md sticky top-0 z-40 border-b border-slate-200/20 dark:border-slate-800/20">
+<div class="flex items-center space-x-8">
+<span class="lg:hidden text-xl font-serif italic text-slate-900">The Sanctuary</span>
+<nav class="hidden md:flex items-center space-x-8 text-sm font-label uppercase tracking-widest">
+<a class="text-slate-900 dark:text-white border-b border-slate-900 dark:border-white pb-1 active:scale-95 duration-200" href="#">Today</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all active:scale-95 duration-200" href="#">Library</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all active:scale-95 duration-200" href="#">Archive</a>
+</nav>
+</div>
+<div class="flex items-center space-x-6">
+<div class="hidden sm:flex items-center bg-surface-container px-4 py-2 rounded-full w-64">
+<span class="material-symbols-outlined text-outline text-sm mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full font-body placeholder:text-outline" placeholder="Search scripture..." type="text"/>
+</div>
+<div class="flex items-center space-x-4">
+<button class="text-slate-900 dark:text-white transition-all active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="professional headshot of a mature man with a kind expression, soft natural lighting, editorial style photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDW1riCCLTGBZ9MTD7WobGdZAG9KIy8bE0d5du6ZoC9Du7kNggi-FyLAE1RgBn4VdHnc7d1zwpxIJ8k02_lNnZTjKHF-TbdPvFphxWbNEEVtQEtLoHkcu4W0GXt32GuqFyUPnekzUDByDvjFlgWgD00V7JVBsmJhMWAl6p4e6fTI-wjJ7sdObiQo6W3-qXjQHdLJZk7zJdrdv0ktsrCstWpV18ouiOGmr851gDBXUMYyTnF_hDFze1ly9v70PtEc087umJYEhhRENs"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="flex-1 overflow-y-auto px-6 py-8 lg:px-12 max-w-7xl mx-auto w-full space-y-12 pb-32">
+<!-- Section: Verse of the Day -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<div class="lg:col-span-8">
+<p class="text-xs font-label uppercase tracking-[0.2em] text-secondary font-bold mb-4">Verse of the Day</p>
+<blockquote class="space-y-6">
+<h2 class="serif-headline text-4xl lg:text-5xl leading-tight text-primary">
+                                "The Lord is my shepherd; I shall not want. He makes me lie down in green pastures. He leads me beside still waters."
+                            </h2>
+<cite class="block font-label text-sm uppercase tracking-widest text-on-surface-variant not-italic">— Psalm 23:1-2</cite>
+</blockquote>
+<div class="mt-8 flex space-x-4">
+<button class="bg-secondary text-white px-6 py-3 rounded-lg text-xs font-label uppercase tracking-widest flex items-center hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm mr-2" data-icon="auto_stories">auto_stories</span> Read Chapter
+                            </button>
+<button class="bg-surface-container-highest text-on-surface px-6 py-3 rounded-lg text-xs font-label uppercase tracking-widest flex items-center hover:bg-surface-dim transition-colors">
+<span class="material-symbols-outlined text-sm mr-2" data-icon="share">share</span> Share
+                            </button>
+</div>
+</div>
+<div class="lg:col-span-4 hidden lg:block">
+<div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-sm">
+<img alt="Nature serene" class="w-full h-full object-cover" data-alt="serene landscape of a quiet lake at dawn with soft mist and golden morning light reflecting on still water" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5Boh4-npEPQEJZYgUUEf1ePASfOq9jqtI1eP3nx8_N4aaonnPbIr4qyYKTf0JF0YJ1Lor9vriQO9FIXPMx14Hu_mRPSwsGJXoGPec8QuU02HWchdjp7sHVuOxXkqQPS9JyXbF921YmmoYt_AYHp5-DtsrJ0PNMKYhyB0IMv42g1z830eXpViP4uab-yAB0fevYbeRux3VbgB427xuWkTKpysHKMhCa5UfrzhPzGPpE_d-jaoAdjf-x0-4XwO3i7hzu0Aayym1ets"/>
+</div>
+</div>
+</section>
+<!-- Section: Word Study Tool -->
+<section class="bg-surface-container-low rounded-[2rem] p-8 lg:p-12 relative overflow-hidden">
+<div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+<div>
+<p class="text-xs font-label uppercase tracking-[0.2em] text-on-surface-variant mb-2">Lexicon Tool</p>
+<h3 class="serif-headline text-3xl mb-4">Deep Word Study</h3>
+<p class="text-on-surface-variant font-body leading-relaxed max-w-sm mb-6">
+                                Unpack the original Hebrew and Greek meanings. Discover the cultural context behind every verse.
+                            </p>
+<div class="flex space-x-2">
+<input class="flex-1 bg-surface-container-lowest border-none rounded-lg px-4 py-3 focus:ring-1 focus:ring-primary text-sm" placeholder="Enter word or strong's #" type="text"/>
+<button class="bg-primary text-white p-3 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="manage_search">manage_search</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-highest p-6 rounded-2xl">
+<span class="text-secondary font-serif italic text-2xl">Logos</span>
+<p class="text-xs font-label uppercase tracking-tighter mt-2 text-on-surface-variant">Greek: Word, Reason</p>
+</div>
+<div class="bg-surface-container-highest p-6 rounded-2xl">
+<span class="text-secondary font-serif italic text-2xl">Hesed</span>
+<p class="text-xs font-label uppercase tracking-tighter mt-2 text-on-surface-variant">Hebrew: Lovingkindness</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Reading Plans (Asymmetric Grid) -->
+<section>
+<div class="flex justify-between items-end mb-8">
+<div>
+<p class="text-xs font-label uppercase tracking-[0.2em] text-on-surface-variant mb-2">Curated for You</p>
+<h3 class="serif-headline text-3xl">Reading Journeys</h3>
+</div>
+<button class="text-xs font-label uppercase tracking-widest text-secondary border-b border-secondary pb-1">View Library</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1 (Vertical Large) -->
+<div class="md:row-span-2 group cursor-pointer">
+<div class="relative h-full min-h-[400px] rounded-3xl overflow-hidden bg-primary-container text-white p-8 flex flex-col justify-end">
+<img alt="Mountain" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700" data-alt="stunning aerial view of snowy mountain peaks under a starry night sky, dramatic and awe-inspiring aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJsZnvKgiB0R-DaD8Kq-v2mJFSOOyKDrnaW7V6lo3r9C4s0nZtXGGfCZ0qf4Z6K89ei_BQDPjOmvNI1u2EwXhFM50UsqqZuRd_LAhG2J6RXhgzTk_t173yxW61_0N68HB_NoU7AeRA6Wj809gmsJn12Z4HE6VIrFPNk9hWMGPoBDkSaIaaH3JTCwEAysdAMH6JQUHu8TczBOUBVwt2NrbMeG8lCyvnoDgCZRyP5ML1bVjB8FI5wli6m4wRgsWDuTK96SvpAA5xMYQ"/>
+<div class="relative z-10">
+<div class="bg-secondary-container text-on-secondary-container text-[10px] font-label uppercase tracking-widest px-3 py-1 rounded-full w-fit mb-4">Advanced Study</div>
+<h4 class="serif-headline text-3xl mb-2">The Prophets of Old</h4>
+<p class="text-sm text-slate-300 font-body mb-6">A 30-day deep dive into the major prophetic books.</p>
+<div class="flex items-center text-xs font-label uppercase tracking-widest">
+<span class="material-symbols-outlined text-sm mr-2" data-icon="schedule">schedule</span> 12m left
+                                    </div>
+</div>
+</div>
+</div>
+<!-- Card 2 (Horizontal) -->
+<div class="md:col-span-2 group cursor-pointer">
+<div class="relative h-full min-h-[220px] rounded-3xl overflow-hidden bg-surface-container-high p-8 flex flex-col justify-center">
+<div class="flex justify-between items-start">
+<div class="max-w-md">
+<p class="text-[10px] font-label uppercase tracking-widest text-secondary mb-2">New Plan</p>
+<h4 class="serif-headline text-2xl mb-2">Foundations of Grace</h4>
+<p class="text-sm text-on-surface-variant font-body">Exploring the epistles of Paul and the theology of the early church.</p>
+</div>
+<div class="w-24 h-24 rounded-2xl overflow-hidden hidden sm:block">
+<img alt="Old paper" class="w-full h-full object-cover" data-alt="close up of ancient weathered parchment with elegant calligraphy, warm amber lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1GDwuQ8bU10Hc7s4otVskZsiXiZBilgcmkZ_PBgiUN1LAR6w2Ep0aDKUf9zX44hd3a1NS33ki35tZ16IT7XnJ1h-fz56jT8Zdk_lrFTuRob4jPhRykMJogwyRNnldwBjjXOxvV1QrTO5x_ZankQRb-KqbjljN879KXsEtf5VK-gNLqiv9SaF1LyyDt28GRmNLIXGg7OhY-GKAxUQko4OEdMnvAuF3V7hybSCkdzZOzcGsARTnf4D8siPKqBN0qANZ-9ASPE1OsT4"/>
+</div>
+</div>
+<div class="mt-6 h-1 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-1/3"></div>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group cursor-pointer">
+<div class="h-full bg-surface-container-low rounded-3xl p-8 border border-outline-variant/10 hover:border-outline-variant/30 transition-colors flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-secondary mb-4" data-icon="potted_plant">potted_plant</span>
+<h4 class="serif-headline text-xl mb-2">Quiet Moments</h4>
+<p class="text-xs text-on-surface-variant leading-relaxed">Daily reflections for peace and mental clarity.</p>
+</div>
+<div class="pt-4 flex items-center justify-between text-[10px] font-label uppercase tracking-widest text-on-surface-variant">
+<span>7 Days</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group cursor-pointer">
+<div class="h-full bg-surface-container-low rounded-3xl p-8 border border-outline-variant/10 hover:border-outline-variant/30 transition-colors flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-secondary mb-4" data-icon="temple_buddhist">history_edu</span>
+<h4 class="serif-headline text-xl mb-2">Wisdom Literature</h4>
+<p class="text-xs text-on-surface-variant leading-relaxed">Proverbs and Ecclesiastes study for modern life.</p>
+</div>
+<div class="pt-4 flex items-center justify-between text-[10px] font-label uppercase tracking-widest text-on-surface-variant">
+<span>14 Days</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- BottomNavBar Component -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-[#FCF9F2]/90 dark:bg-slate-950/90 backdrop-blur-lg rounded-t-3xl border-t border-slate-200/10 shadow-[0_-4px_20px_rgba(0,0,0,0.03)]">
+<a class="flex flex-col items-center justify-center bg-slate-900 dark:bg-slate-100 text-[#FCF9F2] dark:text-slate-900 rounded-full w-12 h-12 active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:opacity-70" href="#">
+<span class="material-symbols-outlined" data-icon="book_5">book_5</span>
+<span class="font-sans text-[10px] uppercase tracking-tighter mt-1">Read</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:opacity-70" href="#">
+<span class="material-symbols-outlined" data-icon="stylus_note">stylus_note</span>
+<span class="font-sans text-[10px] uppercase tracking-tighter mt-1">Journal</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:opacity-70" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-sans text-[10px] uppercase tracking-tighter mt-1">Profile</span>
+</a>
+</nav>
+</main>
+</div>
+</body></html>

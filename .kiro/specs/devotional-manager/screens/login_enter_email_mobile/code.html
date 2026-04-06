@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#bdce89",
+                        "on-primary-container": "#78849d",
+                        "surface-container": "#f1eee7",
+                        "surface-container-high": "#ebe8e1",
+                        "surface-dim": "#dcdad3",
+                        "inverse-surface": "#31312c",
+                        "outline": "#75777d",
+                        "on-tertiary-fixed-variant": "#3a485c",
+                        "on-surface": "#1c1c18",
+                        "inverse-on-surface": "#f3f0e9",
+                        "secondary-fixed": "#d9eaa3",
+                        "on-secondary-container": "#5a682f",
+                        "tertiary-fixed-dim": "#b9c7e0",
+                        "surface-container-highest": "#e5e2db",
+                        "tertiary": "#000000",
+                        "surface": "#fcf9f2",
+                        "inverse-primary": "#bbc7e2",
+                        "surface-bright": "#fcf9f2",
+                        "on-secondary-fixed": "#161e00",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#d5e3fd",
+                        "on-tertiary-fixed": "#0d1c2f",
+                        "on-background": "#1c1c18",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#45474d",
+                        "on-primary-fixed": "#101c30",
+                        "surface-variant": "#e5e2db",
+                        "on-primary-fixed-variant": "#3c475d",
+                        "secondary": "#56642b",
+                        "tertiary-container": "#0d1c2f",
+                        "background": "#fcf9f2",
+                        "error": "#ba1a1a",
+                        "primary": "#000000",
+                        "primary-container": "#101c30",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#bbc7e2",
+                        "outline-variant": "#c5c6cd",
+                        "surface-container-low": "#f6f3ec",
+                        "on-tertiary-container": "#76859b",
+                        "on-secondary-fixed-variant": "#3f4c15",
+                        "primary-fixed": "#d7e2ff",
+                        "surface-tint": "#535f76",
+                        "secondary-container": "#d6e7a0",
+                        "on-error": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Newsreader"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FCF9F2;
+        }
+        .serif-text {
+            font-family: 'Newsreader', serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col">
+<!-- TopAppBar Shell Suppression Check: Required for Identity -->
+<header class="bg-[#FCF9F2]/80 dark:bg-slate-950/80 backdrop-blur-xl fixed top-0 w-full z-50 shadow-[0_4px_30px_rgba(0,0,0,0.04)]">
+<div class="flex justify-between items-center px-6 py-4 w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-black dark:text-stone-100 hover:opacity-70 transition-opacity scale-95 active:scale-90 transition-transform duration-300 cursor-pointer" data-icon="menu">menu</span>
+</div>
+<h1 class="font-serif italic text-2xl tracking-tighter text-black dark:text-stone-100 uppercase">THE CURATOR</h1>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-black dark:text-stone-100 hover:opacity-70 transition-opacity scale-95 active:scale-90 transition-transform duration-300 cursor-pointer" data-icon="account_circle">account_circle</span>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex items-center justify-center px-6 pt-24 pb-12">
+<div class="w-full max-w-md">
+<!-- Login Card -->
+<div class="bg-surface-container-lowest rounded-3xl p-8 shadow-[0_40px_60px_rgba(0,0,0,0.04)] relative overflow-hidden">
+<!-- Subtle Tonal Background Shape (Editorial Accent) -->
+<div class="absolute top-0 right-0 -mr-16 -mt-16 w-48 h-48 bg-surface-container rounded-full opacity-50 blur-3xl"></div>
+<div class="relative z-10 flex flex-col items-center text-center">
+<!-- Eyebrow Label -->
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-secondary font-bold mb-3">Authentication</span>
+<!-- Title -->
+<h2 class="serif-text text-4xl italic font-light text-primary tracking-tight mb-8">Enter Your Email</h2>
+<!-- Form Container -->
+<form class="w-full space-y-8">
+<div class="w-full">
+<label class="sr-only" for="email">Email Address</label>
+<input class="w-full bg-surface-container border-b-2 border-transparent focus:border-primary focus:ring-0 focus:bg-surface-container-high transition-all duration-300 px-4 py-4 rounded-t-lg text-on-surface placeholder:text-on-surface-variant/50 serif-text italic text-lg" id="email" name="email" placeholder="name@domain.com" type="email"/>
+</div>
+<!-- Primary CTA -->
+<button class="w-full bg-primary text-on-primary font-label py-4 rounded-lg text-sm tracking-widest font-bold uppercase shadow-lg shadow-primary/10 hover:opacity-90 active:scale-[0.98] transition-all duration-300 flex justify-center items-center gap-2" type="submit">
+                            Send Code
+                            <span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</form>
+<!-- Secondary Link -->
+<div class="mt-12">
+<a class="text-on-surface-variant font-label text-[11px] tracking-widest uppercase hover:text-primary transition-colors flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[14px]" data-icon="arrow_back">arrow_back</span>
+                            Back to Social Login
+                        </a>
+</div>
+</div>
+</div>
+<!-- Decorative Graphic (Subtle Editorial Detail) -->
+<div class="mt-12 flex justify-center opacity-20">
+<div class="h-px w-12 bg-on-surface-variant"></div>
+<div class="mx-4">
+<span class="material-symbols-outlined text-[12px]" data-icon="unfold_more">unfold_more</span>
+</div>
+<div class="h-px w-12 bg-on-surface-variant"></div>
+</div>
+<div class="mt-8 text-center px-8">
+<p class="text-on-surface-variant font-body text-xs leading-relaxed opacity-60">
+                    By continuing, you agree to our terms of curated service and privacy documentation.
+                </p>
+</div>
+</div>
+</main>
+<!-- Bottom Shell Suppression Check: Suppressed for Transactional Login Flow -->
+<!-- FAB Suppression Check: Suppressed for Transactional Focus -->
+<!-- Abstract Aesthetic Background Elements -->
+<div class="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none overflow-hidden">
+<div class="absolute top-[10%] left-[-5%] w-[400px] h-[400px] rounded-full bg-secondary-container/10 blur-[120px]"></div>
+<div class="absolute bottom-[5%] right-[-5%] w-[300px] h-[300px] rounded-full bg-tertiary-fixed/10 blur-[100px]"></div>
+</div>
+</body></html>

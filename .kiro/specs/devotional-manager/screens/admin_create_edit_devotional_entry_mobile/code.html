@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary": "#56642b",
+                    "surface-tint": "#535f76",
+                    "on-tertiary-container": "#76859b",
+                    "on-tertiary": "#ffffff",
+                    "on-background": "#1c1c18",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed-variant": "#3c475d",
+                    "on-surface": "#1c1c18",
+                    "on-surface-variant": "#45474d",
+                    "on-secondary-fixed": "#161e00",
+                    "on-primary": "#ffffff",
+                    "surface-container-low": "#f6f3ec",
+                    "surface-container-high": "#ebe8e1",
+                    "inverse-surface": "#31312c",
+                    "surface-container-highest": "#e5e2db",
+                    "on-secondary-fixed-variant": "#3f4c15",
+                    "primary": "#000000",
+                    "tertiary-fixed": "#d5e3fd",
+                    "tertiary": "#000000",
+                    "surface-variant": "#e5e2db",
+                    "error": "#ba1a1a",
+                    "tertiary-container": "#0d1c2f",
+                    "background": "#fcf9f2",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-container": "#78849d",
+                    "inverse-primary": "#bbc7e2",
+                    "inverse-on-surface": "#f3f0e9",
+                    "on-tertiary-fixed-variant": "#3a485c",
+                    "on-primary-fixed": "#101c30",
+                    "surface-bright": "#fcf9f2",
+                    "surface-container": "#f1eee7",
+                    "secondary-container": "#d6e7a0",
+                    "surface": "#fcf9f2",
+                    "secondary-fixed-dim": "#bdce89",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed-dim": "#b9c7e0",
+                    "outline-variant": "#c5c6cd",
+                    "error-container": "#ffdad6",
+                    "primary-fixed": "#d7e2ff",
+                    "outline": "#75777d",
+                    "on-secondary-container": "#5a682f",
+                    "surface-dim": "#dcdad3",
+                    "primary-fixed-dim": "#bbc7e2",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed": "#d9eaa3",
+                    "on-tertiary-fixed": "#0d1c2f",
+                    "primary-container": "#101c30"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Newsreader"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FCF9F2;
+        }
+        .serif-text {
+            font-family: 'Newsreader', serif;
+        }
+        /* Custom scrollbar for clean editorial look */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FCF9F2;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #E5E2DB;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-[#FCF9F2]/80 dark:bg-stone-950/80 backdrop-blur-xl">
+<div class="flex justify-between items-center px-6 h-16 w-full max-w-screen-xl mx-auto">
+<button class="text-black hover:opacity-70 transition-opacity scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+<h1 class="font-serif italic text-2xl tracking-tight text-black dark:text-stone-100">Devotional</h1>
+<div class="flex items-center gap-4">
+<span class="font-label text-[10px] uppercase tracking-widest font-semibold text-secondary">Draft</span>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container">
+<img alt="User profile icon" class="w-full h-full object-cover" data-alt="portrait of a professional woman with a soft smile in minimalist editorial lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhLsGd4TLV5-bgXGWKfVYX0A-3NmSYbeHyxAoTk_jqN63Gw6JpG_gauhc-vgLn_eFWp_Vvfb4h1fY2zc5z-ecADRwm4wUtO5yAYHfX-NZf9QWipDmaSLdZwtXn01ic2QxMTmsDa_eamjfRB8DVb1GAXjz7jVwLlMH18oBpszI00lt4JUpfQVgGUiTPzzYbWbVPQxrjcCODDzpVbrDx2MR2FjiRoBh-K3QotasHYCOmGASf5ymDeMj1MrqnEc01cPLTfhjacwRneb0"/>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-24 px-6 max-w-lg mx-auto space-y-12">
+<!-- Cover Image Upload Area -->
+<section>
+<p class="font-label text-[10px] uppercase tracking-[0.2em] font-semibold text-outline mb-4">Visual Anchor</p>
+<div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-surface-container group cursor-pointer transition-all duration-300">
+<img alt="Cover image" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700" data-alt="misty forest path at dawn with ethereal light filtering through tall ancient pine trees, cinematic editorial style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPMmOOx-eVZXhTlGUuRVBhuwuDiyO0OnoWu_LgJ1kHTK8Rsuq4A0R_Z3oIUaEgVomX7KDt5evmmkXP9y4LZnk1bJ1yS31qx4MH2dveA7YB6zt6zf4oF_FFQ0w1xZWCeuf3ChbGxyQTt7o1Qb_NkXb8HHI0lER8or2H_gD3w0Ac1ebIlkmZhCrHwSna2OHOLFnSsn3OaWnaOrhk0do8fPGL8Ye95pRFH0YBCk5pQXM3n-LaGAEy6qiE3KnrfYNsBAccKhdi_249nx0"/>
+<div class="absolute inset-0 flex flex-col items-center justify-center bg-black/10 backdrop-blur-[2px]">
+<span class="material-symbols-outlined text-black text-3xl mb-2" data-icon="add_a_photo">add_a_photo</span>
+<span class="font-label text-xs font-medium tracking-wide">Replace Cover Image</span>
+</div>
+</div>
+</section>
+<!-- Editor Fields -->
+<form class="space-y-10">
+<!-- Entry Title -->
+<div class="space-y-2">
+<label class="font-label text-[10px] uppercase tracking-[0.2em] font-semibold text-outline">Header</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant/30 focus:border-primary focus:ring-0 serif-text text-4xl italic font-light placeholder:text-surface-dim transition-colors py-2" placeholder="Entry Title" type="text" value="The Quiet Path to Stillness"/>
+</div>
+<!-- Scripture Reference -->
+<div class="space-y-2">
+<label class="font-label text-[10px] uppercase tracking-[0.2em] font-semibold text-outline">Scripture Reference</label>
+<div class="flex items-center gap-3 bg-surface-container/50 px-4 py-3 rounded-lg border-b border-outline-variant/15">
+<span class="material-symbols-outlined text-secondary" data-icon="auto_stories">auto_stories</span>
+<input class="w-full bg-transparent border-none focus:ring-0 font-body text-sm placeholder:text-outline/50" placeholder="e.g. Psalm 46:10" type="text" value="Psalm 46:10"/>
+</div>
+</div>
+<!-- Body Content -->
+<div class="space-y-4">
+<div class="flex justify-between items-center border-b border-outline-variant/15 pb-2">
+<label class="font-label text-[10px] uppercase tracking-[0.2em] font-semibold text-outline">Body Content</label>
+<div class="flex gap-4">
+<button class="text-outline hover:text-black transition-colors" type="button"><span class="material-symbols-outlined text-sm" data-icon="format_bold">format_bold</span></button>
+<button class="text-outline hover:text-black transition-colors" type="button"><span class="material-symbols-outlined text-sm" data-icon="format_italic">format_italic</span></button>
+<button class="text-outline hover:text-black transition-colors" type="button"><span class="material-symbols-outlined text-sm" data-icon="format_quote">format_quote</span></button>
+</div>
+</div>
+<textarea class="w-full bg-transparent border-none focus:ring-0 font-body text-base leading-relaxed placeholder:text-outline/30 resize-none p-0" placeholder="Begin your reflection here..." rows="12">In the modern rush, we often forget the weight of silence. The scripture invites us into a space where activity ceases and listening begins. This stillness is not empty; it is filled with the presence of the Divine curator...</textarea>
+</div>
+<!-- Asymmetric Grid for Prompts & Insights -->
+<div class="grid grid-cols-1 gap-8">
+<!-- Reflection Prompts -->
+<div class="bg-surface-container p-6 rounded-2xl space-y-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-xl" data-icon="self_improvement">self_improvement</span>
+<h3 class="font-serif italic text-lg">Reflection Prompts</h3>
+</div>
+<textarea class="w-full bg-white/50 border-none rounded-xl focus:ring-0 font-body text-sm placeholder:text-outline/50 p-4" placeholder="Add prompts for the reader..." rows="3">What noise can you silence today to hear the whisper of grace?</textarea>
+</div>
+<!-- Adventist Insights -->
+<div class="bg-secondary-container/30 p-6 rounded-2xl space-y-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-xl" data-icon="tips_and_updates">tips_and_updates</span>
+<h3 class="font-serif italic text-lg text-on-secondary-container">Adventist Insights</h3>
+</div>
+<textarea class="w-full bg-white/40 border-none rounded-xl focus:ring-0 font-body text-sm placeholder:text-outline/50 p-4" placeholder="Connect with denominational heritage..." rows="3">Ellen White speaks of the 'closet of prayer' as the most sacred space in the home...</textarea>
+</div>
+</div>
+</form>
+</main>
+<!-- Sticky Bottom Actions -->
+<div class="fixed bottom-0 left-0 w-full z-50 bg-[#FCF9F2]/90 backdrop-blur-lg pt-4 pb-8 px-6 shadow-[0_-10px_30px_rgba(0,0,0,0.03)] rounded-t-3xl">
+<div class="flex gap-4 max-w-lg mx-auto">
+<button class="flex-1 py-4 px-6 bg-surface-container text-on-surface font-label text-[10px] uppercase tracking-[0.2em] font-bold rounded-xl transition-all duration-300 hover:bg-surface-container-highest">
+                Save Draft
+            </button>
+<button class="flex-[2] py-4 px-6 bg-primary text-on-primary font-label text-[10px] uppercase tracking-[0.2em] font-bold rounded-xl shadow-lg shadow-black/10 transition-all duration-300 hover:opacity-90 active:scale-95">
+                Publish Entry
+            </button>
+</div>
+</div>
+<!-- Hidden Navigation Drawer (Placeholder trigger logic) -->
+<div class="fixed inset-0 bg-black/20 backdrop-blur-sm z-[60] pointer-events-none opacity-0 transition-opacity">
+<aside class="h-full w-80 bg-[#FCF9F2] shadow-2xl rounded-r-3xl flex flex-col p-8 gap-4 transform -translate-x-full transition-transform">
+<div class="flex flex-col gap-1 mb-8">
+<div class="w-16 h-16 rounded-full bg-surface-container mb-4 overflow-hidden">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="close-up portrait of julianne reed with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqG4RE2-b9IU2-9z6h_Ic7zXia8o-yxTylo83Ji3m3DwBz1YGm_Jqte41IDUWkMiFptmFyYkUrD1SI2yoY20D1VlG2rfjRbBTy8zx6242Q9OG4Vane1jdSrIf3Z579wwPpFqk5B6A7v9cEciXtp7e52xYUhXvAe2jerGmhe3AFH77jDi-eUCo5_9r6mY4v7QmgioSMc3yRW8R6Xt8M5AmjxwHYkPdiQC1EJvIGdjTyapLCH0WpFmaibY8_QDSxZeY6pxNs9ookOM0"/>
+</div>
+<h4 class="font-serif text-xl font-bold text-black">Julianne Reed</h4>
+<p class="font-sans text-xs tracking-wide text-stone-600">The Digital Curator</p>
+<span class="inline-block mt-2 font-label text-[9px] uppercase tracking-widest text-secondary font-bold">Premium Member</span>
+</div>
+<nav class="space-y-1">
+<div class="flex items-center gap-4 p-4 rounded-xl bg-stone-100 text-black font-medium">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-sans text-sm tracking-wide">My Profile</span>
+</div>
+<div class="flex items-center gap-4 p-4 rounded-xl text-stone-600 hover:bg-[#F1EEE7] transition-colors">
+<span class="material-symbols-outlined" data-icon="local_fire_department">local_fire_department</span>
+<span class="font-sans text-sm tracking-wide">Streaks</span>
+</div>
+<div class="flex items-center gap-4 p-4 rounded-xl text-stone-600 hover:bg-[#F1EEE7] transition-colors">
+<span class="material-symbols-outlined" data-icon="bookmark">bookmark</span>
+<span class="font-sans text-sm tracking-wide">Bookmarks</span>
+</div>
+<div class="flex items-center gap-4 p-4 rounded-xl text-stone-600 hover:bg-[#F1EEE7] transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications_active">notifications_active</span>
+<span class="font-sans text-sm tracking-wide">Notification Settings</span>
+</div>
+</nav>
+</aside>
+</div>
+</body></html>

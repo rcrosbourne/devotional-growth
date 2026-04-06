@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Themes Index | Devotional</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#fcf9f2",
+                        "on-secondary-container": "#5a682f",
+                        "on-secondary-fixed-variant": "#3f4c15",
+                        "inverse-on-surface": "#f3f0e9",
+                        "primary-container": "#101c30",
+                        "error": "#ba1a1a",
+                        "on-surface": "#1c1c18",
+                        "on-secondary-fixed": "#161e00",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#31312c",
+                        "surface-variant": "#e5e2db",
+                        "on-primary-fixed": "#101c30",
+                        "primary": "#000000",
+                        "secondary": "#56642b",
+                        "surface-bright": "#fcf9f2",
+                        "on-tertiary-container": "#76859b",
+                        "on-primary-container": "#78849d",
+                        "on-tertiary": "#ffffff",
+                        "surface-tint": "#535f76",
+                        "secondary-fixed-dim": "#bdce89",
+                        "secondary-fixed": "#d9eaa3",
+                        "surface-container-highest": "#e5e2db",
+                        "on-surface-variant": "#45474d",
+                        "inverse-primary": "#bbc7e2",
+                        "surface-container-high": "#ebe8e1",
+                        "tertiary": "#000000",
+                        "on-tertiary-fixed": "#0d1c2f",
+                        "outline-variant": "#c5c6cd",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed-variant": "#3c475d",
+                        "secondary-container": "#d6e7a0",
+                        "surface-container-low": "#f6f3ec",
+                        "surface-dim": "#dcdad3",
+                        "background": "#fcf9f2",
+                        "tertiary-container": "#0d1c2f",
+                        "tertiary-fixed-dim": "#b9c7e0",
+                        "on-tertiary-fixed-variant": "#3a485c",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#f1eee7",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#d5e3fd",
+                        "outline": "#75777d",
+                        "on-background": "#1c1c18",
+                        "primary-fixed": "#d7e2ff",
+                        "primary-fixed-dim": "#bbc7e2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Newsreader"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #fcf9f2; }
+        .font-serif { font-family: 'Newsreader', serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- TopNavBar Implementation -->
+<nav class="fixed top-0 z-50 bg-[#FCF9F2]/80 dark:bg-[#051125]/80 backdrop-blur-xl flex justify-between items-center px-12 h-20 w-full left-72 right-0">
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-[11px] uppercase tracking-widest font-body text-[#051125] dark:text-[#FCF9F2] border-b border-[#051125] dark:border-[#FCF9F2] pb-1" href="#">Devotions</a>
+<a class="text-[11px] uppercase tracking-widest font-body text-[#051125]/60 dark:text-[#FCF9F2]/60 hover:text-[#051125] dark:hover:text-[#FCF9F2] transition-colors" href="#">Bible Study</a>
+<a class="text-[11px] uppercase tracking-widest font-body text-[#051125]/60 dark:text-[#FCF9F2]/60 hover:text-[#051125] dark:hover:text-[#FCF9F2] transition-colors" href="#">Bookmarks</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-[#051125] dark:text-[#FCF9F2]">search</span>
+</button>
+</div>
+</nav>
+<div class="flex pt-20">
+<!-- SideNavBar Implementation -->
+<aside class="hidden lg:flex flex-col gap-8 h-screen w-72 bg-[#F1EEE7] dark:bg-[#101C30] fixed left-0 top-0 py-10 px-0"><div class="mb-4 px-6">
+<div class="text-2xl font-serif italic text-[#051125] dark:text-[#FCF9F2]">Devotional</div>
+</div>
+<div class="flex flex-col gap-1 px-6">
+<h2 class="text-lg font-serif text-[#051125] dark:text-[#FCF9F2]">The Digital Curator</h2>
+<p class="text-xs uppercase tracking-widest font-body opacity-60">Spiritual Reflection</p>
+</div>
+<nav class="flex flex-col gap-4">
+<a class="relative flex items-center gap-3 py-3 px-4 text-[#051125] dark:text-[#FCF9F2] font-semibold bg-[#FCF9F2]/40 dark:bg-[#051125]/40 transition-all" href="#">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="font-serif">Themes</span>
+<div class="absolute right-0 top-1 bottom-1 w-1 bg-[#051125] dark:bg-[#FCF9F2] rounded-l-full"></div>
+</a>
+<a class="flex items-center gap-3 py-3 px-4 text-[#051125]/50 dark:text-[#FCF9F2]/50 hover:text-[#051125] dark:hover:text-[#FCF9F2] transition-colors hover:bg-[#FCF9F2]/30 dark:hover:bg-[#051125]/30 rounded" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-serif">All Entries</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-4 text-[#051125]/50 dark:text-[#FCF9F2]/50 hover:text-[#051125] dark:hover:text-[#FCF9F2] transition-colors hover:bg-[#FCF9F2]/30 dark:hover:bg-[#051125]/30 rounded" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="font-serif">Analytics</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-4 text-[#051125]/50 dark:text-[#FCF9F2]/50 hover:text-[#051125] dark:hover:text-[#FCF9F2] transition-colors hover:bg-[#FCF9F2]/30 dark:hover:bg-[#051125]/30 rounded" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-serif">Settings</span>
+</a>
+</nav>
+<div class="mt-auto px-4">
+<a class="flex items-center gap-3 p-3 text-[#051125] dark:text-[#FCF9F2] hover:bg-[#FCF9F2]/30 dark:hover:bg-[#051125]/30 rounded-lg transition-all group cursor-pointer" href="#">
+<div class="w-10 h-10 rounded-full bg-surface-variant overflow-hidden flex-shrink-0">
+<img alt="User profile" data-alt="Close up portrait of a serene looking person in soft natural lighting against a neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9xwCnBXxMRAH15rc7MdOA2JWWyNqrgNTqqp4nLk4Y7xztWGhLLcT03GNgeoapY7OyE8661TE1HpKjxUHdpreQpSNPCv73u0GyoiLK216lhlN_ngA9neL3qdrL8REK7u5a8hz2H1PQ6y6gUe4_arsfqdn1Fqtsv1dfR037EyWi1_KO89hO5V4Xby11GEYEiPIrgCGofiIxZqktkSo0l8D0ynnv6oYT_vvRS3JaA4WKoJnUp56m-XeHKSkMi7Dh6CZ-YsyMyur7PDE"/>
+</div>
+<div class="flex flex-col flex-1 overflow-hidden">
+<span class="text-sm font-medium truncate">Curator Alpha</span>
+<span class="text-[10px] uppercase tracking-tighter opacity-50 truncate">Premium Member</span>
+</div>
+<span class="material-symbols-outlined opacity-40 group-hover:opacity-100 transition-opacity">more_vert</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 lg:ml-72 min-h-screen px-8 lg:px-16 py-12">
+<!-- Header Section -->
+<header class="mb-16 max-w-5xl">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+<div class="space-y-4">
+<span class="text-[11px] font-body uppercase tracking-[0.3em] text-secondary font-semibold">Curated Collection</span>
+<h1 class="text-5xl md:text-7xl font-serif text-primary tracking-tight leading-tight">Explore Thematic Devotions</h1>
+</div>
+<div class="bg-surface-container p-6 rounded-xl border border-outline-variant/10 min-w-[280px]">
+<div class="flex justify-between items-center mb-4">
+<span class="text-[10px] uppercase tracking-widest font-medium opacity-60">Overall Progress</span>
+<span class="text-xl font-serif font-bold">64%</span>
+</div>
+<div class="w-full h-1 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[64%]"></div>
+</div>
+<p class="mt-3 text-[11px] font-body text-on-surface-variant italic">18 of 28 themes initiated</p>
+</div>
+</div>
+</header>
+<!-- Themes Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-7xl">
+<!-- Card 1 -->
+<div class="group flex flex-col gap-6 bg-surface-container-low rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5">
+<div class="aspect-[16/9] overflow-hidden">
+<img alt="The Path of Patience" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Minimalist landscape of a winding stone path through a misty forest in soft neutral tones and diffused morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzFWgAIesPI-cdabGKEjCab7Udbvw4qUXuEhCp1DDH0EuXrw94Og6yhtXrOoVoJANVKtqTN-KrNUrGeO2NPLCndwtdsOi33DdpoeEVEP0nI_qCOk2I52JD9pykQ121oN0jYQx2UEa3mDsrImWG3i_82Zr9Vj66wB0VQQwe43lfxzbCCeGDFZEcMqZVbJCJkBj5fSUwqY57zZTCeLsNKDPTWTLsGiPH8kdHkTHrbu2wynF9nt5jvkmxBxHapfFJYXtWApXoy6fT9xo"/>
+</div>
+<div class="px-8 pb-10 space-y-4">
+<div class="flex justify-between items-start">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-[10px] uppercase tracking-widest font-bold rounded-full">Published</span>
+<span class="text-[10px] font-body uppercase tracking-widest opacity-40">12 Days Journey</span>
+</div>
+<h3 class="text-3xl font-serif text-primary">The Path of Patience</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed font-body line-clamp-2">A meditative exploration of waiting with intention, finding peace in the pauses of life's complex narrative.</p>
+<div class="pt-4 space-y-2">
+<div class="flex justify-between text-[10px] uppercase tracking-tighter opacity-60">
+<span>5 of 12 completed</span>
+<span>42%</span>
+</div>
+<div class="w-full h-[2px] bg-surface-variant">
+<div class="h-full bg-primary w-[42%]"></div>
+</div>
+</div>
+<div class="pt-4 flex items-center justify-between">
+<button class="bg-primary text-on-primary px-8 py-3 text-xs uppercase tracking-widest font-body hover:opacity-90 transition-opacity">Review Theme</button>
+<span class="material-symbols-outlined opacity-20 group-hover:opacity-100 transition-opacity group-hover:translate-x-1 duration-300">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group flex flex-col gap-6 bg-surface-container-low rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5">
+<div class="aspect-[16/9] overflow-hidden">
+<img alt="Finding Stillness" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Calm lake surface at dawn reflecting soft blue and golden sky with a single ripple in center and no wind" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5QWqagpjO0dd3Dyyup267U5BLM1gUbtssTOFcZr_B-PkQPMs4lTrS8LzpzNePDR8yoLe6-44SVzmTWdoD2SVlj9mj8KFHmGZojGLnOiQL0TPPp76JBQkWyEeddoHVIfn8LxB5DZX6Wn0H_5yc3OEmMFjAFAzOWwCu3AS6HrUgwJ0qoKRiU_R-H6bY7k25IAP1YObIEANDxKVEO2bb-9XEtjIteIQWvC0HvLEEAZ_sb5GEAYV2QSMZTa4OQFY8pb4EyBoG9OrKHFw"/>
+</div>
+<div class="px-8 pb-10 space-y-4">
+<div class="flex justify-between items-start">
+<span class="px-3 py-1 bg-secondary text-on-secondary text-[10px] uppercase tracking-widest font-bold rounded-full">In Progress</span>
+<span class="text-[10px] font-body uppercase tracking-widest opacity-40">7 Days Journey</span>
+</div>
+<h3 class="text-3xl font-serif text-primary">Finding Stillness</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed font-body line-clamp-2">Cultivating a quiet heart amidst the noise of the digital age. Techniques for spiritual silence and grounding.</p>
+<div class="pt-4 space-y-2">
+<div class="flex justify-between text-[10px] uppercase tracking-tighter opacity-60">
+<span>6 of 7 completed</span>
+<span>85%</span>
+</div>
+<div class="w-full h-[2px] bg-surface-variant">
+<div class="h-full bg-primary w-[85%]"></div>
+</div>
+</div>
+<div class="pt-4 flex items-center justify-between">
+<button class="bg-primary text-on-primary px-8 py-3 text-xs uppercase tracking-widest font-body hover:opacity-90 transition-opacity">Open Theme</button>
+<span class="material-symbols-outlined opacity-20 group-hover:opacity-100 transition-opacity group-hover:translate-x-1 duration-300">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group flex flex-col gap-6 bg-surface-container-low rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5">
+<div class="aspect-[16/9] overflow-hidden">
+<img alt="Legacy of Grace" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Abstract soft focus of ancient golden jewelry and silk fabrics representing heritage and historical elegance in warm parchment lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDC3SyqWCh9u0g8vJat6IDy1TDcIOJyio7RluiZXzvzjyZz16VCj-6aGuPZFl1bAPSPAL4vhsmdlPMNnOTUSkI4WrA1RqH7sh3W4Sos5sxjeVuP20gObaB926uCP6tlcISoqNWjbTsdSl9QbI1AejLlGkGnO58rqqabhZH5VSh-0vjvRGjBJS6IeVtL_k2EUfL00icz4uvT3bJqreK82lmjTcVU6of3EBsy-H-GVx9eAsmqthEwo3vOv14nbtth5Y_IvHrQwmxQRYk"/>
+</div>
+<div class="px-8 pb-10 space-y-4">
+<div class="flex justify-between items-start">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-[10px] uppercase tracking-widest font-bold rounded-full">Published</span>
+<span class="text-[10px] font-body uppercase tracking-widest opacity-40">14 Days Journey</span>
+</div>
+<h3 class="text-3xl font-serif text-primary">Legacy of Grace</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed font-body line-clamp-2">Understanding the historical context of mercy and how it shapes our modern response to failure and forgiveness.</p>
+<div class="pt-4 space-y-2">
+<div class="flex justify-between text-[10px] uppercase tracking-tighter opacity-60">
+<span>0 of 14 completed</span>
+<span>0%</span>
+</div>
+<div class="w-full h-[2px] bg-surface-variant">
+<div class="h-full bg-primary w-[0%]"></div>
+</div>
+</div>
+<div class="pt-4 flex items-center justify-between">
+<button class="bg-primary text-on-primary px-8 py-3 text-xs uppercase tracking-widest font-body hover:opacity-90 transition-opacity">Open Theme</button>
+<span class="material-symbols-outlined opacity-20 group-hover:opacity-100 transition-opacity group-hover:translate-x-1 duration-300">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group flex flex-col gap-6 bg-surface-container-low rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5">
+<div class="aspect-[16/9] overflow-hidden">
+<img alt="Heart for the Poor" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Close up of wrinkled hands holding a simple earthen bowl in dramatic chiaroscuro lighting style with deep shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcTbimnSVfvW0Hb_O4vzPn9jrL7TPQEBPxHw6ATyUdFlcychiWDhMOextngiYJwpA_lqEq93K2xfvR7lBiZOEgyNdDNzlKkk_qErfw98ZUuHq9a_zjzW2onl7KduOnBt46N9_nqCkPLS9THADrjL71DYyziINcuHRO7iqMLr4An7SZ7kPHIKHZKegT1CBrgc6ozd7f5to18y9JiTuKNgzwMh3slOm_DFnGIgVaw6DDhqxnnDKoxle68GJJ-f8XNSWsLwo8zXcNfw8"/>
+</div>
+<div class="px-8 pb-10 space-y-4">
+<div class="flex justify-between items-start">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-[10px] uppercase tracking-widest font-bold rounded-full">Published</span>
+<span class="text-[10px] font-body uppercase tracking-widest opacity-40">10 Days Journey</span>
+</div>
+<h3 class="text-3xl font-serif text-primary">Heart for the Poor</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed font-body line-clamp-2">A radical shift in perspective toward service and empathy. Exploring the spiritual wealth found in humility.</p>
+<div class="pt-4 space-y-2">
+<div class="flex justify-between text-[10px] uppercase tracking-tighter opacity-60">
+<span>10 of 10 completed</span>
+<span>100%</span>
+</div>
+<div class="w-full h-[2px] bg-surface-variant">
+<div class="h-full bg-secondary w-[100%]"></div>
+</div>
+</div>
+<div class="pt-4 flex items-center justify-between">
+<button class="bg-surface-container-highest text-on-surface px-8 py-3 text-xs uppercase tracking-widest font-body hover:opacity-80 transition-opacity">Review Theme</button>
+<span class="material-symbols-outlined text-secondary font-variation-settings-'FILL' 1">check_circle</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Floating Action Suppression Note: The user didn't request a FAB, and following the Suppression rule, it's not present for this Index screen. -->
+<!-- Footer Implementation -->
+<footer class="mt-32 w-full py-12 flex flex-col items-center justify-center gap-4 bg-[#F1EEE7] dark:bg-[#101C30]">
+<div class="flex gap-8 text-[10px] uppercase tracking-[0.2em] font-body text-[#051125]/40 dark:text-[#FCF9F2]/40">
+<span class="hover:text-[#56642B] transition-colors cursor-default">v1.2.0</span>
+<a class="hover:text-[#56642B] transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-[#56642B] transition-colors" href="#">Terms</a>
+</div>
+<p class="text-[10px] uppercase tracking-[0.2em] font-body text-[#051125]/40 dark:text-[#FCF9F2]/40">
+                    © 2024 Devotional. All rights reserved.
+                </p>
+</footer>
+</main>
+</div>
+</body></html>

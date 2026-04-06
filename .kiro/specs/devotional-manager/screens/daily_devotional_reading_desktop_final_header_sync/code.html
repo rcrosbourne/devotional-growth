@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Curator | The Architecture of Silence</title>
+<!-- Typography -->
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#535f76",
+                        "on-secondary-fixed": "#161e00",
+                        "tertiary-container": "#0d1c2f",
+                        "primary-fixed-dim": "#bbc7e2",
+                        "on-tertiary-fixed-variant": "#3a485c",
+                        "on-primary-container": "#78849d",
+                        "outline-variant": "#c5c6cd",
+                        "on-background": "#1c1c18",
+                        "inverse-on-surface": "#f3f0e9",
+                        "surface-container": "#f1eee7",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#d7e2ff",
+                        "tertiary-fixed-dim": "#b9c7e0",
+                        "surface-variant": "#e5e2db",
+                        "surface-container-high": "#ebe8e1",
+                        "inverse-surface": "#31312c",
+                        "on-tertiary-container": "#76859b",
+                        "on-primary-fixed": "#101c30",
+                        "surface-dim": "#dcdad3",
+                        "secondary-container": "#d6e7a0",
+                        "primary-container": "#101c30",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#fcf9f2",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#d5e3fd",
+                        "error": "#ba1a1a",
+                        "primary": "#000000",
+                        "on-tertiary-fixed": "#0d1c2f",
+                        "inverse-primary": "#bbc7e2",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#e5e2db",
+                        "on-secondary-fixed-variant": "#3f4c15",
+                        "secondary-fixed-dim": "#bdce89",
+                        "secondary-fixed": "#d9eaa3",
+                        "surface-container-low": "#f6f3ec",
+                        "outline": "#75777d",
+                        "on-surface-variant": "#45474d",
+                        "surface": "#fcf9f2",
+                        "tertiary": "#000000",
+                        "on-primary-fixed-variant": "#3c475d",
+                        "on-surface": "#1c1c18",
+                        "secondary": "#56642b",
+                        "on-secondary-container": "#5a682f",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#fcf9f2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Newsreader", "serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .serif { font-family: 'Newsreader', serif; }
+        .sans { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-secondary-container">
+<!-- SideNavBar: Refined from SCREEN_21 -->
+<aside class="hidden md:flex flex-col gap-8 h-screen w-72 bg-[#EBE8E1] border-r border-outline-variant/15 dark:bg-[#0D1C2F] fixed left-0 top-0 py-10 px-0 z-40">
+<div class="mb-4 px-6">
+<div class="text-2xl font-headline italic text-primary dark:text-surface">Devotional</div>
+</div>
+<div class="flex flex-col gap-1 px-6">
+<h2 class="text-lg font-headline text-primary dark:text-surface">The Digital Curator</h2>
+<p class="text-xs uppercase tracking-widest font-body opacity-60">Spiritual Reflection</p>
+</div>
+<nav class="flex flex-col gap-4">
+<!-- Daily Devotional -->
+<a class="flex items-center gap-3 py-3 px-4 text-on-surface/50 dark:text-surface/50 hover:text-on-surface dark:hover:text-surface transition-colors hover:bg-surface/30 dark:hover:bg-primary/30 rounded" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-headline">Daily Devotional</span>
+</a>
+<a class="relative flex items-center gap-3 py-3 px-4 text-primary dark:text-surface font-semibold bg-surface/60 dark:bg-primary/40 transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-headline">Themes</span>
+<div class="absolute right-0 top-1 bottom-1 w-1.5 bg-primary dark:bg-surface rounded-l-full"></div>
+</a>
+<a class="flex items-center gap-3 py-3 px-4 text-on-surface/50 dark:text-surface/50 hover:text-on-surface dark:hover:text-surface transition-colors hover:bg-surface/30 dark:hover:bg-primary/30 rounded" href="#">
+<span class="material-symbols-outlined">collections_bookmark</span>
+<span class="font-headline">My Library</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-4 text-on-surface/50 dark:text-surface/50 hover:text-on-surface dark:hover:text-surface transition-colors hover:bg-surface/30 dark:hover:bg-primary/30 rounded" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-headline">Settings</span>
+</a>
+</nav>
+<div class="mt-auto px-4 relative group">
+<div class="absolute bottom-full left-4 mb-2 w-64 bg-surface-container-lowest border border-outline-variant/15 shadow-[0_20px_50px_rgba(0,0,0,0.08)] rounded-xl py-4 z-50 overflow-hidden hidden group-hover:block">
+<div class="px-6 pb-3 border-b border-outline-variant/10">
+<span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-1 block">Account</span>
+<p class="font-headline text-lg leading-tight">Curator Alpha</p>
+</div>
+<div class="py-2">
+<button class="w-full flex items-center gap-3 px-6 py-3 text-sm hover:bg-surface-container-low transition-colors duration-300 text-on-surface">
+<span class="material-symbols-outlined text-stone-500">person</span> Profile Settings
+                    </button>
+<button class="w-full flex items-center gap-3 px-6 py-3 text-sm hover:bg-surface-container-low transition-colors duration-300 text-on-surface">
+<span class="material-symbols-outlined text-stone-500">link</span> Partner Linking
+                    </button>
+<button class="w-full flex items-center gap-3 px-6 py-3 text-sm hover:bg-surface-container-low transition-colors duration-300 text-on-surface">
+<span class="material-symbols-outlined text-stone-500">notifications</span> Notifications
+                    </button>
+<div class="h-px bg-outline-variant/10 my-2 mx-4"></div>
+<button class="w-full flex items-center gap-3 px-6 py-3 text-sm text-error hover:bg-error-container/20 transition-colors duration-300">
+<span class="material-symbols-outlined">logout</span> Sign Out
+                    </button>
+</div>
+</div>
+<a class="flex items-center gap-3 p-3 text-primary dark:text-surface bg-surface/80 dark:bg-primary/30 rounded-xl transition-all cursor-pointer" href="#">
+<div class="w-10 h-10 rounded-full bg-surface-variant overflow-hidden flex-shrink-0">
+<img alt="User profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9xwCnBXxMRAH15rc7MdOA2JWWyNqrgNTqqp4nLk4Y7xztWGhLLcT03GNgeoapY7OyE8661TE1HpKjxUHdpreQpSNPCv73u0GyoiLK216lhlN_ngA9neL3qdrL8REK7u5a8hz2H1PQ6y6gUe4_arsfqdn1Fqtsv1dfR037EyWi1_KO89hO5V4Xby11GEYEiPIrgCGofiIxZqktkSo0l8D0ynnv6oYT_vvRS3JaA4WKoJnUp56m-XeHKSkMi7Dh6CZ-YsyMyur7PDE"/>
+</div>
+<div class="flex flex-col flex-1 overflow-hidden">
+<span class="text-sm font-medium truncate">Curator Alpha</span>
+<span class="text-[10px] uppercase tracking-tighter opacity-50 truncate">Premium Member</span>
+</div>
+<span class="material-symbols-outlined opacity-40 group-hover:opacity-100 transition-opacity">more_vert</span>
+</a>
+</div>
+</aside>
+<!-- TopNavBar: Updated to match SCREEN_21 layout and elements -->
+<nav class="fixed top-0 z-30 bg-surface/80 dark:bg-[#051125]/80 backdrop-blur-xl flex justify-between items-center px-12 h-20 w-full md:left-72 md:right-0 border-b border-outline-variant/10">
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-[11px] uppercase tracking-widest font-body text-primary dark:text-surface border-b border-primary dark:border-surface pb-1" href="#">Devotions</a>
+<a class="text-[11px] uppercase tracking-widest font-body text-primary/60 dark:text-surface/60 hover:text-primary dark:hover:text-surface transition-colors" href="#">Bible Study</a>
+<a class="text-[11px] uppercase tracking-widest font-body text-primary/60 dark:text-surface/60 hover:text-primary dark:hover:text-surface transition-colors" href="#">Bookmarks</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-primary dark:text-surface">search</span>
+</button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="md:ml-72 min-h-screen relative">
+<section class="max-w-4xl mx-auto px-8 pt-32 pb-32">
+<!-- Hero Title Section -->
+<div class="mb-20">
+<span class="label-md uppercase tracking-[0.3em] text-[10px] text-secondary font-bold mb-4 block">Contemplation Four</span>
+<h1 class="headline-lg serif text-6xl md:text-7xl font-light text-primary tracking-tight leading-tight">
+                    Day 04: The Void and <br/>The Vessel
+                </h1>
+</div>
+<!-- Scripture Pull-Quote -->
+<div class="relative py-16 mb-20">
+<div class="absolute inset-0 bg-surface-container -mx-8 rounded-3xl -z-10 opacity-40"></div>
+<div class="max-w-2xl mx-auto text-center px-4">
+<span class="material-symbols-outlined text-secondary text-4xl mb-6 opacity-40" style="font-variation-settings: 'FILL' 1;">format_quote</span>
+<p class="serif italic text-2xl md:text-3xl text-on-surface leading-relaxed">
+                        "Be still, and know that I am God; I will be exalted among the nations, I will be exalted in the earth."
+                    </p>
+<span class="block mt-6 sans font-bold text-xs uppercase tracking-widest text-on-surface-variant">— Psalm 46:10</span>
+</div>
+</div>
+<!-- Main Editorial Content -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-24">
+<div class="md:col-span-8 md:col-start-3 space-y-8">
+<p class="serif text-xl leading-relaxed text-on-surface opacity-90">
+                        Modern life is a relentless storm of sound—a chaotic blend of digital notifications, urban hum, and the internal monologue of anxieties. We have become accustomed to viewing silence as a "void," an empty space that must be filled with productivity or entertainment. Yet, in the architecture of the spirit, silence is not a vacuum; it is the very vessel that holds the presence of the Divine.
+                    </p>
+<p class="serif text-xl leading-relaxed text-on-surface opacity-90">
+                        When we choose stillness, we are not simply ceasing motion. We are performing a radical act of trust. To stop is to admit that the world does not spin on the axis of our efforts, but on the grace of the Creator. The "vessel" of our soul must be emptied of its self-constructed noise before it can be filled with the transcendent clarity that only God provides in the hush of the morning.
+                    </p>
+<div class="py-4">
+<img alt="Minimalist architectural space with soft light falling through a window onto a textured parchment-colored wall creating deep shadows" class="w-full h-[400px] object-cover rounded-2xl mb-4 grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLfc5ok6iHGkyEhaNeS5-rUxyVwlDVCE7ZBLuGwMM4BJtagf-4HEJNTRqxEYmfW95jchYYjCmkbYn4Q4IceHlKpusTzldWIXixW1V9s2qFG_N-1WOGnd84hvMvolUgPHqoF6bePsYkT6pzZIeY3xYz0jZaZi4gXR3l0bGktg4xycLxpf5U4M53g9Y3xRxBLNwL3LwNK4kIt8MNf_dinqDK8-9VEFIbXOYZbzVgGW2fLbbtH9PeIGtrHT78UrZyV2fjkVMGfYElZgs"/>
+<p class="text-[10px] sans uppercase tracking-widest text-on-surface-variant italic text-center">Visual Study: The Weight of Light and Shadow</p>
+</div>
+<p class="serif text-xl leading-relaxed text-on-surface opacity-90">
+                        The architecture of silence requires intentional structural design. It is not something we stumble upon; it is something we build into our day with the precision of a master mason. By carving out these minutes, we transition from being victims of the chaos to becoming curators of our own peace. In this stillness, the "void" becomes a sacred meeting place.
+                    </p>
+</div>
+</div>
+<!-- Reflection Prompts Section -->
+<div class="bg-surface-container-low rounded-[2rem] p-10 mb-24 relative overflow-hidden">
+<div class="relative z-10">
+<div class="flex items-center gap-3 mb-8">
+<span class="material-symbols-outlined text-secondary">self_improvement</span>
+<h2 class="sans font-bold text-sm uppercase tracking-[0.2em]">Personal Reflections</h2>
+</div>
+<div class="space-y-10">
+<div class="border-l-2 border-secondary/20 pl-8">
+<p class="serif text-2xl italic text-on-surface mb-2">What specific sound or digital noise currently feels like the loudest "wall" in your life?</p>
+<span class="text-[11px] sans text-on-surface-variant font-medium">Contemplate the source and the frequency.</span>
+</div>
+<div class="border-l-2 border-secondary/20 pl-8">
+<p class="serif text-2xl italic text-on-surface mb-2">How would your perception of today change if you viewed silence as a 'vessel' rather than an 'empty void'?</p>
+<span class="text-[11px] sans text-on-surface-variant font-medium">Consider your emotional response to stillness.</span>
+</div>
+</div>
+</div>
+<div class="absolute -right-20 -bottom-20 w-80 h-80 bg-secondary/5 rounded-full blur-3xl"></div>
+</div>
+<!-- Adventist Insights -->
+<footer class="bg-primary text-on-primary rounded-3xl p-12 mb-16">
+<div class="max-w-xl">
+<h3 class="sans font-bold text-[10px] uppercase tracking-[0.3em] text-on-primary/60 mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">auto_stories</span>
+                        Theological Context
+                    </h3>
+<p class="serif text-lg leading-relaxed mb-4">
+                        Ellen G. White often spoke of the "quiet hour," suggesting that our spiritual strength is directly proportionate to our time spent in private, undisturbed communion with the Father. In Seventh-day Adventist theology, the Sabbath itself is the grandest architecture of silence—a sanctuary built in time rather than stone.
+                    </p>
+<p class="sans text-xs text-on-primary/40 font-medium">
+                        Insight derived from "The Ministry of Healing" &amp; "The Desire of Ages".
+                    </p>
+</div>
+</footer>
+<!-- Content Navigation -->
+<div class="flex items-center justify-between pt-12 border-t border-outline-variant/30">
+<button class="flex items-center gap-4 group">
+<div class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+</div>
+<div class="text-left">
+<span class="block text-[10px] sans font-bold text-on-surface-variant uppercase tracking-widest">Previous Day</span>
+<span class="block serif text-lg group-hover:text-secondary transition-colors">The Foundation of Breath</span>
+</div>
+</button>
+<button class="flex items-center gap-4 group text-right">
+<div class="text-right">
+<span class="block text-[10px] sans font-bold text-on-surface-variant uppercase tracking-widest">Next Day</span>
+<span class="block serif text-lg group-hover:text-secondary transition-colors">Echoes of Eternity</span>
+</div>
+<div class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</div>
+</button>
+</div>
+</section>
+</main>
+</body></html>

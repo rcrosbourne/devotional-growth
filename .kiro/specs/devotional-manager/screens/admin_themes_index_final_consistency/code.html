@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Themes Management | DevotionAdmin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#45474d",
+                        "on-tertiary-fixed-variant": "#3a485c",
+                        "on-primary-fixed-variant": "#3c475d",
+                        "inverse-surface": "#31312c",
+                        "surface-tint": "#535f76",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#3f4c15",
+                        "on-primary-fixed": "#101c30",
+                        "on-background": "#1c1c18",
+                        "primary-fixed": "#d7e2ff",
+                        "on-surface": "#1c1c18",
+                        "surface-variant": "#e5e2db",
+                        "secondary-container": "#d6e7a0",
+                        "outline-variant": "#c5c6cd",
+                        "on-tertiary-container": "#76859b",
+                        "tertiary": "#000000",
+                        "surface-dim": "#dcdad3",
+                        "primary-container": "#101c30",
+                        "on-secondary": "#ffffff",
+                        "surface": "#fcf9f2",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#e5e2db",
+                        "outline": "#75777d",
+                        "surface-container": "#f1eee7",
+                        "on-primary-container": "#78849d",
+                        "inverse-primary": "#bbc7e2",
+                        "tertiary-fixed-dim": "#b9c7e0",
+                        "background": "#fcf9f2",
+                        "primary-fixed-dim": "#bbc7e2",
+                        "on-surface": "#1c1c18",
+                        "surface-container-low": "#f6f3ec",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#d9eaa3",
+                        "surface-bright": "#fcf9f2",
+                        "inverse-on-surface": "#f3f0e9",
+                        "tertiary-fixed": "#d5e3fd",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#ebe8e1",
+                        "secondary": "#56642b",
+                        "primary": "#000000",
+                        "secondary-fixed-dim": "#bdce89",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-container": "#5a682f",
+                        "on-tertiary-fixed": "#0d1c2f",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#0d1c2f",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Newsreader", "serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #FCF9F2;
+            color: #1C1C18;
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+<!-- SideNavBar (Updated to match SCREEN_26) -->
+<aside class="hidden md:flex flex-col gap-8 h-screen w-72 bg-[#EBE8E1] border-r border-outline-variant/15 dark:bg-[#0D1C2F] fixed left-0 top-0 py-10 px-0 z-40">
+<div class="mb-4 px-6">
+<div class="text-2xl font-headline italic text-primary dark:text-surface">DevotionAdmin</div>
+</div>
+<div class="flex flex-col gap-1 px-6">
+<h2 class="text-lg font-headline text-primary dark:text-surface">Management Console</h2>
+<p class="text-xs uppercase tracking-widest font-body opacity-60">System Administrator</p>
+</div>
+<nav class="flex flex-col gap-4">
+<a class="flex items-center gap-3 py-3 px-4 text-on-surface/50 dark:text-surface/50 hover:text-on-surface dark:hover:text-surface transition-colors hover:bg-surface/30 dark:hover:bg-primary/30 rounded" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-headline text-lg">Dashboard</span>
+</a>
+<!-- Active Tab -->
+<a class="relative flex items-center gap-3 py-3 px-4 text-primary dark:text-surface font-semibold bg-surface/60 dark:bg-primary/40 transition-all" href="#">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="font-headline text-lg">Content Library</span>
+<div class="absolute right-0 top-1 bottom-1 w-1.5 bg-primary dark:bg-surface rounded-l-full"></div>
+</a>
+<a class="flex items-center gap-3 py-3 px-4 text-on-surface/50 dark:text-surface/50 hover:text-on-surface dark:hover:text-surface transition-colors hover:bg-surface/30 dark:hover:bg-primary/30 rounded" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-headline text-lg">User Management</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-4 text-on-surface/50 dark:text-surface/50 hover:text-on-surface dark:hover:text-surface transition-colors hover:bg-surface/30 dark:hover:bg-primary/30 rounded" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-headline text-lg">Analytics</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-4 text-on-surface/50 dark:text-surface/50 hover:text-on-surface dark:hover:text-surface transition-colors hover:bg-surface/30 dark:hover:bg-primary/30 rounded" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-headline text-lg">App Settings</span>
+</a>
+</nav>
+<div class="mt-auto px-4 relative group">
+<div class="absolute bottom-full left-4 mb-2 w-64 bg-surface-container-lowest border border-outline-variant/15 shadow-[0_20px_50px_rgba(0,0,0,0.08)] rounded-xl py-4 z-50 overflow-hidden hidden group-hover:block">
+<div class="px-6 pb-3 border-b border-outline-variant/10">
+<span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-1 block">Account</span>
+<p class="font-headline text-lg leading-tight">Admin Curator</p>
+</div>
+<div class="py-2">
+<button class="w-full flex items-center gap-3 px-6 py-3 text-sm hover:bg-surface-container-low transition-colors duration-300 text-on-surface">
+<span class="material-symbols-outlined text-stone-500">person</span> Profile Settings
+                    </button>
+<button class="w-full flex items-center gap-3 px-6 py-3 text-sm hover:bg-surface-container-low transition-colors duration-300 text-on-surface">
+<span class="material-symbols-outlined text-stone-500">notifications</span> Notifications
+                    </button>
+<div class="h-px bg-outline-variant/10 my-2 mx-4"></div>
+<button class="w-full flex items-center gap-3 px-6 py-3 text-sm text-error hover:bg-error-container/20 transition-colors duration-300">
+<span class="material-symbols-outlined">logout</span> Sign Out
+                    </button>
+</div>
+</div>
+<a class="flex items-center gap-3 p-3 text-primary dark:text-surface bg-surface/80 dark:bg-primary/30 rounded-xl transition-all cursor-pointer" href="#">
+<div class="w-10 h-10 rounded-full bg-surface-variant overflow-hidden flex-shrink-0">
+<img alt="User profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAQtOOe8b6llYYpbHmHWVrM3DgeEh9o5eJn5OC9OihLNUxHuYjZCAP9SSEPDaB1ltwYOGekeZj7StClnl541Fccs8mHznLvoLWKHskEktQh_UG-rlChGuTbDBhAJOIp1pdi-BZaSYpPb1W79vAY2YzzDIkwZQ2yHSSmQ2m0nWzf5EO1jtBdsTRLBlGOjq4yE_zzAQ94Fgl8n8pO6RSlHT0YldlNZjI4er5TmSOqWpTjdF1uLmXGRrVYnZ-VH85SZPSh3uYooCFE0o"/>
+</div>
+<div class="flex flex-col flex-1 overflow-hidden">
+<span class="text-sm font-medium truncate">Admin Curator</span>
+<span class="text-[10px] uppercase tracking-tighter opacity-50 truncate">Primary Administrator</span>
+</div>
+<span class="material-symbols-outlined opacity-40 group-hover:opacity-100 transition-opacity">more_vert</span>
+</a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 flex flex-col min-w-0 md:ml-72">
+<!-- TopNavBar (Updated to match SCREEN_26 style) -->
+<nav class="fixed top-0 z-30 bg-surface/80 dark:bg-[#051125]/80 backdrop-blur-xl flex justify-between items-center px-12 h-20 w-full md:left-72 md:right-0 border-b border-outline-variant/10">
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-[11px] uppercase tracking-widest font-body text-primary dark:text-surface border-b border-primary dark:border-surface pb-1" href="#">Themes Management</a>
+<a class="text-[11px] uppercase tracking-widest font-body text-primary/60 dark:text-surface/60 hover:text-primary dark:hover:text-surface transition-colors" href="#">Editorial Board</a>
+<a class="text-[11px] uppercase tracking-widest font-body text-primary/60 dark:text-surface/60 hover:text-primary dark:hover:text-surface transition-colors" href="#">Archived Collections</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="bg-primary text-on-primary px-5 py-2 rounded-lg font-['Inter'] text-xs font-bold uppercase tracking-wider flex items-center gap-2 hover:opacity-90 transition-all">
+<span class="material-symbols-outlined text-sm">add</span>
+                    New Theme
+                </button>
+<button class="hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-primary dark:text-surface">search</span>
+</button>
+</div>
+</nav>
+<!-- Content Area -->
+<div class="p-8 pt-32 space-y-12 max-w-7xl mx-auto w-full">
+<!-- Page Header -->
+<section class="space-y-4">
+<div class="flex items-center gap-4">
+<span class="font-['Inter'] text-xs font-bold tracking-[0.2em] uppercase text-secondary">Curator Dashboard</span>
+<div class="h-[1px] flex-1 bg-outline-variant/30"></div>
+</div>
+<h1 class="font-headline text-6xl font-medium tracking-tight text-primary">Managed Themes</h1>
+<p class="font-headline text-xl italic text-on-surface-variant/80 max-w-2xl leading-relaxed">
+                    Organize your spiritual content into curated editorial journeys. Manage the flow of devotion through structured thematic collections.
+                </p>
+</section>
+<!-- Dashboard Summary Section (from SCREEN_42) -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-px bg-outline-variant/30 rounded-xl overflow-hidden border border-outline-variant/30">
+<div class="bg-surface-container-low p-8 space-y-2">
+<p class="font-['Inter'] text-[10px] font-bold tracking-[0.2em] uppercase text-secondary">Total Themes</p>
+<div class="flex items-baseline gap-2">
+<h3 class="font-headline text-4xl font-medium">24</h3>
+<span class="text-xs text-secondary font-medium">+2 this month</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-8 space-y-2">
+<p class="font-['Inter'] text-[10px] font-bold tracking-[0.2em] uppercase text-secondary">Published</p>
+<div class="flex items-baseline gap-2">
+<h3 class="font-headline text-4xl font-medium">18</h3>
+<span class="text-xs text-on-surface-variant font-medium">75% of total</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-8 space-y-2">
+<p class="font-['Inter'] text-[10px] font-bold tracking-[0.2em] uppercase text-secondary">Drafts</p>
+<div class="flex items-baseline gap-2">
+<h3 class="font-headline text-4xl font-medium">6</h3>
+<span class="text-xs text-on-surface-variant font-medium">Pending review</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-8 space-y-2">
+<p class="font-['Inter'] text-[10px] font-bold tracking-[0.2em] uppercase text-secondary">Total Entries</p>
+<div class="flex items-baseline gap-2">
+<h3 class="font-headline text-4xl font-medium">412</h3>
+<span class="material-symbols-outlined text-secondary text-sm">trending_up</span>
+</div>
+</div>
+</section>
+<!-- Themes Table Section -->
+<section class="bg-surface-container-low rounded-xl overflow-hidden shadow-sm border border-outline-variant/10">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant/20 bg-surface-container/30">
+<th class="px-6 py-5 font-['Inter'] text-[11px] font-bold tracking-[0.1em] uppercase text-slate-500">Theme Title</th>
+<th class="px-6 py-5 font-['Inter'] text-[11px] font-bold tracking-[0.1em] uppercase text-slate-500">Status</th>
+<th class="px-6 py-5 font-['Inter'] text-[11px] font-bold tracking-[0.1em] uppercase text-slate-500">Entries</th>
+<th class="px-6 py-5 font-['Inter'] text-[11px] font-bold tracking-[0.1em] uppercase text-slate-500">Date Created</th>
+<th class="px-6 py-5 font-['Inter'] text-[11px] font-bold tracking-[0.1em] uppercase text-slate-500 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Row 1 -->
+<tr class="group hover:bg-surface-container/50 transition-colors">
+<td class="px-6 py-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded bg-surface-variant flex-shrink-0 overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAo_unWnoKFT99KR6ALMS7YHHrkP29HzJpJVUgetBgzMaz_RG8Ee8XfqhZ2WhAiPUaBoPlFpClh0vYKgkrvGhRswWz_2o1g1PMt5vJ7sTmQOupOSbPmeNQBLxZsqCV-AvmkioWTf03IhBqogSATkyDok1cHZzXaDk6XjEJ1xbEQNwH6EKOD8rYuNuVSU6a4zVNkiebbOjJK75eI_gJ4WSEsZw4xJ0UVmlS6JYkDfdaCzVPr1BlscliNbTNzFJbq_l9UWnOIX8Ue6SI"/>
+</div>
+<div>
+<p class="font-headline text-lg font-semibold text-primary">Foundations of Faith</p>
+<p class="font-['Inter'] text-xs text-on-surface-variant">Essential teachings for new believers</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-secondary-container text-on-secondary-container">
+                                        Published
+                                    </span>
+</td>
+<td class="px-6 py-6">
+<span class="font-['Inter'] text-sm font-medium">12 Entries</span>
+</td>
+<td class="px-6 py-6 font-['Inter'] text-sm text-on-surface-variant">Oct 12, 2023</td>
+<td class="px-6 py-6 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 hover:bg-white/50 rounded-lg transition-colors text-slate-400 hover:text-primary">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 hover:bg-white/50 rounded-lg transition-colors text-slate-400 hover:text-primary">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+<button class="p-2 hover:bg-white/50 rounded-lg transition-colors text-slate-400 hover:text-error">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-surface-container/50 transition-colors">
+<td class="px-6 py-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded bg-surface-variant flex-shrink-0 overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUZpgGxeySDc1eNAL_FQlkxvZuq8cb1TY0t1yT6HSsf7wLLQA64hAxziz3nqsdgqXqGvdKwZSnkMcfJ_0MdypGfX2Y25OL_jDy1Hxaj3EPq1OJTuIkalb243fLDMaDVfiJdhoOEodVS-pExXfR3NAz1HdKvGLaXRyN4zODCg1Wu0iiWoXwdaP4FVy05y-Erde48TmzK_ctsnMlyOcQr9EXDwR-pOU_6WbaH9WT6Y5lZeu0el4Z6dL2gEoew16rz_wL3wPU-FSj2iQ"/>
+</div>
+<div>
+<p class="font-headline text-lg font-semibold text-primary">Walking in Silence</p>
+<p class="font-['Inter'] text-xs text-on-surface-variant">A 30-day contemplative journey</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-surface-container-highest text-on-surface-variant">
+                                        Draft
+                                    </span>
+</td>
+<td class="px-6 py-6">
+<span class="font-['Inter'] text-sm font-medium">8 Entries</span>
+</td>
+<td class="px-6 py-6 font-['Inter'] text-sm text-on-surface-variant">Nov 02, 2023</td>
+<td class="px-6 py-6 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 hover:bg-white/50 rounded-lg transition-colors text-slate-400 hover:text-primary">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 hover:bg-white/50 rounded-lg transition-colors text-slate-400 hover:text-primary">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+<button class="p-2 hover:bg-white/50 rounded-lg transition-colors text-slate-400 hover:text-error">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-surface-container/50 transition-colors">
+<td class="px-6 py-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded bg-surface-variant flex-shrink-0 overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLooVzTYPP8YOBzHbW_S82HgWjlrMq9hv1w5JjP1Ly_5zly8c_zn-l0fdQ8D_mFwiF6W2DKSVa0tnqW1vows_e5kCXHd_aWz0VxfRVMdsXDYQ3wso_Tq_C_lJhEriAiT_8v7Sp7fSNk95jLuIGALtSfgYPowQ0Ly1hwg-w-sdf0_wW1xQENzPd5T08lVUVcaZ-qJRIwt12BiBYQmteRiFF_bnRMLJ3uqx1exr57jtEEV44_kd0mOxvE1uKgX_2_wrabdXSkvCXmMI"/>
+</div>
+<div>
+<p class="font-headline text-lg font-semibold text-primary">Proverbs of Old</p>
+<p class="font-['Inter'] text-xs text-on-surface-variant">Wisdom for modern-day challenges</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-secondary-container text-on-secondary-container">
+                                        Published
+                                    </span>
+</td>
+<td class="px-6 py-6">
+<span class="font-['Inter'] text-sm font-medium">31 Entries</span>
+</td>
+<td class="px-6 py-6 font-['Inter'] text-sm text-on-surface-variant">Sep 15, 2023</td>
+<td class="px-6 py-6 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 hover:bg-white/50 rounded-lg transition-colors text-slate-400 hover:text-primary">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-2 hover:bg-white/50 rounded-lg transition-colors text-slate-400 hover:text-primary">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+<button class="p-2 hover:bg-white/50 rounded-lg transition-colors text-slate-400 hover:text-error">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 bg-surface-container/50 flex justify-between items-center border-t border-outline-variant/10">
+<p class="font-['Inter'] text-xs text-on-surface-variant">Showing 3 of 24 themes</p>
+<div class="flex gap-4">
+<button class="text-xs font-bold font-['Inter'] tracking-widest uppercase hover:underline">Previous</button>
+<button class="text-xs font-bold font-['Inter'] tracking-widest uppercase hover:underline">Next</button>
+</div>
+</div>
+</section>
+<!-- Bottom Graphic/Editorial Note -->
+<footer class="pt-12 border-t border-outline-variant/20 flex flex-col md:flex-row justify-between items-start gap-8">
+<div class="max-w-xs space-y-4">
+<h4 class="font-headline text-2xl font-medium italic">Curatorial Note</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                        Themes serve as the intellectual spine of our devotional experience. Ensure each theme maintains a cohesive narrative arc and consistent spiritual depth.
+                    </p>
+</div>
+<div class="w-full md:w-1/2 h-32 rounded-lg bg-surface-container-high overflow-hidden relative">
+<div class="absolute inset-0 bg-gradient-to-r from-surface-container-high to-transparent z-10"></div>
+<img class="w-full h-full object-cover opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAY_G62wCLbLVeAnuU7qccVpP0hm86Ix9z7npXN3T7x6AqvF8-F-6RFQCFMb7Q7Y3udJeXPcoDt85SuvW9eVBOLH0v82EHRIPXO4gmmQ1jGzA_TE1RNHzpHhF2RFlkvtZWYml0aZksbwxi_RiFLEOoidhWXIR2PGYVHNzZQ99wtxBfaS-_MxZrgOFQUkrrk9yvbPksjcQhHJvm2-OJuUbhPk1x1AQ3-jQSBzcTrVLrZq9HMTToP9fXhyrDdskF0P4kLv5kr_6s-FlE"/>
+<div class="absolute inset-0 flex items-center justify-end pr-12 z-20">
+<span class="font-headline text-sm tracking-[0.2em] uppercase text-primary font-bold">DevotionAdmin v2.4</span>
+</div>
+</div>
+</footer>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Sanctuary | Notifications</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed-variant": "#3a485c",
+                    "secondary": "#56642b",
+                    "primary-container": "#101c30",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#78849d",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#000000",
+                    "error": "#ba1a1a",
+                    "on-error-container": "#93000a",
+                    "surface-container-lowest": "#ffffff",
+                    "background": "#fcf9f2",
+                    "surface-container-high": "#ebe8e1",
+                    "on-secondary-fixed-variant": "#3f4c15",
+                    "secondary-fixed": "#d9eaa3",
+                    "on-tertiary-fixed": "#0d1c2f",
+                    "on-primary-fixed": "#101c30",
+                    "on-background": "#1c1c18",
+                    "on-secondary-fixed": "#161e00",
+                    "surface-dim": "#dcdad3",
+                    "on-surface-variant": "#45474d",
+                    "on-error": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-container": "#5a682f",
+                    "tertiary-fixed-dim": "#b9c7e0",
+                    "surface-container-low": "#f6f3ec",
+                    "primary-fixed": "#d7e2ff",
+                    "on-primary": "#ffffff",
+                    "surface-variant": "#e5e2db",
+                    "on-surface": "#1c1c18",
+                    "surface-container-highest": "#e5e2db",
+                    "surface-tint": "#535f76",
+                    "outline-variant": "#c5c6cd",
+                    "inverse-surface": "#31312c",
+                    "surface-bright": "#fcf9f2",
+                    "primary": "#000000",
+                    "inverse-on-surface": "#f3f0e9",
+                    "secondary-container": "#d6e7a0",
+                    "outline": "#75777d",
+                    "secondary-fixed-dim": "#bdce89",
+                    "primary-fixed-dim": "#bbc7e2",
+                    "surface": "#fcf9f2",
+                    "on-primary-fixed-variant": "#3c475d",
+                    "inverse-primary": "#bbc7e2",
+                    "tertiary-container": "#0d1c2f",
+                    "surface-container": "#f1eee7",
+                    "tertiary-fixed": "#d5e3fd",
+                    "on-tertiary-container": "#76859b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Newsreader", "serif"],
+                    "body": ["Inter", "sans-serif"],
+                    "label": ["Inter", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .serif { font-family: 'Newsreader', serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-[#FCF9F2]/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200/20 flex justify-between items-center w-full px-6 py-4 lg:px-12">
+<div class="flex items-center gap-8">
+<span class="text-xl font-serif italic text-slate-900 dark:text-slate-100">The Sanctuary</span>
+<div class="hidden lg:flex items-center gap-6">
+<a class="text-slate-500 hover:text-slate-900 transition-all font-label uppercase tracking-widest text-xs" href="#">Today</a>
+<a class="text-slate-500 hover:text-slate-900 transition-all font-label uppercase tracking-widest text-xs" href="#">Library</a>
+<a class="text-slate-500 hover:text-slate-900 transition-all font-label uppercase tracking-widest text-xs" href="#">Archive</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-slate-900">search</button>
+<button class="material-symbols-outlined text-slate-900 relative">
+                notifications
+                <span class="absolute top-0 right-0 w-1.5 h-1.5 bg-secondary rounded-full"></span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="Soft focused portrait of a mature man with a kind expression in a bright minimalist room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyzNkdRbO6nWknzSPeU5IANabQoQkNKrjScvWWLgw9E2j21BQoR9v2XRjPIu3EkZ1xjxNLns1Z37BLqWIevYS7Z-3IM96N8ECAlmIrNqNqwYsALT92HUBFSnp2vfyMpYO_ok6VWZp49KEHHDnCLDzLhc4RmcgdWWej5_hHab686DXnNHq72CDBoFIwoM2x5ezWM13F3YSPoDXL5I7Sui801oqqS65gg7LK--IsIo_RQpEN3jxMUW1FDuQndGYLAvqMobPKS0QUNM0"/>
+</div>
+</div>
+</nav>
+<div class="flex pt-16 h-screen">
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col h-full py-8 px-6 bg-[#FCF9F2] dark:bg-slate-950 w-64 fixed left-0">
+<div class="mb-12">
+<p class="font-label uppercase tracking-widest text-[10px] text-slate-500 mb-1">Daily Devotion</p>
+<h2 class="text-2xl font-serif italic text-slate-900">The Sanctuary</h2>
+</div>
+<nav class="flex-1 space-y-4">
+<a class="flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-900 hover:bg-[#F1EEE7] transition-colors duration-300 py-2 px-3 rounded-lg group" href="#">
+<span class="material-symbols-outlined mr-3">menu_book</span>
+<span class="font-body text-sm">Devotionals</span>
+</a>
+<a class="flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-900 hover:bg-[#F1EEE7] transition-colors duration-300 py-2 px-3 rounded-lg" href="#">
+<span class="material-symbols-outlined mr-3">auto_stories</span>
+<span class="font-body text-sm">Scripture</span>
+</a>
+<a class="flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-900 hover:bg-[#F1EEE7] transition-colors duration-300 py-2 px-3 rounded-lg" href="#">
+<span class="material-symbols-outlined mr-3">edit_note</span>
+<span class="font-body text-sm">Journal</span>
+</a>
+<a class="flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-900 hover:bg-[#F1EEE7] transition-colors duration-300 py-2 px-3 rounded-lg" href="#">
+<span class="material-symbols-outlined mr-3">self_improvement</span>
+<span class="font-body text-sm">Reflection</span>
+</a>
+<a class="flex items-center text-slate-500 dark:text-slate-400 hover:text-slate-900 hover:bg-[#F1EEE7] transition-colors duration-300 py-2 px-3 rounded-lg" href="#">
+<span class="material-symbols-outlined mr-3">groups</span>
+<span class="font-body text-sm">Community</span>
+</a>
+</nav>
+<div class="mt-auto pt-8 border-t border-slate-200/20">
+<button class="w-full bg-primary text-on-primary py-3 px-4 rounded-lg font-body text-sm font-medium hover:opacity-90 transition-opacity mb-4">
+                    New Entry
+                </button>
+<a class="flex items-center text-slate-500 hover:text-slate-900 py-2 px-3" href="#">
+<span class="material-symbols-outlined mr-3">settings</span>
+<span class="font-body text-sm">Settings</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 lg:ml-64 px-6 lg:px-12 py-12 bg-background">
+<div class="max-w-3xl mx-auto">
+<!-- Editorial Header -->
+<header class="mb-12">
+<span class="font-label text-xs uppercase tracking-widest text-secondary block mb-2">Internal Correspondence</span>
+<div class="flex justify-between items-end">
+<h1 class="text-5xl lg:text-6xl font-headline tracking-tight text-primary">Notifications</h1>
+<div class="flex items-center gap-6">
+<button class="text-sm font-body text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-lg">done_all</span>
+                                Mark all as read
+                            </button>
+<a class="text-sm font-body text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-lg">settings</span>
+                                Settings
+                            </a>
+</div>
+</div>
+</header>
+<!-- Notifications List -->
+<div class="space-y-1">
+<!-- Unread Item -->
+<div class="group relative flex gap-6 p-6 bg-surface-container-low rounded-xl mb-4 transition-all hover:bg-surface-container-high border-l-4 border-secondary">
+<div class="flex-shrink-0">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-weight="fill">volunteer_activism</span>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-body font-semibold text-primary text-lg">Partner completed a devotional</h3>
+<span class="text-xs font-label uppercase tracking-wider text-on-surface-variant">2 mins ago</span>
+</div>
+<p class="text-on-surface-variant font-body leading-relaxed max-w-xl">
+                                Julian just finished <span class="italic font-headline">"The Breath of Silence"</span>. He added a reflection for you to read.
+                            </p>
+<div class="mt-4 flex gap-3">
+<button class="px-4 py-2 bg-primary text-on-primary text-sm rounded-lg hover:opacity-90 transition-opacity">Read Reflection</button>
+<button class="px-4 py-2 bg-surface-container-highest text-on-surface text-sm rounded-lg hover:opacity-70 transition-opacity">Dismiss</button>
+</div>
+</div>
+</div>
+<!-- Unread Item -->
+<div class="group relative flex gap-6 p-6 bg-surface-container-low rounded-xl mb-4 transition-all hover:bg-surface-container-high border-l-4 border-secondary">
+<div class="flex-shrink-0">
+<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined">auto_awesome</span>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-body font-semibold text-primary text-lg">New theme published</h3>
+<span class="text-xs font-label uppercase tracking-wider text-on-surface-variant">1 hour ago</span>
+</div>
+<p class="text-on-surface-variant font-body leading-relaxed max-w-xl">
+                                Explore <span class="italic font-headline">"Verdant Solace"</span>, our new curated collection of evening prayers and botanical meditations.
+                            </p>
+</div>
+</div>
+<!-- Read Divider -->
+<div class="py-8 flex items-center gap-4">
+<div class="h-px flex-1 bg-outline-variant/30"></div>
+<span class="font-label text-[10px] uppercase tracking-[0.2em] text-outline">Earlier This Week</span>
+<div class="h-px flex-1 bg-outline-variant/30"></div>
+</div>
+<!-- Read Item -->
+<div class="group flex gap-6 p-6 bg-background rounded-xl transition-all hover:bg-surface-container-low">
+<div class="flex-shrink-0">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant opacity-60">
+<span class="material-symbols-outlined">history_edu</span>
+</div>
+</div>
+<div class="flex-1 opacity-70">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-body font-medium text-primary text-lg">Journal Streak: 7 Days</h3>
+<span class="text-xs font-label uppercase tracking-wider text-on-surface-variant">Oct 24</span>
+</div>
+<p class="text-on-surface-variant font-body leading-relaxed">
+                                You've maintained a beautiful rhythm. Seven days of intentional presence documented in your sanctuary.
+                            </p>
+</div>
+</div>
+<!-- Read Item -->
+<div class="group flex gap-6 p-6 bg-background rounded-xl transition-all hover:bg-surface-container-low">
+<div class="flex-shrink-0">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant opacity-60">
+<span class="material-symbols-outlined">group_add</span>
+</div>
+</div>
+<div class="flex-1 opacity-70">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-body font-medium text-primary text-lg">Community Invitation</h3>
+<span class="text-xs font-label uppercase tracking-wider text-on-surface-variant">Oct 22</span>
+</div>
+<p class="text-on-surface-variant font-body leading-relaxed">
+                                Clara requested to join your <span class="italic font-headline">"Morning Light"</span> circle.
+                            </p>
+</div>
+</div>
+</div>
+<!-- Footer Callout -->
+<div class="mt-16 p-12 bg-secondary/5 rounded-3xl text-center border border-secondary/10">
+<span class="material-symbols-outlined text-4xl text-secondary mb-4">spa</span>
+<h2 class="text-3xl font-headline italic mb-4">Cultivate Tranquility</h2>
+<p class="text-on-surface-variant font-body mb-8 max-w-md mx-auto">
+                        Manage how you receive alerts to maintain your focus and peace of mind during your practice.
+                    </p>
+<button class="bg-secondary text-white px-8 py-3 rounded-full font-body font-medium hover:opacity-90 transition-all">
+                        Notification Preferences
+                    </button>
+</div>
+</div>
+</main>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-[#FCF9F2]/90 dark:bg-slate-950/90 backdrop-blur-lg shadow-[0_-4px_20px_rgba(0,0,0,0.03)] rounded-t-3xl border-t border-slate-200/10">
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-sans text-[10px] uppercase tracking-tighter mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">book_5</span>
+<span class="font-sans text-[10px] uppercase tracking-tighter mt-1">Read</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">stylus_note</span>
+<span class="font-sans text-[10px] uppercase tracking-tighter mt-1">Journal</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-slate-900 dark:bg-slate-100 text-[#FCF9F2] dark:text-slate-900 rounded-full w-12 h-12" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Day 04: The Void and The Vessel</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#d9eaa3",
+                        "background": "#fcf9f2",
+                        "surface-container-highest": "#e5e2db",
+                        "outline": "#75777d",
+                        "secondary-fixed-dim": "#bdce89",
+                        "primary": "#000000",
+                        "on-primary-fixed-variant": "#3c475d",
+                        "on-tertiary-fixed-variant": "#3a485c",
+                        "surface-container-high": "#ebe8e1",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#56642b",
+                        "primary-fixed": "#d7e2ff",
+                        "on-primary-fixed": "#101c30",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#dcdad3",
+                        "inverse-on-surface": "#f3f0e9",
+                        "surface-bright": "#fcf9f2",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#bbc7e2",
+                        "surface-variant": "#e5e2db",
+                        "on-secondary-fixed-variant": "#3f4c15",
+                        "surface-tint": "#535f76",
+                        "on-background": "#1c1c18",
+                        "inverse-surface": "#31312c",
+                        "tertiary-fixed": "#d5e3fd",
+                        "on-secondary-container": "#5a682f",
+                        "surface-container-low": "#f6f3ec",
+                        "surface": "#fcf9f2",
+                        "on-surface-variant": "#45474d",
+                        "on-primary-container": "#78849d",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c5c6cd",
+                        "on-error-container": "#93000a",
+                        "primary-fixed-dim": "#bbc7e2",
+                        "surface-container": "#f1eee7",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#101c30",
+                        "tertiary-container": "#0d1c2f",
+                        "on-tertiary-fixed": "#0d1c2f",
+                        "on-surface": "#1c1c18",
+                        "tertiary": "#000000",
+                        "on-secondary-fixed": "#161e00",
+                        "secondary-container": "#d6e7a0",
+                        "on-tertiary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Newsreader"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .serif { font-family: 'Newsreader', serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background antialiased pb-32">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full flex items-center justify-between px-6 py-4 bg-[#FCF9F2]/80 dark:bg-[#051125]/80 backdrop-blur-xl z-50">
+<div class="flex items-center gap-4">
+<button class="text-[#000000] dark:text-[#FCF9F2] hover:opacity-70 transition-opacity active:scale-95 duration-150">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="text-2xl font-headline font-bold tracking-tighter text-[#000000] dark:text-[#FCF9F2]">Curator</span>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden ring-1 ring-outline-variant/30">
+<img alt="User profile avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKFI4S9vjzem0IYlSOZ85OsKjuZ_wLsjy2Zd51FI9XCxnii7s_8Ue1zXb6F5NQvOWNAiRy4EA4a8AzMRXTts0d6YBGeBkaFhSQw9QladLMGzWSydK_2N7pbVWWZZjzoEJyDOvSHcZJoRPJN0S7R3gkFdkeikWyO_hdheeQ0M3Eus9fu0n6VPmO3hWbn5UELBq9imH2nV4sj65fwFpZaEkGVzBCXAW_746oSvkz9ecVG_4jXuxugFS5sDRb2dLJPv9VquE3shmX5BA"/>
+</div>
+</header>
+<main class="pt-24 px-6 max-w-2xl mx-auto space-y-12">
+<!-- Content Header -->
+<section class="space-y-2">
+<p class="font-label text-[11px] uppercase tracking-[0.2em] text-secondary font-semibold">CONTEMPLATION FOUR</p>
+<h1 class="serif text-4xl md:text-5xl font-medium leading-tight text-primary">Day 04: The Void and The Vessel.</h1>
+</section>
+<!-- Featured Quote -->
+<section class="relative py-8 px-8 bg-surface-container-low rounded-xl">
+<div class="serif text-2xl text-center leading-relaxed italic text-on-surface">
+<span class="text-secondary text-4xl block h-4 mb-2">“</span>
+                The soul is a vessel that must be emptied of the noise of the world before it can be filled with the stillness of the Creator.
+                <span class="text-secondary text-4xl block h-4 mt-2">”</span>
+</div>
+</section>
+<!-- Main Text -->
+<article class="serif text-xl leading-relaxed space-y-6 text-on-surface/90">
+<p>To understand the vessel, one must first confront the void. In the silence of the early hours, we find the canvas of our consciousness stretched thin, awaiting the first brushstroke of divine intention. We often fear emptiness, filling every crevice of our schedule with activity, yet it is only in the hollowed space that resonance can occur.</p>
+<p>The Hebrew concept of <i>tsimtsum</i> suggests a divine contraction—a making of space. When we intentionally step back from our own ambitions, we create the necessary clearance for grace to enter. It is not a lack of substance, but a readiness for presence.</p>
+</article>
+<!-- Inset Image -->
+<figure class="space-y-3">
+<div class="aspect-[4/5] overflow-hidden rounded-xl bg-surface-container shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Minimalist scene of a single ceramic vessel on a wooden table, illuminated by a sharp beam of morning light with deep shadows and dust motes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4sTP_6pcsfIcC-kHoH7oKEyoV-1bNRWkkCHwSOVVSIxhiQhbL0HfwjQtS8IWuOE3cubUmat9tW59PPubYNT6K0DGIA_BXHT9HKnZyBUogHekNuFDKzCpaDpK7itB9lKQS5-hyDUFsVssoju11i10X1iZSdveW_Hr4S0SKIoHD4JIgvQ7nzwOoP1-v_sq5G8RWFq-chBVX8yLleocK6VvN7Tdz9Yjfm0tUTvU5lBpBOCKbmDcJZ4rQkZRa7EXUPfCpzA3zhgMGgko"/>
+</div>
+<figcaption class="font-label text-xs italic text-on-surface-variant text-center px-8">
+                The play of light and shadow reminds us that form exists only in relation to space.
+            </figcaption>
+</figure>
+<!-- Main Text Continued -->
+<article class="serif text-xl leading-relaxed text-on-surface/90">
+<p>Consider the clay in the potter's hand. Its value is not in its weight or its exterior glaze, but in the volume it can hold. Our lives are similarly measured. Are we preoccupied with the decorative surface, or are we cultivating the capacity of our internal architecture?</p>
+</article>
+<!-- Personal Reflections Section -->
+<section class="space-y-6 pt-8">
+<h3 class="font-label text-xs uppercase tracking-widest text-secondary font-bold">Guided Reflection</h3>
+<div class="space-y-4">
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/10 space-y-3">
+<p class="serif text-lg font-medium italic">What 'noise' currently occupies the vessel of your mind?</p>
+<div class="h-12 border-b border-outline-variant/30 flex items-end pb-2 font-body text-sm text-on-surface-variant/50 italic">Tap to begin reflecting...</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-outline-variant/10 space-y-3">
+<p class="serif text-lg font-medium italic">How can you contract your schedule today to create a void for grace?</p>
+<div class="h-12 border-b border-outline-variant/30 flex items-end pb-2 font-body text-sm text-on-surface-variant/50 italic">Tap to begin reflecting...</div>
+</div>
+</div>
+</section>
+<!-- Theological Context (Navy High-Contrast) -->
+<section class="bg-primary-container text-surface-container-lowest rounded-2xl p-8 space-y-4 shadow-xl">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-fixed">auto_stories</span>
+<h4 class="font-label text-[10px] uppercase tracking-widest text-secondary-fixed font-bold">Adventist Insight</h4>
+</div>
+<h5 class="serif text-2xl leading-snug">The Sanctuary Within</h5>
+<p class="font-body text-sm leading-relaxed text-surface-container-highest/80">
+                In the sanctuary service, the displacement of air by incense symbolized the movement of prayer into the divine presence. Ellen White reminds us that "there is no limit to the usefulness of one who, by putting self aside, makes room for the working of the Holy Spirit upon his heart."
+            </p>
+</section>
+<!-- Previous/Next Navigation -->
+<nav class="flex justify-between items-center pt-12 pb-8">
+<button class="flex items-center gap-2 text-secondary font-label text-xs font-bold uppercase tracking-widest group">
+<span class="material-symbols-outlined text-sm group-hover:-translate-x-1 transition-transform">arrow_back_ios</span>
+                Day 03
+            </button>
+<button class="flex items-center gap-2 text-primary font-label text-xs font-bold uppercase tracking-widest group">
+                Day 05
+                <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward_ios</span>
+</button>
+</nav>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="bg-[#FCF9F2]/90 backdrop-blur-2xl fixed bottom-0 w-full rounded-t-2xl z-50 flex justify-around items-center px-4 pb-8 pt-4 shadow-[0_-4px_24px_rgba(0,0,0,0.04)] border-t border-[#000000]/5">
+<!-- Today Tab (Active) -->
+<a class="flex flex-col items-center justify-center text-[#56642B] scale-110 active:scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+<span class="font-['Inter'] text-[11px] font-medium uppercase tracking-wider">Today</span>
+</a>
+<!-- Themes Tab -->
+<a class="flex flex-col items-center justify-center text-black/40 active:scale-95 transition-transform duration-200 hover:text-black" href="#">
+<span class="material-symbols-outlined mb-1">auto_stories</span>
+<span class="font-['Inter'] text-[11px] font-medium uppercase tracking-wider">Themes</span>
+</a>
+<!-- Library Tab -->
+<a class="flex flex-col items-center justify-center text-black/40 active:scale-95 transition-transform duration-200 hover:text-black" href="#">
+<span class="material-symbols-outlined mb-1">local_library</span>
+<span class="font-['Inter'] text-[11px] font-medium uppercase tracking-wider">Library</span>
+</a>
+<!-- Profile Tab -->
+<a class="flex flex-col items-center justify-center text-black/40 active:scale-95 transition-transform duration-200 hover:text-black" href="#">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-['Inter'] text-[11px] font-medium uppercase tracking-wider">Profile</span>
+</a>
+</nav>
+</body></html>

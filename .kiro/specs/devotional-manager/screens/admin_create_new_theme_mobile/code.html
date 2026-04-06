@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Create New Theme - Editorial Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "outline": "#75777d",
+                        "surface-container-high": "#ebe8e1",
+                        "on-surface": "#1c1c18",
+                        "on-tertiary-fixed-variant": "#3a485c",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#f1eee7",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#d6e7a0",
+                        "surface-dim": "#dcdad3",
+                        "secondary-fixed": "#d9eaa3",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#56642b",
+                        "on-secondary-fixed-variant": "#3f4c15",
+                        "primary-fixed-dim": "#bbc7e2",
+                        "on-tertiary-fixed": "#0d1c2f",
+                        "on-primary-fixed-variant": "#3c475d",
+                        "on-background": "#1c1c18",
+                        "inverse-primary": "#bbc7e2",
+                        "secondary-fixed-dim": "#bdce89",
+                        "surface-bright": "#fcf9f2",
+                        "primary-container": "#101c30",
+                        "inverse-surface": "#31312c",
+                        "surface-container-highest": "#e5e2db",
+                        "surface-variant": "#e5e2db",
+                        "surface-tint": "#535f76",
+                        "on-surface-variant": "#45474d",
+                        "tertiary-fixed-dim": "#b9c7e0",
+                        "on-error-container": "#93000a",
+                        "on-primary-container": "#78849d",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#fcf9f2",
+                        "surface": "#fcf9f2",
+                        "tertiary": "#000000",
+                        "surface-container-low": "#f6f3ec",
+                        "primary": "#000000",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#c5c6cd",
+                        "tertiary-fixed": "#d5e3fd",
+                        "inverse-on-surface": "#f3f0e9",
+                        "on-primary-fixed": "#101c30",
+                        "tertiary-container": "#0d1c2f",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-container": "#76859b",
+                        "on-secondary-fixed": "#161e00",
+                        "primary-fixed": "#d7e2ff",
+                        "on-secondary-container": "#5a682f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Newsreader", "serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .serif-headline { font-family: 'Newsreader', serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#FCF9F2]/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-sm shadow-black/5 flex items-center px-6 h-16 w-full">
+<div class="flex items-center w-full justify-between">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 duration-200 hover:opacity-70 transition-opacity">
+<span class="material-symbols-outlined text-black dark:text-stone-100">arrow_back</span>
+</button>
+<h1 class="text-xl font-bold font-serif text-black dark:text-stone-100 font-serif italic tracking-tight">New Devotional Theme</h1>
+</div>
+<button class="text-sm font-label uppercase tracking-widest text-secondary font-semibold">Preview</button>
+</div>
+</header>
+<main class="pt-24 px-6 max-w-lg mx-auto">
+<!-- Breadcrumb / Eyebrow -->
+<span class="block text-[10px] font-label uppercase tracking-[0.2em] text-secondary mb-2">Editor Workspace</span>
+<h2 class="serif-headline text-4xl font-light leading-tight mb-8">Create New Theme</h2>
+<!-- Cover Image Upload Section -->
+<section class="mb-10">
+<div class="relative w-full aspect-[4/5] rounded-2xl bg-surface-container-high overflow-hidden group">
+<img class="w-full h-full object-cover opacity-40 mix-blend-multiply grayscale" data-alt="Moody atmospheric landscape photography of mountain peaks at dawn with misty clouds and soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYKq6nWUhEi3SGxwlKQPbKej_Gtj71ZPU1_JHgNbxpAg91dZmuxAz1Sr7DtYO0RU0KNK3fSIVNynekXlO_D7dAY6lJTVtMIYi1j009bztFczM-pof-41vqIpLAFQXMBM3glLWd21NJqO5x5Mis7nOPs9THN4kopHRZqRPQtcpNvs_sldFAnZkN8auN90k0dlyX0eBS5gGURceVRx-lSl-IOGqPyHm2J08vEJt83hGzBX8TTY1cVUkKd6vJUXLXZ9e6kaA0rLnu8fU"/>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
+<span class="material-symbols-outlined text-4xl mb-4 text-on-surface-variant">add_a_photo</span>
+<p class="font-label text-sm font-medium text-on-surface">Upload Cover Artwork</p>
+<p class="text-xs text-on-surface-variant mt-2 max-w-[200px]">High-resolution vertical images work best for editorial themes.</p>
+</div>
+<input class="absolute inset-0 opacity-0 cursor-pointer" type="file"/>
+</div>
+</section>
+<!-- Form Fields -->
+<div class="space-y-12">
+<!-- Theme Title -->
+<div class="space-y-2 group">
+<label class="text-[10px] font-label uppercase tracking-widest text-secondary">Theme Title</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant py-4 serif-headline text-2xl focus:ring-0 focus:border-primary transition-colors placeholder:text-surface-dim" placeholder="e.g., The Architecture of Silence" type="text"/>
+</div>
+<!-- Description / Rich Text Area -->
+<div class="space-y-4">
+<label class="text-[10px] font-label uppercase tracking-widest text-secondary">Editorial Description</label>
+<div class="bg-surface-container-low rounded-2xl p-1">
+<div class="flex gap-2 p-2 border-b border-surface-container-high mb-2">
+<button class="p-2 hover:bg-surface-container-highest rounded-lg transition-colors"><span class="material-symbols-outlined text-sm">format_bold</span></button>
+<button class="p-2 hover:bg-surface-container-highest rounded-lg transition-colors"><span class="material-symbols-outlined text-sm">format_italic</span></button>
+<button class="p-2 hover:bg-surface-container-highest rounded-lg transition-colors"><span class="material-symbols-outlined text-sm">format_quote</span></button>
+<button class="p-2 hover:bg-surface-container-highest rounded-lg transition-colors"><span class="material-symbols-outlined text-sm">list</span></button>
+</div>
+<textarea class="w-full min-h-[240px] bg-transparent border-0 focus:ring-0 text-on-surface leading-relaxed p-4 font-body text-base placeholder:text-surface-dim" placeholder="Begin weaving your narrative here..."></textarea>
+</div>
+</div>
+<!-- AI Theme Generation Card (Bento Style) -->
+<section class="mt-8">
+<div class="bg-primary-container text-on-primary-container p-8 rounded-[2rem] shadow-xl relative overflow-hidden">
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-secondary-container" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="text-[10px] font-label uppercase tracking-[0.2em] text-on-primary-container/60">Creative Assistant</span>
+</div>
+<h3 class="serif-headline text-2xl text-white mb-3">AI Theme Generation</h3>
+<p class="text-on-primary-container/80 text-sm mb-6 leading-relaxed">
+                            Describe your vision and let our engine curate scriptures, reflections, and imagery prompts for this theme.
+                        </p>
+<button class="w-full bg-secondary-container text-on-secondary-container py-4 rounded-xl font-label font-bold text-xs uppercase tracking-widest hover:opacity-90 active:scale-[0.98] transition-all">
+                            Generate Content
+                        </button>
+</div>
+<!-- Decorative abstract background for AI card -->
+<div class="absolute -right-12 -bottom-12 w-48 h-48 bg-secondary/20 blur-3xl rounded-full"></div>
+<div class="absolute -left-8 -top-8 w-32 h-32 bg-on-primary-container/10 blur-2xl rounded-full"></div>
+</div>
+</section>
+</div>
+</main>
+<!-- Sticky Actions -->
+<div class="fixed bottom-20 left-0 w-full px-6 z-40 pointer-events-none">
+<div class="max-w-lg mx-auto flex gap-3 pointer-events-auto">
+<button class="flex-1 bg-surface-container-highest text-on-surface py-5 rounded-2xl font-label font-bold text-xs uppercase tracking-widest shadow-lg shadow-black/5 active:scale-95 transition-all">
+                Save as Draft
+            </button>
+<button class="flex-1 bg-primary text-on-primary py-5 rounded-2xl font-label font-bold text-xs uppercase tracking-widest shadow-lg shadow-black/20 active:scale-95 transition-all">
+                Publish
+            </button>
+</div>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 pb-safe bg-[#FCF9F2]/80 dark:bg-slate-950/80 backdrop-blur-xl rounded-t-2xl shadow-[0_-4px_20px_0_rgba(0,0,0,0.05)] z-50">
+<a class="flex flex-col items-center justify-center bg-[#56642B]/10 text-[#56642B] dark:text-[#A4B465] rounded-xl px-3 py-1.5 active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">dashboard_customize</span>
+<span class="font-sans uppercase tracking-widest text-[10px]">Themes</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 px-3 py-1.5 hover:text-black dark:hover:text-white transition-colors active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined mb-1">calendar_today</span>
+<span class="font-sans uppercase tracking-widest text-[10px]">Schedule</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 px-3 py-1.5 hover:text-black dark:hover:text-white transition-colors active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined mb-1">analytics</span>
+<span class="font-sans uppercase tracking-widest text-[10px]">Insights</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 px-3 py-1.5 hover:text-black dark:hover:text-white transition-colors active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined mb-1">settings</span>
+<span class="font-sans uppercase tracking-widest text-[10px]">Settings</span>
+</a>
+</nav>
+</body></html>

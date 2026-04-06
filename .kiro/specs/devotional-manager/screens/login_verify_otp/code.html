@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Verify Your Email | Devotional</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#d9eaa3",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#5a682f",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-container": "#78849d",
+                        "inverse-primary": "#bbc7e2",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#fcf9f2",
+                        "inverse-on-surface": "#f3f0e9",
+                        "outline-variant": "#c5c6cd",
+                        "on-background": "#1c1c18",
+                        "surface-dim": "#dcdad3",
+                        "surface-container-low": "#f6f3ec",
+                        "surface-variant": "#e5e2db",
+                        "primary-container": "#101c30",
+                        "on-surface": "#1c1c18",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#d5e3fd",
+                        "on-primary-fixed": "#101c30",
+                        "primary": "#000000",
+                        "secondary-fixed-dim": "#bdce89",
+                        "tertiary-container": "#0d1c2f",
+                        "surface-container-high": "#ebe8e1",
+                        "secondary-container": "#d6e7a0",
+                        "on-primary-fixed-variant": "#3c475d",
+                        "on-error-container": "#93000a",
+                        "outline": "#75777d",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#0d1c2f",
+                        "on-tertiary-container": "#76859b",
+                        "background": "#fcf9f2",
+                        "primary-fixed": "#d7e2ff",
+                        "on-secondary-fixed": "#161e00",
+                        "on-secondary-fixed-variant": "#3f4c15",
+                        "tertiary": "#000000",
+                        "on-tertiary-fixed-variant": "#3a485c",
+                        "on-surface-variant": "#45474d",
+                        "on-tertiary": "#ffffff",
+                        "surface": "#fcf9f2",
+                        "inverse-surface": "#31312c",
+                        "surface-container": "#f1eee7",
+                        "secondary": "#56642b",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#535f76",
+                        "surface-container-highest": "#e5e2db",
+                        "tertiary-fixed-dim": "#b9c7e0",
+                        "primary-fixed-dim": "#bbc7e2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Newsreader"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #FCF9F2;
+        }
+        .otp-input:focus {
+            outline: none;
+            border-bottom: 2px solid #000000 !important;
+            background-color: #E5E2DB !important;
+        }
+    </style>
+</head>
+<body class="font-body text-on-surface bg-background min-h-screen flex items-center justify-center p-6 selection:bg-secondary-container">
+<!-- Editorial Canvas Container -->
+<main class="w-full max-w-xl mx-auto flex flex-col items-center">
+<!-- Logo/Identity (Suppressing Shell as per Transactional Rule) -->
+<div class="mb-16">
+<span class="font-headline italic text-3xl tracking-tight text-primary">Devotional</span>
+</div>
+<!-- Asymmetric Editorial Card -->
+<div class="w-full bg-surface-container p-12 md:p-16 rounded-xl shadow-sm relative overflow-hidden">
+<!-- Subtle Texture Accent -->
+<div class="absolute top-0 left-0 w-1 h-full bg-secondary/20"></div>
+<!-- Content Hierarchy -->
+<div class="space-y-2 mb-10">
+<p class="font-label uppercase tracking-widest text-[10px] text-on-primary-container font-semibold">Security Protocol</p>
+<h1 class="font-headline text-4xl md:text-5xl font-medium text-primary">Verify Your Email</h1>
+</div>
+<p class="text-on-surface-variant leading-relaxed mb-12 max-w-sm">
+                We've sent a code to your email. Please enter it below to securely log in.
+            </p>
+<!-- OTP Input Section -->
+<form action="#" class="space-y-12" method="POST">
+<div class="flex justify-between gap-2 md:gap-4">
+<input class="otp-input w-12 h-16 md:w-16 md:h-20 text-center text-3xl font-headline border-0 border-b-2 border-outline-variant bg-surface-container-low transition-all duration-300 rounded-t-lg" maxlength="1" placeholder="·" type="text"/>
+<input class="otp-input w-12 h-16 md:w-16 md:h-20 text-center text-3xl font-headline border-0 border-b-2 border-outline-variant bg-surface-container-low transition-all duration-300 rounded-t-lg" maxlength="1" placeholder="·" type="text"/>
+<input class="otp-input w-12 h-16 md:w-16 md:h-20 text-center text-3xl font-headline border-0 border-b-2 border-outline-variant bg-surface-container-low transition-all duration-300 rounded-t-lg" maxlength="1" placeholder="·" type="text"/>
+<input class="otp-input w-12 h-16 md:w-16 md:h-20 text-center text-3xl font-headline border-0 border-b-2 border-outline-variant bg-surface-container-low transition-all duration-300 rounded-t-lg" maxlength="1" placeholder="·" type="text"/>
+<input class="otp-input w-12 h-16 md:w-16 md:h-20 text-center text-3xl font-headline border-0 border-b-2 border-outline-variant bg-surface-container-low transition-all duration-300 rounded-t-lg" maxlength="1" placeholder="·" type="text"/>
+<input class="otp-input w-12 h-16 md:w-16 md:h-20 text-center text-3xl font-headline border-0 border-b-2 border-outline-variant bg-surface-container-low transition-all duration-300 rounded-t-lg" maxlength="1" placeholder="·" type="text"/>
+</div>
+<!-- Action Section -->
+<div class="flex flex-col items-center gap-8">
+<button class="w-full bg-primary text-on-primary font-body font-medium py-4 px-8 rounded-lg hover:opacity-90 transition-opacity duration-300 flex items-center justify-center gap-2 group" type="submit">
+                        Verify Code
+                        <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<div class="text-center space-y-4">
+<p class="text-xs font-label text-on-surface-variant uppercase tracking-widest">
+                            Didn't receive it? 
+                            <a class="text-primary font-bold hover:underline underline-offset-4 decoration-secondary transition-all" href="#">Resend Code</a>
+</p>
+</div>
+</div>
+</form>
+</div>
+<!-- Secondary Support Text -->
+<div class="mt-12 text-center max-w-sm">
+<p class="text-xs text-on-surface-variant/60 leading-relaxed italic font-headline">
+                "Patience is the calm acceptance that things can happen in a different order than the one you have in mind."
+            </p>
+</div>
+</main>
+<!-- Background Decoration (Subtle Grain/Depth) -->
+<div class="fixed inset-0 -z-10 pointer-events-none opacity-20">
+<div class="absolute inset-0 bg-[radial-gradient(#56642B_1px,transparent_1px)] [background-size:40px_40px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]"></div>
+</div>
+</body></html>
