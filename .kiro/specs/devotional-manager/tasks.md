@@ -43,7 +43,7 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Factory
     - _Requirements: 3.1, 3.5_
 
-  - [ ] 1.7 Create `ScriptureCache` model, migration, and factory
+  - [x] 1.7 Create `ScriptureCache` model, migration, and factory
     - Migration: `scripture_caches` table per design schema (id, book, chapter, verse_start, verse_end nullable, bible_version, text longText, timestamps, unique composite index)
     - Model: `final` class with property annotations, casts
     - Factory
