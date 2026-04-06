@@ -37,7 +37,7 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Factory with draft and published states
     - _Requirements: 2.1, 2.2, 2.3_
 
-  - [ ] 1.6 Create `ScriptureReference` model, migration, and factory
+  - [x] 1.6 Create `ScriptureReference` model, migration, and factory
     - Migration: `scripture_references` table per design schema (id, devotional_entry_id FK cascade, book, chapter, verse_start, verse_end nullable, raw_reference, timestamps)
     - Model: `final` class with `devotionalEntry()` belongsTo, property annotations, casts
     - Factory
