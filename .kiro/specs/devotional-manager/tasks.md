@@ -31,7 +31,7 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Factory with draft and published states
     - _Requirements: 1.1, 1.2, 9.1_
 
-  - [ ] 1.5 Create `DevotionalEntry` model, migration, and factory
+  - [x] 1.5 Create `DevotionalEntry` model, migration, and factory
     - Migration: `devotional_entries` table per design schema (id, theme_id FK cascade, title, body longText, reflection_prompts nullable, adventist_insights nullable, display_order default 0, status default 'draft', timestamps)
     - Model: `final` class with `theme()` belongsTo, `scriptureReferences()` hasMany, `completions()` hasMany, `observations()` hasMany, `generatedImage()` hasOne, `scopePublished()`, property annotations, casts
     - Factory with draft and published states
