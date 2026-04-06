@@ -49,7 +49,7 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Factory
     - _Requirements: 3.1, 3.2_
 
-  - [ ] 1.8 Create `ReadingPlan`, `ReadingPlanDay`, and `ReadingPlanProgress` models, migrations, and factories
+  - [x] 1.8 Create `ReadingPlan`, `ReadingPlanDay`, and `ReadingPlanProgress` models, migrations, and factories
     - Migrations per design schema for all three tables
     - `ReadingPlan`: `days()` hasMany, `progress()` hasMany, `scopeDefault()`
     - `ReadingPlanDay`: `readingPlan()` belongsTo, `progress()` hasMany
