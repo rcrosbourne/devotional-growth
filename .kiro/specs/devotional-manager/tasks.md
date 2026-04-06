@@ -7,13 +7,13 @@ Incremental implementation of the Devotional Manager feature on top of the exist
 ## Tasks
 
 - [ ] 1. Database migrations and Eloquent models
-  - [-] 1.1 Create migration to modify `users` table — add `partner_id` (nullable FK to users, nullOnDelete), `is_admin` (boolean, default false), make `password` nullable
+  - [x] 1.1 Create migration to modify `users` table — add `partner_id` (nullable FK to users, nullOnDelete), `is_admin` (boolean, default false), make `password` nullable
     - Run `php artisan make:migration` to create the migration
     - Update the `User` model: add `partner_id`, `is_admin` property annotations, casts, `partner()` belongsTo, `socialAccounts()` hasMany, `observations()` hasMany, `bookmarks()` hasMany, `completions()` hasMany, `notificationPreference()` hasOne, `isAdmin()` helper, `hasPartner()` helper
     - Update `UserFactory` with `is_admin` and `partner_id` states
     - _Requirements: 8.3, 13.4, 14.1_
 
-  - [ ] 1.2 Create `SocialAccount` model, migration, and factory
+  - [x] 1.2 Create `SocialAccount` model, migration, and factory
     - Migration: `social_accounts` table per design schema (id, user_id FK, provider, provider_id, provider_token, provider_refresh_token, timestamps, unique constraints)
     - Model: `final` class with `user()` belongsTo, property annotations, casts
     - Factory with states for google, apple, github providers

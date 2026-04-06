@@ -8,6 +8,8 @@ use Carbon\CarbonInterface;
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -17,7 +19,9 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property-read string $name
  * @property-read string $email
  * @property-read CarbonInterface|null $email_verified_at
- * @property-read string $password
+ * @property-read string|null $password
+ * @property-read int|null $partner_id
+ * @property-read bool $is_admin
  * @property-read string|null $remember_token
  * @property-read string|null $two_factor_secret
  * @property-read string|null $two_factor_recovery_codes
@@ -44,6 +48,32 @@ final class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
+     * @return BelongsTo<self, $this>
+     */
+    public function partner(): BelongsTo
+    {
+        return $this->belongsTo(self::class, 'partner_id');
+    }
+
+    /**
+     * @return HasMany<SocialAccount, $this>
+     */
+    public function socialAccounts(): HasMany
+    {
+        return $this->hasMany(SocialAccount::class);
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->is_admin;
+    }
+
+    public function hasPartner(): bool
+    {
+        return $this->partner_id !== null;
+    }
+
+    /**
      * @return array<string, string>
      */
     protected function casts(): array
@@ -54,6 +84,8 @@ final class User extends Authenticatable implements MustVerifyEmail
             'email' => 'string',
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'partner_id' => 'integer',
+            'is_admin' => 'boolean',
             'remember_token' => 'string',
             'two_factor_secret' => 'string',
             'two_factor_recovery_codes' => 'string',
