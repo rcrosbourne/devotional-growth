@@ -5,31 +5,33 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Carbon\CarbonInterface;
-use Database\Factories\ObservationFactory;
+use Database\Factories\AiGenerationLogFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property-read int $id
- * @property-read int $user_id
- * @property-read int $devotional_entry_id
- * @property-read string $body
- * @property-read CarbonInterface|null $edited_at
+ * @property-read int $admin_id
+ * @property-read string $prompt
+ * @property-read array<string, mixed>|null $generated_content
+ * @property-read string $status
+ * @property-read string|null $error_message
+ * @property-read int|null $devotional_entry_id
  * @property-read CarbonInterface $created_at
  * @property-read CarbonInterface $updated_at
  */
-final class Observation extends Model
+final class AiGenerationLog extends Model
 {
-    /** @use HasFactory<ObservationFactory> */
+    /** @use HasFactory<AiGenerationLogFactory> */
     use HasFactory;
 
     /**
      * @return BelongsTo<User, $this>
      */
-    public function user(): BelongsTo
+    public function admin(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'admin_id');
     }
 
     /**
@@ -47,10 +49,12 @@ final class Observation extends Model
     {
         return [
             'id' => 'integer',
-            'user_id' => 'integer',
+            'admin_id' => 'integer',
+            'prompt' => 'string',
+            'generated_content' => 'array',
+            'status' => 'string',
+            'error_message' => 'string',
             'devotional_entry_id' => 'integer',
-            'body' => 'string',
-            'edited_at' => 'datetime',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];

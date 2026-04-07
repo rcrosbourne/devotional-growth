@@ -5,32 +5,23 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Carbon\CarbonInterface;
-use Database\Factories\ObservationFactory;
+use Database\Factories\GeneratedImageFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property-read int $id
- * @property-read int $user_id
  * @property-read int $devotional_entry_id
- * @property-read string $body
- * @property-read CarbonInterface|null $edited_at
+ * @property-read string $path
+ * @property-read string $prompt
  * @property-read CarbonInterface $created_at
  * @property-read CarbonInterface $updated_at
  */
-final class Observation extends Model
+final class GeneratedImage extends Model
 {
-    /** @use HasFactory<ObservationFactory> */
+    /** @use HasFactory<GeneratedImageFactory> */
     use HasFactory;
-
-    /**
-     * @return BelongsTo<User, $this>
-     */
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
 
     /**
      * @return BelongsTo<DevotionalEntry, $this>
@@ -47,10 +38,9 @@ final class Observation extends Model
     {
         return [
             'id' => 'integer',
-            'user_id' => 'integer',
             'devotional_entry_id' => 'integer',
-            'body' => 'string',
-            'edited_at' => 'datetime',
+            'path' => 'string',
+            'prompt' => 'string',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];

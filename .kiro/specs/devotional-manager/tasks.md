@@ -70,31 +70,31 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Factory
     - _Requirements: 6.1, 6.2_
 
-  - [ ] 1.11 Create `DevotionalCompletion` model, migration, and factory
+  - [x] 1.11 Create `DevotionalCompletion` model, migration, and factory
     - Migration: `devotional_completions` table per design schema (id, user_id FK cascade, devotional_entry_id FK cascade, completed_at timestamp, timestamps, unique composite)
     - Model: `final` class with `user()` belongsTo, `devotionalEntry()` belongsTo, property annotations, casts
     - Factory
     - _Requirements: 8.1, 8.2_
 
-  - [ ] 1.12 Create `Observation` model, migration, and factory
+  - [x] 1.12 Create `Observation` model, migration, and factory
     - Migration: `observations` table per design schema (id, user_id FK cascade, devotional_entry_id FK cascade, body text, edited_at nullable, timestamps)
     - Model: `final` class with `user()` belongsTo, `devotionalEntry()` belongsTo, property annotations, casts
     - Factory
     - _Requirements: 13.1, 13.2_
 
-  - [ ] 1.13 Create `GeneratedImage` model, migration, and factory
+  - [x] 1.13 Create `GeneratedImage` model, migration, and factory
     - Migration: `generated_images` table per design schema (id, devotional_entry_id FK cascade, path, prompt text, timestamps)
     - Model: `final` class with `devotionalEntry()` belongsTo, property annotations, casts
     - Factory
     - _Requirements: 12.4, 12.5_
 
-  - [ ] 1.14 Create `AiGenerationLog` model, migration, and factory
+  - [x] 1.14 Create `AiGenerationLog` model, migration, and factory
     - Migration: `ai_generation_logs` table per design schema (id, admin_id FK cascade, prompt text, generated_content json nullable, status, error_message nullable, devotional_entry_id nullable FK nullOnDelete, timestamps)
     - Model: `final` class with `admin()` belongsTo, `devotionalEntry()` belongsTo, property annotations, casts
     - Factory with pending/completed/failed/approved states
     - _Requirements: AI content generation_
 
-  - [ ] 1.15 Create `NotificationPreference` model, migration, and factory
+  - [x] 1.15 Create `NotificationPreference` model, migration, and factory
     - Migration: `notification_preferences` table per design schema (id, user_id FK cascade unique, completion_notifications default true, observation_notifications default true, new_theme_notifications default true, reminder_notifications default true, timestamps)
     - Model: `final` class with `user()` belongsTo, property annotations, casts
     - Factory
