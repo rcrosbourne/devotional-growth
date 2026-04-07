@@ -100,7 +100,7 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Factory
     - _Requirements: 14.8, 14.9_
 
-  - [ ] 1.16 Create Enums: `ContentStatus` (draft/published), `SocialProvider` (google/apple/github), `AiGenerationStatus` (pending/completed/failed/approved/rejected)
+  - [x] 1.16 Create Enums: `ContentStatus` (draft/published), `SocialProvider` (google/apple/github), `AiGenerationStatus` (pending/completed/failed/approved/rejected)
     - Place in `app/Enums/`
     - Use in model casts where applicable
     - _Requirements: Admin content model, Social login_

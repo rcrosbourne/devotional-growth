@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Enums\SocialProvider;
 use App\Models\SocialAccount;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -21,7 +22,7 @@ final class SocialAccountFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'provider' => 'google',
+            'provider' => SocialProvider::Google,
             'provider_id' => (string) fake()->unique()->randomNumber(9),
             'provider_token' => Str::random(40),
             'provider_refresh_token' => Str::random(40),
@@ -31,21 +32,21 @@ final class SocialAccountFactory extends Factory
     public function google(): self
     {
         return $this->state(fn (array $attributes): array => [
-            'provider' => 'google',
+            'provider' => SocialProvider::Google,
         ]);
     }
 
     public function apple(): self
     {
         return $this->state(fn (array $attributes): array => [
-            'provider' => 'apple',
+            'provider' => SocialProvider::Apple,
         ]);
     }
 
     public function github(): self
     {
         return $this->state(fn (array $attributes): array => [
-            'provider' => 'github',
+            'provider' => SocialProvider::GitHub,
         ]);
     }
 }

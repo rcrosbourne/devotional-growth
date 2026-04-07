@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Enums\ContentStatus;
 use App\Models\DevotionalEntry;
 use App\Models\Theme;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -25,21 +26,21 @@ final class DevotionalEntryFactory extends Factory
             'reflection_prompts' => fake()->sentence(),
             'adventist_insights' => fake()->sentence(),
             'display_order' => 0,
-            'status' => 'draft',
+            'status' => ContentStatus::Draft,
         ];
     }
 
     public function published(): self
     {
         return $this->state(fn (array $attributes): array => [
-            'status' => 'published',
+            'status' => ContentStatus::Published,
         ]);
     }
 
     public function draft(): self
     {
         return $this->state(fn (array $attributes): array => [
-            'status' => 'draft',
+            'status' => ContentStatus::Draft,
         ]);
     }
 }

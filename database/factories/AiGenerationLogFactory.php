@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Enums\AiGenerationStatus;
 use App\Models\AiGenerationLog;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -22,7 +23,7 @@ final class AiGenerationLogFactory extends Factory
             'admin_id' => User::factory()->admin(),
             'prompt' => fake()->sentence(),
             'generated_content' => null,
-            'status' => 'pending',
+            'status' => AiGenerationStatus::Pending,
             'error_message' => null,
             'devotional_entry_id' => null,
         ];
@@ -31,14 +32,14 @@ final class AiGenerationLogFactory extends Factory
     public function pending(): self
     {
         return $this->state(fn (array $attributes): array => [
-            'status' => 'pending',
+            'status' => AiGenerationStatus::Pending,
         ]);
     }
 
     public function completed(): self
     {
         return $this->state(fn (array $attributes): array => [
-            'status' => 'completed',
+            'status' => AiGenerationStatus::Completed,
             'generated_content' => [
                 'title' => fake()->sentence(4),
                 'body' => fake()->paragraphs(3, true),
@@ -52,7 +53,7 @@ final class AiGenerationLogFactory extends Factory
     public function failed(): self
     {
         return $this->state(fn (array $attributes): array => [
-            'status' => 'failed',
+            'status' => AiGenerationStatus::Failed,
             'error_message' => 'AI provider returned an error.',
         ]);
     }
@@ -60,7 +61,7 @@ final class AiGenerationLogFactory extends Factory
     public function approved(): self
     {
         return $this->state(fn (array $attributes): array => [
-            'status' => 'approved',
+            'status' => AiGenerationStatus::Approved,
             'generated_content' => [
                 'title' => fake()->sentence(4),
                 'body' => fake()->paragraphs(3, true),

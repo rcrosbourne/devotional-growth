@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Enums\SocialProvider;
 use App\Models\SocialAccount;
 use App\Models\User;
 
@@ -33,25 +34,25 @@ test('user returns belongs to relationship', function (): void {
 test('factory creates google provider by default', function (): void {
     $socialAccount = SocialAccount::factory()->create();
 
-    expect($socialAccount->provider)->toBe('google');
+    expect($socialAccount->provider)->toBe(SocialProvider::Google);
 });
 
 test('factory google state sets provider to google', function (): void {
     $socialAccount = SocialAccount::factory()->google()->create();
 
-    expect($socialAccount->provider)->toBe('google');
+    expect($socialAccount->provider)->toBe(SocialProvider::Google);
 });
 
 test('factory apple state sets provider to apple', function (): void {
     $socialAccount = SocialAccount::factory()->apple()->create();
 
-    expect($socialAccount->provider)->toBe('apple');
+    expect($socialAccount->provider)->toBe(SocialProvider::Apple);
 });
 
 test('factory github state sets provider to github', function (): void {
     $socialAccount = SocialAccount::factory()->github()->create();
 
-    expect($socialAccount->provider)->toBe('github');
+    expect($socialAccount->provider)->toBe(SocialProvider::GitHub);
 });
 
 test('user has many social accounts', function (): void {

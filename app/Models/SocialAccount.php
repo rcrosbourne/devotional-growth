@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\SocialProvider;
 use Carbon\CarbonInterface;
 use Database\Factories\SocialAccountFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @property-read int $id
  * @property-read int $user_id
- * @property-read string $provider
+ * @property-read SocialProvider $provider
  * @property-read string $provider_id
  * @property-read string|null $provider_token
  * @property-read string|null $provider_refresh_token
@@ -41,7 +42,7 @@ final class SocialAccount extends Model
         return [
             'id' => 'integer',
             'user_id' => 'integer',
-            'provider' => 'string',
+            'provider' => SocialProvider::class,
             'provider_id' => 'string',
             'provider_token' => 'string',
             'provider_refresh_token' => 'string',

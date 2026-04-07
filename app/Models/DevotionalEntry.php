@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\ContentStatus;
 use Carbon\CarbonInterface;
 use Database\Factories\DevotionalEntryFactory;
 use Illuminate\Database\Eloquent\Builder;
@@ -21,7 +22,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property-read string|null $reflection_prompts
  * @property-read string|null $adventist_insights
  * @property-read int $display_order
- * @property-read string $status
+ * @property-read ContentStatus $status
  * @property-read CarbonInterface $created_at
  * @property-read CarbonInterface $updated_at
  */
@@ -76,7 +77,7 @@ final class DevotionalEntry extends Model
      */
     protected function scopePublished(Builder $query): Builder
     {
-        return $query->where('status', 'published');
+        return $query->where('status', ContentStatus::Published);
     }
 
     /**
@@ -92,7 +93,7 @@ final class DevotionalEntry extends Model
             'reflection_prompts' => 'string',
             'adventist_insights' => 'string',
             'display_order' => 'integer',
-            'status' => 'string',
+            'status' => ContentStatus::class,
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];

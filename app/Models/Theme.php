@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\ContentStatus;
 use Carbon\CarbonInterface;
 use Database\Factories\ThemeFactory;
 use Illuminate\Database\Eloquent\Builder;
@@ -17,7 +18,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read int $created_by
  * @property-read string $name
  * @property-read string|null $description
- * @property-read string $status
+ * @property-read ContentStatus $status
  * @property-read CarbonInterface $created_at
  * @property-read CarbonInterface $updated_at
  */
@@ -48,7 +49,7 @@ final class Theme extends Model
      */
     protected function scopePublished(Builder $query): Builder
     {
-        return $query->where('status', 'published');
+        return $query->where('status', ContentStatus::Published);
     }
 
     /**
@@ -61,7 +62,7 @@ final class Theme extends Model
             'created_by' => 'integer',
             'name' => 'string',
             'description' => 'string',
-            'status' => 'string',
+            'status' => ContentStatus::class,
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];

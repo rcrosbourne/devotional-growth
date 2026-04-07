@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\AiGenerationStatus;
 use Carbon\CarbonInterface;
 use Database\Factories\AiGenerationLogFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,7 +16,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read int $admin_id
  * @property-read string $prompt
  * @property-read array<string, mixed>|null $generated_content
- * @property-read string $status
+ * @property-read AiGenerationStatus $status
  * @property-read string|null $error_message
  * @property-read int|null $devotional_entry_id
  * @property-read CarbonInterface $created_at
@@ -52,7 +53,7 @@ final class AiGenerationLog extends Model
             'admin_id' => 'integer',
             'prompt' => 'string',
             'generated_content' => 'array',
-            'status' => 'string',
+            'status' => AiGenerationStatus::class,
             'error_message' => 'string',
             'devotional_entry_id' => 'integer',
             'created_at' => 'datetime',

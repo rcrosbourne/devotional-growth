@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Enums\ContentStatus;
 use App\Models\DevotionalCompletion;
 use App\Models\DevotionalEntry;
 use App\Models\GeneratedImage;
@@ -47,13 +48,13 @@ test('scope published filters to published entries', function (): void {
 test('factory creates draft entry by default', function (): void {
     $entry = DevotionalEntry::factory()->create();
 
-    expect($entry->status)->toBe('draft');
+    expect($entry->status)->toBe(ContentStatus::Draft);
 });
 
 test('factory published state sets status to published', function (): void {
     $entry = DevotionalEntry::factory()->published()->create();
 
-    expect($entry->status)->toBe('published');
+    expect($entry->status)->toBe(ContentStatus::Published);
 });
 
 test('completions returns has many relationship', function (): void {
