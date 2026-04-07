@@ -64,7 +64,7 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Factories for both
     - _Requirements: 5.1, 5.2, 5.3_
 
-  - [ ] 1.10 Create `Bookmark` model, migration, and factory
+  - [x] 1.10 Create `Bookmark` model, migration, and factory
     - Migration: `bookmarks` table per design schema (id, user_id FK cascade, morphs bookmarkable, timestamps, unique composite)
     - Model: `final` class with `user()` belongsTo, `bookmarkable()` morphTo, property annotations, casts
     - Factory
