@@ -107,7 +107,7 @@ Incremental implementation of the Devotional Manager feature on top of the exist
 
 
 - [ ] 2. Authentication — Social Login and Email OTP
-  - [ ] 2.1 Install Laravel Socialite, configure Google/Apple/GitHub providers
+  - [x] 2.1 Install Laravel Socialite, configure Google/Apple/GitHub providers
     - Add `laravel/socialite` via Composer
     - Configure provider credentials in `config/services.php` using `config()` (not `env()` directly)
     - Add provider env vars to `.env.example`
