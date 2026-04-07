@@ -57,7 +57,7 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Factories for all three
     - _Requirements: 4.1, 4.2, 4.4_
 
-  - [ ] 1.9 Create `WordStudy` and `WordStudyPassage` models, migrations, and factories
+  - [x] 1.9 Create `WordStudy` and `WordStudyPassage` models, migrations, and factories
     - Migrations per design schema for both tables
     - `WordStudy`: `passages()` hasMany, property annotations, casts
     - `WordStudyPassage`: `wordStudy()` belongsTo
