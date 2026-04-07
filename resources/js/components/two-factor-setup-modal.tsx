@@ -72,6 +72,7 @@ function TwoFactorSetupStep({
                     <div className="mx-auto flex max-w-md overflow-hidden">
                         <div className="mx-auto aspect-square w-64 rounded-lg border border-border">
                             <div className="z-10 flex h-full w-full items-center justify-center p-5">
+                                {/* eslint-disable @eslint-react/dom-no-dangerously-set-innerhtml -- server-rendered SVG QR code */}
                                 {qrCodeSvg ? (
                                     <div
                                         dangerouslySetInnerHTML={{
@@ -81,6 +82,7 @@ function TwoFactorSetupStep({
                                 ) : (
                                     <Loader2 className="flex size-4 animate-spin" />
                                 )}
+                                {/* eslint-enable @eslint-react/dom-no-dangerously-set-innerhtml */}
                             </div>
                         </div>
                     </div>
@@ -139,9 +141,10 @@ function TwoFactorVerificationStep({
     const pinInputContainerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        setTimeout(() => {
+        const timeoutId = setTimeout(() => {
             pinInputContainerRef.current?.querySelector('input')?.focus();
         }, 0);
+        return () => clearTimeout(timeoutId);
     }, []);
 
     return (
@@ -286,18 +289,24 @@ export default function TwoFactorSetupModal({
 
     useEffect(() => {
         if (!isOpen) {
-            resetModalState();
-
             return;
         }
 
         if (!qrCodeSvg) {
             fetchSetupData();
         }
-    }, [isOpen, qrCodeSvg, fetchSetupData, resetModalState]);
+    }, [isOpen, qrCodeSvg, fetchSetupData]);
 
     return (
-        <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
+        <Dialog
+            open={isOpen}
+            onOpenChange={(open) => {
+                if (!open) {
+                    resetModalState();
+                    onClose();
+                }
+            }}
+        >
             <DialogContent className="sm:max-w-md">
                 <DialogHeader className="flex items-center justify-center">
                     <GridScanIcon />

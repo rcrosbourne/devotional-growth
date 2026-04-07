@@ -51,7 +51,12 @@ export function initializeTheme() {
 }
 
 export function useAppearance() {
-    const [appearance, setAppearance] = useState<Appearance>('system');
+    const [appearance, setAppearance] = useState<Appearance>(() => {
+        if (typeof window === 'undefined') {
+            return 'system';
+        }
+        return (localStorage.getItem('appearance') as Appearance) || 'system';
+    });
 
     const updateAppearance = useCallback((mode: Appearance) => {
         setAppearance(mode);
@@ -66,17 +71,14 @@ export function useAppearance() {
     }, []);
 
     useEffect(() => {
-        const savedAppearance = localStorage.getItem(
-            'appearance',
-        ) as Appearance | null;
-        updateAppearance(savedAppearance || 'system');
+        applyTheme(appearance);
 
         return () =>
             mediaQuery()?.removeEventListener(
                 'change',
                 handleSystemThemeChange,
             );
-    }, [updateAppearance]);
+    }, [appearance]);
 
     return { appearance, updateAppearance } as const;
 }
