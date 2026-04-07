@@ -26,11 +26,11 @@ final class BookmarkFactory extends Factory
         ];
     }
 
-    public function forDevotionalEntry(?DevotionalEntry $entry = null): self
+    public function forDevotionalEntry(DevotionalEntry $entry): self
     {
         return $this->state(fn (array $attributes): array => [
             'bookmarkable_type' => DevotionalEntry::class,
-            'bookmarkable_id' => $entry?->id ?? DevotionalEntry::factory(),
+            'bookmarkable_id' => $entry->id,
         ]);
     }
 }

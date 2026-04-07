@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Models\AiGenerationLog;
+use App\Models\DevotionalEntry;
 use App\Models\User;
 
 test('to array', function (): void {
@@ -29,6 +30,15 @@ test('admin returns belongs to relationship', function (): void {
     expect($log->admin)
         ->toBeInstanceOf(User::class)
         ->id->toBe($admin->id);
+});
+
+test('devotional entry returns belongs to relationship', function (): void {
+    $entry = DevotionalEntry::factory()->create();
+    $log = AiGenerationLog::factory()->approved()->create(['devotional_entry_id' => $entry->id]);
+
+    expect($log->devotionalEntry)
+        ->toBeInstanceOf(DevotionalEntry::class)
+        ->id->toBe($entry->id);
 });
 
 test('factory defaults to pending status', function (): void {

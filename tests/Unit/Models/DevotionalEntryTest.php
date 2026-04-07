@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
+use App\Models\DevotionalCompletion;
 use App\Models\DevotionalEntry;
+use App\Models\GeneratedImage;
+use App\Models\Observation;
 use App\Models\Theme;
 
 test('to array', function (): void {
@@ -38,7 +41,7 @@ test('scope published filters to published entries', function (): void {
     DevotionalEntry::factory()->for($theme)->published()->create();
     DevotionalEntry::factory()->for($theme)->published()->create();
 
-    expect(DevotionalEntry::published()->count())->toBe(2);
+    expect(DevotionalEntry::query()->published()->count())->toBe(2);
 });
 
 test('factory creates draft entry by default', function (): void {
@@ -51,6 +54,29 @@ test('factory published state sets status to published', function (): void {
     $entry = DevotionalEntry::factory()->published()->create();
 
     expect($entry->status)->toBe('published');
+});
+
+test('completions returns has many relationship', function (): void {
+    $entry = DevotionalEntry::factory()->create();
+    DevotionalCompletion::factory()->for($entry, 'devotionalEntry')->count(2)->create();
+
+    expect($entry->completions)->toHaveCount(2);
+});
+
+test('observations returns has many relationship', function (): void {
+    $entry = DevotionalEntry::factory()->create();
+    Observation::factory()->for($entry, 'devotionalEntry')->count(2)->create();
+
+    expect($entry->observations)->toHaveCount(2);
+});
+
+test('generated image returns has one relationship', function (): void {
+    $entry = DevotionalEntry::factory()->create();
+    $image = GeneratedImage::factory()->for($entry, 'devotionalEntry')->create();
+
+    expect($entry->generatedImage)
+        ->toBeInstanceOf(GeneratedImage::class)
+        ->id->toBe($image->id);
 });
 
 test('theme has many entries', function (): void {

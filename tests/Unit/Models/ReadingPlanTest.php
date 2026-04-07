@@ -41,7 +41,7 @@ test('reading plan scope default filters to default plans', function (): void {
     ReadingPlan::factory()->create();
     ReadingPlan::factory()->default()->create();
 
-    expect(ReadingPlan::default()->count())->toBe(1);
+    expect(ReadingPlan::query()->default()->count())->toBe(1);
 });
 
 test('reading plan factory default state sets is_default', function (): void {
@@ -77,6 +77,14 @@ test('reading plan day passages is an array', function (): void {
     $day = ReadingPlanDay::factory()->create();
 
     expect($day->passages)->toBeArray();
+});
+
+test('reading plan day has many progress', function (): void {
+    $plan = ReadingPlan::factory()->create();
+    $day = ReadingPlanDay::factory()->for($plan, 'readingPlan')->create();
+    ReadingPlanProgress::factory()->for($plan, 'readingPlan')->for($day, 'readingPlanDay')->count(2)->create();
+
+    expect($day->progress)->toHaveCount(2);
 });
 
 test('reading plan progress to array', function (): void {

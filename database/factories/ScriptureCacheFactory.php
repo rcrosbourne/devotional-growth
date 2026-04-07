@@ -30,8 +30,11 @@ final class ScriptureCacheFactory extends Factory
     public function withVerseRange(): self
     {
         return $this->state(function (array $attributes): array {
+            /** @var int $verseStart */
+            $verseStart = $attributes['verse_start'];
+
             return [
-                'verse_end' => $attributes['verse_start'] + fake()->numberBetween(1, 5),
+                'verse_end' => $verseStart + fake()->numberBetween(1, 5),
             ];
         });
     }

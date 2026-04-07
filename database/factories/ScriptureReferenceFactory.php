@@ -18,6 +18,7 @@ final class ScriptureReferenceFactory extends Factory
      */
     public function definition(): array
     {
+        /** @var string $book */
         $book = fake()->randomElement(['Genesis', 'Psalms', 'Isaiah', 'Matthew', 'John', 'Romans', 'Revelation']);
         $chapter = fake()->numberBetween(1, 50);
         $verseStart = fake()->numberBetween(1, 30);
@@ -28,18 +29,24 @@ final class ScriptureReferenceFactory extends Factory
             'chapter' => $chapter,
             'verse_start' => $verseStart,
             'verse_end' => null,
-            'raw_reference' => "{$book} {$chapter}:{$verseStart}",
+            'raw_reference' => sprintf('%s %d:%d', $book, $chapter, $verseStart),
         ];
     }
 
     public function withVerseRange(): self
     {
         return $this->state(function (array $attributes): array {
-            $verseEnd = $attributes['verse_start'] + fake()->numberBetween(1, 5);
+            /** @var string $book */
+            $book = $attributes['book'];
+            /** @var int $chapter */
+            $chapter = $attributes['chapter'];
+            /** @var int $verseStart */
+            $verseStart = $attributes['verse_start'];
+            $verseEnd = $verseStart + fake()->numberBetween(1, 5);
 
             return [
                 'verse_end' => $verseEnd,
-                'raw_reference' => "{$attributes['book']} {$attributes['chapter']}:{$attributes['verse_start']}-{$verseEnd}",
+                'raw_reference' => sprintf('%s %d:%d-%d', $book, $chapter, $verseStart, $verseEnd),
             ];
         });
     }

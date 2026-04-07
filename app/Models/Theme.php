@@ -46,7 +46,7 @@ final class Theme extends Model
      * @param  Builder<self>  $query
      * @return Builder<self>
      */
-    public function scopePublished(Builder $query): Builder
+    protected function scopePublished(Builder $query): Builder
     {
         return $query->where('status', 'published');
     }

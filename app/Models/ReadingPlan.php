@@ -45,7 +45,7 @@ final class ReadingPlan extends Model
      * @param  Builder<self>  $query
      * @return Builder<self>
      */
-    public function scopeDefault(Builder $query): Builder
+    protected function scopeDefault(Builder $query): Builder
     {
         return $query->where('is_default', true);
     }
