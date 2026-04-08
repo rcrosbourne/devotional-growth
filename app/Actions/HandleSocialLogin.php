@@ -9,7 +9,7 @@ use App\Models\SocialAccount;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
-use Laravel\Socialite\Contracts\User as SocialiteUser;
+use Laravel\Socialite\Two\User as SocialiteUser;
 
 final readonly class HandleSocialLogin
 {
@@ -29,7 +29,7 @@ final readonly class HandleSocialLogin
                     'provider_refresh_token' => $socialiteUser->refreshToken,
                 ]);
 
-                return $socialAccount->user;
+                return $socialAccount->user()->firstOrFail();
             }
 
             $email = $socialiteUser->getEmail();

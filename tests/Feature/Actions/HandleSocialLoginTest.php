@@ -29,7 +29,7 @@ function makeSocialiteUser(
     return $socialiteUser;
 }
 
-it('creates a new user and social account when neither exist', function () {
+it('creates a new user and social account when neither exist', function (): void {
     $action = new HandleSocialLogin;
 
     $user = $action->handle('google', makeSocialiteUser());
@@ -49,7 +49,7 @@ it('creates a new user and social account when neither exist', function () {
     ]);
 });
 
-it('returns existing user when social account already exists', function () {
+it('returns existing user when social account already exists', function (): void {
     $existingUser = User::factory()->create();
     SocialAccount::factory()->for($existingUser)->create([
         'provider' => SocialProvider::Google,
@@ -63,8 +63,8 @@ it('returns existing user when social account already exists', function () {
     $user = $action->handle('google', makeSocialiteUser());
 
     expect($user->id)->toBe($existingUser->id);
-    expect(User::count())->toBe(1);
-    expect(SocialAccount::count())->toBe(1);
+    expect(User::query()->count())->toBe(1);
+    expect(SocialAccount::query()->count())->toBe(1);
 
     $this->assertDatabaseHas('social_accounts', [
         'user_id' => $existingUser->id,
@@ -73,7 +73,7 @@ it('returns existing user when social account already exists', function () {
     ]);
 });
 
-it('links social account to existing user matched by email', function () {
+it('links social account to existing user matched by email', function (): void {
     $existingUser = User::factory()->create(['email' => 'john@example.com']);
 
     $action = new HandleSocialLogin;
@@ -81,8 +81,8 @@ it('links social account to existing user matched by email', function () {
     $user = $action->handle('google', makeSocialiteUser());
 
     expect($user->id)->toBe($existingUser->id);
-    expect(User::count())->toBe(1);
-    expect(SocialAccount::count())->toBe(1);
+    expect(User::query()->count())->toBe(1);
+    expect(SocialAccount::query()->count())->toBe(1);
 
     $this->assertDatabaseHas('social_accounts', [
         'user_id' => $existingUser->id,
@@ -91,7 +91,7 @@ it('links social account to existing user matched by email', function () {
     ]);
 });
 
-it('updates tokens on existing social account', function () {
+it('updates tokens on existing social account', function (): void {
     $existingUser = User::factory()->create();
     SocialAccount::factory()->for($existingUser)->create([
         'provider' => SocialProvider::Google,
@@ -112,29 +112,29 @@ it('updates tokens on existing social account', function () {
     ]);
 });
 
-it('handles different providers independently', function () {
+it('handles different providers independently', function (): void {
     $action = new HandleSocialLogin;
 
     $user1 = $action->handle('google', makeSocialiteUser(id: '111'));
     $user2 = $action->handle('github', makeSocialiteUser(id: '111'));
 
     expect($user1->id)->toBe($user2->id);
-    expect(SocialAccount::count())->toBe(2);
+    expect(SocialAccount::query()->count())->toBe(2);
 });
 
-it('throws exception when social provider returns no email', function () {
+it('throws exception when social provider returns no email', function (): void {
     $action = new HandleSocialLogin;
 
     $action->handle('google', makeSocialiteUser(email: null));
 })->throws(ValidationException::class, 'An email address is required for social login.');
 
-it('throws exception when social provider returns empty email', function () {
+it('throws exception when social provider returns empty email', function (): void {
     $action = new HandleSocialLogin;
 
     $action->handle('google', makeSocialiteUser(email: ''));
 })->throws(ValidationException::class, 'An email address is required for social login.');
 
-it('throws exception for invalid provider', function () {
+it('throws exception for invalid provider', function (): void {
     $action = new HandleSocialLogin;
 
     $action->handle('invalid', makeSocialiteUser());
