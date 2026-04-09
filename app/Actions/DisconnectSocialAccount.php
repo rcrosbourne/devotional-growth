@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Actions;
 
+use App\Enums\SocialProvider;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 final readonly class DisconnectSocialAccount
@@ -14,20 +16,26 @@ final readonly class DisconnectSocialAccount
      */
     public function handle(User $user, string $provider): void
     {
-        $remainingSocialAccounts = $user->socialAccounts()
-            ->where('provider', '!=', $provider)
-            ->count();
+        $socialProvider = SocialProvider::from($provider);
 
-        $hasPassword = $user->password !== null;
+        DB::transaction(function () use ($user, $socialProvider): void {
+            $user->socialAccounts()->lockForUpdate()->get();
 
-        if ($remainingSocialAccounts === 0 && ! $hasPassword) {
-            throw ValidationException::withMessages([
-                'provider' => ['Cannot disconnect this social account. You must have at least one other authentication method (another social account or a password).'],
-            ]);
-        }
+            $otherAuthMethodCount = $user->socialAccounts()
+                ->where('provider', '!=', $socialProvider)
+                ->count();
 
-        $user->socialAccounts()
-            ->where('provider', $provider)
-            ->delete();
+            $hasPassword = $user->password !== null;
+
+            if ($otherAuthMethodCount === 0 && ! $hasPassword) {
+                throw ValidationException::withMessages([
+                    'provider' => ['You cannot disconnect your only authentication method.'],
+                ]);
+            }
+
+            $user->socialAccounts()
+                ->where('provider', $socialProvider)
+                ->delete();
+        });
     }
 }

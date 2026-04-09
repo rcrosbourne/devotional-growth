@@ -113,7 +113,7 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Add provider env vars to `.env.example`
     - _Requirements: Social login_
 
-  - [ ] 2.2 Create `HandleSocialLogin` action
+  - [x] 2.2 Create `HandleSocialLogin` action
     - `final readonly` class with `handle(string $provider, SocialiteUser $socialiteUser): User`
     - Find existing SocialAccount by provider+provider_id, return linked User
     - If no SocialAccount but email matches existing User, link the social account to that User
@@ -121,12 +121,12 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Wrap in `DB::transaction()`
     - _Requirements: Social login, Property 32_
 
-  - [ ] 2.3 Create `DisconnectSocialAccount` action
+  - [x] 2.3 Create `DisconnectSocialAccount` action
     - `final readonly` class with `handle(User $user, string $provider): void`
     - Ensure user has at least one other auth method (another social account or email OTP) before disconnecting
     - _Requirements: Social login_
 
-  - [ ] 2.4 Create `SocialLoginController` with redirect and callback routes
+  - [x] 2.4 Create `SocialLoginController` with redirect and callback routes
     - `final readonly` controller
     - `redirect(string $provider)` — validate provider, redirect to Socialite
     - `callback(string $provider)` — get Socialite user, delegate to `HandleSocialLogin`, login, redirect to dashboard
