@@ -43,20 +43,26 @@ final readonly class HandleSocialLogin
             $user = User::query()->where('email', $email)->first();
 
             if (! $user) {
+                $name = $socialiteUser->getName()
+                    ?? $socialiteUser->getNickname()
+                    ?? str($email)->before('@')->value();
+
                 $user = User::query()->create([
-                    'name' => $socialiteUser->getName(),
+                    'name' => $name,
                     'email' => $email,
                     'email_verified_at' => now(),
                     'password' => null,
                 ]);
             }
 
-            $user->socialAccounts()->create([
-                'provider' => $socialProvider,
-                'provider_id' => $socialiteUser->getId(),
-                'provider_token' => $socialiteUser->token,
-                'provider_refresh_token' => $socialiteUser->refreshToken,
-            ]);
+            $user->socialAccounts()->updateOrCreate(
+                ['provider' => $socialProvider],
+                [
+                    'provider_id' => $socialiteUser->getId(),
+                    'provider_token' => $socialiteUser->token,
+                    'provider_refresh_token' => $socialiteUser->refreshToken,
+                ],
+            );
 
             return $user;
         });
