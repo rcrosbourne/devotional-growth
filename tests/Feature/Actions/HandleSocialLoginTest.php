@@ -134,6 +134,56 @@ it('throws exception when social provider returns empty email', function (): voi
     $action->handle('google', makeSocialiteUser(email: ''));
 })->throws(ValidationException::class, 'An email address is required for social login.');
 
+it('updates provider_id when existing user has same provider with different provider_id', function (): void {
+    $existingUser = User::factory()->create(['email' => 'john@example.com']);
+    SocialAccount::factory()->for($existingUser)->create([
+        'provider' => SocialProvider::Google,
+        'provider_id' => '999999',
+        'provider_token' => 'old-token',
+        'provider_refresh_token' => 'old-refresh',
+    ]);
+
+    $action = new HandleSocialLogin;
+
+    $user = $action->handle('google', makeSocialiteUser(id: '123456'));
+
+    expect($user->id)->toBe($existingUser->id);
+    expect(User::query()->count())->toBe(1);
+    expect(SocialAccount::query()->count())->toBe(1);
+
+    $this->assertDatabaseHas('social_accounts', [
+        'user_id' => $existingUser->id,
+        'provider' => SocialProvider::Google->value,
+        'provider_id' => '123456',
+        'provider_token' => 'test-token',
+        'provider_refresh_token' => 'test-refresh-token',
+    ]);
+});
+
+it('falls back to nickname when name is null', function (): void {
+    $action = new HandleSocialLogin;
+
+    $socialiteUser = new SocialiteUser;
+    $socialiteUser->id = '123456';
+    $socialiteUser->name = null;
+    $socialiteUser->nickname = 'johndoe';
+    $socialiteUser->email = 'john@example.com';
+    $socialiteUser->token = 'test-token';
+    $socialiteUser->refreshToken = 'test-refresh-token';
+
+    $user = $action->handle('google', $socialiteUser);
+
+    expect($user->name)->toBe('johndoe');
+});
+
+it('falls back to email local part when name and nickname are null', function (): void {
+    $action = new HandleSocialLogin;
+
+    $user = $action->handle('google', makeSocialiteUser(name: null));
+
+    expect($user->name)->toBe('john');
+});
+
 it('throws exception for invalid provider', function (): void {
     $action = new HandleSocialLogin;
 
