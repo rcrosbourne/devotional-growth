@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\SocialLoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserEmailResetNotification;
 use App\Http\Controllers\UserEmailVerification;
@@ -66,6 +67,12 @@ Route::middleware('guest')->group(function (): void {
         ->name('login');
     Route::post('login', [SessionController::class, 'store'])
         ->name('login.store');
+
+    // Social Login...
+    Route::get('auth/{provider}/redirect', [SocialLoginController::class, 'redirect'])
+        ->name('social.redirect');
+    Route::get('auth/{provider}/callback', [SocialLoginController::class, 'callback'])
+        ->name('social.callback');
 });
 
 Route::middleware('auth')->group(function (): void {
