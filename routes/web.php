@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\EmailOtpController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SocialLoginController;
 use App\Http\Controllers\UserController;
@@ -73,6 +74,16 @@ Route::middleware('guest')->group(function (): void {
         ->name('social.redirect');
     Route::get('auth/{provider}/callback', [SocialLoginController::class, 'callback'])
         ->name('social.callback');
+
+    // Email OTP...
+    Route::get('auth/email-otp', [EmailOtpController::class, 'create'])
+        ->name('email-otp.create');
+    Route::post('auth/email-otp', [EmailOtpController::class, 'store'])
+        ->name('email-otp.store');
+    Route::get('auth/email-otp/verify', [EmailOtpController::class, 'showVerify'])
+        ->name('email-otp.verify.show');
+    Route::post('auth/email-otp/verify', [EmailOtpController::class, 'verify'])
+        ->name('email-otp.verify');
 });
 
 Route::middleware('auth')->group(function (): void {
