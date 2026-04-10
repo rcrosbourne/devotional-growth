@@ -172,35 +172,35 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Mock Socialite and Mail facades
     - _Requirements: Social login, Email OTP login_
 
-- [ ] 3. Checkpoint — Database and auth foundation
-  - Ensure all tests pass, ask the user if questions arise.
+- [x] 3. Checkpoint — Database and auth foundation
+  - All 340 tests pass. No issues found.
 
-- [ ] 4. Admin content management — Themes
-  - [ ] 4.1 Create `CreateTheme` action
+- [x] 4. Admin content management — Themes
+  - [x] 4.1 Create `CreateTheme` action
     - `final readonly` class with `handle(User $admin, string $name, ?string $description): Theme`
     - Create theme with `created_by` = admin id, status = draft
     - _Requirements: 9.1, Property 15_
 
-  - [ ] 4.2 Create `UpdateTheme` action
+  - [x] 4.2 Create `UpdateTheme` action
     - `handle(Theme $theme, string $name, ?string $description): Theme`
     - Update name/description, preserve associated entries
     - _Requirements: 9.3, Property 16_
 
-  - [ ] 4.3 Create `DeleteTheme` action
+  - [x] 4.3 Create `DeleteTheme` action
     - `handle(Theme $theme): void`
     - Delete theme (cascade deletes entries via FK)
     - _Requirements: 9.4, Property 17_
 
-  - [ ] 4.4 Create `PublishTheme` action
+  - [x] 4.4 Create `PublishTheme` action
     - `handle(Theme $theme): Theme`
     - Change status from draft to published
     - _Requirements: Property 41_
 
-  - [ ] 4.5 Create Form Requests: `CreateThemeRequest`, `UpdateThemeRequest`
+  - [x] 4.5 Create Form Requests: `CreateThemeRequest`, `UpdateThemeRequest`
     - Validate name (required, unique), description (optional)
     - _Requirements: 9.1, 9.2_
 
-  - [ ] 4.6 Create `Admin\ThemeController` with full CRUD + publish routes
+  - [x] 4.6 Create `Admin\ThemeController` with full CRUD + publish routes
     - `final readonly` controller
     - `index()` — list all themes (draft + published) for admin
     - `create()` — render admin create form
@@ -212,11 +212,11 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Register routes under `auth` + `admin` middleware prefix `/admin/themes`
     - _Requirements: 9.1, 9.2, 9.3, 9.4_
 
-  - [ ]* 4.7 Write unit tests for `CreateTheme`, `UpdateTheme`, `DeleteTheme`, `PublishTheme` actions
+  - [x]* 4.7 Write unit tests for `CreateTheme`, `UpdateTheme`, `DeleteTheme`, `PublishTheme` actions
     - Test validation, cascade delete, status transitions
     - _Requirements: 9.1, 9.2, 9.3, 9.4_
 
-  - [ ]* 4.8 Write feature tests for `Admin\ThemeController`
+  - [x]* 4.8 Write feature tests for `Admin\ThemeController`
     - Test all CRUD endpoints, admin authorization (non-admin gets 403), validation errors
     - _Requirements: 9.1, 9.2, 9.3, 9.4, Property 38_
 
