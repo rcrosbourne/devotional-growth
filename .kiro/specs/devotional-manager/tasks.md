@@ -163,11 +163,11 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Register in `bootstrap/app.php` as named middleware `admin`
     - _Requirements: Admin content model, Property 38_
 
-  - [ ]* 2.9 Write unit tests for `HandleSocialLogin`, `DisconnectSocialAccount`, `SendEmailOtp`, `VerifyEmailOtp` actions
+  - [x] 2.9 Write unit tests for `HandleSocialLogin`, `DisconnectSocialAccount`, `SendEmailOtp`, `VerifyEmailOtp` actions
     - Test happy paths, edge cases (existing user, new user, duplicate email, expired OTP, max attempts)
     - _Requirements: Social login, Email OTP login_
 
-  - [ ]* 2.10 Write feature tests for `SocialLoginController` and `EmailOtpController`
+  - [x] 2.10 Write feature tests for `SocialLoginController` and `EmailOtpController`
     - Test redirect, callback, OTP request, OTP verify, rate limiting, error cases
     - Mock Socialite and Mail facades
     - _Requirements: Social login, Email OTP login_
