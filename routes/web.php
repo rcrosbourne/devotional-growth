@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\Admin\ThemeController as AdminThemeController;
 use App\Http\Controllers\EmailOtpController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SocialLoginController;
@@ -84,6 +85,17 @@ Route::middleware('guest')->group(function (): void {
         ->name('email-otp.verify.show');
     Route::post('auth/email-otp/verify', [EmailOtpController::class, 'verify'])
         ->name('email-otp.verify');
+});
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function (): void {
+    // Admin Themes...
+    Route::get('themes', new AdminThemeController()->index(...))->name('themes.index');
+    Route::get('themes/create', new AdminThemeController()->create(...))->name('themes.create');
+    Route::post('themes', new AdminThemeController()->store(...))->name('themes.store');
+    Route::get('themes/{theme}/edit', new AdminThemeController()->edit(...))->name('themes.edit');
+    Route::put('themes/{theme}', new AdminThemeController()->update(...))->name('themes.update');
+    Route::delete('themes/{theme}', new AdminThemeController()->destroy(...))->name('themes.destroy');
+    Route::put('themes/{theme}/publish', new AdminThemeController()->publish(...))->name('themes.publish');
 });
 
 Route::middleware('auth')->group(function (): void {
