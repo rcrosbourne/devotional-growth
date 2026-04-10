@@ -133,7 +133,7 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Add routes: `GET /auth/{provider}/redirect`, `GET /auth/{provider}/callback`
     - _Requirements: Social login_
 
-  - [ ] 2.5 Create `SendEmailOtp` action
+  - [x] 2.5 Create `SendEmailOtp` action
     - `final readonly` class with `handle(string $email): void`
     - Generate random 6-digit code, hash with `Hash::make()`, store in `email_otps` table with 10-min expiry
     - Delete any existing OTPs for that email first
@@ -141,7 +141,7 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Rate limit: 5 requests per email per hour (use `RateLimiter`)
     - _Requirements: Email OTP login, Property 34_
 
-  - [ ] 2.6 Create `VerifyEmailOtp` action
+  - [x] 2.6 Create `VerifyEmailOtp` action
     - `final readonly` class with `handle(string $email, string $code): User`
     - Find OTP record by email, check expiry, check attempts < 3, verify code hash
     - On success: find or create User by email, delete OTP record, return User
