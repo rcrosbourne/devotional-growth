@@ -12,23 +12,6 @@ use Laravel\Socialite\Two\User as SocialiteUser;
 
 uses(RefreshDatabase::class);
 
-function makeSocialiteUser(
-    string $id = '123456',
-    ?string $name = 'John Doe',
-    ?string $email = 'john@example.com',
-    ?string $token = 'test-token',
-    ?string $refreshToken = 'test-refresh-token',
-): SocialiteUser {
-    $socialiteUser = new SocialiteUser;
-    $socialiteUser->id = $id;
-    $socialiteUser->name = $name;
-    $socialiteUser->email = $email;
-    $socialiteUser->token = $token;
-    $socialiteUser->refreshToken = $refreshToken;
-
-    return $socialiteUser;
-}
-
 it('creates a new user and social account when neither exist', function (): void {
     $action = new HandleSocialLogin;
 

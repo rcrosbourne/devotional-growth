@@ -24,7 +24,19 @@ pest()->extend(TestCase::class)
 
 expect()->extend('toBeOne', fn () => $this->toBe(1));
 
-function something(): void
-{
-    // ..
+function makeSocialiteUser(
+    string $id = '123456',
+    ?string $name = 'John Doe',
+    ?string $email = 'john@example.com',
+    ?string $token = 'test-token',
+    ?string $refreshToken = 'test-refresh-token',
+): Laravel\Socialite\Two\User {
+    $socialiteUser = new Laravel\Socialite\Two\User;
+    $socialiteUser->id = $id;
+    $socialiteUser->name = $name;
+    $socialiteUser->email = $email;
+    $socialiteUser->token = $token;
+    $socialiteUser->refreshToken = $refreshToken;
+
+    return $socialiteUser;
 }
