@@ -158,7 +158,7 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Add routes under `guest` middleware
     - _Requirements: Email OTP login_
 
-  - [ ] 2.8 Create `EnsureUserIsAdmin` middleware
+  - [x] 2.8 Create `EnsureUserIsAdmin` middleware
     - Check `$request->user()->is_admin` — abort 403 if false
     - Register in `bootstrap/app.php` as named middleware `admin`
     - _Requirements: Admin content model, Property 38_
