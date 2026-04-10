@@ -148,7 +148,7 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - On failure: increment attempts, throw validation exception
     - _Requirements: Email OTP login, Properties 35, 36_
 
-  - [ ] 2.7 Create `EmailOtpController` with request/verify routes and Form Requests
+  - [x] 2.7 Create `EmailOtpController` with request/verify routes and Form Requests
     - `final readonly` controller
     - `create()` — render `auth/email-otp` page
     - `store(SendEmailOtpRequest)` — validate email, delegate to `SendEmailOtp`, redirect to verify page
