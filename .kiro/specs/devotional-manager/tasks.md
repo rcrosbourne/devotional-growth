@@ -392,11 +392,11 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Seed `ReadingPlan` and `ReadingPlanDay` records covering the entire Bible
     - _Requirements: 4.1_
 
-  - [ ]* 11.5 Write unit tests for `ActivateReadingPlan` and `CompleteReadingDay` actions
+  - [ ] 11.5 Write unit tests for `ActivateReadingPlan` and `CompleteReadingDay` actions
     - Test day calculation, progress percentage, missed day identification
     - _Requirements: 4.1–4.6_
 
-  - [ ]* 11.6 Write feature tests for `ReadingPlanController`
+  - [ ] 11.6 Write feature tests for `ReadingPlanController`
     - Test activation, completion, progress display, missed days
     - _Requirements: 4.1–4.6_
 
