@@ -416,14 +416,14 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Test word study display, search, empty results
     - _Requirements: 5.1–5.4_
 
-- [ ] 13. Bookmarks
-  - [ ] 13.1 Create `CreateBookmark` and `DeleteBookmark` actions
+- [x] 13. Bookmarks
+  - [x] 13.1 Create `CreateBookmark` and `DeleteBookmark` actions
     - `CreateBookmark::handle(User $user, string $bookmarkableType, int $bookmarkableId): Bookmark`
     - `DeleteBookmark::handle(Bookmark $bookmark): void`
     - Validate bookmarkable type is one of: DevotionalEntry, ScriptureReference, WordStudy
     - _Requirements: 6.1, 6.2, 6.3, Properties 11, 12_
 
-  - [ ] 13.2 Create `BookmarkController`
+  - [x] 13.2 Create `BookmarkController`
     - `final readonly` controller
     - `index()` — list bookmarks grouped by type (devotional, scripture, word study)
     - `store(CreateBookmarkRequest)` — delegate to `CreateBookmark`
@@ -431,7 +431,7 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Register routes under `auth` + `verified` middleware
     - _Requirements: 6.1, 6.2, 6.3, 6.4_
 
-  - [ ]* 13.3 Write unit and feature tests for bookmark actions and controller
+  - [x]* 13.3 Write unit and feature tests for bookmark actions and controller
     - Test creation, deletion, grouping by type, authorization
     - _Requirements: 6.1–6.4_
 

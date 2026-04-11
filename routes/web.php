@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Http\Controllers\Admin\AiContentController as AdminAiContentController;
 use App\Http\Controllers\Admin\DevotionalEntryController as AdminDevotionalEntryController;
 use App\Http\Controllers\Admin\ThemeController as AdminThemeController;
+use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\DevotionalEntryController;
 use App\Http\Controllers\EmailOtpController;
 use App\Http\Controllers\ReadingPlanController;
@@ -37,6 +38,11 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
 
     // Scripture passages...
     Route::get('scripture', [ScriptureController::class, 'show'])->name('scripture.show');
+
+    // Bookmarks...
+    Route::get('bookmarks', new BookmarkController()->index(...))->name('bookmarks.index');
+    Route::post('bookmarks', new BookmarkController()->store(...))->name('bookmarks.store');
+    Route::delete('bookmarks/{bookmark}', new BookmarkController()->destroy(...))->name('bookmarks.destroy');
 
     // Bible Study / Reading Plans...
     Route::get('bible-study', new ReadingPlanController()->index(...))->name('bible-study.index');

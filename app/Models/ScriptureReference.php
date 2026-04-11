@@ -9,6 +9,7 @@ use Database\Factories\ScriptureReferenceFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 /**
  * @property-read int $id
@@ -32,6 +33,14 @@ final class ScriptureReference extends Model
     public function devotionalEntry(): BelongsTo
     {
         return $this->belongsTo(DevotionalEntry::class);
+    }
+
+    /**
+     * @return MorphMany<Bookmark, $this>
+     */
+    public function bookmarks(): MorphMany
+    {
+        return $this->morphMany(Bookmark::class, 'bookmarkable');
     }
 
     /**
