@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AiContentController as AdminAiContentController;
 use App\Http\Controllers\Admin\DevotionalEntryController as AdminDevotionalEntryController;
 use App\Http\Controllers\Admin\ThemeController as AdminThemeController;
 use App\Http\Controllers\DevotionalEntryController;
+use App\Http\Controllers\DevotionalImageController;
 use App\Http\Controllers\EmailOtpController;
 use App\Http\Controllers\ReadingPlanController;
 use App\Http\Controllers\ScriptureController;
@@ -34,6 +35,9 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
     // User-facing Devotional Entries...
     Route::get('themes/{theme}/entries/{entry}', new DevotionalEntryController()->show(...))->name('themes.entries.show');
     Route::post('themes/{theme}/entries/{entry}/complete', new DevotionalEntryController()->complete(...))->name('themes.entries.complete');
+
+    // Devotional Image Generation...
+    Route::post('entries/{entry}/generate-image', new DevotionalImageController()->store(...))->name('entries.generate-image');
 
     // Scripture passages...
     Route::get('scripture', [ScriptureController::class, 'show'])->name('scripture.show');
