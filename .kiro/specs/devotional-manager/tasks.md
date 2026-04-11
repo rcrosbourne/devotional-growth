@@ -456,8 +456,8 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Test CRUD, partner visibility, chronological ordering, authorization
     - _Requirements: 13.1–13.8_
 
-- [ ] 15. AI image generation
-  - [ ] 15.1 Create `GenerateDevotionalImage` action
+- [x] 15. AI image generation
+  - [x] 15.1 Create `GenerateDevotionalImage` action
     - `handle(DevotionalEntry $entry): GeneratedImage`
     - Construct prompt from entry title, scripture references, and body content
     - Call OpenAI DALL-E API via Laravel HTTP client
@@ -465,13 +465,13 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Replace existing image if one exists (after confirmation flag)
     - _Requirements: 12.1–12.8, Properties 20, 21_
 
-  - [ ] 15.2 Create `DevotionalImageController`
+  - [x] 15.2 Create `DevotionalImageController`
     - `final readonly` controller
     - `store(DevotionalEntry)` — delegate to `GenerateDevotionalImage`, return image data
     - Register route under `auth` + `verified` middleware
     - _Requirements: 12.1–12.7_
 
-  - [ ]* 15.3 Write unit and feature tests for image generation
+  - [x]* 15.3 Write unit and feature tests for image generation
     - Mock OpenAI HTTP calls, test prompt construction, test error handling, test image replacement
     - _Requirements: 12.1–12.8_
 

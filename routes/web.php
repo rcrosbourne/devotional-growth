@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\DevotionalEntryController as AdminDevotionalEntry
 use App\Http\Controllers\Admin\ThemeController as AdminThemeController;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\DevotionalEntryController;
+use App\Http\Controllers\DevotionalImageController;
 use App\Http\Controllers\EmailOtpController;
 use App\Http\Controllers\ObservationController;
 use App\Http\Controllers\ReadingPlanController;
@@ -37,6 +38,9 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
     // User-facing Devotional Entries...
     Route::get('themes/{theme}/entries/{entry}', new DevotionalEntryController()->show(...))->name('themes.entries.show');
     Route::post('themes/{theme}/entries/{entry}/complete', new DevotionalEntryController()->complete(...))->name('themes.entries.complete');
+
+    // Devotional Image Generation...
+    Route::post('entries/{entry}/generate-image', new DevotionalImageController()->store(...))->name('entries.generate-image');
 
     // Observations...
     Route::post('entries/{entry}/observations', new ObservationController()->store(...))->name('observations.store');
