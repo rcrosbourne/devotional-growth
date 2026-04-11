@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\DevotionalEntryController as AdminDevotionalEntry
 use App\Http\Controllers\Admin\ThemeController as AdminThemeController;
 use App\Http\Controllers\DevotionalEntryController;
 use App\Http\Controllers\EmailOtpController;
+use App\Http\Controllers\ScriptureController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SocialLoginController;
 use App\Http\Controllers\ThemeController;
@@ -31,6 +32,9 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
 
     // User-facing Devotional Entries...
     Route::get('themes/{theme}/entries/{entry}', new DevotionalEntryController()->show(...))->name('themes.entries.show');
+
+    // Scripture passages...
+    Route::get('scripture', [ScriptureController::class, 'show'])->name('scripture.show');
 });
 
 Route::middleware('auth')->group(function (): void {
