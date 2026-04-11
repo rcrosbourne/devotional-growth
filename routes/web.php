@@ -32,6 +32,7 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
 
     // User-facing Devotional Entries...
     Route::get('themes/{theme}/entries/{entry}', new DevotionalEntryController()->show(...))->name('themes.entries.show');
+    Route::post('themes/{theme}/entries/{entry}/complete', new DevotionalEntryController()->complete(...))->name('themes.entries.complete');
 
     // Bible Study / Reading Plans...
     Route::get('bible-study', new ReadingPlanController()->index(...))->name('bible-study.index');
