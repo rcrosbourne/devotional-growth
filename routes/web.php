@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\Admin\DevotionalEntryController as AdminDevotionalEntryController;
 use App\Http\Controllers\Admin\ThemeController as AdminThemeController;
 use App\Http\Controllers\EmailOtpController;
 use App\Http\Controllers\SessionController;
@@ -96,6 +97,16 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::put('themes/{theme}', new AdminThemeController()->update(...))->name('themes.update');
     Route::delete('themes/{theme}', new AdminThemeController()->destroy(...))->name('themes.destroy');
     Route::put('themes/{theme}/publish', new AdminThemeController()->publish(...))->name('themes.publish');
+
+    // Admin Devotional Entries...
+    Route::get('themes/{theme}/entries', new AdminDevotionalEntryController()->index(...))->name('themes.entries.index');
+    Route::get('themes/{theme}/entries/create', new AdminDevotionalEntryController()->create(...))->name('themes.entries.create');
+    Route::put('themes/{theme}/entries/reorder', new AdminDevotionalEntryController()->reorder(...))->name('themes.entries.reorder');
+    Route::post('themes/{theme}/entries', new AdminDevotionalEntryController()->store(...))->name('themes.entries.store');
+    Route::get('themes/{theme}/entries/{entry}/edit', new AdminDevotionalEntryController()->edit(...))->name('themes.entries.edit');
+    Route::put('themes/{theme}/entries/{entry}', new AdminDevotionalEntryController()->update(...))->name('themes.entries.update');
+    Route::delete('themes/{theme}/entries/{entry}', new AdminDevotionalEntryController()->destroy(...))->name('themes.entries.destroy');
+    Route::put('themes/{theme}/entries/{entry}/publish', new AdminDevotionalEntryController()->publish(...))->name('themes.entries.publish');
 });
 
 Route::middleware('auth')->group(function (): void {
