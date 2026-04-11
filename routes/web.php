@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\Admin\AiContentController as AdminAiContentController;
 use App\Http\Controllers\Admin\DevotionalEntryController as AdminDevotionalEntryController;
 use App\Http\Controllers\Admin\ThemeController as AdminThemeController;
 use App\Http\Controllers\EmailOtpController;
@@ -107,6 +108,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::put('themes/{theme}/entries/{entry}', new AdminDevotionalEntryController()->update(...))->name('themes.entries.update');
     Route::delete('themes/{theme}/entries/{entry}', new AdminDevotionalEntryController()->destroy(...))->name('themes.entries.destroy');
     Route::put('themes/{theme}/entries/{entry}/publish', new AdminDevotionalEntryController()->publish(...))->name('themes.entries.publish');
+
+    // Admin AI Content...
+    Route::get('ai-content/generate', new AdminAiContentController()->create(...))->name('ai-content.create');
+    Route::post('ai-content/generate', new AdminAiContentController()->store(...))->name('ai-content.store');
 });
 
 Route::middleware('auth')->group(function (): void {
