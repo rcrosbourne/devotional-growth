@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ThemeController as AdminThemeController;
 use App\Http\Controllers\DevotionalEntryController;
 use App\Http\Controllers\EmailOtpController;
 use App\Http\Controllers\ReadingPlanController;
+use App\Http\Controllers\ScriptureController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SocialLoginController;
 use App\Http\Controllers\ThemeController;
@@ -33,6 +34,9 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
     // User-facing Devotional Entries...
     Route::get('themes/{theme}/entries/{entry}', new DevotionalEntryController()->show(...))->name('themes.entries.show');
     Route::post('themes/{theme}/entries/{entry}/complete', new DevotionalEntryController()->complete(...))->name('themes.entries.complete');
+
+    // Scripture passages...
+    Route::get('scripture', [ScriptureController::class, 'show'])->name('scripture.show');
 
     // Bible Study / Reading Plans...
     Route::get('bible-study', new ReadingPlanController()->index(...))->name('bible-study.index');

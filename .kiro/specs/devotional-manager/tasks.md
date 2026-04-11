@@ -333,8 +333,8 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Test non-admin cannot see draft content (Property 37)
     - _Requirements: 1.1–1.4, 10.1–10.4_
 
-- [ ] 9. Scripture passage fetching and caching
-  - [ ] 9.1 Create `FetchScripturePassage` action
+- [x] 9. Scripture passage fetching and caching
+  - [x] 9.1 Create `FetchScripturePassage` action
     - `final readonly` class with `handle(string $book, int $chapter, int $verseStart, ?int $verseEnd, string $bibleVersion = 'KJV'): string`
     - Check `ScriptureCache` first; if cached, return cached text
     - If not cached, call Bible API via Laravel HTTP client (3 retries, 500ms backoff)
@@ -342,13 +342,13 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Return error message if API fails and no cache exists
     - _Requirements: 3.1, 3.2, 3.3, 3.4_
 
-  - [ ] 9.2 Create `ScriptureController`
+  - [x] 9.2 Create `ScriptureController`
     - `final readonly` controller
     - `show(Request)` — fetch scripture passage by reference and version, delegate to `FetchScripturePassage`
     - Register route under `auth` middleware
     - _Requirements: 3.1, 3.2, 3.3, 3.4_
 
-  - [ ]* 9.3 Write unit tests for `FetchScripturePassage` action
+  - [x]* 9.3 Write unit tests for `FetchScripturePassage` action
     - Mock HTTP client, test caching, test API failure fallback, test version switching
     - _Requirements: 3.1–3.4_
 
