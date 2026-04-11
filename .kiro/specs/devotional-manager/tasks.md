@@ -368,18 +368,18 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Test completion recording, "completed together" logic, partner notification dispatch
     - _Requirements: 8.1–8.4_
 
-- [ ] 11. Bible reading plans
-  - [ ] 11.1 Create `ActivateReadingPlan` action
+- [x] 11. Bible reading plans
+  - [x] 11.1 Create `ActivateReadingPlan` action
     - `handle(User $user, ReadingPlan $plan): ReadingPlanProgress`
     - Record start date, calculate daily passages based on plan definition
     - _Requirements: 4.2, Property 7_
 
-  - [ ] 11.2 Create `CompleteReadingDay` action
+  - [x] 11.2 Create `CompleteReadingDay` action
     - `handle(User $user, ReadingPlanDay $day): ReadingPlanProgress`
     - Record completion date, update progress
     - _Requirements: 4.4, Property 8_
 
-  - [ ] 11.3 Create `ReadingPlanController`
+  - [x] 11.3 Create `ReadingPlanController`
     - `final readonly` controller
     - `index()` — show Bible study dashboard with active reading plan, current day passages, progress
     - `show(ReadingPlan)` — show reading plan detail with daily list, progress percentage, missed days
@@ -388,15 +388,15 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Register routes under `auth` + `verified` middleware prefix `/bible-study`
     - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, Properties 7, 8, 9_
 
-  - [ ] 11.4 Create a database seeder for the default 365-day reading plan
+  - [x] 11.4 Create a database seeder for the default 365-day reading plan
     - Seed `ReadingPlan` and `ReadingPlanDay` records covering the entire Bible
     - _Requirements: 4.1_
 
-  - [ ]* 11.5 Write unit tests for `ActivateReadingPlan` and `CompleteReadingDay` actions
+  - [x]* 11.5 Write unit tests for `ActivateReadingPlan` and `CompleteReadingDay` actions
     - Test day calculation, progress percentage, missed day identification
     - _Requirements: 4.1–4.6_
 
-  - [ ]* 11.6 Write feature tests for `ReadingPlanController`
+  - [x]* 11.6 Write feature tests for `ReadingPlanController`
     - Test activation, completion, progress display, missed days
     - _Requirements: 4.1–4.6_
 
