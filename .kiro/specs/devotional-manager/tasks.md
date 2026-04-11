@@ -416,14 +416,14 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Test word study display, search, empty results
     - _Requirements: 5.1–5.4_
 
-- [ ] 13. Bookmarks
-  - [ ] 13.1 Create `CreateBookmark` and `DeleteBookmark` actions
+- [x] 13. Bookmarks
+  - [x] 13.1 Create `CreateBookmark` and `DeleteBookmark` actions
     - `CreateBookmark::handle(User $user, string $bookmarkableType, int $bookmarkableId): Bookmark`
     - `DeleteBookmark::handle(Bookmark $bookmark): void`
     - Validate bookmarkable type is one of: DevotionalEntry, ScriptureReference, WordStudy
     - _Requirements: 6.1, 6.2, 6.3, Properties 11, 12_
 
-  - [ ] 13.2 Create `BookmarkController`
+  - [x] 13.2 Create `BookmarkController`
     - `final readonly` controller
     - `index()` — list bookmarks grouped by type (devotional, scripture, word study)
     - `store(CreateBookmarkRequest)` — delegate to `CreateBookmark`
@@ -431,19 +431,19 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Register routes under `auth` + `verified` middleware
     - _Requirements: 6.1, 6.2, 6.3, 6.4_
 
-  - [ ]* 13.3 Write unit and feature tests for bookmark actions and controller
+  - [x]* 13.3 Write unit and feature tests for bookmark actions and controller
     - Test creation, deletion, grouping by type, authorization
     - _Requirements: 6.1–6.4_
 
-- [ ] 14. Observations
-  - [ ] 14.1 Create `CreateObservation`, `UpdateObservation`, `DeleteObservation` actions
+- [x] 14. Observations
+  - [x] 14.1 Create `CreateObservation`, `UpdateObservation`, `DeleteObservation` actions
     - `CreateObservation::handle(User $user, DevotionalEntry $entry, string $body): Observation`
     - `UpdateObservation::handle(Observation $observation, string $body): Observation` — set edited_at
     - `DeleteObservation::handle(Observation $observation): void`
     - Dispatch partner notification on create (if partner linked and notifications enabled)
     - _Requirements: 13.1–13.7, Properties 22, 23, 24, 25_
 
-  - [ ] 14.2 Create `ObservationController`
+  - [x] 14.2 Create `ObservationController`
     - `final readonly` controller
     - `store(CreateObservationRequest, DevotionalEntry)` — delegate to `CreateObservation`
     - `update(UpdateObservationRequest, Observation)` — delegate to `UpdateObservation`
@@ -452,12 +452,12 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Register routes under `auth` + `verified` middleware
     - _Requirements: 13.1–13.7_
 
-  - [ ]* 14.3 Write unit and feature tests for observation actions and controller
+  - [x]* 14.3 Write unit and feature tests for observation actions and controller
     - Test CRUD, partner visibility, chronological ordering, authorization
     - _Requirements: 13.1–13.8_
 
-- [ ] 15. AI image generation
-  - [ ] 15.1 Create `GenerateDevotionalImage` action
+- [x] 15. AI image generation
+  - [x] 15.1 Create `GenerateDevotionalImage` action
     - `handle(DevotionalEntry $entry): GeneratedImage`
     - Construct prompt from entry title, scripture references, and body content
     - Call OpenAI DALL-E API via Laravel HTTP client
@@ -465,45 +465,45 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Replace existing image if one exists (after confirmation flag)
     - _Requirements: 12.1–12.8, Properties 20, 21_
 
-  - [ ] 15.2 Create `DevotionalImageController`
+  - [x] 15.2 Create `DevotionalImageController`
     - `final readonly` controller
     - `store(DevotionalEntry)` — delegate to `GenerateDevotionalImage`, return image data
     - Register route under `auth` + `verified` middleware
     - _Requirements: 12.1–12.7_
 
-  - [ ]* 15.3 Write unit and feature tests for image generation
+  - [x]* 15.3 Write unit and feature tests for image generation
     - Mock OpenAI HTTP calls, test prompt construction, test error handling, test image replacement
     - _Requirements: 12.1–12.8_
 
-- [ ] 16. Partner linking and notifications
-  - [ ] 16.1 Create `LinkPartner` action
+- [x] 16. Partner linking and notifications
+  - [x] 16.1 Create `LinkPartner` action
     - `handle(User $user, User $partner): void`
     - Set `partner_id` on both users (bidirectional)
     - Wrap in `DB::transaction()`
     - _Requirements: 8.3, 13.4_
 
-  - [ ] 16.2 Create `SendPartnerNotification` action
+  - [x] 16.2 Create `SendPartnerNotification` action
     - `handle(User $partner, string $type, array $data): void`
     - Check partner's notification preferences before sending
     - Use Laravel's built-in notification system (`DatabaseNotification`)
     - Notification types: completion, observation, new_theme
     - _Requirements: 14.1–14.4, 14.8, 14.9, Properties 26, 31_
 
-  - [ ] 16.3 Create `NotificationController`
+  - [x] 16.3 Create `NotificationController`
     - `final readonly` controller
     - `index()` — list notifications in reverse chronological order, mark all as read on visit
     - `updatePreferences(UpdateNotificationPreferencesRequest)` — update notification preferences
     - Register routes under `auth` + `verified` middleware
     - _Requirements: 14.5, 14.6, 14.7, 14.8, Properties 27, 28, 29, 30_
 
-  - [ ] 16.4 Create `PartnerController`
+  - [x] 16.4 Create `PartnerController`
     - `final readonly` controller
     - `store(LinkPartnerRequest)` — delegate to `LinkPartner`
     - `destroy()` — unlink partner (set both partner_id to null)
     - Register routes under `auth` + `verified` middleware
     - _Requirements: 8.3, 13.4_
 
-  - [ ]* 16.5 Write unit and feature tests for partner linking, notifications, and preferences
+  - [x]* 16.5 Write unit and feature tests for partner linking, notifications, and preferences
     - Test bidirectional linking, notification dispatch, preference filtering, mark-as-read, unread count
     - _Requirements: 14.1–14.10_
 

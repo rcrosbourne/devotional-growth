@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Models\Bookmark;
 use App\Models\WordStudy;
 use App\Models\WordStudyPassage;
 
@@ -26,6 +27,13 @@ test('word study has many passages', function (): void {
     WordStudyPassage::factory()->for($study, 'wordStudy')->count(3)->create();
 
     expect($study->passages)->toHaveCount(3);
+});
+
+test('word study bookmarks returns morph many relationship', function (): void {
+    $study = WordStudy::factory()->create();
+    Bookmark::factory()->forWordStudy($study)->count(2)->create();
+
+    expect($study->bookmarks)->toHaveCount(2);
 });
 
 test('word study factory greek state sets language to greek', function (): void {

@@ -9,6 +9,7 @@ use Database\Factories\WordStudyFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 /**
  * @property-read int $id
@@ -31,6 +32,14 @@ final class WordStudy extends Model
     public function passages(): HasMany
     {
         return $this->hasMany(WordStudyPassage::class);
+    }
+
+    /**
+     * @return MorphMany<Bookmark, $this>
+     */
+    public function bookmarks(): MorphMany
+    {
+        return $this->morphMany(Bookmark::class, 'bookmarkable');
     }
 
     /**
