@@ -7,16 +7,26 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ─── Editorial Serenity — Font Imports ─── */
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Inter:wght@300..800&display=swap');
+
 @theme {
+    /* ─── Typography ─── */
     --font-sans:
-        'Instrument Sans', ui-sans-serif, system-ui, sans-serif,
+        'Inter', ui-sans-serif, system-ui, sans-serif,
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
         'Noto Color Emoji';
 
+    --font-serif:
+        'Newsreader', 'Georgia', 'Cambria', 'Times New Roman',
+        ui-serif, serif;
+
+    /* ─── Radii ─── */
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
     --radius-sm: calc(var(--radius) - 4px);
 
+    /* ─── shadcn/ui semantic tokens ─── */
     --color-background: var(--background);
     --color-foreground: var(--foreground);
 
@@ -59,77 +69,138 @@
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-ring: var(--sidebar-ring);
+
+    /* ─── Editorial Serenity: Surface Hierarchy ─── */
+    --color-parchment: var(--parchment);
+    --color-bone: var(--bone);
+    --color-moss: var(--moss);
+    --color-moss-foreground: var(--moss-foreground);
+    --color-surface: var(--es-surface);
+    --color-surface-variant: var(--es-surface-variant);
+    --color-surface-container-lowest: var(--es-surface-container-lowest);
+    --color-surface-container-low: var(--es-surface-container-low);
+    --color-surface-container: var(--es-surface-container);
+    --color-surface-container-high: var(--es-surface-container-high);
+    --color-surface-container-highest: var(--es-surface-container-highest);
+    --color-on-surface: var(--es-on-surface);
+    --color-on-surface-variant: var(--es-on-surface-variant);
+
+    /* ─── Editorial Serenity: Ambient Shadow ─── */
+    --shadow-ambient: 0 4px 48px rgb(60 50 30 / 0.05);
+    --shadow-ambient-lg: 0 8px 60px rgb(60 50 30 / 0.06);
 }
 
+/* ─────────────────────────────────────────────────
+   Light Mode — Editorial Serenity (Parchment)
+   ───────────────────────────────────────────────── */
 :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
+    /* shadcn semantic — warm parchment palette */
+    --background: #FCF9F2;
+    --foreground: #1A1A18;
+    --card: #F6F3EB;
+    --card-foreground: #1A1A18;
+    --popover: #FDFBF6;
+    --popover-foreground: #1A1A18;
+    --primary: #1A1A18;
+    --primary-foreground: #FCF9F2;
+    --secondary: #F1EEE7;
+    --secondary-foreground: #1A1A18;
+    --muted: #F1EEE7;
+    --muted-foreground: #78756D;
+    --accent: #F1EEE7;
+    --accent-foreground: #1A1A18;
     --destructive: oklch(0.577 0.245 27.325);
     --destructive-foreground: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.87 0 0);
-    --chart-1: oklch(0.646 0.222 41.116);
+    --border: #E8E4DB;
+    --input: #E8E4DB;
+    --ring: #D6D1C7;
+    --chart-1: #56642B;
     --chart-2: oklch(0.6 0.118 184.704);
     --chart-3: oklch(0.398 0.07 227.392);
     --chart-4: oklch(0.828 0.189 84.429);
     --chart-5: oklch(0.769 0.188 70.08);
     --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.87 0 0);
+
+    /* Sidebar — bone / parchment feel */
+    --sidebar: #F6F3EB;
+    --sidebar-foreground: #1A1A18;
+    --sidebar-primary: #1A1A18;
+    --sidebar-primary-foreground: #FCF9F2;
+    --sidebar-accent: #EBE8E0;
+    --sidebar-accent-foreground: #1A1A18;
+    --sidebar-border: #E8E4DB;
+    --sidebar-ring: #D6D1C7;
+
+    /* Editorial Serenity tokens */
+    --parchment: #FCF9F2;
+    --bone: #F1EEE7;
+    --moss: #56642B;
+    --moss-foreground: #FFFFFF;
+    --es-surface: #FCF9F2;
+    --es-surface-variant: #F6F3EB;
+    --es-surface-container-lowest: #FFFFFF;
+    --es-surface-container-low: #FAF7F0;
+    --es-surface-container: #F6F3EB;
+    --es-surface-container-high: #F1EEE7;
+    --es-surface-container-high: #F1EEE7;
+    --es-surface-container-highest: #EBE8E0;
+    --es-on-surface: #1A1A18;
+    --es-on-surface-variant: #78756D;
 }
 
+/* ─────────────────────────────────────────────────
+   Dark Mode — Editorial Night (Deep Walnut)
+   ───────────────────────────────────────────────── */
 .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.145 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.145 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.985 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
+    --background: #141210;
+    --foreground: #EDE9E0;
+    --card: #1C1A17;
+    --card-foreground: #EDE9E0;
+    --popover: #1C1A17;
+    --popover-foreground: #EDE9E0;
+    --primary: #EDE9E0;
+    --primary-foreground: #141210;
+    --secondary: #252320;
+    --secondary-foreground: #EDE9E0;
+    --muted: #252320;
+    --muted-foreground: #9B968B;
+    --accent: #252320;
+    --accent-foreground: #EDE9E0;
     --destructive: oklch(0.396 0.141 25.723);
     --destructive-foreground: oklch(0.637 0.237 25.331);
-    --border: oklch(0.269 0 0);
-    --input: oklch(0.269 0 0);
-    --ring: oklch(0.439 0 0);
-    --chart-1: oklch(0.488 0.243 264.376);
+    --border: #2E2B27;
+    --input: #2E2B27;
+    --ring: #3D3A35;
+    --chart-1: #7A8B42;
     --chart-2: oklch(0.696 0.17 162.48);
     --chart-3: oklch(0.769 0.188 70.08);
     --chart-4: oklch(0.627 0.265 303.9);
     --chart-5: oklch(0.645 0.246 16.439);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.985 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(0.269 0 0);
-    --sidebar-ring: oklch(0.439 0 0);
+
+    /* Sidebar — deep walnut */
+    --sidebar: #1C1A17;
+    --sidebar-foreground: #EDE9E0;
+    --sidebar-primary: #EDE9E0;
+    --sidebar-primary-foreground: #141210;
+    --sidebar-accent: #252320;
+    --sidebar-accent-foreground: #EDE9E0;
+    --sidebar-border: #2E2B27;
+    --sidebar-ring: #3D3A35;
+
+    /* Editorial Serenity tokens — dark */
+    --parchment: #141210;
+    --bone: #1C1A17;
+    --moss: #7A8B42;
+    --moss-foreground: #141210;
+    --es-surface: #141210;
+    --es-surface-variant: #1C1A17;
+    --es-surface-container-lowest: #0F0E0C;
+    --es-surface-container-low: #181614;
+    --es-surface-container: #1C1A17;
+    --es-surface-container-high: #252320;
+    --es-surface-container-highest: #2E2B27;
+    --es-on-surface: #EDE9E0;
+    --es-on-surface-variant: #9B968B;
 }
 
 @layer base {
@@ -138,6 +209,8 @@
     }
 
     body {
-        @apply bg-background text-foreground;
+        @apply bg-background text-foreground antialiased;
+        font-feature-settings: 'liga' 1, 'calt' 1;
+        text-rendering: optimizeLegibility;
     }
 }
