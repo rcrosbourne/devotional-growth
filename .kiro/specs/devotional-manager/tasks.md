@@ -435,15 +435,15 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Test creation, deletion, grouping by type, authorization
     - _Requirements: 6.1–6.4_
 
-- [ ] 14. Observations
-  - [ ] 14.1 Create `CreateObservation`, `UpdateObservation`, `DeleteObservation` actions
+- [x] 14. Observations
+  - [x] 14.1 Create `CreateObservation`, `UpdateObservation`, `DeleteObservation` actions
     - `CreateObservation::handle(User $user, DevotionalEntry $entry, string $body): Observation`
     - `UpdateObservation::handle(Observation $observation, string $body): Observation` — set edited_at
     - `DeleteObservation::handle(Observation $observation): void`
     - Dispatch partner notification on create (if partner linked and notifications enabled)
     - _Requirements: 13.1–13.7, Properties 22, 23, 24, 25_
 
-  - [ ] 14.2 Create `ObservationController`
+  - [x] 14.2 Create `ObservationController`
     - `final readonly` controller
     - `store(CreateObservationRequest, DevotionalEntry)` — delegate to `CreateObservation`
     - `update(UpdateObservationRequest, Observation)` — delegate to `UpdateObservation`
@@ -452,7 +452,7 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Register routes under `auth` + `verified` middleware
     - _Requirements: 13.1–13.7_
 
-  - [ ]* 14.3 Write unit and feature tests for observation actions and controller
+  - [x]* 14.3 Write unit and feature tests for observation actions and controller
     - Test CRUD, partner visibility, chronological ordering, authorization
     - _Requirements: 13.1–13.8_
 

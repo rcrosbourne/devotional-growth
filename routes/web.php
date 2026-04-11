@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\DevotionalEntryController as AdminDevotionalEntry
 use App\Http\Controllers\Admin\ThemeController as AdminThemeController;
 use App\Http\Controllers\DevotionalEntryController;
 use App\Http\Controllers\EmailOtpController;
+use App\Http\Controllers\ObservationController;
 use App\Http\Controllers\ReadingPlanController;
 use App\Http\Controllers\ScriptureController;
 use App\Http\Controllers\SessionController;
@@ -34,6 +35,11 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
     // User-facing Devotional Entries...
     Route::get('themes/{theme}/entries/{entry}', new DevotionalEntryController()->show(...))->name('themes.entries.show');
     Route::post('themes/{theme}/entries/{entry}/complete', new DevotionalEntryController()->complete(...))->name('themes.entries.complete');
+
+    // Observations...
+    Route::post('entries/{entry}/observations', new ObservationController()->store(...))->name('observations.store');
+    Route::put('observations/{observation}', new ObservationController()->update(...))->name('observations.update');
+    Route::delete('observations/{observation}', new ObservationController()->destroy(...))->name('observations.destroy');
 
     // Scripture passages...
     Route::get('scripture', [ScriptureController::class, 'show'])->name('scripture.show');
