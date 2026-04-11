@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Notifications;
 
 use App\Models\DevotionalEntry;
+use App\Models\Observation;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -17,6 +18,7 @@ final class PartnerAddedObservation extends Notification implements ShouldQueue
     public function __construct(
         public User $partner,
         public DevotionalEntry $entry,
+        public Observation $observation,
     ) {}
 
     /**
@@ -38,7 +40,8 @@ final class PartnerAddedObservation extends Notification implements ShouldQueue
             'entry_id' => $this->entry->id,
             'entry_title' => $this->entry->title,
             'theme_id' => $this->entry->theme_id,
-            'message' => sprintf('%s added a reflection on "%s"', $this->partner->name, $this->entry->title),
+            'observation_id' => $this->observation->id,
+            'message' => sprintf('%s added an observation on "%s"', $this->partner->name, $this->entry->title),
         ];
     }
 }

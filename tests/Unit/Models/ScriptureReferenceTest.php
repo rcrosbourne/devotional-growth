@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Models\Bookmark;
 use App\Models\DevotionalEntry;
 use App\Models\ScriptureReference;
 
@@ -36,6 +37,13 @@ test('devotional entry has many scripture references', function (): void {
     ScriptureReference::factory()->for($entry, 'devotionalEntry')->count(3)->create();
 
     expect($entry->scriptureReferences)->toHaveCount(3);
+});
+
+test('bookmarks returns morph many relationship', function (): void {
+    $reference = ScriptureReference::factory()->create();
+    Bookmark::factory()->forScriptureReference($reference)->count(2)->create();
+
+    expect($reference->bookmarks)->toHaveCount(2);
 });
 
 test('verse end is nullable', function (): void {

@@ -5,9 +5,12 @@ declare(strict_types=1);
 use App\Http\Controllers\Admin\AiContentController as AdminAiContentController;
 use App\Http\Controllers\Admin\DevotionalEntryController as AdminDevotionalEntryController;
 use App\Http\Controllers\Admin\ThemeController as AdminThemeController;
+use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\DevotionalEntryController;
+use App\Http\Controllers\DevotionalImageController;
 use App\Http\Controllers\EmailOtpController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ObservationController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\ReadingPlanController;
 use App\Http\Controllers\ScriptureController;
@@ -21,6 +24,7 @@ use App\Http\Controllers\UserEmailVerificationNotificationController;
 use App\Http\Controllers\UserPasswordController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\UserTwoFactorAuthenticationController;
+use App\Http\Controllers\WordStudyController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -37,14 +41,31 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
     Route::get('themes/{theme}/entries/{entry}', new DevotionalEntryController()->show(...))->name('themes.entries.show');
     Route::post('themes/{theme}/entries/{entry}/complete', new DevotionalEntryController()->complete(...))->name('themes.entries.complete');
 
+    // Devotional Image Generation...
+    Route::post('entries/{entry}/generate-image', new DevotionalImageController()->store(...))->name('entries.generate-image');
+
+    // Observations...
+    Route::post('entries/{entry}/observations', new ObservationController()->store(...))->name('observations.store');
+    Route::put('observations/{observation}', new ObservationController()->update(...))->name('observations.update');
+    Route::delete('observations/{observation}', new ObservationController()->destroy(...))->name('observations.destroy');
+
     // Scripture passages...
     Route::get('scripture', [ScriptureController::class, 'show'])->name('scripture.show');
+
+    // Bookmarks...
+    Route::get('bookmarks', new BookmarkController()->index(...))->name('bookmarks.index');
+    Route::post('bookmarks', new BookmarkController()->store(...))->name('bookmarks.store');
+    Route::delete('bookmarks/{bookmark}', new BookmarkController()->destroy(...))->name('bookmarks.destroy');
 
     // Bible Study / Reading Plans...
     Route::get('bible-study', new ReadingPlanController()->index(...))->name('bible-study.index');
     Route::get('bible-study/reading-plan/{readingPlan}', new ReadingPlanController()->show(...))->name('bible-study.reading-plan.show');
     Route::post('bible-study/reading-plan/{readingPlan}/activate', new ReadingPlanController()->activate(...))->name('bible-study.reading-plan.activate');
     Route::post('bible-study/reading-plan/day/{day}/complete', new ReadingPlanController()->completeDay(...))->name('bible-study.reading-plan.complete-day');
+
+    // Word Study...
+    Route::get('bible-study/word-study/search', [WordStudyController::class, 'search'])->name('bible-study.word-study.search');
+    Route::get('bible-study/word-study/{wordStudy}', [WordStudyController::class, 'show'])->name('bible-study.word-study.show');
 
     // Notifications...
     Route::get('notifications', new NotificationController()->index(...))->name('notifications.index');

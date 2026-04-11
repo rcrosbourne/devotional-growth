@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Enums\ContentStatus;
+use App\Models\Bookmark;
 use App\Models\DevotionalCompletion;
 use App\Models\DevotionalEntry;
 use App\Models\GeneratedImage;
@@ -78,6 +79,13 @@ test('generated image returns has one relationship', function (): void {
     expect($entry->generatedImage)
         ->toBeInstanceOf(GeneratedImage::class)
         ->id->toBe($image->id);
+});
+
+test('bookmarks returns morph many relationship', function (): void {
+    $entry = DevotionalEntry::factory()->create();
+    Bookmark::factory()->forDevotionalEntry($entry)->count(2)->create();
+
+    expect($entry->bookmarks)->toHaveCount(2);
 });
 
 test('theme has many entries', function (): void {

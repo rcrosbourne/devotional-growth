@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Actions\SendPartnerNotification;
 use App\Models\DevotionalEntry;
 use App\Models\NotificationPreference;
+use App\Models\Observation;
 use App\Models\Theme;
 use App\Models\User;
 use App\Notifications\PartnerAddedObservation;
@@ -31,9 +32,10 @@ it('sends an observation notification when preferences allow', function (): void
     $partner = User::factory()->create();
     $entry = DevotionalEntry::factory()->published()->create();
     $user = User::factory()->create();
+    $observation = Observation::factory()->for($user)->for($entry)->create();
     $action = resolve(SendPartnerNotification::class);
 
-    $action->handle($partner, 'observation', new PartnerAddedObservation($user, $entry));
+    $action->handle($partner, 'observation', new PartnerAddedObservation($user, $entry, $observation));
 
     Notification::assertSentTo($partner, PartnerAddedObservation::class);
 });
@@ -76,9 +78,10 @@ it('does not send an observation notification when disabled', function (): void 
     ]);
     $entry = DevotionalEntry::factory()->published()->create();
     $user = User::factory()->create();
+    $observation = Observation::factory()->for($user)->for($entry)->create();
     $action = resolve(SendPartnerNotification::class);
 
-    $action->handle($partner, 'observation', new PartnerAddedObservation($user, $entry));
+    $action->handle($partner, 'observation', new PartnerAddedObservation($user, $entry, $observation));
 
     Notification::assertNotSentTo($partner, PartnerAddedObservation::class);
 });
@@ -118,16 +121,18 @@ it('includes correct data in the observation notification', function (): void {
     $partner = User::factory()->create();
     $user = User::factory()->create();
     $entry = DevotionalEntry::factory()->published()->create(['title' => 'Grace Abounds']);
+    $observation = Observation::factory()->for($user)->for($entry)->create();
     $action = resolve(SendPartnerNotification::class);
 
-    $action->handle($partner, 'observation', new PartnerAddedObservation($user, $entry));
+    $action->handle($partner, 'observation', new PartnerAddedObservation($user, $entry, $observation));
 
-    Notification::assertSentTo($partner, function (PartnerAddedObservation $notification) use ($user, $entry): bool {
+    Notification::assertSentTo($partner, function (PartnerAddedObservation $notification) use ($user, $entry, $observation): bool {
         $data = $notification->toArray($notification);
 
         return $data['partner_id'] === $user->id
             && $data['entry_id'] === $entry->id
-            && $data['entry_title'] === 'Grace Abounds';
+            && $data['entry_title'] === 'Grace Abounds'
+            && $data['observation_id'] === $observation->id;
     });
 });
 
