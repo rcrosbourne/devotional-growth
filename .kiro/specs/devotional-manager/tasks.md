@@ -312,8 +312,8 @@ Incremental implementation of the Devotional Manager feature on top of the exist
 - [ ] 7. Checkpoint — Admin backend complete
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 8. User-facing backend — Themes and Devotional Entries (read-only)
-  - [ ] 8.1 Create `ThemeController` (user-facing, read-only)
+- [x] 8. User-facing backend — Themes and Devotional Entries (read-only)
+  - [x] 8.1 Create `ThemeController` (user-facing, read-only)
     - `final readonly` controller
     - `index()` — list published themes with entry counts, completed counts per user, progress percentage
     - `show(Theme)` — show published theme with published entries in display_order, completion status
@@ -321,14 +321,14 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Register routes under `auth` + `verified` middleware
     - _Requirements: 1.1, 1.2, 1.3, 1.4, Properties 1, 2, 37_
 
-  - [ ] 8.2 Create `DevotionalEntryController` (user-facing, read-only)
+  - [x] 8.2 Create `DevotionalEntryController` (user-facing, read-only)
     - `final readonly` controller
     - `show(Theme, DevotionalEntry)` — show published entry with title, body, scripture texts, reflection prompts, adventist insights, completion status, previous/next navigation, partner observations (if partner linked), generated image
     - Only return published entries within published themes
     - Include previous/next entry IDs for navigation
     - _Requirements: 10.1, 10.2, 10.3, 10.4, Properties 18, 19, 33_
 
-  - [ ]* 8.3 Write feature tests for user-facing `ThemeController` and `DevotionalEntryController`
+  - [x]* 8.3 Write feature tests for user-facing `ThemeController` and `DevotionalEntryController`
     - Test published-only filtering, progress calculation, previous/next navigation, solo vs partner mode
     - Test non-admin cannot see draft content (Property 37)
     - _Requirements: 1.1–1.4, 10.1–10.4_
