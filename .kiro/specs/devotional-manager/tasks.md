@@ -280,13 +280,13 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Test all CRUD endpoints, admin authorization, validation errors, reorder
     - _Requirements: 2.1–2.6, Property 38_
 
-- [ ] 6. AI content generation (admin)
-  - [ ] 6.1 Install Laravel AI SDK (Prism) and configure AI provider
+- [x] 6. AI content generation (admin)
+  - [x] 6.1 Install Laravel AI SDK (Prism) and configure AI provider
     - Add `laravel/ai` via Composer
     - Configure AI provider credentials in `config/services.php`
     - _Requirements: AI content generation_
 
-  - [ ] 6.2 Create `GenerateDevotionalContent` action
+  - [x] 6.2 Create `GenerateDevotionalContent` action
     - `final readonly` class with `handle(User $admin, string $prompt): AiGenerationLog`
     - Call Prism with structured prompt requesting title, body, scripture_references, reflection_prompts, adventist_insights
     - Store request and result in `AiGenerationLog` (status: pending → completed/failed)
@@ -294,18 +294,18 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Mock Prism in tests
     - _Requirements: AI content generation, Properties 39, 40_
 
-  - [ ] 6.3 Create `Admin\AiContentController`
+  - [x] 6.3 Create `Admin\AiContentController`
     - `final readonly` controller
     - `create()` — render AI generation interface page
     - `store(GenerateContentRequest)` — delegate to `GenerateDevotionalContent`, return generated content
     - Register routes under `auth` + `admin` middleware prefix `/admin/ai-content`
     - _Requirements: AI content generation_
 
-  - [ ]* 6.4 Write unit tests for `GenerateDevotionalContent` action
+  - [x]* 6.4 Write unit tests for `GenerateDevotionalContent` action
     - Mock Prism, test successful generation, failed generation, structured output validation
     - _Requirements: AI content generation, Properties 39, 40_
 
-  - [ ]* 6.5 Write feature tests for `Admin\AiContentController`
+  - [x]* 6.5 Write feature tests for `Admin\AiContentController`
     - Test generation endpoint, admin authorization, error handling
     - _Requirements: AI content generation_
 
