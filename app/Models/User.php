@@ -63,6 +63,14 @@ final class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(SocialAccount::class);
     }
 
+    /**
+     * @return HasMany<Bookmark, $this>
+     */
+    public function bookmarks(): HasMany
+    {
+        return $this->hasMany(Bookmark::class);
+    }
+
     public function isAdmin(): bool
     {
         return $this->is_admin;
