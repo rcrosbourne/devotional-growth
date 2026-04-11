@@ -475,35 +475,35 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Mock OpenAI HTTP calls, test prompt construction, test error handling, test image replacement
     - _Requirements: 12.1–12.8_
 
-- [ ] 16. Partner linking and notifications
-  - [ ] 16.1 Create `LinkPartner` action
+- [x] 16. Partner linking and notifications
+  - [x] 16.1 Create `LinkPartner` action
     - `handle(User $user, User $partner): void`
     - Set `partner_id` on both users (bidirectional)
     - Wrap in `DB::transaction()`
     - _Requirements: 8.3, 13.4_
 
-  - [ ] 16.2 Create `SendPartnerNotification` action
+  - [x] 16.2 Create `SendPartnerNotification` action
     - `handle(User $partner, string $type, array $data): void`
     - Check partner's notification preferences before sending
     - Use Laravel's built-in notification system (`DatabaseNotification`)
     - Notification types: completion, observation, new_theme
     - _Requirements: 14.1–14.4, 14.8, 14.9, Properties 26, 31_
 
-  - [ ] 16.3 Create `NotificationController`
+  - [x] 16.3 Create `NotificationController`
     - `final readonly` controller
     - `index()` — list notifications in reverse chronological order, mark all as read on visit
     - `updatePreferences(UpdateNotificationPreferencesRequest)` — update notification preferences
     - Register routes under `auth` + `verified` middleware
     - _Requirements: 14.5, 14.6, 14.7, 14.8, Properties 27, 28, 29, 30_
 
-  - [ ] 16.4 Create `PartnerController`
+  - [x] 16.4 Create `PartnerController`
     - `final readonly` controller
     - `store(LinkPartnerRequest)` — delegate to `LinkPartner`
     - `destroy()` — unlink partner (set both partner_id to null)
     - Register routes under `auth` + `verified` middleware
     - _Requirements: 8.3, 13.4_
 
-  - [ ]* 16.5 Write unit and feature tests for partner linking, notifications, and preferences
+  - [x]* 16.5 Write unit and feature tests for partner linking, notifications, and preferences
     - Test bidirectional linking, notification dispatch, preference filtering, mark-as-read, unread count
     - _Requirements: 14.1–14.10_
 

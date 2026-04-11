@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\DevotionalEntryController as AdminDevotionalEntry
 use App\Http\Controllers\Admin\ThemeController as AdminThemeController;
 use App\Http\Controllers\DevotionalEntryController;
 use App\Http\Controllers\EmailOtpController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\ReadingPlanController;
 use App\Http\Controllers\ScriptureController;
 use App\Http\Controllers\SessionController;
@@ -43,6 +45,14 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
     Route::get('bible-study/reading-plan/{readingPlan}', new ReadingPlanController()->show(...))->name('bible-study.reading-plan.show');
     Route::post('bible-study/reading-plan/{readingPlan}/activate', new ReadingPlanController()->activate(...))->name('bible-study.reading-plan.activate');
     Route::post('bible-study/reading-plan/day/{day}/complete', new ReadingPlanController()->completeDay(...))->name('bible-study.reading-plan.complete-day');
+
+    // Notifications...
+    Route::get('notifications', new NotificationController()->index(...))->name('notifications.index');
+    Route::put('notifications/preferences', new NotificationController()->updatePreferences(...))->name('notifications.preferences.update');
+
+    // Partner...
+    Route::post('partner', new PartnerController()->store(...))->name('partner.store');
+    Route::delete('partner', new PartnerController()->destroy(...))->name('partner.destroy');
 });
 
 Route::middleware('auth')->group(function (): void {
