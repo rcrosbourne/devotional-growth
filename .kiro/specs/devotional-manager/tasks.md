@@ -220,45 +220,45 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Test all CRUD endpoints, admin authorization (non-admin gets 403), validation errors
     - _Requirements: 9.1, 9.2, 9.3, 9.4, Property 38_
 
-- [ ] 5. Admin content management — Devotional Entries
-  - [ ] 5.1 Create `CreateDevotionalEntry` action
+- [x] 5. Admin content management — Devotional Entries
+  - [x] 5.1 Create `CreateDevotionalEntry` action
     - `handle(Theme $theme, array $data): DevotionalEntry`
     - Create entry with title, body, reflection_prompts, adventist_insights, display_order, status = draft
     - Create associated ScriptureReference records from parsed references
     - Wrap in `DB::transaction()`
     - _Requirements: 2.1, 2.2, 2.3, Property 4_
 
-  - [ ] 5.2 Create `UpdateDevotionalEntry` action
+  - [x] 5.2 Create `UpdateDevotionalEntry` action
     - `handle(DevotionalEntry $entry, array $data): DevotionalEntry`
     - Update fields, sync scripture references
     - _Requirements: 2.4_
 
-  - [ ] 5.3 Create `DeleteDevotionalEntry` action
+  - [x] 5.3 Create `DeleteDevotionalEntry` action
     - `handle(DevotionalEntry $entry): void`
     - Delete entry (cascade via FK)
     - _Requirements: 2.5_
 
-  - [ ] 5.4 Create `PublishDevotionalEntry` action
+  - [x] 5.4 Create `PublishDevotionalEntry` action
     - `handle(DevotionalEntry $entry): DevotionalEntry`
     - Change status from draft to published
     - _Requirements: Property 41_
 
-  - [ ] 5.5 Create `ReorderDevotionalEntries` action
+  - [x] 5.5 Create `ReorderDevotionalEntries` action
     - `handle(Theme $theme, array $orderedIds): void`
     - Update display_order for each entry based on position in array
     - _Requirements: 2.6, Property 5_
 
-  - [ ] 5.6 Create `ScriptureReferenceParser` service class in `app/Services/`
+  - [x] 5.6 Create `ScriptureReferenceParser` service class in `app/Services/`
     - `parse(string $raw): object` — parse "John 3:16", "Psalm 23:1-6" etc. into book, chapter, verse_start, verse_end
     - `format(string $book, int $chapter, int $verseStart, ?int $verseEnd): string` — format back to string
     - Create `ScriptureReferenceFormat` validation rule in `app/Rules/`
     - _Requirements: 3.5, Property 6_
 
-  - [ ] 5.7 Create Form Requests: `CreateDevotionalEntryRequest`, `UpdateDevotionalEntryRequest`, `ReorderDevotionalEntriesRequest`
+  - [x] 5.7 Create Form Requests: `CreateDevotionalEntryRequest`, `UpdateDevotionalEntryRequest`, `ReorderDevotionalEntriesRequest`
     - Validate title (required), body (required), scripture_references (required, array, min:1), reflection_prompts (optional), adventist_insights (optional)
     - _Requirements: 2.1, 2.4, Property 3_
 
-  - [ ] 5.8 Create `Admin\DevotionalEntryController` with full CRUD + publish + reorder routes
+  - [x] 5.8 Create `Admin\DevotionalEntryController` with full CRUD + publish + reorder routes
     - `final readonly` controller
     - `index(Theme)` — list all entries for theme (draft + published)
     - `create(Theme)` — render admin create form
@@ -271,12 +271,12 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Register routes under `auth` + `admin` middleware prefix `/admin/themes/{theme}/entries`
     - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 2.6_
 
-  - [ ]* 5.9 Write unit tests for entry actions and `ScriptureReferenceParser`
+  - [x]* 5.9 Write unit tests for entry actions and `ScriptureReferenceParser`
     - Test `CreateDevotionalEntry`, `UpdateDevotionalEntry`, `DeleteDevotionalEntry`, `PublishDevotionalEntry`, `ReorderDevotionalEntries`
     - Test scripture parsing for various formats (single verse, range, multi-chapter)
     - _Requirements: 2.1–2.6, 3.5_
 
-  - [ ]* 5.10 Write feature tests for `Admin\DevotionalEntryController`
+  - [x]* 5.10 Write feature tests for `Admin\DevotionalEntryController`
     - Test all CRUD endpoints, admin authorization, validation errors, reorder
     - _Requirements: 2.1–2.6, Property 38_
 
