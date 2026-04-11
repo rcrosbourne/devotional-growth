@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Models\Bookmark;
 use App\Models\User;
 
 test('to array', function (): void {
@@ -53,4 +54,11 @@ test('has partner returns false when no partner is linked', function (): void {
     $user = User::factory()->create();
 
     expect($user->hasPartner())->toBeFalse();
+});
+
+test('bookmarks returns has many relationship', function (): void {
+    $user = User::factory()->create();
+    Bookmark::factory()->for($user)->count(3)->create();
+
+    expect($user->bookmarks)->toHaveCount(3);
 });

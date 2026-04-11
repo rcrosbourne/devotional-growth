@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 /**
  * @property-read int $id
@@ -69,6 +70,14 @@ final class DevotionalEntry extends Model
     public function generatedImage(): HasOne
     {
         return $this->hasOne(GeneratedImage::class);
+    }
+
+    /**
+     * @return MorphMany<Bookmark, $this>
+     */
+    public function bookmarks(): MorphMany
+    {
+        return $this->morphMany(Bookmark::class, 'bookmarkable');
     }
 
     /**
