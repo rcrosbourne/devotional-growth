@@ -352,19 +352,19 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Mock HTTP client, test caching, test API failure fallback, test version switching
     - _Requirements: 3.1–3.4_
 
-- [ ] 10. Devotional completion tracking
-  - [ ] 10.1 Create `CompleteDevotionalEntry` action
+- [x] 10. Devotional completion tracking
+  - [x] 10.1 Create `CompleteDevotionalEntry` action
     - `handle(User $user, DevotionalEntry $entry): DevotionalCompletion`
     - Create completion record with user_id, devotional_entry_id, completed_at
     - Check if partner also completed → determine "completed together" status
     - Dispatch partner notification if partner is linked and notifications enabled
     - _Requirements: 8.1, 8.2, 8.3, Properties 13, 14_
 
-  - [ ] 10.2 Add completion routes to `DevotionalEntryController`
+  - [x] 10.2 Add completion routes to `DevotionalEntryController`
     - `POST /themes/{theme}/entries/{entry}/complete` — delegate to `CompleteDevotionalEntry`
     - _Requirements: 8.1_
 
-  - [ ]* 10.3 Write unit tests for `CompleteDevotionalEntry` action
+  - [x]* 10.3 Write unit tests for `CompleteDevotionalEntry` action
     - Test completion recording, "completed together" logic, partner notification dispatch
     - _Requirements: 8.1–8.4_
 
