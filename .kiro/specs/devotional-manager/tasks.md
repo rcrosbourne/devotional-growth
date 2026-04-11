@@ -282,7 +282,7 @@ Incremental implementation of the Devotional Manager feature on top of the exist
 
 - [ ] 6. AI content generation (admin)
   - [ ] 6.1 Install Laravel AI SDK (Prism) and configure AI provider
-    - Add `echolabs/prism` via Composer
+    - Add `laravel/ai` via Composer
     - Configure AI provider credentials in `config/services.php`
     - _Requirements: AI content generation_
 
