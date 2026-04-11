@@ -9,6 +9,8 @@ use App\Models\Observation;
 use App\Models\ScriptureReference;
 use App\Models\Theme;
 use App\Models\User;
+use App\Notifications\PartnerCompletedEntry;
+use Illuminate\Support\Facades\Notification;
 
 // Show
 
@@ -355,4 +357,95 @@ it('includes entry body, reflection prompts, and adventist insights', function (
             ->where('entry.reflection_prompts', 'What do you think?')
             ->where('entry.adventist_insights', 'Sabbath perspective')
         );
+});
+
+// Complete
+
+it('marks a devotional entry as complete', function (): void {
+    Notification::fake();
+
+    $user = User::factory()->create();
+    $theme = Theme::factory()->published()->create();
+    $entry = DevotionalEntry::factory()->published()->for($theme)->create();
+
+    $response = $this->actingAs($user)
+        ->post(route('themes.entries.complete', [$theme, $entry]));
+
+    $response->assertRedirect();
+    $this->assertDatabaseHas('devotional_completions', [
+        'user_id' => $user->id,
+        'devotional_entry_id' => $entry->id,
+    ]);
+});
+
+it('returns 404 when completing an entry in a draft theme', function (): void {
+    $user = User::factory()->create();
+    $theme = Theme::factory()->draft()->create();
+    $entry = DevotionalEntry::factory()->published()->for($theme)->create();
+
+    $response = $this->actingAs($user)
+        ->post(route('themes.entries.complete', [$theme, $entry]));
+
+    $response->assertNotFound();
+});
+
+it('returns 404 when completing a draft entry', function (): void {
+    $user = User::factory()->create();
+    $theme = Theme::factory()->published()->create();
+    $entry = DevotionalEntry::factory()->draft()->for($theme)->create();
+
+    $response = $this->actingAs($user)
+        ->post(route('themes.entries.complete', [$theme, $entry]));
+
+    $response->assertNotFound();
+});
+
+it('returns 404 when completing an entry that does not belong to the theme', function (): void {
+    $user = User::factory()->create();
+    $theme = Theme::factory()->published()->create();
+    $otherTheme = Theme::factory()->published()->create();
+    $entry = DevotionalEntry::factory()->published()->for($otherTheme)->create();
+
+    $response = $this->actingAs($user)
+        ->post(route('themes.entries.complete', [$theme, $entry]));
+
+    $response->assertNotFound();
+});
+
+it('redirects unauthenticated users when completing', function (): void {
+    $theme = Theme::factory()->published()->create();
+    $entry = DevotionalEntry::factory()->published()->for($theme)->create();
+
+    $response = $this->post(route('themes.entries.complete', [$theme, $entry]));
+
+    $response->assertRedirectToRoute('login');
+});
+
+it('sends a partner notification when completing an entry', function (): void {
+    Notification::fake();
+
+    $partner = User::factory()->create();
+    $user = User::factory()->withPartner($partner)->create();
+    $theme = Theme::factory()->published()->create();
+    $entry = DevotionalEntry::factory()->published()->for($theme)->create();
+
+    $this->actingAs($user)
+        ->post(route('themes.entries.complete', [$theme, $entry]));
+
+    Notification::assertSentTo($partner, PartnerCompletedEntry::class);
+});
+
+it('does not create duplicate completions on repeated requests', function (): void {
+    Notification::fake();
+
+    $user = User::factory()->create();
+    $theme = Theme::factory()->published()->create();
+    $entry = DevotionalEntry::factory()->published()->for($theme)->create();
+
+    $this->actingAs($user)
+        ->post(route('themes.entries.complete', [$theme, $entry]));
+    $this->actingAs($user)
+        ->post(route('themes.entries.complete', [$theme, $entry]));
+
+    expect(DevotionalCompletion::query()->count())->toBe(1);
 });

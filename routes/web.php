@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\DevotionalEntryController as AdminDevotionalEntry
 use App\Http\Controllers\Admin\ThemeController as AdminThemeController;
 use App\Http\Controllers\DevotionalEntryController;
 use App\Http\Controllers\EmailOtpController;
+use App\Http\Controllers\ReadingPlanController;
 use App\Http\Controllers\ScriptureController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SocialLoginController;
@@ -32,9 +33,16 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
 
     // User-facing Devotional Entries...
     Route::get('themes/{theme}/entries/{entry}', new DevotionalEntryController()->show(...))->name('themes.entries.show');
+    Route::post('themes/{theme}/entries/{entry}/complete', new DevotionalEntryController()->complete(...))->name('themes.entries.complete');
 
     // Scripture passages...
     Route::get('scripture', [ScriptureController::class, 'show'])->name('scripture.show');
+
+    // Bible Study / Reading Plans...
+    Route::get('bible-study', new ReadingPlanController()->index(...))->name('bible-study.index');
+    Route::get('bible-study/reading-plan/{readingPlan}', new ReadingPlanController()->show(...))->name('bible-study.reading-plan.show');
+    Route::post('bible-study/reading-plan/{readingPlan}/activate', new ReadingPlanController()->activate(...))->name('bible-study.reading-plan.activate');
+    Route::post('bible-study/reading-plan/day/{day}/complete', new ReadingPlanController()->completeDay(...))->name('bible-study.reading-plan.complete-day');
 });
 
 Route::middleware('auth')->group(function (): void {
