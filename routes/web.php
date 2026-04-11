@@ -5,9 +5,11 @@ declare(strict_types=1);
 use App\Http\Controllers\Admin\AiContentController as AdminAiContentController;
 use App\Http\Controllers\Admin\DevotionalEntryController as AdminDevotionalEntryController;
 use App\Http\Controllers\Admin\ThemeController as AdminThemeController;
+use App\Http\Controllers\DevotionalEntryController;
 use App\Http\Controllers\EmailOtpController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SocialLoginController;
+use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserEmailResetNotification;
 use App\Http\Controllers\UserEmailVerification;
@@ -22,6 +24,13 @@ Route::get('/', fn () => Inertia::render('welcome'))->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function (): void {
     Route::get('dashboard', fn () => Inertia::render('dashboard'))->name('dashboard');
+
+    // User-facing Themes...
+    Route::get('themes', new ThemeController()->index(...))->name('themes.index');
+    Route::get('themes/{theme}', new ThemeController()->show(...))->name('themes.show');
+
+    // User-facing Devotional Entries...
+    Route::get('themes/{theme}/entries/{entry}', new DevotionalEntryController()->show(...))->name('themes.entries.show');
 });
 
 Route::middleware('auth')->group(function (): void {
