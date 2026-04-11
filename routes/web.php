@@ -9,7 +9,9 @@ use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\DevotionalEntryController;
 use App\Http\Controllers\DevotionalImageController;
 use App\Http\Controllers\EmailOtpController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ObservationController;
+use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\ReadingPlanController;
 use App\Http\Controllers\ScriptureController;
 use App\Http\Controllers\SessionController;
@@ -64,6 +66,14 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
     // Word Study...
     Route::get('bible-study/word-study/search', [WordStudyController::class, 'search'])->name('bible-study.word-study.search');
     Route::get('bible-study/word-study/{wordStudy}', [WordStudyController::class, 'show'])->name('bible-study.word-study.show');
+
+    // Notifications...
+    Route::get('notifications', new NotificationController()->index(...))->name('notifications.index');
+    Route::put('notifications/preferences', new NotificationController()->updatePreferences(...))->name('notifications.preferences.update');
+
+    // Partner...
+    Route::post('partner', new PartnerController()->store(...))->name('partner.store');
+    Route::delete('partner', new PartnerController()->destroy(...))->name('partner.destroy');
 });
 
 Route::middleware('auth')->group(function (): void {

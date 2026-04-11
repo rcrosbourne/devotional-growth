@@ -114,7 +114,7 @@ it('calls the image ai provider', function (): void {
 
     $action->handle($entry);
 
-    Image::assertGenerated(fn ($prompt) => str_contains($prompt->prompt, 'Forgiveness'));
+    Image::assertGenerated(fn ($prompt): bool => str_contains((string) $prompt->prompt, 'Forgiveness'));
 });
 
 it('truncates long body text in the prompt', function (): void {

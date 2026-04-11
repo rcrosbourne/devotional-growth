@@ -49,9 +49,9 @@ final readonly class GenerateDevotionalImage
 
         $bodyExcerpt = mb_substr(strip_tags($entry->body), 0, 300);
 
-        return "Create a serene, inspirational image for a Christian devotional titled \"{$entry->title}\". "
-            ."Scripture references: {$scriptureRefs}. "
-            ."Theme of the devotional: {$bodyExcerpt}. "
+        return sprintf('Create a serene, inspirational image for a Christian devotional titled "%s". ', $entry->title)
+            .sprintf('Scripture references: %s. ', $scriptureRefs)
+            .sprintf('Theme of the devotional: %s. ', $bodyExcerpt)
             .'The image should be warm, peaceful, and suitable for spiritual reflection. '
             .'Do not include any text or words in the image.';
     }

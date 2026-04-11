@@ -56,6 +56,7 @@ it('replaces an existing image when replace flag is true', function (): void {
         ->postJson(route('entries.generate-image', $entry), ['replace' => true]);
 
     $response->assertOk();
+
     expect(GeneratedImage::query()->count())->toBe(1);
     Storage::disk('public')->assertMissing('images/devotionals/old.png');
 });
@@ -69,6 +70,7 @@ it('returns existing image without regenerating when replace is false', function
         ->postJson(route('entries.generate-image', $entry), ['replace' => false]);
 
     $response->assertOk();
+
     expect($response->json('image.id'))->toBe($existing->id);
 });
 
