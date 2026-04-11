@@ -6,7 +6,7 @@ export default function ThemesIndex({ themes }: { themes: unknown[] }) {
         <DevotionalLayout>
             <Head title="Themes" />
             <div className="px-6 py-6 md:px-8">
-                <p className="text-xs font-medium uppercase tracking-[0.15em] text-on-surface-variant">
+                <p className="text-xs font-medium tracking-[0.15em] text-on-surface-variant uppercase">
                     Curated Collection
                 </p>
                 <h1 className="mt-2 font-serif text-4xl font-medium tracking-tight text-on-surface md:text-5xl">

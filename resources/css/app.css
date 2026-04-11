@@ -13,13 +13,11 @@
 @theme {
     /* ─── Typography ─── */
     --font-sans:
-        'Inter', ui-sans-serif, system-ui, sans-serif,
-        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-        'Noto Color Emoji';
+        'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+        'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
     --font-serif:
-        'Newsreader', 'Georgia', 'Cambria', 'Times New Roman',
-        ui-serif, serif;
+        'Newsreader', 'Georgia', 'Cambria', 'Times New Roman', ui-serif, serif;
 
     /* ─── Radii ─── */
     --radius-lg: var(--radius);
@@ -95,26 +93,26 @@
    ───────────────────────────────────────────────── */
 :root {
     /* shadcn semantic — warm parchment palette */
-    --background: #FCF9F2;
-    --foreground: #1A1A18;
-    --card: #F6F3EB;
-    --card-foreground: #1A1A18;
-    --popover: #FDFBF6;
-    --popover-foreground: #1A1A18;
-    --primary: #1A1A18;
-    --primary-foreground: #FCF9F2;
-    --secondary: #F1EEE7;
-    --secondary-foreground: #1A1A18;
-    --muted: #F1EEE7;
-    --muted-foreground: #78756D;
-    --accent: #F1EEE7;
-    --accent-foreground: #1A1A18;
+    --background: #fcf9f2;
+    --foreground: #1a1a18;
+    --card: #f6f3eb;
+    --card-foreground: #1a1a18;
+    --popover: #fdfbf6;
+    --popover-foreground: #1a1a18;
+    --primary: #1a1a18;
+    --primary-foreground: #fcf9f2;
+    --secondary: #f1eee7;
+    --secondary-foreground: #1a1a18;
+    --muted: #f1eee7;
+    --muted-foreground: #78756d;
+    --accent: #f1eee7;
+    --accent-foreground: #1a1a18;
     --destructive: oklch(0.577 0.245 27.325);
     --destructive-foreground: oklch(0.577 0.245 27.325);
-    --border: #E8E4DB;
-    --input: #E8E4DB;
-    --ring: #D6D1C7;
-    --chart-1: #56642B;
+    --border: #e8e4db;
+    --input: #e8e4db;
+    --ring: #d6d1c7;
+    --chart-1: #56642b;
     --chart-2: oklch(0.6 0.118 184.704);
     --chart-3: oklch(0.398 0.07 227.392);
     --chart-4: oklch(0.828 0.189 84.429);
@@ -122,30 +120,30 @@
     --radius: 0.625rem;
 
     /* Sidebar — bone / parchment feel */
-    --sidebar: #F6F3EB;
-    --sidebar-foreground: #1A1A18;
-    --sidebar-primary: #1A1A18;
-    --sidebar-primary-foreground: #FCF9F2;
-    --sidebar-accent: #EBE8E0;
-    --sidebar-accent-foreground: #1A1A18;
-    --sidebar-border: #E8E4DB;
-    --sidebar-ring: #D6D1C7;
+    --sidebar: #f6f3eb;
+    --sidebar-foreground: #1a1a18;
+    --sidebar-primary: #1a1a18;
+    --sidebar-primary-foreground: #fcf9f2;
+    --sidebar-accent: #ebe8e0;
+    --sidebar-accent-foreground: #1a1a18;
+    --sidebar-border: #e8e4db;
+    --sidebar-ring: #d6d1c7;
 
     /* Editorial Serenity tokens */
-    --parchment: #FCF9F2;
-    --bone: #F1EEE7;
-    --moss: #56642B;
-    --moss-foreground: #FFFFFF;
-    --es-surface: #FCF9F2;
-    --es-surface-variant: #F6F3EB;
-    --es-surface-container-lowest: #FFFFFF;
-    --es-surface-container-low: #FAF7F0;
-    --es-surface-container: #F6F3EB;
-    --es-surface-container-high: #F1EEE7;
-    --es-surface-container-high: #F1EEE7;
-    --es-surface-container-highest: #EBE8E0;
-    --es-on-surface: #1A1A18;
-    --es-on-surface-variant: #78756D;
+    --parchment: #fcf9f2;
+    --bone: #f1eee7;
+    --moss: #56642b;
+    --moss-foreground: #ffffff;
+    --es-surface: #fcf9f2;
+    --es-surface-variant: #f6f3eb;
+    --es-surface-container-lowest: #ffffff;
+    --es-surface-container-low: #faf7f0;
+    --es-surface-container: #f6f3eb;
+    --es-surface-container-high: #f1eee7;
+    --es-surface-container-high: #f1eee7;
+    --es-surface-container-highest: #ebe8e0;
+    --es-on-surface: #1a1a18;
+    --es-on-surface-variant: #78756d;
 }
 
 /* ─────────────────────────────────────────────────
@@ -153,54 +151,54 @@
    ───────────────────────────────────────────────── */
 .dark {
     --background: #141210;
-    --foreground: #EDE9E0;
-    --card: #1C1A17;
-    --card-foreground: #EDE9E0;
-    --popover: #1C1A17;
-    --popover-foreground: #EDE9E0;
-    --primary: #EDE9E0;
+    --foreground: #ede9e0;
+    --card: #1c1a17;
+    --card-foreground: #ede9e0;
+    --popover: #1c1a17;
+    --popover-foreground: #ede9e0;
+    --primary: #ede9e0;
     --primary-foreground: #141210;
     --secondary: #252320;
-    --secondary-foreground: #EDE9E0;
+    --secondary-foreground: #ede9e0;
     --muted: #252320;
-    --muted-foreground: #9B968B;
+    --muted-foreground: #9b968b;
     --accent: #252320;
-    --accent-foreground: #EDE9E0;
+    --accent-foreground: #ede9e0;
     --destructive: oklch(0.396 0.141 25.723);
     --destructive-foreground: oklch(0.637 0.237 25.331);
-    --border: #2E2B27;
-    --input: #2E2B27;
-    --ring: #3D3A35;
-    --chart-1: #7A8B42;
+    --border: #2e2b27;
+    --input: #2e2b27;
+    --ring: #3d3a35;
+    --chart-1: #7a8b42;
     --chart-2: oklch(0.696 0.17 162.48);
     --chart-3: oklch(0.769 0.188 70.08);
     --chart-4: oklch(0.627 0.265 303.9);
     --chart-5: oklch(0.645 0.246 16.439);
 
     /* Sidebar — deep walnut */
-    --sidebar: #1C1A17;
-    --sidebar-foreground: #EDE9E0;
-    --sidebar-primary: #EDE9E0;
+    --sidebar: #1c1a17;
+    --sidebar-foreground: #ede9e0;
+    --sidebar-primary: #ede9e0;
     --sidebar-primary-foreground: #141210;
     --sidebar-accent: #252320;
-    --sidebar-accent-foreground: #EDE9E0;
-    --sidebar-border: #2E2B27;
-    --sidebar-ring: #3D3A35;
+    --sidebar-accent-foreground: #ede9e0;
+    --sidebar-border: #2e2b27;
+    --sidebar-ring: #3d3a35;
 
     /* Editorial Serenity tokens — dark */
     --parchment: #141210;
-    --bone: #1C1A17;
-    --moss: #7A8B42;
+    --bone: #1c1a17;
+    --moss: #7a8b42;
     --moss-foreground: #141210;
     --es-surface: #141210;
-    --es-surface-variant: #1C1A17;
-    --es-surface-container-lowest: #0F0E0C;
+    --es-surface-variant: #1c1a17;
+    --es-surface-container-lowest: #0f0e0c;
     --es-surface-container-low: #181614;
-    --es-surface-container: #1C1A17;
+    --es-surface-container: #1c1a17;
     --es-surface-container-high: #252320;
-    --es-surface-container-highest: #2E2B27;
-    --es-on-surface: #EDE9E0;
-    --es-on-surface-variant: #9B968B;
+    --es-surface-container-highest: #2e2b27;
+    --es-on-surface: #ede9e0;
+    --es-on-surface-variant: #9b968b;
 }
 
 @layer base {
@@ -210,7 +208,9 @@
 
     body {
         @apply bg-background text-foreground antialiased;
-        font-feature-settings: 'liga' 1, 'calt' 1;
+        font-feature-settings:
+            'liga' 1,
+            'calt' 1;
         text-rendering: optimizeLegibility;
     }
 }

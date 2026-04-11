@@ -510,15 +510,15 @@ Incremental implementation of the Devotional Manager feature on top of the exist
 - [ ] 17. Checkpoint — All backend logic complete
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 18. Frontend — Design system and layout
-  - [ ] 18.1 Set up Editorial Serenity design system in Tailwind CSS v4
+- [x] 18. Frontend — Design system and layout
+  - [x] 18.1 Set up Editorial Serenity design system in Tailwind CSS v4
     - Configure custom colors: parchment `#FCF9F2`, moss green `#56642B`, surface layers
     - Add Newsreader (serif) and Inter (sans-serif) font imports
     - Configure Tailwind theme extensions for the design tokens
     - Update `resources/css/app.css` with design system variables
     - _Requirements: 7.1, 7.5_
 
-  - [ ] 18.2 Create `devotional-layout` component with responsive navigation
+  - [x] 18.2 Create `devotional-layout` component with responsive navigation
     - Mobile (< 768px): bottom navigation bar with Themes, Study, Bookmarks, Settings tabs
     - Desktop (≥ 768px): sidebar navigation with all nav items + notification badge
     - Use existing `app-layout` as reference, extend with devotional-specific nav
@@ -526,8 +526,8 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Readable font sizes (min 16px body, 1.5 line-height)
     - _Requirements: 7.1, 7.2, 7.3, 7.4, 7.5_
 
-  - [ ] 18.3 Create shared UI components
-    - `bottom-nav` — mobile bottom navigation bar
+  - [x] 18.3 Create shared UI components
+    - `bottom-nav` — mobile bottom navigation bar (built into devotional-layout)
     - `completion-indicator` — visual completion status (self, partner, both)
     - `progress-bar` — theme/reading plan progress visualization
     - `confirmation-dialog` — reusable delete confirmation modal

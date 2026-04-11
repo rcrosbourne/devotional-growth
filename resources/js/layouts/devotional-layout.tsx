@@ -1,15 +1,15 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { useIsMobile } from '@/hooks/use-mobile';
 import { useInitials } from '@/hooks/use-initials';
+import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
+import { logout } from '@/routes';
 import { index as bibleStudyIndex } from '@/routes/bible-study';
 import { index as bookmarksIndex } from '@/routes/bookmarks';
 import { index as notificationsIndex } from '@/routes/notifications';
 import { index as themesIndex } from '@/routes/themes';
 import { edit as settingsEdit } from '@/routes/user-profile';
-import { logout } from '@/routes';
 import { type SharedData } from '@/types';
-import { Link, usePage, router } from '@inertiajs/react';
+import { Link, router, usePage } from '@inertiajs/react';
 import {
     Bell,
     Bookmark,
@@ -42,9 +42,21 @@ interface TopTab {
 
 const sidebarNavItems: SidebarNavItem[] = [
     { title: 'Themes', href: '/themes', icon: <Palette className="size-4" /> },
-    { title: 'Bible Study', href: '/bible-study', icon: <GraduationCap className="size-4" /> },
-    { title: 'Bookmarks', href: '/bookmarks', icon: <Bookmark className="size-4" /> },
-    { title: 'Settings', href: '/settings', icon: <Settings className="size-4" /> },
+    {
+        title: 'Bible Study',
+        href: '/bible-study',
+        icon: <GraduationCap className="size-4" />,
+    },
+    {
+        title: 'Bookmarks',
+        href: '/bookmarks',
+        icon: <Bookmark className="size-4" />,
+    },
+    {
+        title: 'Settings',
+        href: '/settings',
+        icon: <Settings className="size-4" />,
+    },
 ];
 
 const topTabs: TopTab[] = [
@@ -87,9 +99,7 @@ export default function DevotionalLayout({ children }: DevotionalLayoutProps) {
                 )}
 
                 {/* Mobile top bar */}
-                {isMobile && (
-                    <MobileTopBar user={auth.user} />
-                )}
+                {isMobile && <MobileTopBar user={auth.user} />}
 
                 {/* Page content */}
                 <main className={cn('flex-1', isMobile && 'pb-20')}>
@@ -97,9 +107,7 @@ export default function DevotionalLayout({ children }: DevotionalLayoutProps) {
                 </main>
 
                 {/* Mobile bottom nav */}
-                {isMobile && (
-                    <MobileBottomNav currentUrl={page.url} />
-                )}
+                {isMobile && <MobileBottomNav currentUrl={page.url} />}
             </div>
         </div>
     );
@@ -123,14 +131,18 @@ function DesktopSidebar({
 
     useEffect(() => {
         function handleClickOutside(e: MouseEvent) {
-            if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+            if (
+                menuRef.current &&
+                !menuRef.current.contains(e.target as Node)
+            ) {
                 setUserMenuOpen(false);
             }
         }
         if (userMenuOpen) {
             document.addEventListener('mousedown', handleClickOutside);
         }
-        return () => document.removeEventListener('mousedown', handleClickOutside);
+        return () =>
+            document.removeEventListener('mousedown', handleClickOutside);
     }, [userMenuOpen]);
 
     const isAdmin = Boolean(user.is_admin);
@@ -140,14 +152,14 @@ function DesktopSidebar({
             {/* Branding */}
             <div className="px-5 pt-6 pb-4">
                 <Link href={themesIndex.url()} className="block">
-                    <h1 className="font-serif text-xl italic leading-tight tracking-tight text-sidebar-foreground">
+                    <h1 className="font-serif text-xl leading-tight tracking-tight text-sidebar-foreground italic">
                         Devotional
                     </h1>
                 </Link>
                 <p className="mt-2 text-sm text-sidebar-foreground/80">
                     The Digital Curator
                 </p>
-                <p className="text-[10px] font-medium uppercase tracking-[0.15em] text-sidebar-foreground/40">
+                <p className="text-[10px] font-medium tracking-[0.15em] text-sidebar-foreground/40 uppercase">
                     Spiritual Reflection
                 </p>
             </div>
@@ -182,8 +194,8 @@ function DesktopSidebar({
             <div className="relative px-3 pb-4" ref={menuRef}>
                 {/* User menu popover */}
                 {userMenuOpen && (
-                    <div className="absolute bottom-full left-3 right-3 mb-1 rounded-lg bg-popover p-1.5 shadow-ambient-lg">
-                        <p className="px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.15em] text-muted-foreground">
+                    <div className="absolute right-3 bottom-full left-3 mb-1 rounded-lg bg-popover p-1.5 shadow-ambient-lg">
+                        <p className="px-3 py-1.5 text-[10px] font-medium tracking-[0.15em] text-muted-foreground uppercase">
                             Account
                         </p>
                         <Link
@@ -249,7 +261,7 @@ function DesktopSidebar({
                         <p className="truncate text-sm font-medium text-sidebar-foreground">
                             {user.name}
                         </p>
-                        <p className="text-[10px] font-medium uppercase tracking-[0.1em] text-sidebar-foreground/50">
+                        <p className="text-[10px] font-medium tracking-[0.1em] text-sidebar-foreground/50 uppercase">
                             {isAdmin ? 'Administrator' : 'Member'}
                         </p>
                     </div>
@@ -335,14 +347,20 @@ function MobileTopBar({ user }: { user: SharedData['auth']['user'] }) {
 
     return (
         <div className="flex h-14 items-center justify-between bg-background px-4">
-            <Link href={settingsEdit.url()} prefetch className="flex items-center gap-2">
+            <Link
+                href={settingsEdit.url()}
+                prefetch
+                className="flex items-center gap-2"
+            >
                 <Avatar className="size-8">
                     <AvatarImage src={user.avatar} alt={user.name} />
                     <AvatarFallback className="bg-moss text-[11px] font-medium text-moss-foreground">
                         {getInitials(user.name)}
                     </AvatarFallback>
                 </Avatar>
-                <span className="font-serif text-sm italic text-foreground">Curator</span>
+                <span className="font-serif text-sm text-foreground italic">
+                    Curator
+                </span>
             </Link>
             <button
                 type="button"
@@ -377,7 +395,9 @@ function MobileBottomNav({ currentUrl }: { currentUrl: string }) {
                             )}
                         >
                             <Icon className="size-5" />
-                            <span className="text-[10px] font-medium">{item.title}</span>
+                            <span className="text-[10px] font-medium">
+                                {item.title}
+                            </span>
                         </Link>
                     );
                 })}
