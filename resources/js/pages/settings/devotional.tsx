@@ -27,6 +27,12 @@ import { Switch } from '@/components/ui/switch';
 import { useInitials } from '@/hooks/use-initials';
 import { useTwoFactorAuth } from '@/hooks/use-two-factor-auth';
 import DevotionalLayout from '@/layouts/devotional-layout';
+import {
+    type BibleVersionKey,
+    BIBLE_VERSIONS,
+    getPreferredVersion,
+    setPreferredVersion,
+} from '@/lib/bible-versions';
 import { edit as editAppearance } from '@/routes/appearance';
 import { update as updatePreferences } from '@/routes/notifications/preferences';
 import {
@@ -42,6 +48,7 @@ import { Transition } from '@headlessui/react';
 import { Form, Head, Link, router, useForm, usePage } from '@inertiajs/react';
 import {
     ArrowRight,
+    BookOpen,
     ExternalLink,
     Link2Off,
     LinkIcon,
@@ -715,6 +722,13 @@ function SocialAccountsSection({
 }
 
 function AppPreferencesSection() {
+    const [bibleVersion, setBibleVersion] = useState(getPreferredVersion);
+
+    function handleBibleVersionChange(version: BibleVersionKey) {
+        setBibleVersion(version);
+        setPreferredVersion(version);
+    }
+
     return (
         <section className="flex flex-col gap-8 md:flex-row md:gap-16">
             <SectionHeader
@@ -722,7 +736,40 @@ function AppPreferencesSection() {
                 description="Tailor the visual and functional experience of the app."
             />
 
-            <div className="flex-1">
+            <div className="flex-1 space-y-3">
+                {/* Bible Version Preference */}
+                <div className="flex items-center justify-between gap-4 rounded-xl border border-border/50 bg-surface-container-low px-5 py-4">
+                    <div className="flex items-center gap-4">
+                        <div className="flex size-10 items-center justify-center rounded-lg bg-surface-container-highest">
+                            <BookOpen className="size-5 text-on-surface" />
+                        </div>
+                        <div>
+                            <p className="text-sm font-medium text-on-surface">
+                                Bible Version
+                            </p>
+                            <p className="text-[10px] font-medium tracking-[0.1em] text-on-surface-variant/50 uppercase">
+                                Default Translation
+                            </p>
+                        </div>
+                    </div>
+                    <select
+                        value={bibleVersion}
+                        onChange={(e) =>
+                            handleBibleVersionChange(
+                                e.target.value as BibleVersionKey,
+                            )
+                        }
+                        className="rounded-lg border border-border bg-surface-container-lowest px-3 py-2 text-sm text-on-surface focus:border-moss focus:ring-1 focus:ring-moss focus:outline-none"
+                    >
+                        {BIBLE_VERSIONS.map((v) => (
+                            <option key={v.value} value={v.value}>
+                                {v.value} — {v.label}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+                {/* Appearance Link */}
                 <Link
                     href={editAppearance.url()}
                     prefetch

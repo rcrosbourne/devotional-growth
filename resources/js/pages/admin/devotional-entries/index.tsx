@@ -15,10 +15,20 @@ import {
     destroy as entriesDestroy,
     edit as entriesEdit,
     publish as entriesPublish,
+    reorder as entriesReorder,
 } from '@/routes/admin/themes/entries';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link, router } from '@inertiajs/react';
-import { ArrowLeft, FileText, Pencil, Plus, Send, Trash2 } from 'lucide-react';
+import {
+    ArrowLeft,
+    ChevronDown,
+    ChevronUp,
+    FileText,
+    Pencil,
+    Plus,
+    Send,
+    Trash2,
+} from 'lucide-react';
 import { useState } from 'react';
 
 interface ScriptureReference {
@@ -49,6 +59,7 @@ interface Props {
 
 export default function EntriesIndex({ theme, entries }: Props) {
     const [deleteTarget, setDeleteTarget] = useState<Entry | null>(null);
+    const [reordering, setReordering] = useState(false);
 
     const breadcrumbs: BreadcrumbItem[] = [
         { title: 'Themes', href: themesIndex.url() },
@@ -70,6 +81,29 @@ export default function EntriesIndex({ theme, entries }: Props) {
 
     function handlePublish(entry: Entry) {
         router.put(entriesPublish.url({ theme: theme.id, entry: entry.id }));
+    }
+
+    function handleMoveEntry(index: number, direction: 'up' | 'down') {
+        if (reordering) return;
+        const swapIndex = direction === 'up' ? index - 1 : index + 1;
+        if (swapIndex < 0 || swapIndex >= entries.length) return;
+
+        const reordered = [...entries];
+        [reordered[index], reordered[swapIndex]] = [
+            reordered[swapIndex],
+            reordered[index],
+        ];
+
+        setReordering(true);
+        router.put(
+            entriesReorder.url(theme.id),
+            { ordered_ids: reordered.map((e) => e.id) },
+            {
+                preserveScroll: true,
+                onFinish: () => setReordering(false),
+                onError: () => setReordering(false),
+            },
+        );
     }
 
     function formatDate(dateString: string) {
@@ -186,6 +220,9 @@ export default function EntriesIndex({ theme, entries }: Props) {
                             <table className="w-full">
                                 <thead>
                                     <tr className="border-b border-border bg-surface-container-high/50">
+                                        <th className="w-16 px-2 py-3 text-center text-xs font-medium tracking-[0.1em] text-on-surface-variant uppercase">
+                                            Order
+                                        </th>
                                         <th className="px-4 py-3 text-left text-xs font-medium tracking-[0.1em] text-on-surface-variant uppercase">
                                             Entry Title
                                         </th>
@@ -204,11 +241,60 @@ export default function EntriesIndex({ theme, entries }: Props) {
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-border">
-                                    {entries.map((entry) => (
+                                    {entries.map((entry, index) => (
                                         <tr
                                             key={entry.id}
                                             className="group transition-colors hover:bg-surface-container-low/50"
                                         >
+                                            <td className="px-2 py-4">
+                                                <div className="flex flex-col items-center gap-0.5">
+                                                    <Button
+                                                        variant="ghost"
+                                                        size="icon"
+                                                        className="size-6"
+                                                        disabled={
+                                                            index === 0 ||
+                                                            reordering
+                                                        }
+                                                        onClick={() =>
+                                                            handleMoveEntry(
+                                                                index,
+                                                                'up',
+                                                            )
+                                                        }
+                                                    >
+                                                        <ChevronUp className="size-3.5" />
+                                                        <span className="sr-only">
+                                                            Move up
+                                                        </span>
+                                                    </Button>
+                                                    <span className="text-xs font-medium text-on-surface-variant/60">
+                                                        {index + 1}
+                                                    </span>
+                                                    <Button
+                                                        variant="ghost"
+                                                        size="icon"
+                                                        className="size-6"
+                                                        disabled={
+                                                            index ===
+                                                                entries.length -
+                                                                    1 ||
+                                                            reordering
+                                                        }
+                                                        onClick={() =>
+                                                            handleMoveEntry(
+                                                                index,
+                                                                'down',
+                                                            )
+                                                        }
+                                                    >
+                                                        <ChevronDown className="size-3.5" />
+                                                        <span className="sr-only">
+                                                            Move down
+                                                        </span>
+                                                    </Button>
+                                                </div>
+                                            </td>
                                             <td className="px-4 py-4">
                                                 <Link
                                                     href={entriesEdit.url({
@@ -312,11 +398,47 @@ export default function EntriesIndex({ theme, entries }: Props) {
                                     className="rounded-lg border border-border bg-surface-container-low p-4"
                                 >
                                     <div className="flex items-start justify-between gap-3">
+                                        <div className="flex shrink-0 flex-col items-center gap-0.5">
+                                            <Button
+                                                variant="ghost"
+                                                size="icon"
+                                                className="size-6"
+                                                disabled={
+                                                    idx === 0 || reordering
+                                                }
+                                                onClick={() =>
+                                                    handleMoveEntry(idx, 'up')
+                                                }
+                                            >
+                                                <ChevronUp className="size-3" />
+                                                <span className="sr-only">
+                                                    Move entry {idx + 1} up
+                                                </span>
+                                            </Button>
+                                            <span className="text-xs font-medium text-on-surface-variant/60">
+                                                {idx + 1}
+                                            </span>
+                                            <Button
+                                                variant="ghost"
+                                                size="icon"
+                                                className="size-6"
+                                                disabled={
+                                                    idx ===
+                                                        entries.length - 1 ||
+                                                    reordering
+                                                }
+                                                onClick={() =>
+                                                    handleMoveEntry(idx, 'down')
+                                                }
+                                            >
+                                                <ChevronDown className="size-3" />
+                                                <span className="sr-only">
+                                                    Move entry {idx + 1} down
+                                                </span>
+                                            </Button>
+                                        </div>
                                         <div className="min-w-0 flex-1">
                                             <div className="flex items-center gap-2">
-                                                <span className="text-xs font-medium text-on-surface-variant/60">
-                                                    #{idx + 1}
-                                                </span>
                                                 <StatusBadge
                                                     status={entry.status}
                                                 />
