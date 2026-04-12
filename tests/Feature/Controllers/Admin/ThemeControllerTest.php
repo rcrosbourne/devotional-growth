@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 use App\Enums\ContentStatus;
 use App\Models\DevotionalEntry;
+use App\Models\GeneratedImage;
 use App\Models\Theme;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 // Index
 
@@ -31,6 +33,24 @@ it('shows all themes regardless of status', function (): void {
         ->assertInertia(fn ($page) => $page
             ->component('admin/themes/index')
             ->has('themes', 2)
+        );
+});
+
+it('includes cover image path when generated image exists on disk', function (): void {
+    $admin = User::factory()->admin()->create();
+    $theme = Theme::factory()->create(['created_by' => $admin->id]);
+    $entry = DevotionalEntry::factory()->for($theme)->create();
+    $image = GeneratedImage::factory()->for($entry, 'devotionalEntry')->create();
+
+    Storage::disk('public')->put($image->path, 'fake-image-content');
+
+    $response = $this->actingAs($admin)
+        ->get(route('admin.themes.index'));
+
+    $response->assertOk()
+        ->assertInertia(fn ($page) => $page
+            ->component('admin/themes/index')
+            ->where('themes.0.cover_image_path', $image->path)
         );
 });
 
@@ -268,6 +288,7 @@ it('denies non-admin from deleting a theme', function (): void {
 it('publishes a draft theme', function (): void {
     $admin = User::factory()->admin()->create();
     $theme = Theme::factory()->draft()->create(['created_by' => $admin->id]);
+    DevotionalEntry::factory()->published()->for($theme)->create();
 
     $response = $this->actingAs($admin)
         ->put(route('admin.themes.publish', $theme));
@@ -279,12 +300,115 @@ it('publishes a draft theme', function (): void {
     expect($theme->status)->toBe(ContentStatus::Published);
 });
 
+it('rejects publishing a theme without published entries', function (): void {
+    $admin = User::factory()->admin()->create();
+    $theme = Theme::factory()->draft()->create(['created_by' => $admin->id]);
+
+    $response = $this->actingAs($admin)
+        ->put(route('admin.themes.publish', $theme));
+
+    $response->assertSessionHasErrors('theme');
+
+    expect($theme->refresh()->status)->toBe(ContentStatus::Draft);
+});
+
 it('denies non-admin from publishing a theme', function (): void {
     $user = User::factory()->create();
     $theme = Theme::factory()->draft()->create();
 
     $response = $this->actingAs($user)
         ->put(route('admin.themes.publish', $theme));
+
+    $response->assertForbidden();
+});
+
+// Unpublish
+
+it('unpublishes a published theme and its entries', function (): void {
+    $admin = User::factory()->admin()->create();
+    $theme = Theme::factory()->published()->create(['created_by' => $admin->id]);
+    $entries = DevotionalEntry::factory()->published()->for($theme)->count(2)->create();
+
+    $response = $this->actingAs($admin)
+        ->put(route('admin.themes.unpublish', $theme));
+
+    $response->assertRedirectToRoute('admin.themes.index');
+
+    expect($theme->refresh()->status)->toBe(ContentStatus::Draft);
+
+    foreach ($entries as $entry) {
+        expect($entry->refresh()->status)->toBe(ContentStatus::Draft);
+    }
+});
+
+it('denies non-admin from unpublishing a theme', function (): void {
+    $user = User::factory()->create();
+    $theme = Theme::factory()->published()->create();
+
+    $response = $this->actingAs($user)
+        ->put(route('admin.themes.unpublish', $theme));
+
+    $response->assertForbidden();
+});
+
+// Generate Image
+
+it('generates an image for a theme', function (): void {
+    Storage::fake('public');
+    Laravel\Ai\Image::fake();
+
+    $admin = User::factory()->admin()->create();
+    $theme = Theme::factory()->create(['created_by' => $admin->id]);
+
+    $response = $this->actingAs($admin)
+        ->post(route('admin.themes.generate-image', $theme));
+
+    $response->assertRedirect();
+
+    expect($theme->refresh()->image_path)->not->toBeNull();
+});
+
+it('prefers theme own image over entry image in cover', function (): void {
+    $admin = User::factory()->admin()->create();
+    $theme = Theme::factory()->create([
+        'created_by' => $admin->id,
+        'image_path' => 'images/themes/theme-cover.png',
+    ]);
+    $entry = DevotionalEntry::factory()->for($theme)->create();
+    $image = GeneratedImage::factory()->for($entry, 'devotionalEntry')->create();
+
+    Storage::disk('public')->put('images/themes/theme-cover.png', 'theme-image');
+    Storage::disk('public')->put($image->path, 'entry-image');
+
+    $response = $this->actingAs($admin)
+        ->get(route('admin.themes.index'));
+
+    $response->assertOk()
+        ->assertInertia(fn ($page) => $page
+            ->where('themes.0.cover_image_path', 'images/themes/theme-cover.png')
+        );
+});
+
+it('handles image generation failure gracefully', function (): void {
+    $admin = User::factory()->admin()->create();
+    $theme = Theme::factory()->create(['created_by' => $admin->id]);
+
+    // Simulate AI service failure by not configuring AI, and using a bad config
+    config()->set('ai.default', 'nonexistent-provider');
+
+    $response = $this->actingAs($admin)
+        ->post(route('admin.themes.generate-image', $theme));
+
+    $response->assertRedirect()
+        ->assertSessionHas('error');
+});
+
+it('denies non-admin from generating theme image', function (): void {
+    $user = User::factory()->create();
+    $theme = Theme::factory()->create();
+
+    $response = $this->actingAs($user)
+        ->post(route('admin.themes.generate-image', $theme));
 
     $response->assertForbidden();
 });

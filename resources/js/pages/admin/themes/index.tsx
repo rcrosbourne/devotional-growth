@@ -8,12 +8,24 @@ import {
     DialogHeader,
     DialogTitle,
 } from '@/components/ui/dialog';
-import AppLayout from '@/layouts/app-layout';
-import { create, destroy, edit, index, publish } from '@/routes/admin/themes';
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipTrigger,
+} from '@/components/ui/tooltip';
+import DevotionalLayout from '@/layouts/devotional-layout';
+import { storageUrl } from '@/lib/utils';
+import {
+    create,
+    destroy,
+    edit,
+    publish,
+    unpublish,
+} from '@/routes/admin/themes';
 import { index as entriesIndex } from '@/routes/admin/themes/entries';
-import { type BreadcrumbItem } from '@/types';
 import { Head, Link, router } from '@inertiajs/react';
 import {
+    ArrowDownToLine,
     BookOpen,
     ChevronLeft,
     ChevronRight,
@@ -26,8 +38,6 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 
-const breadcrumbs: BreadcrumbItem[] = [{ title: 'Themes', href: index.url() }];
-
 interface Theme {
     id: number;
     name: string;
@@ -35,6 +45,7 @@ interface Theme {
     status: 'draft' | 'published';
     entries_count: number;
     created_at: string;
+    cover_image_path: string | null;
 }
 
 interface Props {
@@ -73,6 +84,10 @@ export default function ThemesIndex({ themes }: Props) {
         router.put(publish.url(theme.id));
     }
 
+    function handleUnpublish(theme: Theme) {
+        router.put(unpublish.url(theme.id));
+    }
+
     function formatDate(dateString: string) {
         return new Date(dateString).toLocaleDateString('en-US', {
             month: 'short',
@@ -82,7 +97,7 @@ export default function ThemesIndex({ themes }: Props) {
     }
 
     return (
-        <AppLayout breadcrumbs={breadcrumbs}>
+        <DevotionalLayout>
             <Head title="Manage Themes" />
 
             <div className="px-6 py-6 md:px-8">
@@ -216,16 +231,41 @@ export default function ThemesIndex({ themes }: Props) {
                                                     href={entriesIndex.url(
                                                         theme.id,
                                                     )}
-                                                    className="group/link"
+                                                    className="group/link flex items-center gap-4"
                                                 >
-                                                    <p className="font-serif text-base font-medium text-on-surface transition-colors group-hover/link:text-moss">
-                                                        {theme.name}
-                                                    </p>
-                                                    {theme.description && (
-                                                        <p className="mt-0.5 line-clamp-1 text-sm text-on-surface-variant">
-                                                            {theme.description}
+                                                    <div className="size-12 shrink-0 overflow-hidden rounded-lg bg-surface-container-high">
+                                                        {theme.cover_image_path ? (
+                                                            <img
+                                                                src={storageUrl(
+                                                                    theme.cover_image_path,
+                                                                )}
+                                                                alt=""
+                                                                onError={(
+                                                                    e,
+                                                                ) => {
+                                                                    e.currentTarget.style.display =
+                                                                        'none';
+                                                                }}
+                                                                className="size-full object-cover"
+                                                            />
+                                                        ) : (
+                                                            <div className="flex size-full items-center justify-center">
+                                                                <BookOpen className="size-4 text-on-surface-variant/30" />
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                    <div className="min-w-0">
+                                                        <p className="font-serif text-base font-medium text-on-surface transition-colors group-hover/link:text-moss">
+                                                            {theme.name}
                                                         </p>
-                                                    )}
+                                                        {theme.description && (
+                                                            <p className="mt-0.5 line-clamp-1 text-sm text-on-surface-variant">
+                                                                {
+                                                                    theme.description
+                                                                }
+                                                            </p>
+                                                        )}
+                                                    </div>
                                                 </Link>
                                             </td>
                                             <td className="px-4 py-4">
@@ -252,73 +292,131 @@ export default function ThemesIndex({ themes }: Props) {
                                             </td>
                                             <td className="px-4 py-4">
                                                 <div className="flex items-center justify-end gap-1">
-                                                    <Button
-                                                        variant="ghost"
-                                                        size="icon"
-                                                        asChild
-                                                        className="size-8"
-                                                    >
-                                                        <Link
-                                                            href={entriesIndex.url(
-                                                                theme.id,
-                                                            )}
-                                                        >
-                                                            <Eye className="size-4" />
-                                                            <span className="sr-only">
-                                                                View entries
-                                                            </span>
-                                                        </Link>
-                                                    </Button>
-                                                    <Button
-                                                        variant="ghost"
-                                                        size="icon"
-                                                        asChild
-                                                        className="size-8"
-                                                    >
-                                                        <Link
-                                                            href={edit.url(
-                                                                theme.id,
-                                                            )}
-                                                        >
-                                                            <Pencil className="size-4" />
-                                                            <span className="sr-only">
-                                                                Edit
-                                                            </span>
-                                                        </Link>
-                                                    </Button>
+                                                    <Tooltip>
+                                                        <TooltipTrigger asChild>
+                                                            <Button
+                                                                variant="ghost"
+                                                                size="icon"
+                                                                asChild
+                                                                className="size-8"
+                                                            >
+                                                                <Link
+                                                                    href={entriesIndex.url(
+                                                                        theme.id,
+                                                                    )}
+                                                                >
+                                                                    <Eye className="size-4" />
+                                                                    <span className="sr-only">
+                                                                        View
+                                                                        entries
+                                                                    </span>
+                                                                </Link>
+                                                            </Button>
+                                                        </TooltipTrigger>
+                                                        <TooltipContent>
+                                                            View entries
+                                                        </TooltipContent>
+                                                    </Tooltip>
+                                                    <Tooltip>
+                                                        <TooltipTrigger asChild>
+                                                            <Button
+                                                                variant="ghost"
+                                                                size="icon"
+                                                                asChild
+                                                                className="size-8"
+                                                            >
+                                                                <Link
+                                                                    href={edit.url(
+                                                                        theme.id,
+                                                                    )}
+                                                                >
+                                                                    <Pencil className="size-4" />
+                                                                    <span className="sr-only">
+                                                                        Edit
+                                                                    </span>
+                                                                </Link>
+                                                            </Button>
+                                                        </TooltipTrigger>
+                                                        <TooltipContent>
+                                                            Edit theme
+                                                        </TooltipContent>
+                                                    </Tooltip>
                                                     {theme.status ===
                                                         'draft' && (
-                                                        <Button
-                                                            variant="ghost"
-                                                            size="icon"
-                                                            className="size-8 text-moss hover:text-moss"
-                                                            onClick={() =>
-                                                                handlePublish(
-                                                                    theme,
-                                                                )
-                                                            }
-                                                        >
-                                                            <Send className="size-4" />
-                                                            <span className="sr-only">
-                                                                Publish
-                                                            </span>
-                                                        </Button>
+                                                        <Tooltip>
+                                                            <TooltipTrigger
+                                                                asChild
+                                                            >
+                                                                <Button
+                                                                    variant="ghost"
+                                                                    size="icon"
+                                                                    className="size-8 text-moss hover:text-moss"
+                                                                    onClick={() =>
+                                                                        handlePublish(
+                                                                            theme,
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    <Send className="size-4" />
+                                                                    <span className="sr-only">
+                                                                        Publish
+                                                                    </span>
+                                                                </Button>
+                                                            </TooltipTrigger>
+                                                            <TooltipContent>
+                                                                Publish theme
+                                                            </TooltipContent>
+                                                        </Tooltip>
                                                     )}
-                                                    <Button
-                                                        variant="ghost"
-                                                        size="icon"
-                                                        className="size-8 text-destructive hover:text-destructive"
-                                                        onClick={() =>
-                                                            setDeleteTarget(
-                                                                theme,
-                                                            )
-                                                        }
-                                                    >
-                                                        <Trash2 className="size-4" />
-                                                        <span className="sr-only">
-                                                            Delete
-                                                        </span>
-                                                    </Button>
+                                                    {theme.status ===
+                                                        'published' && (
+                                                        <Tooltip>
+                                                            <TooltipTrigger
+                                                                asChild
+                                                            >
+                                                                <Button
+                                                                    variant="ghost"
+                                                                    size="icon"
+                                                                    className="size-8 text-on-surface-variant hover:text-on-surface"
+                                                                    onClick={() =>
+                                                                        handleUnpublish(
+                                                                            theme,
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    <ArrowDownToLine className="size-4" />
+                                                                    <span className="sr-only">
+                                                                        Unpublish
+                                                                    </span>
+                                                                </Button>
+                                                            </TooltipTrigger>
+                                                            <TooltipContent>
+                                                                Unpublish theme
+                                                            </TooltipContent>
+                                                        </Tooltip>
+                                                    )}
+                                                    <Tooltip>
+                                                        <TooltipTrigger asChild>
+                                                            <Button
+                                                                variant="ghost"
+                                                                size="icon"
+                                                                className="size-8 text-destructive hover:text-destructive"
+                                                                onClick={() =>
+                                                                    setDeleteTarget(
+                                                                        theme,
+                                                                    )
+                                                                }
+                                                            >
+                                                                <Trash2 className="size-4" />
+                                                                <span className="sr-only">
+                                                                    Delete
+                                                                </span>
+                                                            </Button>
+                                                        </TooltipTrigger>
+                                                        <TooltipContent>
+                                                            Delete theme
+                                                        </TooltipContent>
+                                                    </Tooltip>
                                                 </div>
                                             </td>
                                         </tr>
@@ -370,24 +468,46 @@ export default function ThemesIndex({ themes }: Props) {
                                     key={theme.id}
                                     className="rounded-lg border border-border bg-surface-container-low p-4"
                                 >
-                                    <div className="flex items-start justify-between gap-3">
+                                    <div className="flex items-start gap-3">
+                                        {theme.cover_image_path && (
+                                            <div className="size-14 shrink-0 overflow-hidden rounded-lg bg-surface-container-high">
+                                                <img
+                                                    src={storageUrl(
+                                                        theme.cover_image_path,
+                                                    )}
+                                                    alt=""
+                                                    onError={(e) => {
+                                                        (
+                                                            e.currentTarget
+                                                                .parentElement as HTMLElement
+                                                        ).style.display =
+                                                            'none';
+                                                    }}
+                                                    className="size-full object-cover"
+                                                />
+                                            </div>
+                                        )}
                                         <div className="min-w-0 flex-1">
-                                            <Link
-                                                href={entriesIndex.url(
-                                                    theme.id,
-                                                )}
-                                            >
-                                                <h3 className="font-serif text-lg font-medium text-on-surface">
-                                                    {theme.name}
-                                                </h3>
-                                            </Link>
+                                            <div className="flex items-start justify-between gap-2">
+                                                <Link
+                                                    href={entriesIndex.url(
+                                                        theme.id,
+                                                    )}
+                                                >
+                                                    <h3 className="font-serif text-lg font-medium text-on-surface">
+                                                        {theme.name}
+                                                    </h3>
+                                                </Link>
+                                                <StatusBadge
+                                                    status={theme.status}
+                                                />
+                                            </div>
                                             {theme.description && (
                                                 <p className="mt-1 line-clamp-2 text-sm text-on-surface-variant">
                                                     {theme.description}
                                                 </p>
                                             )}
                                         </div>
-                                        <StatusBadge status={theme.status} />
                                     </div>
                                     <div className="mt-3 flex items-center justify-between">
                                         <div className="flex items-center gap-4 text-sm text-on-surface-variant">
@@ -423,6 +543,18 @@ export default function ThemesIndex({ themes }: Props) {
                                                     }
                                                 >
                                                     <Send className="size-3.5" />
+                                                </Button>
+                                            )}
+                                            {theme.status === 'published' && (
+                                                <Button
+                                                    variant="ghost"
+                                                    size="icon"
+                                                    className="size-8 text-on-surface-variant"
+                                                    onClick={() =>
+                                                        handleUnpublish(theme)
+                                                    }
+                                                >
+                                                    <ArrowDownToLine className="size-3.5" />
                                                 </Button>
                                             )}
                                             <Button
@@ -509,6 +641,6 @@ export default function ThemesIndex({ themes }: Props) {
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
-        </AppLayout>
+        </DevotionalLayout>
     );
 }

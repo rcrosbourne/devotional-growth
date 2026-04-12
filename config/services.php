@@ -55,4 +55,8 @@ return [
         'redirect' => '/auth/github/callback',
     ],
 
+    'api_bible' => [
+        'key' => env('BIBLE_API_KEY'),
+    ],
+
 ];

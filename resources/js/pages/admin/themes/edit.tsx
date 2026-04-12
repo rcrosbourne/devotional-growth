@@ -11,18 +11,32 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import AppLayout from '@/layouts/app-layout';
-import { destroy, index, publish, update } from '@/routes/admin/themes';
+import DevotionalLayout from '@/layouts/devotional-layout';
+import { storageUrl } from '@/lib/utils';
+import {
+    destroy,
+    generateImage,
+    index,
+    publish,
+    update,
+} from '@/routes/admin/themes';
 import { index as entriesIndex } from '@/routes/admin/themes/entries';
-import { type BreadcrumbItem } from '@/types';
 import { Head, Link, router, useForm } from '@inertiajs/react';
-import { ArrowLeft, ExternalLink, Send, Trash2 } from 'lucide-react';
+import {
+    ArrowLeft,
+    ExternalLink,
+    ImagePlus,
+    Loader2,
+    Send,
+    Trash2,
+} from 'lucide-react';
 import { type FormEventHandler, useState } from 'react';
 
 interface Theme {
     id: number;
     name: string;
     description: string | null;
+    image_path: string | null;
     status: 'draft' | 'published';
 }
 
@@ -32,11 +46,9 @@ interface Props {
 
 export default function ThemesEdit({ theme }: Props) {
     const [showDeleteDialog, setShowDeleteDialog] = useState(false);
-
-    const breadcrumbs: BreadcrumbItem[] = [
-        { title: 'Themes', href: index.url() },
-        { title: theme.name, href: '#' },
-    ];
+    const [generatingImage, setGeneratingImage] = useState(false);
+    const [confirmRegenerate, setConfirmRegenerate] = useState(false);
+    const [imageFailed, setImageFailed] = useState(false);
 
     const { data, setData, put, processing, errors, isDirty } = useForm({
         name: theme.name,
@@ -58,8 +70,30 @@ export default function ThemesEdit({ theme }: Props) {
         router.put(publish.url(theme.id));
     }
 
+    function handleGenerateImage() {
+        if (theme.image_path) {
+            setConfirmRegenerate(true);
+            return;
+        }
+        doGenerateImage();
+    }
+
+    function doGenerateImage() {
+        setGeneratingImage(true);
+        setConfirmRegenerate(false);
+        setImageFailed(false);
+        router.post(
+            generateImage.url(theme.id),
+            { replace: theme.image_path ? true : false },
+            {
+                preserveScroll: true,
+                onFinish: () => setGeneratingImage(false),
+            },
+        );
+    }
+
     return (
-        <AppLayout breadcrumbs={breadcrumbs}>
+        <DevotionalLayout>
             <Head title={`Edit: ${theme.name}`} />
 
             <div className="px-6 py-6 md:px-8">
@@ -188,6 +222,47 @@ export default function ThemesEdit({ theme }: Props) {
                     )}
                 </form>
 
+                {/* Theme Image */}
+                <div className="mt-12 max-w-2xl rounded-lg border border-border bg-surface-container-low p-6">
+                    <h3 className="text-xs font-medium tracking-[0.1em] text-on-surface-variant uppercase">
+                        Theme Cover Image
+                    </h3>
+                    {theme.image_path && !imageFailed && (
+                        <div className="mt-4 overflow-hidden rounded-lg">
+                            <img
+                                src={storageUrl(theme.image_path)}
+                                alt={`Cover for ${theme.name}`}
+                                onError={() => setImageFailed(true)}
+                                className="w-full object-cover"
+                            />
+                        </div>
+                    )}
+                    {(!theme.image_path || imageFailed) && (
+                        <p className="mt-2 text-sm text-on-surface-variant/60 italic">
+                            No cover image generated yet. Generate one from the
+                            theme title and description.
+                        </p>
+                    )}
+                    <Button
+                        type="button"
+                        variant="outline"
+                        className="mt-4"
+                        disabled={generatingImage}
+                        onClick={handleGenerateImage}
+                    >
+                        {generatingImage ? (
+                            <Loader2 className="size-4 animate-spin" />
+                        ) : (
+                            <ImagePlus className="size-4" />
+                        )}
+                        {generatingImage
+                            ? 'Generating...'
+                            : theme.image_path
+                              ? 'Regenerate Cover Image'
+                              : 'Generate Cover Image'}
+                    </Button>
+                </div>
+
                 {/* Danger Zone */}
                 <div className="mt-12 max-w-2xl rounded-lg border border-destructive/20 bg-destructive/5 p-6">
                     <h3 className="font-serif text-lg font-medium text-destructive">
@@ -236,6 +311,42 @@ export default function ThemesEdit({ theme }: Props) {
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
-        </AppLayout>
+
+            {/* Regenerate Image Confirmation */}
+            <Dialog
+                open={confirmRegenerate}
+                onOpenChange={setConfirmRegenerate}
+            >
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Regenerate Cover Image</DialogTitle>
+                        <DialogDescription>
+                            This will replace the existing cover image with a
+                            newly generated one. Continue?
+                        </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter>
+                        <Button
+                            variant="outline"
+                            onClick={() => setConfirmRegenerate(false)}
+                        >
+                            Cancel
+                        </Button>
+                        <Button
+                            className="bg-moss text-moss-foreground hover:bg-moss/90"
+                            disabled={generatingImage}
+                            onClick={doGenerateImage}
+                        >
+                            {generatingImage ? (
+                                <Loader2 className="size-4 animate-spin" />
+                            ) : (
+                                <ImagePlus className="size-4" />
+                            )}
+                            Regenerate
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+        </DevotionalLayout>
     );
 }

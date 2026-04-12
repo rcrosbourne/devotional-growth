@@ -11,17 +11,26 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import AppLayout from '@/layouts/app-layout';
-import { index as themesIndex } from '@/routes/admin/themes';
+import DevotionalLayout from '@/layouts/devotional-layout';
+import { storageUrl } from '@/lib/utils';
 import {
     destroy as entriesDestroy,
     index as entriesIndex,
     publish as entriesPublish,
     update as entriesUpdate,
 } from '@/routes/admin/themes/entries';
-import { type BreadcrumbItem } from '@/types';
+import { generateImage } from '@/routes/entries';
 import { Head, Link, router, useForm } from '@inertiajs/react';
-import { ArrowLeft, BookOpen, Plus, Send, Trash2, X } from 'lucide-react';
+import {
+    ArrowLeft,
+    BookOpen,
+    ImagePlus,
+    Loader2,
+    Plus,
+    Send,
+    Trash2,
+    X,
+} from 'lucide-react';
 import { type FormEventHandler, useRef, useState } from 'react';
 
 interface ScriptureRefItem {
@@ -32,6 +41,12 @@ interface ScriptureRefItem {
 interface ScriptureReference {
     id: number;
     raw_reference: string;
+}
+
+interface GeneratedImage {
+    id: number;
+    path: string;
+    prompt: string;
 }
 
 interface Entry {
@@ -45,6 +60,7 @@ interface Entry {
     created_at: string;
     updated_at: string;
     scripture_references: ScriptureReference[];
+    generated_image: GeneratedImage | null;
 }
 
 interface Theme {
@@ -65,6 +81,9 @@ export default function EditEntry({ theme, entry }: Props) {
     const [showDeleteDialog, setShowDeleteDialog] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
     const [isPublishing, setIsPublishing] = useState(false);
+    const [generatingImage, setGeneratingImage] = useState(false);
+    const [confirmRegenerate, setConfirmRegenerate] = useState(false);
+    const [imageFailed, setImageFailed] = useState(false);
     const nextKeyRef = useRef(
         entry.scripture_references.length > 0
             ? entry.scripture_references.length
@@ -79,12 +98,6 @@ export default function EditEntry({ theme, entry }: Props) {
     const [refItems, setRefItems] = useState<ScriptureRefItem[]>(() =>
         toRefItems(initialRefs),
     );
-
-    const breadcrumbs: BreadcrumbItem[] = [
-        { title: 'Themes', href: themesIndex.url() },
-        { title: theme.name, href: entriesIndex.url(theme.id) },
-        { title: 'Edit Entry', href: '#' },
-    ];
 
     const { data, setData, put, processing, errors, isDirty } = useForm({
         title: entry.title,
@@ -119,6 +132,28 @@ export default function EditEntry({ theme, entry }: Props) {
         );
     }
 
+    function handleGenerateImage() {
+        if (entry.generated_image) {
+            setConfirmRegenerate(true);
+            return;
+        }
+        doGenerateImage();
+    }
+
+    function doGenerateImage() {
+        setGeneratingImage(true);
+        setConfirmRegenerate(false);
+        setImageFailed(false);
+        router.post(
+            generateImage.url(entry.id),
+            { replace: entry.generated_image ? true : false },
+            {
+                preserveScroll: true,
+                onFinish: () => setGeneratingImage(false),
+            },
+        );
+    }
+
     function syncRefs(items: ScriptureRefItem[]) {
         setRefItems(items);
         setData(
@@ -149,7 +184,7 @@ export default function EditEntry({ theme, entry }: Props) {
     }
 
     return (
-        <AppLayout breadcrumbs={breadcrumbs}>
+        <DevotionalLayout>
             <Head title={`Edit: ${entry.title}`} />
 
             <div className="px-6 py-6 md:px-8">
@@ -396,6 +431,49 @@ export default function EditEntry({ theme, entry }: Props) {
                                 )}
                             </div>
 
+                            {/* Generated Image */}
+                            <div className="rounded-lg border border-border bg-surface-container-low p-5">
+                                <p className="text-xs font-medium tracking-[0.1em] text-on-surface-variant uppercase">
+                                    Generated Image
+                                </p>
+                                {entry.generated_image && !imageFailed && (
+                                    <div className="mt-3 overflow-hidden rounded-lg">
+                                        <img
+                                            src={storageUrl(
+                                                entry.generated_image.path,
+                                            )}
+                                            alt={`Image for ${entry.title}`}
+                                            onError={() => setImageFailed(true)}
+                                            className="w-full object-cover"
+                                        />
+                                    </div>
+                                )}
+                                {(!entry.generated_image || imageFailed) && (
+                                    <p className="mt-2 text-sm text-on-surface-variant/60 italic">
+                                        No image generated yet.
+                                    </p>
+                                )}
+                                <Button
+                                    type="button"
+                                    variant="outline"
+                                    size="sm"
+                                    className="mt-3 w-full"
+                                    disabled={generatingImage}
+                                    onClick={handleGenerateImage}
+                                >
+                                    {generatingImage ? (
+                                        <Loader2 className="size-4 animate-spin" />
+                                    ) : (
+                                        <ImagePlus className="size-4" />
+                                    )}
+                                    {generatingImage
+                                        ? 'Generating...'
+                                        : entry.generated_image
+                                          ? 'Regenerate Image'
+                                          : 'Generate Image'}
+                                </Button>
+                            </div>
+
                             {/* Danger Zone */}
                             <div className="rounded-lg border border-destructive/20 bg-destructive/5 p-5">
                                 <p className="text-xs font-medium tracking-[0.1em] text-destructive uppercase">
@@ -448,6 +526,42 @@ export default function EditEntry({ theme, entry }: Props) {
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
-        </AppLayout>
+
+            {/* Regenerate Confirmation Dialog */}
+            <Dialog
+                open={confirmRegenerate}
+                onOpenChange={setConfirmRegenerate}
+            >
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Regenerate Image</DialogTitle>
+                        <DialogDescription>
+                            This will replace the existing image with a newly
+                            generated one. Continue?
+                        </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter>
+                        <Button
+                            variant="outline"
+                            onClick={() => setConfirmRegenerate(false)}
+                        >
+                            Cancel
+                        </Button>
+                        <Button
+                            className="bg-moss text-moss-foreground hover:bg-moss/90"
+                            disabled={generatingImage}
+                            onClick={doGenerateImage}
+                        >
+                            {generatingImage ? (
+                                <Loader2 className="size-4 animate-spin" />
+                            ) : (
+                                <ImagePlus className="size-4" />
+                            )}
+                            Regenerate
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+        </DevotionalLayout>
     );
 }

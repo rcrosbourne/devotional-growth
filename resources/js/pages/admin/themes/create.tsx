@@ -2,17 +2,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import AppLayout from '@/layouts/app-layout';
+import DevotionalLayout from '@/layouts/devotional-layout';
 import { index, store } from '@/routes/admin/themes';
-import { type BreadcrumbItem } from '@/types';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { ArrowLeft } from 'lucide-react';
 import type { FormEventHandler } from 'react';
-
-const breadcrumbs: BreadcrumbItem[] = [
-    { title: 'Themes', href: index.url() },
-    { title: 'Create', href: '#' },
-];
 
 export default function ThemesCreate() {
     const { data, setData, post, processing, errors } = useForm({
@@ -26,7 +20,7 @@ export default function ThemesCreate() {
     };
 
     return (
-        <AppLayout breadcrumbs={breadcrumbs}>
+        <DevotionalLayout>
             <Head title="Create Theme" />
 
             <div className="px-6 py-6 md:px-8">
@@ -111,6 +105,6 @@ export default function ThemesCreate() {
                     </div>
                 </form>
             </div>
-        </AppLayout>
+        </DevotionalLayout>
     );
 }
