@@ -6,6 +6,7 @@ import { logout } from '@/routes';
 import { index as bibleStudyIndex } from '@/routes/bible-study';
 import { index as bookmarksIndex } from '@/routes/bookmarks';
 import { index as notificationsIndex } from '@/routes/notifications';
+import { index as settingsIndex } from '@/routes/settings';
 import { index as themesIndex } from '@/routes/themes';
 import { edit as settingsEdit } from '@/routes/user-profile';
 import { type SharedData } from '@/types';
@@ -58,7 +59,7 @@ const sidebarNavItems: SidebarNavItem[] = [
     },
     {
         title: 'Settings',
-        href: settingsEdit.url(),
+        href: settingsIndex.url(),
         icon: <Settings className="size-4" />,
     },
 ];
@@ -73,7 +74,7 @@ const mobileNavItems = [
     { title: 'Themes', href: themesIndex.url(), icon: BookOpen },
     { title: 'Study', href: bibleStudyIndex.url(), icon: GraduationCap },
     { title: 'Bookmarks', href: bookmarksIndex.url(), icon: Bookmark },
-    { title: 'Settings', href: settingsEdit.url(), icon: Settings },
+    { title: 'Settings', href: settingsIndex.url(), icon: Settings },
 ];
 
 export default function DevotionalLayout({ children }: DevotionalLayoutProps) {
@@ -212,7 +213,7 @@ function DesktopSidebar({
                             <span>Profile Settings</span>
                         </Link>
                         <Link
-                            href={settingsEdit.url()}
+                            href={settingsIndex.url()}
                             prefetch
                             className="flex h-9 items-center gap-3 rounded-md px-3 text-sm text-popover-foreground transition-colors hover:bg-accent"
                             onClick={() => setUserMenuOpen(false)}
@@ -352,7 +353,7 @@ function MobileTopBar({ user }: { user: SharedData['auth']['user'] }) {
     return (
         <div className="flex h-14 items-center justify-between bg-background px-4">
             <Link
-                href={settingsEdit.url()}
+                href={settingsIndex.url()}
                 prefetch
                 className="flex items-center gap-2"
             >
