@@ -10,6 +10,9 @@ interface EntryNavigatorProps {
     className?: string;
 }
 
+const navLinkClass =
+    'flex h-11 items-center gap-1.5 rounded-md px-3 text-sm font-medium text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-on-surface';
+
 export function EntryNavigator({
     previousHref,
     previousLabel = 'Previous',
@@ -22,11 +25,7 @@ export function EntryNavigator({
             className={cn('flex items-center justify-between gap-4', className)}
         >
             {previousHref ? (
-                <Link
-                    href={previousHref}
-                    prefetch
-                    className="flex h-11 items-center gap-1.5 rounded-md px-3 text-sm font-medium text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-on-surface"
-                >
+                <Link href={previousHref} prefetch className={navLinkClass}>
                     <ChevronLeft className="size-4" />
                     <span>{previousLabel}</span>
                 </Link>
@@ -35,11 +34,7 @@ export function EntryNavigator({
             )}
 
             {nextHref ? (
-                <Link
-                    href={nextHref}
-                    prefetch
-                    className="flex h-11 items-center gap-1.5 rounded-md px-3 text-sm font-medium text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-on-surface"
-                >
+                <Link href={nextHref} prefetch className={navLinkClass}>
                     <span>{nextLabel}</span>
                     <ChevronRight className="size-4" />
                 </Link>

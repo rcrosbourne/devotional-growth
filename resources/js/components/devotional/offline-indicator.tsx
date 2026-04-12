@@ -32,6 +32,8 @@ export function OfflineIndicator({ className }: OfflineIndicatorProps) {
 
     return (
         <div
+            role="status"
+            aria-live="polite"
             className={cn(
                 'flex items-center gap-2 bg-surface-container-highest px-4 py-2 text-sm text-on-surface-variant',
                 className,

@@ -15,7 +15,10 @@ export function ProgressBar({
     showPercentage = false,
     className,
 }: ProgressBarProps) {
-    const percentage = max > 0 ? Math.round((value / max) * 100) : 0;
+    const percentage =
+        max > 0
+            ? Math.max(0, Math.min(100, Math.round((value / max) * 100)))
+            : 0;
 
     return (
         <div className={cn('space-y-1.5', className)}>

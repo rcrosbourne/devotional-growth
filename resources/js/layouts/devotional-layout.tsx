@@ -41,20 +41,24 @@ interface TopTab {
 }
 
 const sidebarNavItems: SidebarNavItem[] = [
-    { title: 'Themes', href: '/themes', icon: <Palette className="size-4" /> },
+    {
+        title: 'Themes',
+        href: themesIndex.url(),
+        icon: <Palette className="size-4" />,
+    },
     {
         title: 'Bible Study',
-        href: '/bible-study',
+        href: bibleStudyIndex.url(),
         icon: <GraduationCap className="size-4" />,
     },
     {
         title: 'Bookmarks',
-        href: '/bookmarks',
+        href: bookmarksIndex.url(),
         icon: <Bookmark className="size-4" />,
     },
     {
         title: 'Settings',
-        href: '/settings',
+        href: settingsEdit.url(),
         icon: <Settings className="size-4" />,
     },
 ];
@@ -66,10 +70,10 @@ const topTabs: TopTab[] = [
 ];
 
 const mobileNavItems = [
-    { title: 'Themes', href: '/themes', icon: BookOpen },
-    { title: 'Study', href: '/bible-study', icon: GraduationCap },
-    { title: 'Bookmarks', href: '/bookmarks', icon: Bookmark },
-    { title: 'Settings', href: '/settings', icon: Settings },
+    { title: 'Themes', href: themesIndex.url(), icon: BookOpen },
+    { title: 'Study', href: bibleStudyIndex.url(), icon: GraduationCap },
+    { title: 'Bookmarks', href: bookmarksIndex.url(), icon: Bookmark },
+    { title: 'Settings', href: settingsEdit.url(), icon: Settings },
 ];
 
 export default function DevotionalLayout({ children }: DevotionalLayoutProps) {
@@ -145,7 +149,7 @@ function DesktopSidebar({
             document.removeEventListener('mousedown', handleClickOutside);
     }, [userMenuOpen]);
 
-    const isAdmin = Boolean(user.is_admin);
+    const isAdmin = Boolean(user?.is_admin);
 
     return (
         <aside className="flex w-60 shrink-0 flex-col bg-sidebar">

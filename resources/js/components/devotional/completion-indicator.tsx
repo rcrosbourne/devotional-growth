@@ -8,13 +8,24 @@ interface CompletionIndicatorProps {
     className?: string;
 }
 
+const statusLabels: Record<CompletionStatus, string> = {
+    none: 'Not completed',
+    self: 'Completed by you',
+    partner: 'Completed by partner',
+    both: 'Completed together',
+};
+
 export function CompletionIndicator({
     status,
     className,
 }: CompletionIndicatorProps) {
+    const label = statusLabels[status];
+
     if (status === 'none') {
         return (
             <div
+                aria-label={label}
+                title={label}
                 className={cn(
                     'flex size-6 items-center justify-center rounded-full bg-surface-container-high',
                     className,
@@ -28,6 +39,8 @@ export function CompletionIndicator({
     if (status === 'both') {
         return (
             <div
+                aria-label={label}
+                title={label}
                 className={cn(
                     'flex size-6 items-center justify-center rounded-full bg-moss',
                     className,
@@ -40,6 +53,8 @@ export function CompletionIndicator({
 
     return (
         <div
+            aria-label={label}
+            title={label}
             className={cn(
                 'flex size-6 items-center justify-center rounded-full',
                 status === 'self' ? 'bg-moss' : 'bg-moss/40',
