@@ -599,21 +599,21 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Partner observations display (if partner linked)
     - _Requirements: 10.1, 10.2, 10.3, 10.4, 3.1, 3.2, 3.3, 8.1, 8.3, 12.1, 12.3, 12.5, 13.1, 13.3, 13.4, 13.8_
 
-- [ ] 22. Frontend — Bible study pages
-  - [ ] 22.1 Create Bible study dashboard (`bible-study/index.tsx`)
+- [x] 22. Frontend — Bible study pages
+  - [x] 22.1 Create Bible study dashboard (`bible-study/index.tsx`)
     - Verse of the day section
     - Word study search input
     - Reading plan cards with progress indicators
     - _Requirements: 4.3, 5.1_
 
-  - [ ] 22.2 Create reading plan progress page (`bible-study/reading-plan.tsx`)
+  - [x] 22.2 Create reading plan progress page (`bible-study/reading-plan.tsx`)
     - Circular progress visualization
     - Daily reading list with completed/current/upcoming states
     - Missed readings section with catch-up option
     - Mark day complete action
     - _Requirements: 4.3, 4.4, 4.5, 4.6_
 
-  - [ ] 22.3 Create word study detail page (`bible-study/word-study.tsx`)
+  - [x] 22.3 Create word study detail page (`bible-study/word-study.tsx`)
     - Greek/Hebrew word display, transliteration, definition, Strong's number
     - Associated passages list
     - `word-study-popover` component for tapping words in scripture
