@@ -13,18 +13,17 @@ export default function AuthLayout({
     title,
     description,
     variant = 'centered',
-    ...props
 }: AuthLayoutProps) {
     if (variant === 'split') {
         return (
-            <AuthSplitLayout title={title} description={description} {...props}>
+            <AuthSplitLayout title={title} description={description}>
                 {children}
             </AuthSplitLayout>
         );
     }
 
     return (
-        <AuthCenteredLayout title={title} description={description} {...props}>
+        <AuthCenteredLayout title={title} description={description}>
             {children}
         </AuthCenteredLayout>
     );

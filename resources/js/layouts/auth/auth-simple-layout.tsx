@@ -56,13 +56,20 @@ export default function AuthSimpleLayout({
                         &copy; {year} Devotional. Curated, Protected &amp;
                         Verified.
                     </span>
+                    {/* TODO: Update hrefs when privacy/terms pages exist */}
                     <div className="flex gap-6">
-                        <span className="cursor-pointer transition-colors hover:text-foreground">
+                        <a
+                            href="/privacy"
+                            className="transition-colors hover:text-foreground"
+                        >
                             Privacy Policy
-                        </span>
-                        <span className="cursor-pointer transition-colors hover:text-foreground">
+                        </a>
+                        <a
+                            href="/terms"
+                            className="transition-colors hover:text-foreground"
+                        >
                             Terms of Service
-                        </span>
+                        </a>
                     </div>
                 </div>
             </footer>

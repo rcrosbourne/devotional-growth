@@ -112,13 +112,20 @@ export default function AuthSplitLayout({
                 <footer className="border-t border-border/50 px-6 py-5 sm:px-12">
                     <div className="mx-auto flex max-w-sm flex-col items-center justify-between gap-3 text-xs text-muted-foreground sm:flex-row">
                         <span>&copy; {year} The Curator</span>
+                        {/* TODO: Update hrefs when privacy/terms pages exist */}
                         <div className="flex gap-6">
-                            <span className="cursor-pointer transition-colors hover:text-foreground">
+                            <a
+                                href="/privacy"
+                                className="transition-colors hover:text-foreground"
+                            >
                                 Privacy Policy
-                            </span>
-                            <span className="cursor-pointer transition-colors hover:text-foreground">
+                            </a>
+                            <a
+                                href="/terms"
+                                className="transition-colors hover:text-foreground"
+                            >
                                 Terms
-                            </span>
+                            </a>
                         </div>
                     </div>
                 </footer>
