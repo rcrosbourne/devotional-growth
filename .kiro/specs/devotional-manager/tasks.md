@@ -550,8 +550,8 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Error handling for expired/invalid codes, rate limiting
     - _Requirements: Email OTP login_
 
-- [ ] 20. Frontend — Admin pages
-  - [ ] 20.1 Create admin themes pages (`admin/themes/index.tsx`, `admin/themes/create.tsx`, `admin/themes/edit.tsx`)
+- [x] 20. Frontend — Admin pages
+  - [x] 20.1 Create admin themes pages (`admin/themes/index.tsx`, `admin/themes/create.tsx`, `admin/themes/edit.tsx`)
     - Index: list all themes with status chips (draft/published), entry counts, action buttons
     - Create: form with name, description fields
     - Edit: pre-populated form with existing data, delete button
@@ -559,13 +559,13 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Use `useForm` for form handling, Wayfinder for routes
     - _Requirements: 9.1, 9.2, 9.3, 9.4_
 
-  - [ ] 20.2 Create admin devotional entry pages (`admin/devotional-entries/index.tsx`, `admin/devotional-entries/create.tsx`, `admin/devotional-entries/edit.tsx`)
+  - [x] 20.2 Create admin devotional entry pages (`admin/devotional-entries/index.tsx`, `admin/devotional-entries/create.tsx`, `admin/devotional-entries/edit.tsx`)
     - Index: data table with entries, status, actions, drag-to-reorder
     - Create: form with title, body (rich text), scripture references (dynamic add/remove), reflection prompts, adventist insights
     - Edit: pre-populated form, delete button, publish button
     - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 2.6_
 
-  - [ ] 20.3 Create admin AI content generation page (`admin/ai-content/generate.tsx`)
+  - [x] 20.3 Create admin AI content generation page (`admin/ai-content/generate.tsx`)
     - Prompt textarea with "Generate Content" button
     - Live preview of generated content in editorial format
     - "Approve & Edit" button to save generated content as a new draft entry
