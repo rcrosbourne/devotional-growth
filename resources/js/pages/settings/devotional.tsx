@@ -28,6 +28,7 @@ import { useInitials } from '@/hooks/use-initials';
 import { useTwoFactorAuth } from '@/hooks/use-two-factor-auth';
 import DevotionalLayout from '@/layouts/devotional-layout';
 import {
+    type BibleVersionKey,
     BIBLE_VERSIONS,
     getPreferredVersion,
     setPreferredVersion,
@@ -723,7 +724,7 @@ function SocialAccountsSection({
 function AppPreferencesSection() {
     const [bibleVersion, setBibleVersion] = useState(getPreferredVersion);
 
-    function handleBibleVersionChange(version: string) {
+    function handleBibleVersionChange(version: BibleVersionKey) {
         setBibleVersion(version);
         setPreferredVersion(version);
     }
@@ -754,7 +755,9 @@ function AppPreferencesSection() {
                     <select
                         value={bibleVersion}
                         onChange={(e) =>
-                            handleBibleVersionChange(e.target.value)
+                            handleBibleVersionChange(
+                                e.target.value as BibleVersionKey,
+                            )
                         }
                         className="rounded-lg border border-border bg-surface-container-lowest px-3 py-2 text-sm text-on-surface focus:border-moss focus:ring-1 focus:ring-moss focus:outline-none"
                     >

@@ -101,6 +101,7 @@ export default function EntriesIndex({ theme, entries }: Props) {
             {
                 preserveScroll: true,
                 onFinish: () => setReordering(false),
+                onError: () => setReordering(false),
             },
         );
     }
@@ -410,6 +411,9 @@ export default function EntriesIndex({ theme, entries }: Props) {
                                                 }
                                             >
                                                 <ChevronUp className="size-3" />
+                                                <span className="sr-only">
+                                                    Move entry {idx + 1} up
+                                                </span>
                                             </Button>
                                             <span className="text-xs font-medium text-on-surface-variant/60">
                                                 {idx + 1}
@@ -428,6 +432,9 @@ export default function EntriesIndex({ theme, entries }: Props) {
                                                 }
                                             >
                                                 <ChevronDown className="size-3" />
+                                                <span className="sr-only">
+                                                    Move entry {idx + 1} down
+                                                </span>
                                             </Button>
                                         </div>
                                         <div className="min-w-0 flex-1">

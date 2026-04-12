@@ -1,8 +1,16 @@
 import { ConfirmationDialog } from '@/components/devotional/confirmation-dialog';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
 import { useInitials } from '@/hooks/use-initials';
 import DevotionalLayout from '@/layouts/devotional-layout';
 import {
+    type BibleVersionKey,
     BIBLE_VERSIONS,
     getPreferredVersion,
     setPreferredVersion,
@@ -32,7 +40,6 @@ import {
     BookmarkCheck,
     BookOpen,
     Check,
-    ChevronDown,
     Edit3,
     ImagePlus,
     Loader2,
@@ -42,13 +49,7 @@ import {
     Trash2,
     X,
 } from 'lucide-react';
-import {
-    type FormEvent,
-    useCallback,
-    useEffect,
-    useRef,
-    useState,
-} from 'react';
+import { type FormEvent, useCallback, useEffect, useState } from 'react';
 
 interface ScriptureReference {
     id: number;
@@ -99,79 +100,28 @@ function BibleVersionSelector({
     value,
     onChange,
 }: {
-    value: string;
-    onChange: (version: string) => void;
+    value: BibleVersionKey;
+    onChange: (version: BibleVersionKey) => void;
 }) {
-    const [open, setOpen] = useState(false);
-    const ref = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        function handleClickOutside(e: MouseEvent) {
-            if (ref.current && !ref.current.contains(e.target as Node)) {
-                setOpen(false);
-            }
-        }
-        document.addEventListener('mousedown', handleClickOutside);
-        return () =>
-            document.removeEventListener('mousedown', handleClickOutside);
-    }, []);
-
     return (
-        <div ref={ref} className="relative inline-block">
-            <button
-                type="button"
-                onClick={() => setOpen(!open)}
-                className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-surface-container-lowest px-3 py-1 text-[10px] font-bold tracking-[0.15em] text-on-surface-variant/70 uppercase transition-all hover:border-moss/40 hover:text-moss"
-            >
-                {value}
-                <ChevronDown
-                    className={cn(
-                        'size-3 transition-transform',
-                        open && 'rotate-180',
-                    )}
-                />
-            </button>
-            {open && (
-                <div className="absolute top-full left-1/2 z-50 mt-2 min-w-[200px] -translate-x-1/2 overflow-hidden rounded-xl border border-border/60 bg-surface-container-lowest shadow-ambient">
-                    <div className="px-3 py-2">
-                        <span className="text-[9px] font-bold tracking-[0.2em] text-on-surface-variant/40 uppercase">
-                            Translation
-                        </span>
-                    </div>
-                    {BIBLE_VERSIONS.map((v) => (
-                        <button
-                            key={v.value}
-                            type="button"
-                            onClick={() => {
-                                onChange(v.value);
-                                setOpen(false);
-                            }}
-                            className={cn(
-                                'flex w-full items-center gap-3 px-3 py-2.5 text-left text-sm transition-colors hover:bg-surface-container-high',
-                                v.value === value
-                                    ? 'text-moss'
-                                    : 'text-on-surface',
-                            )}
-                        >
-                            <span
-                                className={cn(
-                                    'w-10 text-[10px] font-bold tracking-widest uppercase',
-                                    v.value === value
-                                        ? 'text-moss'
-                                        : 'text-on-surface-variant/50',
-                                )}
-                            >
-                                {v.value}
-                            </span>
-                            <span className="flex-1 text-xs">{v.label}</span>
-                            {v.value === value && (
-                                <Check className="size-3.5 text-moss" />
-                            )}
-                        </button>
-                    ))}
-                </div>
-            )}
-        </div>
+        <Select
+            value={value}
+            onValueChange={(v) => onChange(v as BibleVersionKey)}
+        >
+            <SelectTrigger className="inline-flex h-auto w-auto gap-1.5 rounded-full border-border/60 bg-surface-container-lowest px-3 py-1 text-[10px] font-bold tracking-[0.15em] text-on-surface-variant/70 uppercase shadow-none transition-all hover:border-moss/40 hover:text-moss">
+                <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+                {BIBLE_VERSIONS.map((v) => (
+                    <SelectItem key={v.value} value={v.value}>
+                        <span className="font-bold tracking-widest uppercase">
+                            {v.value}
+                        </span>{' '}
+                        — {v.label}
+                    </SelectItem>
+                ))}
+            </SelectContent>
+        </Select>
     );
 }
 
@@ -429,6 +379,7 @@ export default function DevotionalEntriesShow({
             if (entry.scripture_references.length === 0) {
                 return;
             }
+            setPassageTexts({});
             setLoadingPassages(true);
             const texts: Record<number, string> = {};
 
@@ -477,9 +428,9 @@ export default function DevotionalEntriesShow({
         const controller = new AbortController();
         fetchPassages(bibleVersion, controller.signal);
         return () => controller.abort();
-    }, [bibleVersion, fetchPassages]);
+    }, [bibleVersion, fetchPassages, entry.id]);
 
-    function handleVersionChange(version: string) {
+    function handleVersionChange(version: BibleVersionKey) {
         setBibleVersion(version);
         setPreferredVersion(version);
     }
@@ -654,8 +605,8 @@ export default function DevotionalEntriesShow({
                                     &rdquo;
                                 </p>
                             ) : (
-                                <p className="font-serif text-xl leading-relaxed text-on-surface italic md:text-2xl lg:text-3xl">
-                                    &ldquo;{firstScripture.raw_reference}&rdquo;
+                                <p className="font-serif text-xl leading-relaxed text-on-surface-variant/70 md:text-2xl lg:text-3xl">
+                                    {firstScripture.raw_reference}
                                 </p>
                             )}
                             <span className="mt-4 block text-xs font-bold tracking-widest text-on-surface-variant uppercase">
