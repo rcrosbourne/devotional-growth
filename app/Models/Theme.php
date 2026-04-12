@@ -21,6 +21,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read ContentStatus $status
  * @property-read CarbonInterface $created_at
  * @property-read CarbonInterface $updated_at
+ * @property-read int $entries_count
+ * @property-read int $completed_entries_count
  */
 final class Theme extends Model
 {
