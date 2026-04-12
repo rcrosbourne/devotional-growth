@@ -7,6 +7,7 @@ use App\Models\DevotionalEntry;
 use App\Models\GeneratedImage;
 use App\Models\ScriptureReference;
 use App\Models\Theme;
+use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Ai\Image;
 
@@ -128,6 +129,22 @@ it('truncates long body text in the prompt', function (): void {
     $result = $action->handle($entry);
 
     expect(mb_strlen($result->prompt))->toBeLessThan(mb_strlen($longBody));
+});
+
+it('strips extended attributes from generated images on macOS', function (): void {
+    Process::fake();
+
+    $entry = DevotionalEntry::factory()
+        ->for(Theme::factory())
+        ->create();
+
+    $action = resolve(GenerateDevotionalImage::class);
+
+    $result = $action->handle($entry);
+
+    Process::assertRan(fn ($process): bool => $process->command[0] === 'xattr'
+        && $process->command[1] === '-c'
+        && str_contains((string) $process->command[2], $result->path));
 });
 
 it('persists the generated image in the database', function (): void {
