@@ -621,13 +621,13 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Empty state when no data available
     - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5_
 
-- [ ] 23. Frontend — Bookmarks and notifications pages
-  - [ ] 23.1 Create bookmarks page (`bookmarks/index.tsx`)
+- [x] 23. Frontend — Bookmarks and notifications pages
+  - [x] 23.1 Create bookmarks page (`bookmarks/index.tsx`)
     - Bookmarks grouped by type: Devotional Entries, Scripture References, Word Studies
     - Remove bookmark action with confirmation
     - _Requirements: 6.1, 6.2, 6.3, 6.4_
 
-  - [ ] 23.2 Create notifications page (`notifications/index.tsx`)
+  - [x] 23.2 Create notifications page (`notifications/index.tsx`)
     - Notification list in reverse chronological order
     - Unread/read grouping with visual distinction (green left border for unread)
     - "Mark all as read" action (auto on page visit)
