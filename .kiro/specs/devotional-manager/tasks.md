@@ -536,18 +536,20 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - `entry-navigator` — previous/next entry navigation controls
     - _Requirements: 7.3, 8.2, 8.3, 4.6, 11.6_
 
-- [ ] 19. Frontend — Auth pages
-  - [ ] 19.1 Create welcome/login page (`resources/js/pages/auth/login.tsx`)
+- [x] 19. Frontend — Auth pages
+  - [x] 19.1 Create welcome/login page (`resources/js/pages/session/create.tsx`)
     - Social login buttons (Google, Apple, GitHub) linking to Socialite redirect routes
     - "Login with Email" button linking to OTP flow
-    - Split layout on desktop (photo left, form right), single column on mobile
+    - Split layout on desktop (forest panel left, form right), single column on mobile
     - Use Wayfinder for type-safe route generation
+    - Editorial Serenity design: serif headings, uppercase tracking labels, warm parchment
     - _Requirements: Social login, Email OTP login_
 
-  - [ ] 19.2 Create email OTP pages (`auth/email-otp.tsx`, `auth/email-otp-verify.tsx`)
-    - Email input page with `useForm` for email submission
-    - OTP verification page with 6-digit input (use `input-otp` package already installed)
+  - [x] 19.2 Redesign email OTP pages (`auth/email-otp.tsx`, `auth/email-otp-verify.tsx`)
+    - Email input page with Form component for email submission
+    - OTP verification page with 6-digit InputOTP slots
     - Error handling for expired/invalid codes, rate limiting
+    - Centered card layout with Editorial Serenity styling
     - _Requirements: Email OTP login_
 
 - [ ] 20. Frontend — Admin pages
@@ -572,21 +574,21 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Loading state during generation, error handling
     - _Requirements: AI content generation_
 
-- [ ] 21. Frontend — User-facing theme and devotional pages
-  - [ ] 21.1 Create themes index page (`themes/index.tsx`)
+- [x] 21. Frontend — User-facing theme and devotional pages
+  - [x] 21.1 Create themes index page (`themes/index.tsx`)
     - Published theme cards with cover image, title, description, progress bar, completion percentage
     - Featured series hero section
     - Overall progress summary
     - Empty state when no themes exist
     - _Requirements: 1.1, 1.3, 1.4_
 
-  - [ ] 21.2 Create theme detail page (`themes/show.tsx`)
+  - [x] 21.2 Create theme detail page (`themes/show.tsx`)
     - Entry list in display order with title, scripture refs, completion indicators
     - Theme progress tracking
     - Completion summary when all entries done
     - _Requirements: 1.2, 8.2, 8.4, 10.3_
 
-  - [ ] 21.3 Create daily devotional view page (`devotional-entries/show.tsx`)
+  - [x] 21.3 Create daily devotional view page (`devotional-entries/show.tsx`)
     - Single scrollable view: title, scripture passage (with version selector), body, reflection prompts, adventist insights
     - `scripture-passage` component with inline Bible text and `bible-version-selector` dropdown
     - `completion-indicator` and mark-complete button

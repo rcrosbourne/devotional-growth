@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Models\DevotionalCompletion;
 use App\Models\DevotionalEntry;
+use App\Models\GeneratedImage;
 use App\Models\Theme;
 use App\Models\User;
 
@@ -108,6 +109,37 @@ it('displays empty state when no published themes exist', function (): void {
         ->assertInertia(fn ($page) => $page
             ->component('themes/index')
             ->has('themes', 0)
+        );
+});
+
+it('includes cover image path from first published entry with a generated image', function (): void {
+    $user = User::factory()->create();
+    $theme = Theme::factory()->published()->create();
+    $entry = DevotionalEntry::factory()->published()->for($theme)->create(['display_order' => 1]);
+    $image = GeneratedImage::factory()->for($entry, 'devotionalEntry')->create();
+
+    $response = $this->actingAs($user)
+        ->get(route('themes.index'));
+
+    $response->assertOk()
+        ->assertInertia(fn ($page) => $page
+            ->component('themes/index')
+            ->where('themes.0.cover_image_path', $image->path)
+        );
+});
+
+it('returns null cover image when no entries have generated images', function (): void {
+    $user = User::factory()->create();
+    $theme = Theme::factory()->published()->create();
+    DevotionalEntry::factory()->published()->for($theme)->create();
+
+    $response = $this->actingAs($user)
+        ->get(route('themes.index'));
+
+    $response->assertOk()
+        ->assertInertia(fn ($page) => $page
+            ->component('themes/index')
+            ->where('themes.0.cover_image_path', null)
         );
 });
 

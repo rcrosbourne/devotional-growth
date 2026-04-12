@@ -1,10 +1,8 @@
-import AppLogoIcon from '@/components/app-logo-icon';
 import { home } from '@/routes';
 import { Link } from '@inertiajs/react';
-import { type PropsWithChildren } from 'react';
+import { type PropsWithChildren, useMemo } from 'react';
 
 interface AuthLayoutProps {
-    name?: string;
     title?: string;
     description?: string;
 }
@@ -14,31 +12,67 @@ export default function AuthSimpleLayout({
     title,
     description,
 }: PropsWithChildren<AuthLayoutProps>) {
-    return (
-        <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-background p-6 md:p-10">
-            <div className="w-full max-w-sm">
-                <div className="flex flex-col gap-8">
-                    <div className="flex flex-col items-center gap-4">
-                        <Link
-                            href={home()}
-                            className="flex flex-col items-center gap-2 font-medium"
-                        >
-                            <div className="mb-1 flex h-9 w-9 items-center justify-center rounded-md">
-                                <AppLogoIcon className="size-9 fill-current text-[var(--foreground)] dark:text-white" />
-                            </div>
-                            <span className="sr-only">{title}</span>
-                        </Link>
+    const year = useMemo(() => new Date().getFullYear(), []);
 
-                        <div className="space-y-2 text-center">
-                            <h1 className="text-xl font-medium">{title}</h1>
-                            <p className="text-center text-sm text-muted-foreground">
-                                {description}
-                            </p>
+    return (
+        <div className="flex min-h-dvh flex-col bg-background">
+            {/* Header */}
+            <header className="px-6 py-6 sm:px-10">
+                <Link
+                    href={home()}
+                    className="font-serif text-xl text-foreground italic transition-opacity hover:opacity-70"
+                >
+                    Devotional
+                </Link>
+            </header>
+
+            {/* Main content */}
+            <main className="flex flex-1 items-center justify-center px-6 pb-12">
+                <div className="w-full max-w-md">
+                    <div className="rounded-xl border border-border/40 bg-card/50 px-6 py-10 shadow-ambient sm:px-10 sm:py-12">
+                        {/* Heading area */}
+                        <div className="mb-8 space-y-3 text-center">
+                            {title && (
+                                <h1 className="font-serif text-3xl leading-tight text-foreground sm:text-4xl">
+                                    {title}
+                                </h1>
+                            )}
+                            {description && (
+                                <p className="mx-auto max-w-xs text-sm leading-relaxed text-muted-foreground">
+                                    {description}
+                                </p>
+                            )}
                         </div>
+
+                        {children}
                     </div>
-                    {children}
                 </div>
-            </div>
+            </main>
+
+            {/* Footer */}
+            <footer className="px-6 py-5 sm:px-10">
+                <div className="flex flex-col items-center justify-between gap-3 text-xs text-muted-foreground sm:flex-row">
+                    <span>
+                        &copy; {year} Devotional. Curated, Protected &amp;
+                        Verified.
+                    </span>
+                    {/* TODO: Update hrefs when privacy/terms pages exist */}
+                    <div className="flex gap-6">
+                        <a
+                            href="/privacy"
+                            className="transition-colors hover:text-foreground"
+                        >
+                            Privacy Policy
+                        </a>
+                        <a
+                            href="/terms"
+                            className="transition-colors hover:text-foreground"
+                        >
+                            Terms of Service
+                        </a>
+                    </div>
+                </div>
+            </footer>
         </div>
     );
 }
