@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ThemeController as AdminThemeController;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\DevotionalEntryController;
 use App\Http\Controllers\DevotionalImageController;
+use App\Http\Controllers\DevotionalSettingsController;
 use App\Http\Controllers\EmailOtpController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ObservationController;
@@ -71,6 +72,9 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
     Route::get('notifications', new NotificationController()->index(...))->name('notifications.index');
     Route::put('notifications/preferences', new NotificationController()->updatePreferences(...))->name('notifications.preferences.update');
 
+    // Devotional Settings...
+    Route::delete('settings/social/{provider}', new DevotionalSettingsController()->disconnectSocialAccount(...))->name('settings.disconnect-social');
+
     // Partner...
     Route::post('partner', new PartnerController()->store(...))->name('partner.store');
     Route::delete('partner', new PartnerController()->destroy(...))->name('partner.destroy');
@@ -80,8 +84,10 @@ Route::middleware('auth')->group(function (): void {
     // User...
     Route::delete('user', [UserController::class, 'destroy'])->name('user.destroy');
 
+    // Settings...
+    Route::get('settings', new DevotionalSettingsController()->index(...))->name('settings.index');
+
     // User Profile...
-    Route::redirect('settings', '/settings/profile');
     Route::get('settings/profile', [UserProfileController::class, 'edit'])->name('user-profile.edit');
     Route::patch('settings/profile', [UserProfileController::class, 'update'])->name('user-profile.update');
 

@@ -634,8 +634,8 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Notification preference toggles (completion, observation, new theme, reminders)
     - _Requirements: 14.5, 14.6, 14.7, 14.8, 14.9, 14.10_
 
-- [ ] 24. Frontend — Settings page
-  - [ ] 24.1 Create settings page (`settings/devotional.tsx` or extend existing settings)
+- [x] 24. Frontend — Settings page
+  - [x] 24.1 Create settings page (`settings/devotional.tsx` or extend existing settings)
     - Partner linking section with link/unlink CTA
     - Notification preference toggles
     - Bible version preference
