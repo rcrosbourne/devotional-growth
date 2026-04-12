@@ -52,7 +52,10 @@ final readonly class ThemeController
         $entries = $theme->entries()
             ->published()
             ->orderBy('display_order')
-            ->with(['completions' => fn (Relation $query) => $query->where('user_id', $user->id)])
+            ->with([
+                'scriptureReferences',
+                'completions' => fn (Relation $query) => $query->where('user_id', $user->id),
+            ])
             ->get();
 
         $totalEntries = $entries->count();
