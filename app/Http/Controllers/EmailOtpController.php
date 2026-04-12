@@ -49,6 +49,6 @@ final readonly class EmailOtpController
 
         session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        return redirect()->intended(route('themes.index', absolute: false));
     }
 }

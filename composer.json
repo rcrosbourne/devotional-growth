@@ -17,7 +17,8 @@
         "laravel/socialite": "^5.26.1",
         "laravel/tinker": "^3.0",
         "laravel/wayfinder": "^0.1.15",
-        "nunomaduro/essentials": "^1.2.0"
+        "nunomaduro/essentials": "^1.2.0",
+        "resend/resend-php": "^1.2"
     },
     "require-dev": {
         "driftingly/rector-laravel": "^2.2.0",

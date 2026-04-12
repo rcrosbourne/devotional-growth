@@ -204,5 +204,5 @@ it('redirects authenticated users away from reset password', function (): void {
         ->fromRoute('dashboard')
         ->get(route('password.reset', ['token' => 'fake-token']));
 
-    $response->assertRedirectToRoute('dashboard');
+    $response->assertRedirect(route('themes.index', absolute: false));
 });
