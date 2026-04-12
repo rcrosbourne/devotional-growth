@@ -113,6 +113,25 @@ it('displays empty state when no published themes exist', function (): void {
         );
 });
 
+it('prefers theme own image over entry image', function (): void {
+    $user = User::factory()->create();
+    $theme = Theme::factory()->published()->create(['image_path' => 'images/themes/own-cover.png']);
+    $entry = DevotionalEntry::factory()->published()->for($theme)->create();
+    $image = GeneratedImage::factory()->for($entry, 'devotionalEntry')->create();
+
+    Storage::disk('public')->put('images/themes/own-cover.png', 'theme-image');
+    Storage::disk('public')->put($image->path, 'entry-image');
+
+    $response = $this->actingAs($user)
+        ->get(route('themes.index'));
+
+    $response->assertOk()
+        ->assertInertia(fn ($page) => $page
+            ->component('themes/index')
+            ->where('themes.0.cover_image_path', 'images/themes/own-cover.png')
+        );
+});
+
 it('includes cover image path from first published entry with a generated image', function (): void {
     $user = User::factory()->create();
     $theme = Theme::factory()->published()->create();

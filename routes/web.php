@@ -156,6 +156,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::put('themes/{theme}', new AdminThemeController()->update(...))->name('themes.update');
     Route::delete('themes/{theme}', new AdminThemeController()->destroy(...))->name('themes.destroy');
     Route::put('themes/{theme}/publish', new AdminThemeController()->publish(...))->name('themes.publish');
+    Route::put('themes/{theme}/unpublish', new AdminThemeController()->unpublish(...))->name('themes.unpublish');
+    Route::post('themes/{theme}/generate-image', new AdminThemeController()->generateImage(...))->name('themes.generate-image');
 
     // Admin Devotional Entries...
     Route::get('themes/{theme}/entries', new AdminDevotionalEntryController()->index(...))->name('themes.entries.index');
@@ -166,6 +168,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::put('themes/{theme}/entries/{entry}', new AdminDevotionalEntryController()->update(...))->name('themes.entries.update');
     Route::delete('themes/{theme}/entries/{entry}', new AdminDevotionalEntryController()->destroy(...))->name('themes.entries.destroy');
     Route::put('themes/{theme}/entries/{entry}/publish', new AdminDevotionalEntryController()->publish(...))->name('themes.entries.publish');
+    Route::put('themes/{theme}/entries/{entry}/unpublish', new AdminDevotionalEntryController()->unpublish(...))->name('themes.entries.unpublish');
 
     // Admin AI Content...
     Route::get('ai-content/generate', new AdminAiContentController()->create(...))->name('ai-content.create');

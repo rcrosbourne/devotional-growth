@@ -1,4 +1,5 @@
 import { ConfirmationDialog } from '@/components/devotional/confirmation-dialog';
+import { ScriptureBody } from '@/components/devotional/scripture-body';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
     Select,
@@ -651,26 +652,21 @@ export default function DevotionalEntriesShow({
                     </div>
                 )}
 
-                {/* Additional Scripture References */}
-                {entry.scripture_references.length > 1 && (
-                    <div className="mb-10 flex flex-wrap gap-2">
-                        {entry.scripture_references.slice(1).map((ref) => (
-                            <span
-                                key={ref.id}
-                                className="rounded-full bg-surface-container-high px-3 py-1 text-[11px] font-medium text-on-surface-variant"
-                            >
-                                {ref.raw_reference}
-                            </span>
-                        ))}
-                    </div>
-                )}
-
-                {/* Main Body Content */}
-                <div className="mx-auto mb-20 max-w-2xl md:mx-0 md:mr-auto md:ml-auto">
-                    <div
-                        className="prose-editorial font-serif text-lg leading-relaxed text-on-surface/90 md:text-xl [&>p]:mb-6"
-                        dangerouslySetInnerHTML={{ __html: entry.body }}
-                    />
+                {/* Additional Scripture References + Body */}
+                <div className="mx-auto mb-20 max-w-2xl">
+                    {entry.scripture_references.length > 1 && (
+                        <div className="mb-10 flex flex-wrap justify-center gap-2">
+                            {entry.scripture_references.slice(1).map((ref) => (
+                                <span
+                                    key={ref.id}
+                                    className="rounded-full bg-surface-container-high px-3 py-1 text-[11px] font-medium text-on-surface-variant"
+                                >
+                                    {ref.raw_reference}
+                                </span>
+                            ))}
+                        </div>
+                    )}
+                    <ScriptureBody body={entry.body} />
                 </div>
 
                 {/* Reflection Prompts */}

@@ -8,7 +8,12 @@ import {
     DialogHeader,
     DialogTitle,
 } from '@/components/ui/dialog';
-import AppLayout from '@/layouts/app-layout';
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipTrigger,
+} from '@/components/ui/tooltip';
+import DevotionalLayout from '@/layouts/devotional-layout';
 import { index as themesIndex } from '@/routes/admin/themes';
 import {
     create as entriesCreate,
@@ -16,10 +21,11 @@ import {
     edit as entriesEdit,
     publish as entriesPublish,
     reorder as entriesReorder,
+    unpublish as entriesUnpublish,
 } from '@/routes/admin/themes/entries';
-import { type BreadcrumbItem } from '@/types';
 import { Head, Link, router } from '@inertiajs/react';
 import {
+    ArrowDownToLine,
     ArrowLeft,
     ChevronDown,
     ChevronUp,
@@ -61,11 +67,6 @@ export default function EntriesIndex({ theme, entries }: Props) {
     const [deleteTarget, setDeleteTarget] = useState<Entry | null>(null);
     const [reordering, setReordering] = useState(false);
 
-    const breadcrumbs: BreadcrumbItem[] = [
-        { title: 'Themes', href: themesIndex.url() },
-        { title: theme.name, href: '#' },
-    ];
-
     const publishedCount = entries.filter(
         (e) => e.status === 'published',
     ).length;
@@ -81,6 +82,10 @@ export default function EntriesIndex({ theme, entries }: Props) {
 
     function handlePublish(entry: Entry) {
         router.put(entriesPublish.url({ theme: theme.id, entry: entry.id }));
+    }
+
+    function handleUnpublish(entry: Entry) {
+        router.put(entriesUnpublish.url({ theme: theme.id, entry: entry.id }));
     }
 
     function handleMoveEntry(index: number, direction: 'up' | 'down') {
@@ -115,7 +120,7 @@ export default function EntriesIndex({ theme, entries }: Props) {
     }
 
     return (
-        <AppLayout breadcrumbs={breadcrumbs}>
+        <DevotionalLayout>
             <Head title={`Entries - ${theme.name}`} />
 
             <div className="px-6 py-6 md:px-8">
@@ -329,59 +334,109 @@ export default function EntriesIndex({ theme, entries }: Props) {
                                             </td>
                                             <td className="px-4 py-4">
                                                 <div className="flex items-center justify-end gap-1">
-                                                    <Button
-                                                        variant="ghost"
-                                                        size="icon"
-                                                        asChild
-                                                        className="size-8"
-                                                    >
-                                                        <Link
-                                                            href={entriesEdit.url(
-                                                                {
-                                                                    theme: theme.id,
-                                                                    entry: entry.id,
-                                                                },
-                                                            )}
-                                                        >
-                                                            <Pencil className="size-4" />
-                                                            <span className="sr-only">
-                                                                Edit
-                                                            </span>
-                                                        </Link>
-                                                    </Button>
+                                                    <Tooltip>
+                                                        <TooltipTrigger asChild>
+                                                            <Button
+                                                                variant="ghost"
+                                                                size="icon"
+                                                                asChild
+                                                                className="size-8"
+                                                            >
+                                                                <Link
+                                                                    href={entriesEdit.url(
+                                                                        {
+                                                                            theme: theme.id,
+                                                                            entry: entry.id,
+                                                                        },
+                                                                    )}
+                                                                >
+                                                                    <Pencil className="size-4" />
+                                                                    <span className="sr-only">
+                                                                        Edit
+                                                                    </span>
+                                                                </Link>
+                                                            </Button>
+                                                        </TooltipTrigger>
+                                                        <TooltipContent>
+                                                            Edit entry
+                                                        </TooltipContent>
+                                                    </Tooltip>
                                                     {entry.status ===
                                                         'draft' && (
-                                                        <Button
-                                                            variant="ghost"
-                                                            size="icon"
-                                                            className="size-8 text-moss hover:text-moss"
-                                                            onClick={() =>
-                                                                handlePublish(
-                                                                    entry,
-                                                                )
-                                                            }
-                                                        >
-                                                            <Send className="size-4" />
-                                                            <span className="sr-only">
-                                                                Publish
-                                                            </span>
-                                                        </Button>
+                                                        <Tooltip>
+                                                            <TooltipTrigger
+                                                                asChild
+                                                            >
+                                                                <Button
+                                                                    variant="ghost"
+                                                                    size="icon"
+                                                                    className="size-8 text-moss hover:text-moss"
+                                                                    onClick={() =>
+                                                                        handlePublish(
+                                                                            entry,
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    <Send className="size-4" />
+                                                                    <span className="sr-only">
+                                                                        Publish
+                                                                    </span>
+                                                                </Button>
+                                                            </TooltipTrigger>
+                                                            <TooltipContent>
+                                                                Publish entry
+                                                            </TooltipContent>
+                                                        </Tooltip>
                                                     )}
-                                                    <Button
-                                                        variant="ghost"
-                                                        size="icon"
-                                                        className="size-8 text-destructive hover:text-destructive"
-                                                        onClick={() =>
-                                                            setDeleteTarget(
-                                                                entry,
-                                                            )
-                                                        }
-                                                    >
-                                                        <Trash2 className="size-4" />
-                                                        <span className="sr-only">
-                                                            Delete
-                                                        </span>
-                                                    </Button>
+                                                    {entry.status ===
+                                                        'published' && (
+                                                        <Tooltip>
+                                                            <TooltipTrigger
+                                                                asChild
+                                                            >
+                                                                <Button
+                                                                    variant="ghost"
+                                                                    size="icon"
+                                                                    className="size-8 text-on-surface-variant hover:text-on-surface"
+                                                                    onClick={() =>
+                                                                        handleUnpublish(
+                                                                            entry,
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    <ArrowDownToLine className="size-4" />
+                                                                    <span className="sr-only">
+                                                                        Unpublish
+                                                                    </span>
+                                                                </Button>
+                                                            </TooltipTrigger>
+                                                            <TooltipContent>
+                                                                Unpublish entry
+                                                            </TooltipContent>
+                                                        </Tooltip>
+                                                    )}
+                                                    <Tooltip>
+                                                        <TooltipTrigger asChild>
+                                                            <Button
+                                                                variant="ghost"
+                                                                size="icon"
+                                                                className="size-8 text-destructive hover:text-destructive"
+                                                                onClick={() =>
+                                                                    setDeleteTarget(
+                                                                        entry,
+                                                                    )
+                                                                }
+                                                            >
+                                                                <Trash2 className="size-4" />
+                                                                <span className="sr-only">
+                                                                    Delete
+                                                                </span>
+                                                            </Button>
+                                                        </TooltipTrigger>
+                                                        <TooltipContent>
+                                                            Delete entry
+                                                        </TooltipContent>
+                                                    </Tooltip>
                                                 </div>
                                             </td>
                                         </tr>
@@ -498,6 +553,18 @@ export default function EntriesIndex({ theme, entries }: Props) {
                                                     <Send className="size-3.5" />
                                                 </Button>
                                             )}
+                                            {entry.status === 'published' && (
+                                                <Button
+                                                    variant="ghost"
+                                                    size="icon"
+                                                    className="size-8 text-on-surface-variant"
+                                                    onClick={() =>
+                                                        handleUnpublish(entry)
+                                                    }
+                                                >
+                                                    <ArrowDownToLine className="size-3.5" />
+                                                </Button>
+                                            )}
                                             <Button
                                                 variant="ghost"
                                                 size="icon"
@@ -547,6 +614,6 @@ export default function EntriesIndex({ theme, entries }: Props) {
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
-        </AppLayout>
+        </DevotionalLayout>
     );
 }

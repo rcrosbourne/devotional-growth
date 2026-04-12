@@ -2,13 +2,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import AppLayout from '@/layouts/app-layout';
-import { index as themesIndex } from '@/routes/admin/themes';
+import DevotionalLayout from '@/layouts/devotional-layout';
 import {
     index as entriesIndex,
     store as entriesStore,
 } from '@/routes/admin/themes/entries';
-import { type BreadcrumbItem } from '@/types';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { ArrowLeft, BookOpen, Plus, X } from 'lucide-react';
 import { type FormEventHandler, useRef, useState } from 'react';
@@ -32,12 +30,6 @@ export default function CreateEntry({ theme }: Props) {
     const [refItems, setRefItems] = useState<ScriptureRefItem[]>([
         { key: 0, value: '' },
     ]);
-
-    const breadcrumbs: BreadcrumbItem[] = [
-        { title: 'Themes', href: themesIndex.url() },
-        { title: theme.name, href: entriesIndex.url(theme.id) },
-        { title: 'New Entry', href: '#' },
-    ];
 
     const { data, setData, post, processing, errors } = useForm({
         title: '',
@@ -74,7 +66,7 @@ export default function CreateEntry({ theme }: Props) {
     }
 
     return (
-        <AppLayout breadcrumbs={breadcrumbs}>
+        <DevotionalLayout>
             <Head title={`New Entry - ${theme.name}`} />
 
             <div className="px-6 py-6 md:px-8">
@@ -297,6 +289,6 @@ export default function CreateEntry({ theme }: Props) {
                     </div>
                 </form>
             </div>
-        </AppLayout>
+        </DevotionalLayout>
     );
 }

@@ -41,7 +41,7 @@ final readonly class ThemeController
                 'status' => $theme->status,
                 'entries_count' => $theme->entries_count,
                 'completed_entries_count' => $theme->completed_entries_count,
-                'cover_image_path' => $coverImages[$theme->id] ?? null,
+                'cover_image_path' => $this->resolveImagePath($theme, $coverImages),
             ]),
         ]);
     }
@@ -78,7 +78,7 @@ final readonly class ThemeController
                     ? $entry->generatedImage->path
                     : null,
             ]),
-            'coverImagePath' => $coverImage[$theme->id] ?? null,
+            'coverImagePath' => $this->resolveImagePath($theme, $coverImage),
             'progress' => [
                 'total' => $totalEntries,
                 'completed' => $completedEntries,
@@ -119,5 +119,17 @@ final readonly class ThemeController
         }
 
         return $result;
+    }
+
+    /**
+     * @param  array<int, string>  $entryCoverImages
+     */
+    private function resolveImagePath(Theme $theme, array $entryCoverImages): ?string
+    {
+        if ($theme->image_path !== null && Storage::disk('public')->exists($theme->image_path)) {
+            return $theme->image_path;
+        }
+
+        return $entryCoverImages[$theme->id] ?? null;
     }
 }

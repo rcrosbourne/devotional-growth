@@ -8,6 +8,7 @@ use App\Actions\CreateDevotionalEntry;
 use App\Actions\DeleteDevotionalEntry;
 use App\Actions\PublishDevotionalEntry;
 use App\Actions\ReorderDevotionalEntries;
+use App\Actions\UnpublishDevotionalEntry;
 use App\Actions\UpdateDevotionalEntry;
 use App\Http\Requests\CreateDevotionalEntryRequest;
 use App\Http\Requests\ReorderDevotionalEntriesRequest;
@@ -60,7 +61,7 @@ final readonly class DevotionalEntryController
     {
         return Inertia::render('admin/devotional-entries/edit', [
             'theme' => $theme,
-            'entry' => $entry->load('scriptureReferences'),
+            'entry' => $entry->load(['scriptureReferences', 'generatedImage']),
         ]);
     }
 
@@ -88,6 +89,13 @@ final readonly class DevotionalEntryController
     }
 
     public function publish(Theme $theme, DevotionalEntry $entry, PublishDevotionalEntry $action): RedirectResponse
+    {
+        $action->handle($entry);
+
+        return to_route('admin.themes.entries.index', $theme);
+    }
+
+    public function unpublish(Theme $theme, DevotionalEntry $entry, UnpublishDevotionalEntry $action): RedirectResponse
     {
         $action->handle($entry);
 
