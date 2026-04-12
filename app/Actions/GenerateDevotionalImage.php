@@ -28,6 +28,7 @@ final readonly class GenerateDevotionalImage
 
         $response = $this->generateImage($prompt);
 
+        /** @var string $path */
         $path = $response->store('images/devotionals', 'public');
 
         $this->stripExtendedAttributes($path);
@@ -61,10 +62,6 @@ final readonly class GenerateDevotionalImage
 
     private function stripExtendedAttributes(string $path): void
     {
-        if (PHP_OS_FAMILY !== 'Darwin') {
-            return;
-        }
-
         $fullPath = Storage::disk('public')->path($path);
 
         Process::run(['xattr', '-c', $fullPath]);

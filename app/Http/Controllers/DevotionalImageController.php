@@ -24,8 +24,8 @@ final readonly class DevotionalImageController
 
         try {
             $action->handle($entry, $replace);
-        } catch (Throwable $e) {
-            Log::error('Image generation failed', ['error' => $e->getMessage(), 'entry_id' => $entry->id]);
+        } catch (Throwable $throwable) {
+            Log::error('Image generation failed', ['error' => $throwable->getMessage(), 'entry_id' => $entry->id]);
 
             return back()->with('error', 'Image generation is currently unavailable. Please try again later.');
         }
