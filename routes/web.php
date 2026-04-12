@@ -170,6 +170,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     // Admin AI Content...
     Route::get('ai-content/generate', new AdminAiContentController()->create(...))->name('ai-content.create');
     Route::post('ai-content/generate', new AdminAiContentController()->store(...))->name('ai-content.store');
+    Route::post('ai-content/save', new AdminAiContentController()->save(...))->name('ai-content.save');
 });
 
 Route::middleware('auth')->group(function (): void {

@@ -6,8 +6,9 @@ namespace App\Http\Controllers;
 
 use App\Actions\GenerateDevotionalImage;
 use App\Models\DevotionalEntry;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Throwable;
 
 final readonly class DevotionalImageController
@@ -16,23 +17,19 @@ final readonly class DevotionalImageController
         Request $request,
         DevotionalEntry $entry,
         GenerateDevotionalImage $action,
-    ): JsonResponse {
+    ): RedirectResponse {
+        set_time_limit(120);
+
         $replace = $request->boolean('replace');
 
         try {
-            $image = $action->handle($entry, $replace);
+            $action->handle($entry, $replace);
+        } catch (Throwable $e) {
+            Log::error('Image generation failed', ['error' => $e->getMessage(), 'entry_id' => $entry->id]);
 
-            return response()->json([
-                'image' => [
-                    'id' => $image->id,
-                    'path' => $image->path,
-                    'url' => asset('storage/'.$image->path),
-                ],
-            ]);
-        } catch (Throwable) {
-            return response()->json([
-                'message' => 'Image generation is currently unavailable. Please try again later.',
-            ], 503);
+            return back()->with('error', 'Image generation is currently unavailable. Please try again later.');
         }
+
+        return back();
     }
 }

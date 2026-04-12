@@ -6,6 +6,7 @@ namespace App\Actions;
 
 use App\Models\DevotionalEntry;
 use App\Models\GeneratedImage;
+use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Ai\Image;
 use Laravel\Ai\Responses\ImageResponse;
@@ -28,6 +29,8 @@ final readonly class GenerateDevotionalImage
         $response = $this->generateImage($prompt);
 
         $path = $response->store('images/devotionals', 'public');
+
+        $this->stripExtendedAttributes($path);
 
         if ($replace && $entry->generatedImage !== null) {
             Storage::disk('public')->delete($entry->generatedImage->path);
@@ -56,12 +59,23 @@ final readonly class GenerateDevotionalImage
             .'Do not include any text or words in the image.';
     }
 
+    private function stripExtendedAttributes(string $path): void
+    {
+        if (PHP_OS_FAMILY !== 'Darwin') {
+            return;
+        }
+
+        $fullPath = Storage::disk('public')->path($path);
+
+        Process::run(['xattr', '-c', $fullPath]);
+    }
+
     private function generateImage(string $prompt): ImageResponse
     {
         return Image::of($prompt)
             ->square()
             ->quality('medium')
-            ->timeout(60)
+            ->timeout(120)
             ->generate();
     }
 }

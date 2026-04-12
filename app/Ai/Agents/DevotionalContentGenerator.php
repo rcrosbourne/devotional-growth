@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace App\Ai\Agents;
 
 use Illuminate\Contracts\JsonSchema\JsonSchema;
+use Laravel\Ai\Attributes\Timeout;
 use Laravel\Ai\Contracts\Agent;
 use Laravel\Ai\Contracts\HasStructuredOutput;
 use Laravel\Ai\Promptable;
 
+#[Timeout(120)]
 final class DevotionalContentGenerator implements Agent, HasStructuredOutput
 {
     use Promptable;
