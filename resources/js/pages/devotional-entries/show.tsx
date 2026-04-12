@@ -1,7 +1,20 @@
 import { ConfirmationDialog } from '@/components/devotional/confirmation-dialog';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
 import { useInitials } from '@/hooks/use-initials';
 import DevotionalLayout from '@/layouts/devotional-layout';
+import {
+    type BibleVersionKey,
+    BIBLE_VERSIONS,
+    getPreferredVersion,
+    setPreferredVersion,
+} from '@/lib/bible-versions';
 import { cn, storageUrl } from '@/lib/utils';
 import {
     destroy as destroyBookmark,
@@ -13,6 +26,7 @@ import {
     store as storeObservation,
     update as updateObservation,
 } from '@/routes/observations';
+import { show as showScripture } from '@/routes/scripture';
 import {
     complete as completeEntry,
     show as showEntry,
@@ -35,7 +49,7 @@ import {
     Trash2,
     X,
 } from 'lucide-react';
-import { type FormEvent, useState } from 'react';
+import { type FormEvent, useCallback, useEffect, useState } from 'react';
 
 interface ScriptureReference {
     id: number;
@@ -80,6 +94,35 @@ interface Props {
     isBookmarked: boolean;
     bookmarkId: number | null;
     entryPosition: number;
+}
+
+function BibleVersionSelector({
+    value,
+    onChange,
+}: {
+    value: BibleVersionKey;
+    onChange: (version: BibleVersionKey) => void;
+}) {
+    return (
+        <Select
+            value={value}
+            onValueChange={(v) => onChange(v as BibleVersionKey)}
+        >
+            <SelectTrigger className="inline-flex h-auto w-auto gap-1.5 rounded-full border-border/60 bg-surface-container-lowest px-3 py-1 text-[10px] font-bold tracking-[0.15em] text-on-surface-variant/70 uppercase shadow-none transition-all hover:border-moss/40 hover:text-moss">
+                <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+                {BIBLE_VERSIONS.map((v) => (
+                    <SelectItem key={v.value} value={v.value}>
+                        <span className="font-bold tracking-widest uppercase">
+                            {v.value}
+                        </span>{' '}
+                        — {v.label}
+                    </SelectItem>
+                ))}
+            </SelectContent>
+        </Select>
+    );
 }
 
 function formatDate(dateString: string): string {
@@ -325,6 +368,73 @@ export default function DevotionalEntriesShow({
     const [generatingImage, setGeneratingImage] = useState(false);
     const [confirmRegenerate, setConfirmRegenerate] = useState(false);
 
+    const [bibleVersion, setBibleVersion] = useState(getPreferredVersion);
+    const [passageTexts, setPassageTexts] = useState<Record<number, string>>(
+        {},
+    );
+    const [loadingPassages, setLoadingPassages] = useState(false);
+
+    const fetchPassages = useCallback(
+        async (version: string, signal?: AbortSignal) => {
+            if (entry.scripture_references.length === 0) {
+                return;
+            }
+            setPassageTexts({});
+            setLoadingPassages(true);
+            const texts: Record<number, string> = {};
+
+            await Promise.all(
+                entry.scripture_references.map(async (ref) => {
+                    try {
+                        const params: Record<string, string> = {
+                            book: ref.book,
+                            chapter: String(ref.chapter),
+                            verse_start: String(ref.verse_start),
+                            bible_version: version,
+                        };
+                        if (ref.verse_end !== null) {
+                            params.verse_end = String(ref.verse_end);
+                        }
+                        const url = showScripture.url({ query: params });
+                        const response = await fetch(url, {
+                            signal,
+                            headers: { Accept: 'application/json' },
+                        });
+                        if (response.ok) {
+                            const data = await response.json();
+                            texts[ref.id] = data.text;
+                        }
+                    } catch (err: unknown) {
+                        if (
+                            err instanceof DOMException &&
+                            err.name === 'AbortError'
+                        ) {
+                            return;
+                        }
+                        // passage fetch failed — will show raw reference
+                    }
+                }),
+            );
+
+            if (!signal?.aborted) {
+                setPassageTexts(texts);
+                setLoadingPassages(false);
+            }
+        },
+        [entry.scripture_references],
+    );
+
+    useEffect(() => {
+        const controller = new AbortController();
+        fetchPassages(bibleVersion, controller.signal);
+        return () => controller.abort();
+    }, [bibleVersion, fetchPassages, entry.id]);
+
+    function handleVersionChange(version: BibleVersionKey) {
+        setBibleVersion(version);
+        setPreferredVersion(version);
+    }
+
     const firstScripture = entry.scripture_references[0];
 
     function handleComplete() {
@@ -485,9 +595,20 @@ export default function DevotionalEntriesShow({
                         />
                         <div className="relative mx-auto max-w-2xl px-4 text-center">
                             <Quote className="mx-auto mb-4 size-8 fill-moss/30 text-moss/40" />
-                            <p className="font-serif text-xl leading-relaxed text-on-surface italic md:text-2xl lg:text-3xl">
-                                &ldquo;{firstScripture.raw_reference}&rdquo;
-                            </p>
+                            {loadingPassages ? (
+                                <div className="flex items-center justify-center py-4">
+                                    <Loader2 className="size-5 animate-spin text-moss/40" />
+                                </div>
+                            ) : passageTexts[firstScripture.id] ? (
+                                <p className="font-serif text-xl leading-relaxed text-on-surface italic md:text-2xl lg:text-3xl">
+                                    &ldquo;{passageTexts[firstScripture.id]}
+                                    &rdquo;
+                                </p>
+                            ) : (
+                                <p className="font-serif text-xl leading-relaxed text-on-surface-variant/70 md:text-2xl lg:text-3xl">
+                                    {firstScripture.raw_reference}
+                                </p>
+                            )}
                             <span className="mt-4 block text-xs font-bold tracking-widest text-on-surface-variant uppercase">
                                 &mdash; {firstScripture.book}{' '}
                                 {firstScripture.chapter}:
@@ -496,6 +617,12 @@ export default function DevotionalEntriesShow({
                                     ? `–${firstScripture.verse_end}`
                                     : ''}
                             </span>
+                            <div className="mt-5">
+                                <BibleVersionSelector
+                                    value={bibleVersion}
+                                    onChange={handleVersionChange}
+                                />
+                            </div>
                         </div>
                     </div>
                 )}

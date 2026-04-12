@@ -642,8 +642,8 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Social account management (connect/disconnect providers)
     - _Requirements: 14.8, Social login_
 
-- [ ] 25. Checkpoint — All frontend pages complete
-  - Ensure all tests pass, ask the user if questions arise.
+- [x] 25. Checkpoint — All frontend pages complete
+  - All 670 tests pass (2395 assertions). Audit found Bible version selector missing from devotional entry show page and settings; both were added with shared `lib/bible-versions.ts` module. All pages verified present and functional.
 
 - [ ] 26. PWA support
   - [ ] 26.1 Install and configure `vite-plugin-pwa` with Workbox
