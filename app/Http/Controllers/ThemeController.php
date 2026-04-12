@@ -28,8 +28,20 @@ final readonly class ThemeController
             ->latest()
             ->get();
 
+        /** @var list<int> $themeIds */
+        $themeIds = $themes->pluck('id')->all();
+        $coverImages = $this->loadCoverImages($themeIds);
+
         return Inertia::render('themes/index', [
-            'themes' => $themes,
+            'themes' => $themes->map(fn (Theme $theme): array => [
+                'id' => $theme->id,
+                'name' => $theme->name,
+                'description' => $theme->description,
+                'status' => $theme->status,
+                'entries_count' => $theme->entries_count,
+                'completed_entries_count' => $theme->completed_entries_count,
+                'cover_image_path' => $coverImages[$theme->id] ?? null,
+            ]),
         ]);
     }
 
@@ -55,5 +67,39 @@ final readonly class ThemeController
                 'percentage' => $totalEntries > 0 ? round(($completedEntries / $totalEntries) * 100) : 0,
             ],
         ]);
+    }
+
+    /**
+     * @param  list<int>  $themeIds
+     * @return array<int, string>
+     */
+    private function loadCoverImages(array $themeIds): array
+    {
+        if ($themeIds === []) {
+            return [];
+        }
+
+        $firstEntryIds = DevotionalEntry::query()
+            ->selectRaw('MIN(id) as id')
+            ->whereIn('theme_id', $themeIds)
+            ->where('status', ContentStatus::Published)
+            ->whereHas('generatedImage')
+            ->groupBy('theme_id')
+            ->pluck('id');
+
+        $entries = DevotionalEntry::query()
+            ->whereIn('id', $firstEntryIds)
+            ->with('generatedImage')
+            ->get();
+
+        $result = [];
+        foreach ($entries as $entry) {
+            $image = $entry->generatedImage;
+            if ($image !== null) {
+                $result[$entry->theme_id] = $image->path;
+            }
+        }
+
+        return $result;
     }
 }

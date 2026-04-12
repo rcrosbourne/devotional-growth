@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Models\Bookmark;
 use App\Models\DevotionalCompletion;
 use App\Models\DevotionalEntry;
 use App\Models\GeneratedImage;
@@ -129,7 +130,7 @@ it('shows not completed when user has not completed the entry', function (): voi
 
 // Previous / Next Navigation
 
-it('includes previous and next entry IDs for navigation', function (): void {
+it('includes previous and next entry data for navigation', function (): void {
     $user = User::factory()->create();
     $theme = Theme::factory()->published()->create();
     $first = DevotionalEntry::factory()->published()->for($theme)->create(['display_order' => 1]);
@@ -142,8 +143,10 @@ it('includes previous and next entry IDs for navigation', function (): void {
     $response->assertOk()
         ->assertInertia(fn ($page) => $page
             ->component('devotional-entries/show')
-            ->where('previousEntryId', $first->id)
-            ->where('nextEntryId', $third->id)
+            ->where('previousEntry.id', $first->id)
+            ->where('previousEntry.title', $first->title)
+            ->where('nextEntry.id', $third->id)
+            ->where('nextEntry.title', $third->title)
         );
 });
 
@@ -159,8 +162,8 @@ it('has no previous entry for the first entry', function (): void {
     $response->assertOk()
         ->assertInertia(fn ($page) => $page
             ->component('devotional-entries/show')
-            ->where('previousEntryId', null)
-            ->where('nextEntryId', $second->id)
+            ->where('previousEntry', null)
+            ->where('nextEntry.id', $second->id)
         );
 });
 
@@ -176,8 +179,8 @@ it('has no next entry for the last entry', function (): void {
     $response->assertOk()
         ->assertInertia(fn ($page) => $page
             ->component('devotional-entries/show')
-            ->where('previousEntryId', $first->id)
-            ->where('nextEntryId', null)
+            ->where('previousEntry.id', $first->id)
+            ->where('nextEntry', null)
         );
 });
 
@@ -194,8 +197,8 @@ it('excludes draft entries from previous/next navigation', function (): void {
     $response->assertOk()
         ->assertInertia(fn ($page) => $page
             ->component('devotional-entries/show')
-            ->where('previousEntryId', null)
-            ->where('nextEntryId', $third->id)
+            ->where('previousEntry', null)
+            ->where('nextEntry.id', $third->id)
         );
 });
 
@@ -448,4 +451,61 @@ it('does not create duplicate completions on repeated requests', function (): vo
         ->post(route('themes.entries.complete', [$theme, $entry]));
 
     expect(DevotionalCompletion::query()->count())->toBe(1);
+});
+
+// Bookmark & Position Data
+
+it('includes bookmark status when entry is bookmarked', function (): void {
+    $user = User::factory()->create();
+    $theme = Theme::factory()->published()->create();
+    $entry = DevotionalEntry::factory()->published()->for($theme)->create();
+    $bookmark = Bookmark::factory()->create([
+        'user_id' => $user->id,
+        'bookmarkable_type' => DevotionalEntry::class,
+        'bookmarkable_id' => $entry->id,
+    ]);
+
+    $response = $this->actingAs($user)
+        ->get(route('themes.entries.show', [$theme, $entry]));
+
+    $response->assertOk()
+        ->assertInertia(fn ($page) => $page
+            ->component('devotional-entries/show')
+            ->where('isBookmarked', true)
+            ->where('bookmarkId', $bookmark->id)
+        );
+});
+
+it('includes bookmark status when entry is not bookmarked', function (): void {
+    $user = User::factory()->create();
+    $theme = Theme::factory()->published()->create();
+    $entry = DevotionalEntry::factory()->published()->for($theme)->create();
+
+    $response = $this->actingAs($user)
+        ->get(route('themes.entries.show', [$theme, $entry]));
+
+    $response->assertOk()
+        ->assertInertia(fn ($page) => $page
+            ->component('devotional-entries/show')
+            ->where('isBookmarked', false)
+            ->where('bookmarkId', null)
+        );
+});
+
+it('includes entry position and total entries count', function (): void {
+    $user = User::factory()->create();
+    $theme = Theme::factory()->published()->create();
+    DevotionalEntry::factory()->published()->for($theme)->create(['display_order' => 1]);
+    $second = DevotionalEntry::factory()->published()->for($theme)->create(['display_order' => 2]);
+    DevotionalEntry::factory()->published()->for($theme)->create(['display_order' => 3]);
+
+    $response = $this->actingAs($user)
+        ->get(route('themes.entries.show', [$theme, $second]));
+
+    $response->assertOk()
+        ->assertInertia(fn ($page) => $page
+            ->component('devotional-entries/show')
+            ->where('entryPosition', 2)
+            ->where('totalEntries', 3)
+        );
 });

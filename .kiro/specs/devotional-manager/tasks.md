@@ -574,21 +574,21 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - Loading state during generation, error handling
     - _Requirements: AI content generation_
 
-- [ ] 21. Frontend — User-facing theme and devotional pages
-  - [ ] 21.1 Create themes index page (`themes/index.tsx`)
+- [x] 21. Frontend — User-facing theme and devotional pages
+  - [x] 21.1 Create themes index page (`themes/index.tsx`)
     - Published theme cards with cover image, title, description, progress bar, completion percentage
     - Featured series hero section
     - Overall progress summary
     - Empty state when no themes exist
     - _Requirements: 1.1, 1.3, 1.4_
 
-  - [ ] 21.2 Create theme detail page (`themes/show.tsx`)
+  - [x] 21.2 Create theme detail page (`themes/show.tsx`)
     - Entry list in display order with title, scripture refs, completion indicators
     - Theme progress tracking
     - Completion summary when all entries done
     - _Requirements: 1.2, 8.2, 8.4, 10.3_
 
-  - [ ] 21.3 Create daily devotional view page (`devotional-entries/show.tsx`)
+  - [x] 21.3 Create daily devotional view page (`devotional-entries/show.tsx`)
     - Single scrollable view: title, scripture passage (with version selector), body, reflection prompts, adventist insights
     - `scripture-passage` component with inline Bible text and `bible-version-selector` dropdown
     - `completion-indicator` and mark-complete button
