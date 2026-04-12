@@ -167,6 +167,25 @@ it('falls back to email local part when name and nickname are null', function ()
     expect($user->name)->toBe('john');
 });
 
+it('handles tokens longer than 255 characters', function (): void {
+    $longToken = str_repeat('a', 1000);
+    $longRefreshToken = str_repeat('b', 500);
+
+    $action = new HandleSocialLogin;
+
+    $user = $action->handle('google', makeSocialiteUser(
+        token: $longToken,
+        refreshToken: $longRefreshToken,
+    ));
+
+    $this->assertDatabaseHas('social_accounts', [
+        'user_id' => $user->id,
+        'provider' => SocialProvider::Google->value,
+        'provider_token' => $longToken,
+        'provider_refresh_token' => $longRefreshToken,
+    ]);
+});
+
 it('throws exception for invalid provider', function (): void {
     $action = new HandleSocialLogin;
 
