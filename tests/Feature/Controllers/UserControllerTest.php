@@ -26,7 +26,7 @@ it('may register a new user', function (): void {
             'password_confirmation' => 'password1234',
         ]);
 
-    $response->assertRedirectToRoute('dashboard');
+    $response->assertRedirect(route('themes.index', absolute: false));
 
     $user = User::query()->where('email', 'test@example.com')->first();
 
@@ -183,5 +183,5 @@ it('redirects authenticated users away from registration', function (): void {
         ->fromRoute('dashboard')
         ->get(route('register'));
 
-    $response->assertRedirectToRoute('dashboard');
+    $response->assertRedirect(route('themes.index', absolute: false));
 });

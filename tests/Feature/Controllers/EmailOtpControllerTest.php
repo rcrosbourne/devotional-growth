@@ -87,7 +87,7 @@ it('verifies a valid OTP and authenticates the user', function (): void {
             'code' => $code,
         ]);
 
-    $response->assertRedirect(route('dashboard'));
+    $response->assertRedirect(route('themes.index'));
 
     $this->assertAuthenticated();
     $this->assertDatabaseMissing('email_otps', [
@@ -111,7 +111,7 @@ it('creates a new user when verifying OTP for unknown email', function (): void 
             'code' => $code,
         ]);
 
-    $response->assertRedirect(route('dashboard'));
+    $response->assertRedirect(route('themes.index'));
 
     $this->assertAuthenticated();
     $this->assertDatabaseHas('users', [
@@ -162,10 +162,10 @@ it('redirects authenticated users away from email OTP pages', function (): void 
     $user = User::factory()->create();
 
     $response = $this->actingAs($user)->get(route('email-otp.create'));
-    $response->assertRedirectToRoute('dashboard');
+    $response->assertRedirect(route('themes.index', absolute: false));
 
     $response = $this->actingAs($user)->get(route('email-otp.verify.show'));
-    $response->assertRedirectToRoute('dashboard');
+    $response->assertRedirect(route('themes.index', absolute: false));
 });
 
 it('asserts OTP mail is sent when requesting a code', function (): void {
