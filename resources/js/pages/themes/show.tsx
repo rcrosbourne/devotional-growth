@@ -1,16 +1,10 @@
 import { ProgressBar } from '@/components/devotional/progress-bar';
 import DevotionalLayout from '@/layouts/devotional-layout';
-import { cn } from '@/lib/utils';
+import { cn, storageUrl } from '@/lib/utils';
 import { show as showEntry } from '@/routes/themes/entries';
 import { Head, Link } from '@inertiajs/react';
-import {
-    ArrowLeft,
-    ArrowRight,
-    CheckCircle2,
-    Lock,
-    Quote,
-    Zap,
-} from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle2, Lock, Zap } from 'lucide-react';
+import { useState } from 'react';
 
 interface ScriptureRef {
     id: number;
@@ -24,6 +18,7 @@ interface Entry {
     display_order: number;
     scripture_references: ScriptureRef[];
     completions: { id: number }[];
+    image_path: string | null;
 }
 
 interface Progress {
@@ -39,6 +34,7 @@ interface Props {
         description: string | null;
     };
     entries: Entry[];
+    coverImagePath: string | null;
     progress: Progress;
 }
 
@@ -48,14 +44,18 @@ function EntryCard({
     entry,
     status,
     themeId,
+    index,
 }: {
     entry: Entry;
     status: EntryStatus;
     themeId: number;
+    index: number;
 }) {
+    const [imgFailed, setImgFailed] = useState(false);
     const isCurrent = status === 'current';
     const isCompleted = status === 'completed';
     const isUpcoming = status === 'upcoming';
+    const showImage = entry.image_path && !imgFailed;
 
     const scriptureLabel = entry.scripture_references
         .map((ref) => ref.raw_reference)
@@ -63,135 +63,146 @@ function EntryCard({
 
     const cleanBody = entry.body.replace(/<[^>]*>/g, '');
     const bodySnippet =
-        cleanBody.length > 200 ? `${cleanBody.slice(0, 200)}...` : cleanBody;
+        cleanBody.length > 160 ? `${cleanBody.slice(0, 160)}...` : cleanBody;
 
     return (
         <Link
             href={showEntry.url({ theme: themeId, entry: entry.id })}
             prefetch
             className={cn(
-                'group flex flex-col gap-6 rounded-3xl p-6 transition-all duration-500 md:flex-row md:items-center md:justify-between md:p-8',
+                'group relative grid overflow-hidden rounded-2xl transition-all duration-500',
+                showImage
+                    ? 'grid-cols-[1fr_140px] md:grid-cols-[1fr_180px]'
+                    : 'grid-cols-1',
                 isCurrent &&
-                    'relative overflow-hidden bg-surface-container-highest shadow-ambient-lg ring-1 ring-moss/20',
+                    'bg-surface-container-highest shadow-ambient-lg ring-1 ring-moss/20',
                 isCompleted &&
-                    'cursor-pointer bg-surface-container-low hover:bg-surface-container-highest',
+                    'bg-surface-container-low hover:bg-surface-container',
                 isUpcoming &&
-                    'cursor-pointer bg-surface-container/50 opacity-60',
+                    'bg-surface-container/50 opacity-50 hover:opacity-70',
             )}
+            style={{ animationDelay: `${index * 60}ms` }}
         >
-            {/* Left accent bar for current entry */}
-            {isCurrent && (
-                <div className="absolute top-0 left-0 h-full w-1.5 bg-moss" />
-            )}
-
-            {/* Day number + Content */}
-            <div className="flex flex-1 items-start gap-6 md:gap-10">
-                {/* Day Counter */}
-                <div className="flex flex-col items-center justify-center">
+            {/* Content */}
+            <div className="flex items-start gap-5 p-5 md:gap-6 md:p-6">
+                {/* Day number */}
+                <div className="flex shrink-0 flex-col items-center pt-0.5">
                     <span
                         className={cn(
-                            'mb-1 text-xs tracking-tighter uppercase',
+                            'font-serif text-2xl font-light tabular-nums md:text-3xl',
                             isCurrent
-                                ? 'text-moss'
-                                : 'text-on-surface-variant/40',
-                        )}
-                    >
-                        Day
-                    </span>
-                    <span
-                        className={cn(
-                            'font-serif text-3xl',
-                            isCurrent
-                                ? 'font-bold text-moss'
+                                ? 'font-semibold text-moss'
                                 : isCompleted
-                                  ? 'font-light text-moss'
-                                  : 'font-light text-on-surface-variant/50',
+                                  ? 'text-moss/70'
+                                  : 'text-on-surface-variant/30',
                         )}
                     >
                         {String(entry.display_order).padStart(2, '0')}
                     </span>
                 </div>
 
-                {/* Entry details */}
-                <div className="flex-1 space-y-2">
-                    <div className="flex items-center gap-3">
+                {/* Text content */}
+                <div className="min-w-0 flex-1 space-y-1.5">
+                    <div className="flex items-center gap-2">
                         <h3
                             className={cn(
-                                'font-serif text-xl md:text-2xl',
+                                'truncate font-serif text-lg md:text-xl',
                                 isCurrent
                                     ? 'font-bold text-on-surface'
                                     : isCompleted
                                       ? 'font-semibold text-on-surface'
-                                      : 'font-semibold text-on-surface-variant/60',
+                                      : 'font-medium text-on-surface-variant/50',
                             )}
                         >
                             {entry.title}
                         </h3>
                         {isCompleted && (
-                            <CheckCircle2 className="size-[18px] shrink-0 fill-moss text-moss-foreground" />
+                            <CheckCircle2 className="size-4 shrink-0 fill-moss text-moss-foreground" />
                         )}
                         {isCurrent && (
-                            <Zap className="size-[18px] shrink-0 fill-moss text-moss-foreground" />
+                            <Zap className="size-4 shrink-0 fill-moss text-moss-foreground" />
                         )}
                         {isUpcoming && (
-                            <Lock className="size-4 shrink-0 text-on-surface-variant/40" />
+                            <Lock className="size-3.5 shrink-0 text-on-surface-variant/30" />
                         )}
                     </div>
 
                     {scriptureLabel && (
-                        <p className="text-xs font-medium tracking-widest text-on-surface-variant/50 uppercase">
+                        <p className="text-[11px] font-medium tracking-widest text-on-surface-variant/50 uppercase">
                             {scriptureLabel}
                         </p>
                     )}
 
                     <p
                         className={cn(
-                            'line-clamp-2 max-w-xl leading-relaxed',
+                            'line-clamp-2 text-sm leading-relaxed',
                             isCurrent
-                                ? 'font-medium text-on-surface'
+                                ? 'text-on-surface/80'
                                 : isUpcoming
-                                  ? 'text-sm text-on-surface-variant/50 italic'
-                                  : 'text-sm text-on-surface-variant',
+                                  ? 'text-on-surface-variant/40 italic'
+                                  : 'text-on-surface-variant/70',
                         )}
                     >
                         {isUpcoming
                             ? 'Continue your journey to unlock this entry.'
                             : bodySnippet}
                     </p>
+
+                    {/* Status + arrow row */}
+                    <div className="flex items-center gap-3 pt-1">
+                        {isCurrent && (
+                            <span className="rounded-full bg-primary px-4 py-1 text-[10px] font-bold tracking-[0.15em] text-primary-foreground uppercase">
+                                Continue
+                            </span>
+                        )}
+                        {isCompleted && (
+                            <span className="text-[10px] font-semibold tracking-widest text-moss/70 uppercase">
+                                Completed
+                            </span>
+                        )}
+                        <ArrowRight
+                            className={cn(
+                                'size-4 transition-transform duration-300 group-hover:translate-x-1',
+                                isCurrent
+                                    ? 'text-on-surface-variant/40'
+                                    : 'text-on-surface-variant/20',
+                            )}
+                        />
+                    </div>
                 </div>
             </div>
 
-            {/* Right side - Status / CTA */}
-            <div className="flex items-center gap-4 pl-16 md:pl-0">
-                {isCurrent && (
-                    <span className="rounded-full bg-primary px-5 py-2 text-[10px] font-bold tracking-[0.2em] text-primary-foreground uppercase shadow-lg shadow-primary/20">
-                        Continue Reading
-                    </span>
-                )}
-                {isCompleted && (
-                    <span className="rounded-full bg-moss/10 px-4 py-1.5 text-[10px] font-bold tracking-widest text-moss uppercase">
-                        Completed
-                    </span>
-                )}
-                {isUpcoming && (
-                    <span className="rounded-full bg-surface-container-highest px-4 py-1.5 text-[10px] font-bold tracking-widest text-on-surface-variant/50 uppercase">
-                        Upcoming
-                    </span>
-                )}
-                <ArrowRight
-                    className={cn(
-                        'size-5 transition-transform duration-300 group-hover:translate-x-1',
-                        isUpcoming
-                            ? 'text-on-surface-variant/20'
-                            : 'text-on-surface-variant/30',
-                    )}
-                />
-            </div>
+            {/* Entry thumbnail */}
+            {showImage && (
+                <div className="relative overflow-hidden">
+                    <img
+                        src={storageUrl(entry.image_path!)}
+                        alt=""
+                        onError={() => setImgFailed(true)}
+                        className={cn(
+                            'h-full w-full object-cover transition-transform duration-700 group-hover:scale-105',
+                            isUpcoming && 'grayscale',
+                        )}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-surface-container-highest/40 to-transparent" />
+                </div>
+            )}
+
+            {/* Left accent for current */}
+            {isCurrent && (
+                <div className="absolute top-0 bottom-0 left-0 w-1 bg-moss" />
+            )}
         </Link>
     );
 }
 
-export default function ThemesShow({ theme, entries, progress }: Props) {
+export default function ThemesShow({
+    theme,
+    entries,
+    coverImagePath,
+    progress,
+}: Props) {
+    const [coverFailed, setCoverFailed] = useState(false);
     let foundFirstIncomplete = false;
     const entryStatuses = entries.map((entry) => {
         if (entry.completions.length > 0) {
@@ -206,91 +217,92 @@ export default function ThemesShow({ theme, entries, progress }: Props) {
 
     const currentEntry = entries.find((_, i) => entryStatuses[i] === 'current');
     const currentDayLabel = currentEntry
-        ? `You are currently at Day ${String(currentEntry.display_order).padStart(2, '0')}: ${currentEntry.title}`
+        ? `Day ${currentEntry.display_order} — ${currentEntry.title}`
         : progress.percentage === 100
-          ? 'All entries completed!'
+          ? 'All entries completed'
           : 'Begin your journey';
 
     return (
         <DevotionalLayout>
             <Head title={theme.name} />
 
-            {/* Hero Header */}
-            <header className="bg-surface-container px-6 pt-10 pb-20 md:px-12 md:pt-16 md:pb-28 lg:px-20">
-                <div className="mx-auto flex max-w-6xl flex-col items-end gap-10 md:flex-row md:gap-20">
-                    <div className="w-full md:w-1/2">
-                        <p className="mb-4 text-xs font-semibold tracking-[0.3em] text-moss uppercase">
-                            Series Journey
-                        </p>
-                        <h1 className="mb-6 font-serif text-4xl leading-tight font-bold tracking-tight text-on-surface md:text-5xl lg:text-7xl">
-                            {theme.name}
-                        </h1>
-                        {theme.description && (
-                            <p className="mb-10 max-w-lg font-serif text-lg leading-relaxed text-on-surface-variant italic opacity-80 md:text-xl">
-                                {theme.description}
-                            </p>
-                        )}
+            {/* Compact Hero */}
+            <header className="relative overflow-hidden bg-surface-container">
+                {/* Cover image as background */}
+                {coverImagePath && !coverFailed && (
+                    <div className="absolute inset-0">
+                        <img
+                            src={storageUrl(coverImagePath)}
+                            alt=""
+                            onError={() => setCoverFailed(true)}
+                            className="h-full w-full object-cover opacity-20"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-r from-surface-container via-surface-container/95 to-surface-container/70" />
+                    </div>
+                )}
 
-                        {/* Progress Card */}
-                        <div className="max-w-sm rounded-2xl border border-border/50 bg-background/40 p-6 backdrop-blur-sm">
-                            <div className="mb-3 flex items-center justify-between">
-                                <span className="text-xs font-medium tracking-widest text-on-surface uppercase">
-                                    Journey Progress
+                <div className="relative px-6 py-8 md:px-10 md:py-10 lg:px-14">
+                    <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+                        {/* Left: Theme info */}
+                        <div className="max-w-2xl space-y-3">
+                            <p className="text-[11px] font-semibold tracking-[0.3em] text-moss uppercase">
+                                {progress.total}-Day Journey
+                            </p>
+                            <h1 className="font-serif text-4xl leading-[1.1] font-bold tracking-tight text-on-surface md:text-5xl">
+                                {theme.name}
+                            </h1>
+                            {theme.description && (
+                                <p className="max-w-lg text-sm leading-relaxed text-on-surface-variant md:text-base">
+                                    {theme.description}
+                                </p>
+                            )}
+                        </div>
+
+                        {/* Right: Progress */}
+                        <div className="w-full max-w-xs shrink-0 rounded-xl border border-border/50 bg-background/50 p-4 backdrop-blur-sm">
+                            <div className="mb-2 flex items-center justify-between">
+                                <span className="text-[10px] font-medium tracking-widest text-on-surface-variant/60 uppercase">
+                                    Progress
                                 </span>
-                                <span className="text-xs font-bold text-moss">
-                                    {String(progress.completed).padStart(
-                                        2,
-                                        '0',
-                                    )}{' '}
-                                    / {String(progress.total).padStart(2, '0')}
+                                <span className="text-sm font-bold text-moss tabular-nums">
+                                    {progress.completed}/{progress.total}
                                 </span>
                             </div>
                             <ProgressBar
                                 value={progress.completed}
                                 max={progress.total}
                             />
-                            <p className="mt-3 text-xs font-medium text-on-surface-variant italic">
+                            <p className="mt-2 text-[11px] text-on-surface-variant italic">
                                 {currentDayLabel}
                             </p>
-                        </div>
-                    </div>
-
-                    {/* Optional hero image placeholder */}
-                    <div className="hidden w-full md:block md:w-1/2">
-                        <div className="aspect-[3/4] overflow-hidden rounded-2xl bg-surface-container-high">
-                            {entries[0]?.body && (
-                                <div className="flex h-full items-center justify-center p-8">
-                                    <Quote className="size-20 text-on-surface-variant/10" />
-                                </div>
-                            )}
                         </div>
                     </div>
                 </div>
             </header>
 
-            {/* Entry List */}
-            <section className="relative z-20 mx-auto -mt-12 max-w-5xl px-6 pb-20">
-                <div className="space-y-4">
+            {/* Entries */}
+            <section className="px-6 py-8 md:px-10 md:py-10 lg:px-14">
+                <div className="space-y-3">
                     {entries.map((entry, index) => (
                         <EntryCard
                             key={entry.id}
                             entry={entry}
                             status={entryStatuses[index]}
                             themeId={theme.id}
+                            index={index}
                         />
                     ))}
                 </div>
 
-                {/* Completion Summary */}
+                {/* Completion state */}
                 {progress.percentage === 100 && (
-                    <div className="mt-16 rounded-3xl bg-moss/5 p-10 text-center">
-                        <CheckCircle2 className="mx-auto mb-4 size-12 text-moss" />
-                        <h2 className="font-serif text-3xl font-medium text-on-surface">
+                    <div className="mt-10 flex flex-col items-center rounded-2xl bg-moss/5 p-8 text-center">
+                        <CheckCircle2 className="mb-3 size-10 text-moss" />
+                        <h2 className="font-serif text-2xl font-medium text-on-surface">
                             Journey Complete
                         </h2>
-                        <p className="mt-2 text-on-surface-variant">
-                            You have completed all {progress.total} entries in
-                            this theme.
+                        <p className="mt-1 text-sm text-on-surface-variant">
+                            All {progress.total} entries finished.
                         </p>
                         <Link
                             href={showEntry.url({
@@ -298,25 +310,13 @@ export default function ThemesShow({ theme, entries, progress }: Props) {
                                 entry: entries[0].id,
                             })}
                             prefetch
-                            className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3 text-xs font-bold tracking-widest text-primary-foreground uppercase"
+                            className="mt-5 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-2.5 text-xs font-bold tracking-widest text-primary-foreground uppercase"
                         >
                             <ArrowLeft className="size-4" />
-                            Review from the Beginning
+                            Review from Beginning
                         </Link>
                     </div>
                 )}
-
-                {/* Footer Quote */}
-                <div className="mx-auto mt-24 max-w-2xl border-t border-border/40 py-16 text-center">
-                    <Quote className="mx-auto mb-6 size-10 fill-moss/20 text-moss" />
-                    <p className="font-serif text-2xl leading-snug text-on-surface italic md:text-3xl">
-                        &ldquo;Silence is the sleep that nourishes
-                        wisdom.&rdquo;
-                    </p>
-                    <p className="mt-4 text-xs tracking-widest text-on-surface-variant/40 uppercase">
-                        &mdash; Francis Bacon
-                    </p>
-                </div>
             </section>
         </DevotionalLayout>
     );

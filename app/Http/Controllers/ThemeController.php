@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -54,6 +55,7 @@ final readonly class ThemeController
             ->orderBy('display_order')
             ->with([
                 'scriptureReferences',
+                'generatedImage',
                 'completions' => fn (Relation $query) => $query->where('user_id', $user->id),
             ])
             ->get();
@@ -61,9 +63,22 @@ final readonly class ThemeController
         $totalEntries = $entries->count();
         $completedEntries = $entries->filter(fn (DevotionalEntry $entry) => $entry->completions->isNotEmpty())->count();
 
+        $coverImage = $this->loadCoverImages([$theme->id]);
+
         return Inertia::render('themes/show', [
             'theme' => $theme,
-            'entries' => $entries,
+            'entries' => $entries->map(fn (DevotionalEntry $entry): array => [
+                'id' => $entry->id,
+                'title' => $entry->title,
+                'body' => $entry->body,
+                'display_order' => $entry->display_order,
+                'scripture_references' => $entry->scriptureReferences,
+                'completions' => $entry->completions,
+                'image_path' => $entry->generatedImage?->path !== null && Storage::disk('public')->exists($entry->generatedImage->path)
+                    ? $entry->generatedImage->path
+                    : null,
+            ]),
+            'coverImagePath' => $coverImage[$theme->id] ?? null,
             'progress' => [
                 'total' => $totalEntries,
                 'completed' => $completedEntries,
@@ -98,7 +113,7 @@ final readonly class ThemeController
         $result = [];
         foreach ($entries as $entry) {
             $image = $entry->generatedImage;
-            if ($image !== null) {
+            if ($image !== null && Storage::disk('public')->exists($image->path)) {
                 $result[$entry->theme_id] = $image->path;
             }
         }

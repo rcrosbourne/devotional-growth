@@ -170,7 +170,7 @@ function DesktopSidebar({
     const isAdmin = Boolean(user?.is_admin);
 
     return (
-        <aside className="flex w-60 shrink-0 flex-col bg-sidebar">
+        <aside className="sticky top-0 flex h-screen w-60 shrink-0 flex-col bg-sidebar">
             {/* Branding */}
             <div className="px-5 pt-6 pb-4">
                 <Link href={themesIndex.url()} className="block">

@@ -113,11 +113,11 @@ it('fetches from api and returns passage', function (): void {
 
 it('respects the bible_version parameter', function (): void {
     $user = User::factory()->create();
+    config()->set('services.api_bible.key', 'test-api-key');
 
     Http::fake([
-        'bible-api.com/*' => Http::response([
-            'reference' => 'John 3:16',
-            'text' => 'For God so loved the world (NIV).',
+        'rest.api.bible/*' => Http::response([
+            'data' => ['content' => 'For God so loved the world (NIV).'],
         ], 200),
     ]);
 

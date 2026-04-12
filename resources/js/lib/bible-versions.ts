@@ -2,10 +2,12 @@ export const BIBLE_VERSIONS = [
     { value: 'KJV', label: 'King James Version' },
     { value: 'NKJV', label: 'New King James Version' },
     { value: 'NIV', label: 'New International Version' },
-    { value: 'ESV', label: 'English Standard Version' },
     { value: 'NLT', label: 'New Living Translation' },
     { value: 'ASV', label: 'American Standard Version' },
     { value: 'WEB', label: 'World English Bible' },
+    { value: 'BBE', label: 'Bible in Basic English' },
+    { value: 'DARBY', label: 'Darby Translation' },
+    { value: 'HEBREW', label: 'Hebrew (Westminster Leningrad Codex)' },
 ] as const;
 
 export type BibleVersionKey = (typeof BIBLE_VERSIONS)[number]['value'];

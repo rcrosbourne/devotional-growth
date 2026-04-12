@@ -107,9 +107,9 @@ it('uses the correct bible version in api request', function (): void {
     ]);
 
     $action = resolve(FetchScripturePassage::class);
-    $action->handle('John', 3, 16, null, 'NIV');
+    $action->handle('John', 3, 16, null, 'ASV');
 
-    Http::assertSent(fn ($request): bool => str_contains((string) $request->url(), 'translation=niv'));
+    Http::assertSent(fn ($request): bool => str_contains((string) $request->url(), 'translation=asv'));
 });
 
 it('defaults to kjv when no version specified', function (): void {
@@ -139,17 +139,17 @@ it('distinguishes cache by bible version', function (): void {
     Http::fake([
         'bible-api.com/*' => Http::response([
             'reference' => 'John 3:16',
-            'text' => 'NIV text here.',
+            'text' => 'ASV text here.',
         ], 200),
     ]);
 
     $action = resolve(FetchScripturePassage::class);
 
     $kjvResult = $action->handle('John', 3, 16, null, 'KJV');
-    $nivResult = $action->handle('John', 3, 16, null, 'NIV');
+    $nivResult = $action->handle('John', 3, 16, null, 'ASV');
 
     expect($kjvResult)->toBe('KJV text here.')
-        ->and($nivResult)->toBe('NIV text here.');
+        ->and($nivResult)->toBe('ASV text here.');
 });
 
 it('returns error message when api returns empty text', function (): void {
@@ -189,6 +189,149 @@ it('returns error message when api returns null body', function (): void {
 
     $action = resolve(FetchScripturePassage::class);
     $result = $action->handle('John', 3, 16, null, 'KJV');
+
+    expect($result)->toContain('Unable to load scripture passage');
+    expect(ScriptureCache::query()->count())->toBe(0);
+});
+
+// API.Bible integration
+
+it('fetches from api.bible for NIV version', function (): void {
+    config()->set('services.api_bible.key', 'test-api-key');
+
+    Http::fake([
+        'rest.api.bible/*' => Http::response([
+            'data' => [
+                'content' => 'The fear of the Lord is the beginning of wisdom.',
+            ],
+        ], 200),
+    ]);
+
+    $action = resolve(FetchScripturePassage::class);
+    $result = $action->handle('Proverbs', 9, 10, null, 'NIV');
+
+    expect($result)->toBe('The fear of the Lord is the beginning of wisdom.');
+
+    Http::assertSent(function ($request): bool {
+        $url = (string) $request->url();
+
+        return str_contains($url, 'rest.api.bible')
+            && str_contains($url, 'PRO.9.10')
+            && $request->header('api-key')[0] === 'test-api-key';
+    });
+});
+
+it('sends correct passage id with verse range to api.bible', function (): void {
+    config()->set('services.api_bible.key', 'test-api-key');
+
+    Http::fake([
+        'rest.api.bible/*' => Http::response([
+            'data' => ['content' => 'Trust in the Lord with all your heart.'],
+        ], 200),
+    ]);
+
+    $action = resolve(FetchScripturePassage::class);
+    $action->handle('Proverbs', 3, 5, 7, 'NKJV');
+
+    Http::assertSent(fn ($request): bool => str_contains((string) $request->url(), 'PRO.3.5-PRO.3.7'));
+});
+
+it('returns empty string when api.bible key is not configured', function (): void {
+    config()->set('services.api_bible.key');
+
+    Http::fake();
+
+    $action = resolve(FetchScripturePassage::class);
+    $result = $action->handle('John', 3, 16, null, 'NIV');
+
+    expect($result)->toContain('Unable to load scripture passage');
+    Http::assertNothingSent();
+});
+
+it('caches api.bible responses', function (): void {
+    config()->set('services.api_bible.key', 'test-api-key');
+
+    Http::fake([
+        'rest.api.bible/*' => Http::response([
+            'data' => ['content' => 'For God so loved the world.'],
+        ], 200),
+    ]);
+
+    $action = resolve(FetchScripturePassage::class);
+    $action->handle('John', 3, 16, null, 'NIV');
+
+    $cached = ScriptureCache::query()
+        ->where('book', 'John')
+        ->where('bible_version', 'NIV')
+        ->first();
+
+    expect($cached)->not->toBeNull()
+        ->and($cached->text)->toBe('For God so loved the world.');
+});
+
+it('uses bible-api.com for KJV and api.bible for NIV', function (): void {
+    config()->set('services.api_bible.key', 'test-api-key');
+
+    Http::fake([
+        'bible-api.com/*' => Http::response([
+            'reference' => 'John 3:16',
+            'text' => 'KJV text.',
+        ], 200),
+        'rest.api.bible/*' => Http::response([
+            'data' => ['content' => 'NIV text.'],
+        ], 200),
+    ]);
+
+    $action = resolve(FetchScripturePassage::class);
+
+    $kjv = $action->handle('John', 3, 16, null, 'KJV');
+    $niv = $action->handle('John', 3, 16, null, 'NIV');
+
+    expect($kjv)->toBe('KJV text.')
+        ->and($niv)->toBe('NIV text.');
+});
+
+it('returns error message when api.bible returns failure status', function (): void {
+    config()->set('services.api_bible.key', 'test-api-key');
+
+    Http::fake([
+        'rest.api.bible/*' => Http::response(null, 500),
+    ]);
+
+    $action = resolve(FetchScripturePassage::class);
+    $result = $action->handle('John', 3, 16, null, 'NIV');
+
+    expect($result)->toContain('Unable to load scripture passage');
+    expect(ScriptureCache::query()->count())->toBe(0);
+});
+
+it('returns error message when api.bible returns invalid data structure', function (): void {
+    config()->set('services.api_bible.key', 'test-api-key');
+
+    Http::fake([
+        'rest.api.bible/*' => Http::response([
+            'data' => 'not-an-array',
+        ], 200),
+    ]);
+
+    $action = resolve(FetchScripturePassage::class);
+    $result = $action->handle('John', 3, 16, null, 'NIV');
+
+    expect($result)->toContain('Unable to load scripture passage');
+    expect(ScriptureCache::query()->count())->toBe(0);
+});
+
+it('returns error message when api.bible returns no content', function (): void {
+    config()->set('services.api_bible.key', 'test-api-key');
+
+    Http::fake([
+        'rest.api.bible/*' => Http::response([
+            'data' => ['content' => null],
+        ], 200),
+    ]);
+
+    $action = resolve(FetchScripturePassage::class);
+    $result = $action->handle('John', 3, 16, null, 'NIV');
 
     expect($result)->toContain('Unable to load scripture passage');
     expect(ScriptureCache::query()->count())->toBe(0);
