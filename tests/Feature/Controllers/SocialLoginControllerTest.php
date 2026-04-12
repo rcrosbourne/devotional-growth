@@ -30,7 +30,7 @@ it('authenticates a new user via social callback', function (string $provider): 
 
     $response = $this->get(route('social.callback', ['provider' => $provider]));
 
-    $response->assertRedirect(route('dashboard', absolute: false));
+    $response->assertRedirect(route('themes.index', absolute: false));
 
     $this->assertAuthenticated();
     $this->assertDatabaseHas('users', [
@@ -56,7 +56,7 @@ it('authenticates an existing user via social callback', function (): void {
 
     $response = $this->get(route('social.callback', ['provider' => 'github']));
 
-    $response->assertRedirect(route('dashboard', absolute: false));
+    $response->assertRedirect(route('themes.index', absolute: false));
 
     $this->assertAuthenticatedAs($user);
     $this->assertDatabaseHas('social_accounts', [
@@ -82,7 +82,7 @@ it('authenticates a returning social user', function (): void {
 
     $response = $this->get(route('social.callback', ['provider' => 'github']));
 
-    $response->assertRedirect(route('dashboard', absolute: false));
+    $response->assertRedirect(route('themes.index', absolute: false));
 
     $this->assertAuthenticatedAs($user);
     $this->assertDatabaseHas('social_accounts', [
@@ -150,7 +150,7 @@ it('redirects authenticated users away from social redirect', function (): void 
     $response = $this->actingAs($user)
         ->get(route('social.redirect', ['provider' => 'github']));
 
-    $response->assertRedirectToRoute('dashboard');
+    $response->assertRedirect(route('themes.index', absolute: false));
 });
 
 it('redirects authenticated users away from social callback', function (): void {
@@ -159,5 +159,5 @@ it('redirects authenticated users away from social callback', function (): void 
     $response = $this->actingAs($user)
         ->get(route('social.callback', ['provider' => 'github']));
 
-    $response->assertRedirectToRoute('dashboard');
+    $response->assertRedirect(route('themes.index', absolute: false));
 });

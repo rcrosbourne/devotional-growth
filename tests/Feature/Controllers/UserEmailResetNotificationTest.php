@@ -73,5 +73,5 @@ it('redirects authenticated users away from forgot password', function (): void 
         ->fromRoute('dashboard')
         ->get(route('password.request'));
 
-    $response->assertRedirectToRoute('dashboard');
+    $response->assertRedirect(route('themes.index', absolute: false));
 });

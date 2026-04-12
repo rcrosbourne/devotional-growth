@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
@@ -19,6 +20,8 @@ final class AppServiceProvider extends ServiceProvider
     {
         $this->bootModelsDefaults();
         $this->bootPasswordDefaults();
+
+        RedirectIfAuthenticated::redirectUsing(fn (): string => route('themes.index'));
     }
 
     private function bootModelsDefaults(): void

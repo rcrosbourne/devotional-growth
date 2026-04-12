@@ -51,7 +51,7 @@ final readonly class SocialLoginController
 
         session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        return redirect()->intended(route('themes.index', absolute: false));
     }
 
     private function validateProvider(string $provider): void
