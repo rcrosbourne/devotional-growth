@@ -1,13 +1,35 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+} from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
-import { store as aiStore } from '@/routes/admin/ai-content';
-import { create as entriesCreate } from '@/routes/admin/themes/entries';
+import { save as aiSave, store as aiStore } from '@/routes/admin/ai-content';
 import { type BreadcrumbItem } from '@/types';
-import { Head, router } from '@inertiajs/react';
-import { Check, Copy, FileEdit, Loader2, Sparkles } from 'lucide-react';
+import { Head } from '@inertiajs/react';
+import {
+    BookOpen,
+    Check,
+    Copy,
+    ImageIcon,
+    Loader2,
+    Sparkles,
+} from 'lucide-react';
 import { useState } from 'react';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -18,8 +40,8 @@ const breadcrumbs: BreadcrumbItem[] = [
 interface GeneratedContent {
     title?: string;
     body?: string;
-    scripture_references?: string[];
-    reflection_prompts?: string;
+    scripture_refs?: string[];
+    reflection_prompts?: string[];
     adventist_insights?: string;
 }
 
@@ -30,16 +52,23 @@ interface AiGenerationLog {
     error_message: string | null;
 }
 
-interface Theme {
+interface ThemeOption {
     id: number;
     name: string;
 }
 
 interface Props {
-    themes: Theme[];
+    themes: ThemeOption[];
 }
 
-const AI_CONTENT_DRAFT_KEY = 'ai_content_draft';
+function getCsrfToken(): string {
+    return decodeURIComponent(
+        document.cookie
+            .split('; ')
+            .find((c) => c.startsWith('XSRF-TOKEN='))
+            ?.split('=')[1] ?? '',
+    );
+}
 
 export default function AiContentGenerate({ themes }: Props) {
     const [prompt, setPrompt] = useState('');
@@ -47,9 +76,17 @@ export default function AiContentGenerate({ themes }: Props) {
     const [result, setResult] = useState<AiGenerationLog | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [copied, setCopied] = useState(false);
-    const [selectedThemeId, setSelectedThemeId] = useState<number | ''>(
-        themes[0]?.id ?? '',
-    );
+
+    // Save dialog state
+    const [saveDialogOpen, setSaveDialogOpen] = useState(false);
+    const [saving, setSaving] = useState(false);
+    const [saveError, setSaveError] = useState<string | null>(null);
+    const [saved, setSaved] = useState(false);
+    const [themeSelection, setThemeSelection] = useState<string>('');
+    const [newThemeName, setNewThemeName] = useState('');
+    const [newThemeDescription, setNewThemeDescription] = useState('');
+    const [availableThemes, setAvailableThemes] =
+        useState<ThemeOption[]>(themes);
 
     async function handleGenerate() {
         if (!prompt.trim()) return;
@@ -57,6 +94,7 @@ export default function AiContentGenerate({ themes }: Props) {
         setGenerating(true);
         setError(null);
         setResult(null);
+        setSaved(false);
 
         try {
             const response = await fetch(aiStore.url(), {
@@ -64,12 +102,7 @@ export default function AiContentGenerate({ themes }: Props) {
                 headers: {
                     'Content-Type': 'application/json',
                     Accept: 'application/json',
-                    'X-XSRF-TOKEN': decodeURIComponent(
-                        document.cookie
-                            .split('; ')
-                            .find((c) => c.startsWith('XSRF-TOKEN='))
-                            ?.split('=')[1] ?? '',
-                    ),
+                    'X-XSRF-TOKEN': getCsrfToken(),
                 },
                 body: JSON.stringify({ prompt }),
             });
@@ -96,11 +129,11 @@ export default function AiContentGenerate({ themes }: Props) {
         const content = result.generated_content;
         const text = [
             content.title && `Title: ${content.title}`,
-            content.scripture_references?.length &&
-                `Scripture: ${content.scripture_references.join(', ')}`,
+            content.scripture_refs?.length &&
+                `Scripture: ${content.scripture_refs.join(', ')}`,
             content.body,
-            content.reflection_prompts &&
-                `Reflection Prompts:\n${content.reflection_prompts}`,
+            content.reflection_prompts?.length &&
+                `Reflection Prompts:\n${content.reflection_prompts.join('\n')}`,
             content.adventist_insights &&
                 `Adventist Insights:\n${content.adventist_insights}`,
         ]
@@ -116,20 +149,84 @@ export default function AiContentGenerate({ themes }: Props) {
         }
     }
 
-    function handleApproveAndEdit() {
-        if (!result?.generated_content || !selectedThemeId) return;
+    function openSaveDialog() {
+        setSaveError(null);
+        setThemeSelection('');
+        setNewThemeName('');
+        setNewThemeDescription('');
+        setSaveDialogOpen(true);
+    }
+
+    async function handleSave() {
+        if (!result) return;
+
+        const isNewTheme = themeSelection === 'new';
+        if (isNewTheme && !newThemeName.trim()) return;
+        if (!isNewTheme && !themeSelection) return;
+
+        setSaving(true);
+        setSaveError(null);
+
         try {
-            sessionStorage.setItem(
-                AI_CONTENT_DRAFT_KEY,
-                JSON.stringify(result.generated_content),
+            const body: Record<string, unknown> = {
+                ai_generation_log_id: result.id,
+            };
+
+            if (isNewTheme) {
+                body.new_theme_name = newThemeName.trim();
+                if (newThemeDescription.trim()) {
+                    body.new_theme_description = newThemeDescription.trim();
+                }
+            } else {
+                body.theme_id = Number(themeSelection);
+            }
+
+            const response = await fetch(aiSave.url(), {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    'X-XSRF-TOKEN': getCsrfToken(),
+                },
+                body: JSON.stringify(body),
+            });
+
+            if (!response.ok) {
+                const data = await response.json().catch(() => null);
+                throw new Error(
+                    data?.message || 'Failed to save. Please try again.',
+                );
+            }
+
+            const data = await response.json();
+
+            // Add the new theme to available themes if one was created
+            if (isNewTheme && data.entry?.theme) {
+                setAvailableThemes((prev) => [
+                    ...prev,
+                    {
+                        id: data.entry.theme.id,
+                        name: data.entry.theme.name,
+                    },
+                ]);
+            }
+
+            setSaved(true);
+            setSaveDialogOpen(false);
+        } catch (err) {
+            setSaveError(
+                err instanceof Error
+                    ? err.message
+                    : 'An unexpected error occurred.',
             );
-        } catch {
-            // sessionStorage unavailable
+        } finally {
+            setSaving(false);
         }
-        router.visit(entriesCreate.url(selectedThemeId));
     }
 
     const content = result?.generated_content;
+    const canSave =
+        content && result?.status === 'completed' && !saved && !generating;
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -191,10 +288,10 @@ export default function AiContentGenerate({ themes }: Props) {
                             </p>
                             <p className="mt-2 text-sm leading-relaxed text-on-surface-variant">
                                 Specify a voice, mood, and scriptural focus for
-                                best results. For example: "A reflective
+                                best results. For example: &quot;A reflective
                                 devotional on Psalm 23 exploring the theme of
                                 divine provision during seasons of uncertainty,
-                                written in a contemplative, warm tone."
+                                written in a contemplative, warm tone.&quot;
                             </p>
                         </div>
                     </div>
@@ -248,11 +345,11 @@ export default function AiContentGenerate({ themes }: Props) {
                         {content && (
                             <div className="overflow-hidden rounded-lg border border-border bg-surface-container-low">
                                 {/* Preview toolbar */}
-                                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border bg-surface-container-high/50 px-4 py-2">
+                                <div className="flex items-center justify-between border-b border-border bg-surface-container-high/50 px-4 py-2">
                                     <span className="text-xs font-medium tracking-[0.1em] text-on-surface-variant uppercase">
                                         Preview
                                     </span>
-                                    <div className="flex flex-wrap items-center gap-2">
+                                    <div className="flex items-center gap-2">
                                         <Button
                                             variant="ghost"
                                             size="sm"
@@ -278,40 +375,23 @@ export default function AiContentGenerate({ themes }: Props) {
                                             <Sparkles className="size-3.5" />
                                             Regenerate
                                         </Button>
-                                    </div>
-                                </div>
-
-                                {/* Approve & Edit bar */}
-                                <div className="flex flex-wrap items-center gap-3 border-b border-border bg-moss/5 px-4 py-3">
-                                    <select
-                                        value={selectedThemeId}
-                                        onChange={(e) =>
-                                            setSelectedThemeId(
-                                                Number(e.target.value),
-                                            )
-                                        }
-                                        className="rounded-md border border-border bg-background px-3 py-1.5 text-sm text-on-surface focus:border-moss focus:ring-1 focus:ring-moss focus:outline-none"
-                                    >
-                                        {themes.length === 0 && (
-                                            <option value="">
-                                                No themes available
-                                            </option>
+                                        {canSave && (
+                                            <Button
+                                                size="sm"
+                                                className="bg-moss text-moss-foreground hover:bg-moss/90"
+                                                onClick={openSaveDialog}
+                                            >
+                                                <BookOpen className="size-3.5" />
+                                                Save as Devotion
+                                            </Button>
                                         )}
-                                        {themes.map((t) => (
-                                            <option key={t.id} value={t.id}>
-                                                {t.name}
-                                            </option>
-                                        ))}
-                                    </select>
-                                    <Button
-                                        size="sm"
-                                        className="bg-moss text-moss-foreground hover:bg-moss/90"
-                                        disabled={!selectedThemeId}
-                                        onClick={handleApproveAndEdit}
-                                    >
-                                        <FileEdit className="size-3.5" />
-                                        Approve &amp; Edit
-                                    </Button>
+                                        {saved && (
+                                            <Badge className="border-moss/20 bg-moss/10 text-moss hover:bg-moss/10">
+                                                <Check className="mr-1 size-3" />
+                                                Saved
+                                            </Badge>
+                                        )}
+                                    </div>
                                 </div>
 
                                 {/* Preview content */}
@@ -322,15 +402,14 @@ export default function AiContentGenerate({ themes }: Props) {
                                         </h2>
                                     )}
 
-                                    {content.scripture_references &&
-                                        content.scripture_references.length >
-                                            0 && (
+                                    {content.scripture_refs &&
+                                        content.scripture_refs.length > 0 && (
                                             <div className="border-l-2 border-moss/30 pl-4">
                                                 <p className="text-xs font-medium tracking-[0.1em] text-moss uppercase">
                                                     Scripture References
                                                 </p>
                                                 <p className="mt-1 font-serif text-sm text-on-surface-variant italic">
-                                                    {content.scripture_references.join(
+                                                    {content.scripture_refs.join(
                                                         ' / ',
                                                     )}
                                                 </p>
@@ -352,29 +431,30 @@ export default function AiContentGenerate({ themes }: Props) {
                                         </div>
                                     )}
 
-                                    {content.reflection_prompts && (
-                                        <div className="rounded-lg bg-surface-container p-4">
-                                            <p className="text-xs font-medium tracking-[0.1em] text-on-surface-variant uppercase">
-                                                Reflection Prompts
-                                            </p>
-                                            <ol className="mt-2 space-y-2">
-                                                {content.reflection_prompts
-                                                    .split('\n')
-                                                    .filter(Boolean)
-                                                    .map((line, idx) => (
-                                                        <li
-                                                            key={line}
-                                                            className="flex gap-2 text-sm text-on-surface"
-                                                        >
-                                                            <span className="shrink-0 font-serif font-medium text-moss">
-                                                                {idx + 1}.
-                                                            </span>
-                                                            {line}
-                                                        </li>
-                                                    ))}
-                                            </ol>
-                                        </div>
-                                    )}
+                                    {content.reflection_prompts &&
+                                        content.reflection_prompts.length >
+                                            0 && (
+                                            <div className="rounded-lg bg-surface-container p-4">
+                                                <p className="text-xs font-medium tracking-[0.1em] text-on-surface-variant uppercase">
+                                                    Reflection Prompts
+                                                </p>
+                                                <ol className="mt-2 space-y-2">
+                                                    {content.reflection_prompts.map(
+                                                        (prompt, idx) => (
+                                                            <li
+                                                                key={prompt}
+                                                                className="flex gap-2 text-sm text-on-surface"
+                                                            >
+                                                                <span className="shrink-0 font-serif font-medium text-moss">
+                                                                    {idx + 1}.
+                                                                </span>
+                                                                {prompt}
+                                                            </li>
+                                                        ),
+                                                    )}
+                                                </ol>
+                                            </div>
+                                        )}
 
                                     {content.adventist_insights && (
                                         <div className="rounded-lg bg-surface-container p-4">
@@ -418,6 +498,127 @@ export default function AiContentGenerate({ themes }: Props) {
                     </div>
                 </div>
             </div>
+
+            {/* Save as Devotion Dialog */}
+            <Dialog open={saveDialogOpen} onOpenChange={setSaveDialogOpen}>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Save as Devotion</DialogTitle>
+                        <DialogDescription>
+                            Choose an existing theme or create a new one. An
+                            image will be generated automatically.
+                        </DialogDescription>
+                    </DialogHeader>
+
+                    <div className="space-y-4 py-2">
+                        <div className="space-y-2">
+                            <Label htmlFor="theme-select">Theme</Label>
+                            <Select
+                                value={themeSelection}
+                                onValueChange={setThemeSelection}
+                            >
+                                <SelectTrigger id="theme-select">
+                                    <SelectValue placeholder="Select a theme..." />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectItem value="new">
+                                        + Create new theme
+                                    </SelectItem>
+                                    {availableThemes.map((theme) => (
+                                        <SelectItem
+                                            key={theme.id}
+                                            value={String(theme.id)}
+                                        >
+                                            {theme.name}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
+
+                        {themeSelection === 'new' && (
+                            <>
+                                <div className="space-y-2">
+                                    <Label htmlFor="new-theme-name">
+                                        Theme Name
+                                    </Label>
+                                    <Input
+                                        id="new-theme-name"
+                                        value={newThemeName}
+                                        onChange={(e) =>
+                                            setNewThemeName(e.target.value)
+                                        }
+                                        placeholder="e.g. Walking in Wisdom"
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="new-theme-desc">
+                                        Description{' '}
+                                        <span className="text-muted-foreground">
+                                            (optional)
+                                        </span>
+                                    </Label>
+                                    <Textarea
+                                        id="new-theme-desc"
+                                        value={newThemeDescription}
+                                        onChange={(e) =>
+                                            setNewThemeDescription(
+                                                e.target.value,
+                                            )
+                                        }
+                                        placeholder="A brief description of this devotional theme..."
+                                        rows={2}
+                                    />
+                                </div>
+                            </>
+                        )}
+
+                        <div className="flex items-center gap-2 rounded-md bg-surface-container p-3 text-sm text-on-surface-variant">
+                            <ImageIcon className="size-4 shrink-0 text-moss" />
+                            An image will be generated for this devotion
+                            automatically.
+                        </div>
+
+                        {saveError && (
+                            <p className="text-sm text-destructive">
+                                {saveError}
+                            </p>
+                        )}
+                    </div>
+
+                    <DialogFooter>
+                        <Button
+                            variant="outline"
+                            onClick={() => setSaveDialogOpen(false)}
+                            disabled={saving}
+                        >
+                            Cancel
+                        </Button>
+                        <Button
+                            className="bg-moss text-moss-foreground hover:bg-moss/90"
+                            disabled={
+                                saving ||
+                                !themeSelection ||
+                                (themeSelection === 'new' &&
+                                    !newThemeName.trim())
+                            }
+                            onClick={handleSave}
+                        >
+                            {saving ? (
+                                <>
+                                    <Loader2 className="size-4 animate-spin" />
+                                    Saving...
+                                </>
+                            ) : (
+                                <>
+                                    <BookOpen className="size-4" />
+                                    Save Devotion
+                                </>
+                            )}
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
         </AppLayout>
     );
 }

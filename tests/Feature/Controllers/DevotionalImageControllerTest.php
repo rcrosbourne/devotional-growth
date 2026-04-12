@@ -21,27 +21,23 @@ it('generates an image for a devotional entry', function (): void {
     $entry = DevotionalEntry::factory()->for(Theme::factory())->create();
 
     $response = $this->actingAs($user)
-        ->postJson(route('entries.generate-image', $entry));
+        ->post(route('entries.generate-image', $entry));
 
-    $response->assertOk()
-        ->assertJsonStructure([
-            'image' => ['id', 'path', 'url'],
-        ]);
+    $response->assertRedirect();
 
     expect(GeneratedImage::query()->count())->toBe(1);
 });
 
-it('returns the image path and url in the response', function (): void {
+it('stores the image in the correct storage path', function (): void {
     $user = User::factory()->create();
     $entry = DevotionalEntry::factory()->for(Theme::factory())->create();
 
-    $response = $this->actingAs($user)
-        ->postJson(route('entries.generate-image', $entry));
+    $this->actingAs($user)
+        ->post(route('entries.generate-image', $entry));
 
-    $data = $response->json('image');
+    $image = GeneratedImage::query()->first();
 
-    expect($data['path'])->toStartWith('images/devotionals/')
-        ->and($data['url'])->toContain('storage/images/devotionals/');
+    expect($image->path)->toStartWith('images/devotionals/');
 });
 
 it('replaces an existing image when replace flag is true', function (): void {
@@ -53,9 +49,9 @@ it('replaces an existing image when replace flag is true', function (): void {
     Storage::disk('public')->put('images/devotionals/old.png', 'old');
 
     $response = $this->actingAs($user)
-        ->postJson(route('entries.generate-image', $entry), ['replace' => true]);
+        ->post(route('entries.generate-image', $entry), ['replace' => true]);
 
-    $response->assertOk();
+    $response->assertRedirect();
 
     expect(GeneratedImage::query()->count())->toBe(1);
     Storage::disk('public')->assertMissing('images/devotionals/old.png');
@@ -67,26 +63,25 @@ it('returns existing image without regenerating when replace is false', function
     $existing = GeneratedImage::factory()->for($entry)->create();
 
     $response = $this->actingAs($user)
-        ->postJson(route('entries.generate-image', $entry), ['replace' => false]);
+        ->post(route('entries.generate-image', $entry), ['replace' => false]);
 
-    $response->assertOk();
+    $response->assertRedirect();
 
-    expect($response->json('image.id'))->toBe($existing->id);
+    expect(GeneratedImage::query()->count())->toBe(1);
+    expect($existing->refresh()->id)->toBe($existing->id);
 });
 
-it('returns 503 when image generation fails', function (): void {
+it('redirects back with error when image generation fails', function (): void {
     Image::fake(fn () => throw new RuntimeException('Provider error'));
 
     $user = User::factory()->create();
     $entry = DevotionalEntry::factory()->for(Theme::factory())->create();
 
     $response = $this->actingAs($user)
-        ->postJson(route('entries.generate-image', $entry));
+        ->post(route('entries.generate-image', $entry));
 
-    $response->assertStatus(503)
-        ->assertJson([
-            'message' => 'Image generation is currently unavailable. Please try again later.',
-        ]);
+    $response->assertRedirect()
+        ->assertSessionHas('error', 'Image generation is currently unavailable. Please try again later.');
 });
 
 // Authentication
@@ -94,9 +89,9 @@ it('returns 503 when image generation fails', function (): void {
 it('redirects unauthenticated users to login', function (): void {
     $entry = DevotionalEntry::factory()->for(Theme::factory())->create();
 
-    $response = $this->postJson(route('entries.generate-image', $entry));
+    $response = $this->post(route('entries.generate-image', $entry));
 
-    $response->assertUnauthorized();
+    $response->assertRedirectToRoute('login');
 });
 
 it('rejects unverified users', function (): void {
@@ -113,7 +108,7 @@ it('returns 404 for a non-existent entry', function (): void {
     $user = User::factory()->create();
 
     $response = $this->actingAs($user)
-        ->postJson(route('entries.generate-image', 99999));
+        ->post(route('entries.generate-image', 99999));
 
     $response->assertNotFound();
 });

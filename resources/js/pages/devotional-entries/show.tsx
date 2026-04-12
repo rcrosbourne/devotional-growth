@@ -620,6 +620,21 @@ export default function DevotionalEntriesShow({
                     </div>
                 </div>
 
+                {/* Hero Image */}
+                {entry.generated_image && (
+                    <div className="relative -mx-6 mb-16 overflow-hidden rounded-3xl md:-mx-8">
+                        <img
+                            src={storageUrl(entry.generated_image.path)}
+                            alt={`Visual for ${entry.title}`}
+                            className="h-auto max-h-[520px] w-full object-cover"
+                        />
+                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
+                        <p className="absolute right-4 bottom-4 text-[9px] tracking-[0.2em] text-on-surface/40 uppercase italic">
+                            AI-Generated Visual Study
+                        </p>
+                    </div>
+                )}
+
                 {/* Scripture Pull-Quote */}
                 {firstScripture && (
                     <div className="relative mb-16 py-12">
@@ -682,20 +697,6 @@ export default function DevotionalEntriesShow({
                         dangerouslySetInnerHTML={{ __html: entry.body }}
                     />
                 </div>
-
-                {/* Generated Image */}
-                {entry.generated_image && (
-                    <div className="mb-20">
-                        <img
-                            src={storageUrl(entry.generated_image.path)}
-                            alt={`Visual for ${entry.title}`}
-                            className="h-auto max-h-[450px] w-full rounded-2xl object-cover grayscale transition-all duration-700 hover:grayscale-0"
-                        />
-                        <p className="mt-3 text-center text-[10px] tracking-widest text-on-surface-variant uppercase italic">
-                            AI-Generated Visual Study
-                        </p>
-                    </div>
-                )}
 
                 {/* Reflection Prompts */}
                 {entry.reflection_prompts && (

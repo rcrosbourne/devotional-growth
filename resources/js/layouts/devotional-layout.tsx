@@ -3,6 +3,8 @@ import { useInitials } from '@/hooks/use-initials';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
 import { logout } from '@/routes';
+import { create as aiContentCreate } from '@/routes/admin/ai-content';
+import { index as adminThemesIndex } from '@/routes/admin/themes';
 import { index as bibleStudyIndex } from '@/routes/bible-study';
 import { index as bookmarksIndex } from '@/routes/bookmarks';
 import { index as notificationsIndex } from '@/routes/notifications';
@@ -22,6 +24,8 @@ import {
     Palette,
     Search,
     Settings,
+    Shield,
+    Sparkles,
     User,
 } from 'lucide-react';
 import { type ReactNode, useEffect, useRef, useState } from 'react';
@@ -61,6 +65,19 @@ const sidebarNavItems: SidebarNavItem[] = [
         title: 'Settings',
         href: settingsIndex.url(),
         icon: <Settings className="size-4" />,
+    },
+];
+
+const adminNavItems: SidebarNavItem[] = [
+    {
+        title: 'Manage Themes',
+        href: adminThemesIndex.url(),
+        icon: <Shield className="size-4" />,
+    },
+    {
+        title: 'AI Content',
+        href: aiContentCreate.url(),
+        icon: <Sparkles className="size-4" />,
     },
 ];
 
@@ -193,6 +210,40 @@ function DesktopSidebar({
                         );
                     })}
                 </ul>
+
+                {/* Admin section */}
+                {isAdmin && (
+                    <>
+                        <div className="mx-3 my-3 h-px bg-sidebar-foreground/10" />
+                        <p className="mb-1 px-3 text-[10px] font-medium tracking-[0.15em] text-sidebar-foreground/40 uppercase">
+                            Admin
+                        </p>
+                        <ul className="space-y-0.5">
+                            {adminNavItems.map((item) => {
+                                const isActive = currentUrl.startsWith(
+                                    item.href,
+                                );
+                                return (
+                                    <li key={item.title}>
+                                        <Link
+                                            href={item.href}
+                                            prefetch
+                                            className={cn(
+                                                'flex h-9 items-center gap-3 rounded-md px-3 text-sm transition-colors',
+                                                isActive
+                                                    ? 'bg-sidebar-accent font-semibold text-sidebar-foreground'
+                                                    : 'text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground',
+                                            )}
+                                        >
+                                            {item.icon}
+                                            <span>{item.title}</span>
+                                        </Link>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </>
+                )}
             </nav>
 
             {/* User section */}
