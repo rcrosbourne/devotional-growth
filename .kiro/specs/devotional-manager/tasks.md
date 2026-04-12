@@ -536,18 +536,20 @@ Incremental implementation of the Devotional Manager feature on top of the exist
     - `entry-navigator` — previous/next entry navigation controls
     - _Requirements: 7.3, 8.2, 8.3, 4.6, 11.6_
 
-- [ ] 19. Frontend — Auth pages
-  - [ ] 19.1 Create welcome/login page (`resources/js/pages/auth/login.tsx`)
+- [x] 19. Frontend — Auth pages
+  - [x] 19.1 Create welcome/login page (`resources/js/pages/session/create.tsx`)
     - Social login buttons (Google, Apple, GitHub) linking to Socialite redirect routes
     - "Login with Email" button linking to OTP flow
-    - Split layout on desktop (photo left, form right), single column on mobile
+    - Split layout on desktop (forest panel left, form right), single column on mobile
     - Use Wayfinder for type-safe route generation
+    - Editorial Serenity design: serif headings, uppercase tracking labels, warm parchment
     - _Requirements: Social login, Email OTP login_
 
-  - [ ] 19.2 Create email OTP pages (`auth/email-otp.tsx`, `auth/email-otp-verify.tsx`)
-    - Email input page with `useForm` for email submission
-    - OTP verification page with 6-digit input (use `input-otp` package already installed)
+  - [x] 19.2 Redesign email OTP pages (`auth/email-otp.tsx`, `auth/email-otp-verify.tsx`)
+    - Email input page with Form component for email submission
+    - OTP verification page with 6-digit InputOTP slots
     - Error handling for expired/invalid codes, rate limiting
+    - Centered card layout with Editorial Serenity styling
     - _Requirements: Email OTP login_
 
 - [ ] 20. Frontend — Admin pages

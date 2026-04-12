@@ -1,115 +1,78 @@
-import SessionController from '@/actions/App/Http/Controllers/SessionController';
-import InputError from '@/components/input-error';
-import TextLink from '@/components/text-link';
-import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import EmailOtpController from '@/actions/App/Http/Controllers/EmailOtpController';
+import SocialLoginController from '@/actions/App/Http/Controllers/SocialLoginController';
+import {
+    AppleIcon,
+    GitHubIcon,
+    GoogleIcon,
+} from '@/components/icons/social-icons';
 import AuthLayout from '@/layouts/auth-layout';
-import { register } from '@/routes';
-import { request } from '@/routes/password';
-import { Form, Head } from '@inertiajs/react';
-import { LoaderCircle } from 'lucide-react';
+import { Head, Link } from '@inertiajs/react';
+import { Mail } from 'lucide-react';
 
-interface LoginProps {
-    status?: string;
-    canResetPassword: boolean;
-}
-
-export default function Login({ status, canResetPassword }: LoginProps) {
+export default function Login() {
     return (
         <AuthLayout
-            title="Log in to your account"
-            description="Enter your email and password below to log in"
+            variant="split"
+            title="Continue Your Journey"
+            description="Enter your sanctuary to continue your daily reflections."
         >
-            <Head title="Log in" />
+            <Head title="Sign In" />
 
-            <Form
-                {...SessionController.store.form()}
-                resetOnSuccess={['password']}
-                className="flex flex-col gap-6"
-            >
-                {({ processing, errors }) => (
-                    <>
-                        <div className="grid gap-6">
-                            <div className="grid gap-2">
-                                <Label htmlFor="email">Email address</Label>
-                                <Input
-                                    id="email"
-                                    type="email"
-                                    name="email"
-                                    required
-                                    autoFocus
-                                    tabIndex={1}
-                                    autoComplete="email"
-                                    placeholder="email@example.com"
-                                />
-                                <InputError message={errors.email} />
-                            </div>
+            <div className="space-y-6">
+                {/* Social Login Buttons */}
+                <div className="space-y-3">
+                    <a
+                        href={SocialLoginController.redirect.url('google')}
+                        className="flex h-12 w-full items-center justify-center gap-3 rounded-lg border border-border bg-background text-sm font-medium text-foreground transition-colors hover:bg-accent"
+                    >
+                        <GoogleIcon className="size-5" />
+                        Continue with Google
+                    </a>
 
-                            <div className="grid gap-2">
-                                <div className="flex items-center">
-                                    <Label htmlFor="password">Password</Label>
-                                    {canResetPassword && (
-                                        <TextLink
-                                            href={request()}
-                                            className="ml-auto text-sm"
-                                            tabIndex={5}
-                                        >
-                                            Forgot password?
-                                        </TextLink>
-                                    )}
-                                </div>
-                                <Input
-                                    id="password"
-                                    type="password"
-                                    name="password"
-                                    required
-                                    tabIndex={2}
-                                    autoComplete="current-password"
-                                    placeholder="Password"
-                                />
-                                <InputError message={errors.password} />
-                            </div>
+                    <a
+                        href={SocialLoginController.redirect.url('apple')}
+                        className="flex h-12 w-full items-center justify-center gap-3 rounded-lg bg-[#1a1a18] text-sm font-medium text-white transition-opacity hover:opacity-90 dark:bg-[#ede9e0] dark:text-[#141210]"
+                    >
+                        <AppleIcon className="size-5" />
+                        Continue with Apple
+                    </a>
 
-                            <div className="flex items-center space-x-3">
-                                <Checkbox
-                                    id="remember"
-                                    name="remember"
-                                    tabIndex={3}
-                                />
-                                <Label htmlFor="remember">Remember me</Label>
-                            </div>
-
-                            <Button
-                                type="submit"
-                                className="mt-4 w-full"
-                                tabIndex={4}
-                                disabled={processing}
-                                data-test="login-button"
-                            >
-                                {processing && (
-                                    <LoaderCircle className="h-4 w-4 animate-spin" />
-                                )}
-                                Log in
-                            </Button>
-                        </div>
-
-                        <div className="text-center text-sm text-muted-foreground">
-                            Don't have an account?{' '}
-                            <TextLink href={register()} tabIndex={5}>
-                                Sign up
-                            </TextLink>
-                        </div>
-                    </>
-                )}
-            </Form>
-
-            {status && (
-                <div className="mb-4 text-center text-sm font-medium text-green-600">
-                    {status}
+                    <a
+                        href={SocialLoginController.redirect.url('github')}
+                        className="flex h-12 w-full items-center justify-center gap-3 rounded-lg bg-[#2d2d2a] text-sm font-medium text-white transition-opacity hover:opacity-90 dark:bg-[#3d3a35] dark:text-[#ede9e0]"
+                    >
+                        <GitHubIcon className="size-5" />
+                        Continue with GitHub
+                    </a>
                 </div>
-            )}
+
+                {/* Divider */}
+                <div className="flex items-center gap-4">
+                    <div className="h-px flex-1 bg-border" />
+                    <span className="text-xs text-muted-foreground">or</span>
+                    <div className="h-px flex-1 bg-border" />
+                </div>
+
+                {/* Email OTP Login */}
+                <Link
+                    href={EmailOtpController.create().url}
+                    className="flex h-12 w-full items-center justify-center gap-2.5 rounded-lg bg-primary text-sm font-semibold tracking-[0.1em] text-primary-foreground uppercase transition-opacity hover:opacity-90"
+                >
+                    <Mail className="size-4" />
+                    Login with Email
+                </Link>
+
+                {/* TODO: Link to a registration/request-access page when the route exists */}
+                <p className="text-center text-sm text-muted-foreground">
+                    New curator?{' '}
+                    <Link
+                        href="/register"
+                        className="font-semibold text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-foreground"
+                    >
+                        Request access
+                    </Link>
+                </p>
+            </div>
         </AuthLayout>
     );
 }

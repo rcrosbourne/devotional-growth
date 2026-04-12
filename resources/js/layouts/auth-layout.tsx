@@ -1,18 +1,30 @@
-import AuthLayoutTemplate from '@/layouts/auth/auth-simple-layout';
+import AuthCenteredLayout from '@/layouts/auth/auth-simple-layout';
+import AuthSplitLayout from '@/layouts/auth/auth-split-layout';
+
+interface AuthLayoutProps {
+    children: React.ReactNode;
+    title: string;
+    description: string;
+    variant?: 'centered' | 'split';
+}
 
 export default function AuthLayout({
     children,
     title,
     description,
-    ...props
-}: {
-    children: React.ReactNode;
-    title: string;
-    description: string;
-}) {
+    variant = 'centered',
+}: AuthLayoutProps) {
+    if (variant === 'split') {
+        return (
+            <AuthSplitLayout title={title} description={description}>
+                {children}
+            </AuthSplitLayout>
+        );
+    }
+
     return (
-        <AuthLayoutTemplate title={title} description={description} {...props}>
+        <AuthCenteredLayout title={title} description={description}>
             {children}
-        </AuthLayoutTemplate>
+        </AuthCenteredLayout>
     );
 }
