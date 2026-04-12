@@ -4,9 +4,10 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
 import { store as aiStore } from '@/routes/admin/ai-content';
+import { create as entriesCreate } from '@/routes/admin/themes/entries';
 import { type BreadcrumbItem } from '@/types';
-import { Head } from '@inertiajs/react';
-import { Check, Copy, Loader2, Sparkles } from 'lucide-react';
+import { Head, router } from '@inertiajs/react';
+import { Check, Copy, FileEdit, Loader2, Sparkles } from 'lucide-react';
 import { useState } from 'react';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -29,12 +30,26 @@ interface AiGenerationLog {
     error_message: string | null;
 }
 
-export default function AiContentGenerate() {
+interface Theme {
+    id: number;
+    name: string;
+}
+
+interface Props {
+    themes: Theme[];
+}
+
+const AI_CONTENT_DRAFT_KEY = 'ai_content_draft';
+
+export default function AiContentGenerate({ themes }: Props) {
     const [prompt, setPrompt] = useState('');
     const [generating, setGenerating] = useState(false);
     const [result, setResult] = useState<AiGenerationLog | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [copied, setCopied] = useState(false);
+    const [selectedThemeId, setSelectedThemeId] = useState<number | ''>(
+        themes[0]?.id ?? '',
+    );
 
     async function handleGenerate() {
         if (!prompt.trim()) return;
@@ -99,6 +114,19 @@ export default function AiContentGenerate() {
         } catch {
             // Clipboard write failed (e.g. permissions denied)
         }
+    }
+
+    function handleApproveAndEdit() {
+        if (!result?.generated_content || !selectedThemeId) return;
+        try {
+            sessionStorage.setItem(
+                AI_CONTENT_DRAFT_KEY,
+                JSON.stringify(result.generated_content),
+            );
+        } catch {
+            // sessionStorage unavailable
+        }
+        router.visit(entriesCreate.url(selectedThemeId));
     }
 
     const content = result?.generated_content;
@@ -220,11 +248,11 @@ export default function AiContentGenerate() {
                         {content && (
                             <div className="overflow-hidden rounded-lg border border-border bg-surface-container-low">
                                 {/* Preview toolbar */}
-                                <div className="flex items-center justify-between border-b border-border bg-surface-container-high/50 px-4 py-2">
+                                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border bg-surface-container-high/50 px-4 py-2">
                                     <span className="text-xs font-medium tracking-[0.1em] text-on-surface-variant uppercase">
                                         Preview
                                     </span>
-                                    <div className="flex items-center gap-2">
+                                    <div className="flex flex-wrap items-center gap-2">
                                         <Button
                                             variant="ghost"
                                             size="sm"
@@ -251,6 +279,39 @@ export default function AiContentGenerate() {
                                             Regenerate
                                         </Button>
                                     </div>
+                                </div>
+
+                                {/* Approve & Edit bar */}
+                                <div className="flex flex-wrap items-center gap-3 border-b border-border bg-moss/5 px-4 py-3">
+                                    <select
+                                        value={selectedThemeId}
+                                        onChange={(e) =>
+                                            setSelectedThemeId(
+                                                Number(e.target.value),
+                                            )
+                                        }
+                                        className="rounded-md border border-border bg-background px-3 py-1.5 text-sm text-on-surface focus:border-moss focus:ring-1 focus:ring-moss focus:outline-none"
+                                    >
+                                        {themes.length === 0 && (
+                                            <option value="">
+                                                No themes available
+                                            </option>
+                                        )}
+                                        {themes.map((t) => (
+                                            <option key={t.id} value={t.id}>
+                                                {t.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    <Button
+                                        size="sm"
+                                        className="bg-moss text-moss-foreground hover:bg-moss/90"
+                                        disabled={!selectedThemeId}
+                                        onClick={handleApproveAndEdit}
+                                    >
+                                        <FileEdit className="size-3.5" />
+                                        Approve &amp; Edit
+                                    </Button>
                                 </div>
 
                                 {/* Preview content */}

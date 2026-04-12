@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Actions\GenerateDevotionalContent;
 use App\Http\Requests\GenerateContentRequest;
+use App\Models\Theme;
 use App\Models\User;
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Http\JsonResponse;
@@ -16,7 +17,9 @@ final readonly class AiContentController
 {
     public function create(): Response
     {
-        return Inertia::render('admin/ai-content/generate');
+        return Inertia::render('admin/ai-content/generate', [
+            'themes' => Theme::query()->orderBy('name')->get(['id', 'name']),
+        ]);
     }
 
     public function store(GenerateContentRequest $request, #[CurrentUser] User $user, GenerateDevotionalContent $action): JsonResponse

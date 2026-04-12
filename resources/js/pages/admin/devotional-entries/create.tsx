@@ -13,6 +13,27 @@ import { Head, Link, useForm } from '@inertiajs/react';
 import { ArrowLeft, BookOpen, Plus, X } from 'lucide-react';
 import { type FormEventHandler, useRef, useState } from 'react';
 
+const AI_CONTENT_DRAFT_KEY = 'ai_content_draft';
+
+interface AiDraft {
+    title?: string;
+    body?: string;
+    scripture_references?: string[];
+    reflection_prompts?: string;
+    adventist_insights?: string;
+}
+
+function consumeAiDraft(): AiDraft | null {
+    try {
+        const raw = sessionStorage.getItem(AI_CONTENT_DRAFT_KEY);
+        if (!raw) return null;
+        sessionStorage.removeItem(AI_CONTENT_DRAFT_KEY);
+        return JSON.parse(raw) as AiDraft;
+    } catch {
+        return null;
+    }
+}
+
 interface ScriptureRefItem {
     key: number;
     value: string;
@@ -28,10 +49,16 @@ interface Props {
 }
 
 export default function CreateEntry({ theme }: Props) {
-    const nextKeyRef = useRef(1);
-    const [refItems, setRefItems] = useState<ScriptureRefItem[]>([
-        { key: 0, value: '' },
-    ]);
+    const [draft] = useState(consumeAiDraft);
+    const draftRefs =
+        draft?.scripture_references && draft.scripture_references.length > 0
+            ? draft.scripture_references
+            : [''];
+
+    const nextKeyRef = useRef(draftRefs.length);
+    const [refItems, setRefItems] = useState<ScriptureRefItem[]>(
+        draftRefs.map((v, i) => ({ key: i, value: v })),
+    );
 
     const breadcrumbs: BreadcrumbItem[] = [
         { title: 'Themes', href: themesIndex.url() },
@@ -40,11 +67,11 @@ export default function CreateEntry({ theme }: Props) {
     ];
 
     const { data, setData, post, processing, errors } = useForm({
-        title: '',
-        body: '',
-        scripture_references: [''] as string[],
-        reflection_prompts: '',
-        adventist_insights: '',
+        title: draft?.title ?? '',
+        body: draft?.body ?? '',
+        scripture_references: draftRefs,
+        reflection_prompts: draft?.reflection_prompts ?? '',
+        adventist_insights: draft?.adventist_insights ?? '',
     });
 
     const handleSubmit: FormEventHandler = (e) => {
