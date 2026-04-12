@@ -7,16 +7,58 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@theme {
-    --font-sans:
-        'Instrument Sans', ui-sans-serif, system-ui, sans-serif,
-        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-        'Noto Color Emoji';
+/* ─── Editorial Serenity — Self-hosted Fonts ─── */
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 300 800;
+    font-display: swap;
+    src: url('../fonts/inter-latin.woff2') format('woff2');
+    unicode-range:
+        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+        U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+        U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
+@font-face {
+    font-family: 'Newsreader';
+    font-style: normal;
+    font-weight: 200 800;
+    font-display: swap;
+    src: url('../fonts/newsreader-latin.woff2') format('woff2');
+    unicode-range:
+        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+        U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+        U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Newsreader';
+    font-style: italic;
+    font-weight: 200 800;
+    font-display: swap;
+    src: url('../fonts/newsreader-italic-latin.woff2') format('woff2');
+    unicode-range:
+        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+        U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+        U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@theme {
+    /* ─── Typography ─── */
+    --font-sans:
+        'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+        'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --font-serif:
+        'Newsreader', 'Georgia', 'Cambria', 'Times New Roman', ui-serif, serif;
+
+    /* ─── Radii ─── */
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
     --radius-sm: calc(var(--radius) - 4px);
 
+    /* ─── shadcn/ui semantic tokens ─── */
     --color-background: var(--background);
     --color-foreground: var(--foreground);
 
@@ -59,77 +101,137 @@
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-ring: var(--sidebar-ring);
+
+    /* ─── Editorial Serenity: Surface Hierarchy ─── */
+    --color-parchment: var(--parchment);
+    --color-bone: var(--bone);
+    --color-moss: var(--moss);
+    --color-moss-foreground: var(--moss-foreground);
+    --color-surface: var(--es-surface);
+    --color-surface-variant: var(--es-surface-variant);
+    --color-surface-container-lowest: var(--es-surface-container-lowest);
+    --color-surface-container-low: var(--es-surface-container-low);
+    --color-surface-container: var(--es-surface-container);
+    --color-surface-container-high: var(--es-surface-container-high);
+    --color-surface-container-highest: var(--es-surface-container-highest);
+    --color-on-surface: var(--es-on-surface);
+    --color-on-surface-variant: var(--es-on-surface-variant);
+
+    /* ─── Editorial Serenity: Ambient Shadow ─── */
+    --shadow-ambient: 0 4px 48px rgb(60 50 30 / 0.05);
+    --shadow-ambient-lg: 0 8px 60px rgb(60 50 30 / 0.06);
 }
 
+/* ─────────────────────────────────────────────────
+   Light Mode — Editorial Serenity (Parchment)
+   ───────────────────────────────────────────────── */
 :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
+    /* shadcn semantic — warm parchment palette */
+    --background: #fcf9f2;
+    --foreground: #1a1a18;
+    --card: #f6f3eb;
+    --card-foreground: #1a1a18;
+    --popover: #fdfbf6;
+    --popover-foreground: #1a1a18;
+    --primary: #1a1a18;
+    --primary-foreground: #fcf9f2;
+    --secondary: #f1eee7;
+    --secondary-foreground: #1a1a18;
+    --muted: #f1eee7;
+    --muted-foreground: #78756d;
+    --accent: #f1eee7;
+    --accent-foreground: #1a1a18;
     --destructive: oklch(0.577 0.245 27.325);
     --destructive-foreground: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.87 0 0);
-    --chart-1: oklch(0.646 0.222 41.116);
+    --border: #e8e4db;
+    --input: #e8e4db;
+    --ring: #d6d1c7;
+    --chart-1: #56642b;
     --chart-2: oklch(0.6 0.118 184.704);
     --chart-3: oklch(0.398 0.07 227.392);
     --chart-4: oklch(0.828 0.189 84.429);
     --chart-5: oklch(0.769 0.188 70.08);
     --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.87 0 0);
+
+    /* Sidebar — bone / parchment feel */
+    --sidebar: #f6f3eb;
+    --sidebar-foreground: #1a1a18;
+    --sidebar-primary: #1a1a18;
+    --sidebar-primary-foreground: #fcf9f2;
+    --sidebar-accent: #ebe8e0;
+    --sidebar-accent-foreground: #1a1a18;
+    --sidebar-border: #e8e4db;
+    --sidebar-ring: #d6d1c7;
+
+    /* Editorial Serenity tokens */
+    --parchment: #fcf9f2;
+    --bone: #f1eee7;
+    --moss: #56642b;
+    --moss-foreground: #ffffff;
+    --es-surface: #fcf9f2;
+    --es-surface-variant: #f6f3eb;
+    --es-surface-container-lowest: #ffffff;
+    --es-surface-container-low: #faf7f0;
+    --es-surface-container: #f6f3eb;
+    --es-surface-container-high: #f1eee7;
+    --es-surface-container-highest: #ebe8e0;
+    --es-on-surface: #1a1a18;
+    --es-on-surface-variant: #78756d;
 }
 
+/* ─────────────────────────────────────────────────
+   Dark Mode — Editorial Night (Deep Walnut)
+   ───────────────────────────────────────────────── */
 .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.145 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.145 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.985 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
+    --background: #141210;
+    --foreground: #ede9e0;
+    --card: #1c1a17;
+    --card-foreground: #ede9e0;
+    --popover: #1c1a17;
+    --popover-foreground: #ede9e0;
+    --primary: #ede9e0;
+    --primary-foreground: #141210;
+    --secondary: #252320;
+    --secondary-foreground: #ede9e0;
+    --muted: #252320;
+    --muted-foreground: #9b968b;
+    --accent: #252320;
+    --accent-foreground: #ede9e0;
     --destructive: oklch(0.396 0.141 25.723);
     --destructive-foreground: oklch(0.637 0.237 25.331);
-    --border: oklch(0.269 0 0);
-    --input: oklch(0.269 0 0);
-    --ring: oklch(0.439 0 0);
-    --chart-1: oklch(0.488 0.243 264.376);
+    --border: #2e2b27;
+    --input: #2e2b27;
+    --ring: #3d3a35;
+    --chart-1: #7a8b42;
     --chart-2: oklch(0.696 0.17 162.48);
     --chart-3: oklch(0.769 0.188 70.08);
     --chart-4: oklch(0.627 0.265 303.9);
     --chart-5: oklch(0.645 0.246 16.439);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.985 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(0.269 0 0);
-    --sidebar-ring: oklch(0.439 0 0);
+
+    /* Sidebar — deep walnut */
+    --sidebar: #1c1a17;
+    --sidebar-foreground: #ede9e0;
+    --sidebar-primary: #ede9e0;
+    --sidebar-primary-foreground: #141210;
+    --sidebar-accent: #252320;
+    --sidebar-accent-foreground: #ede9e0;
+    --sidebar-border: #2e2b27;
+    --sidebar-ring: #3d3a35;
+
+    /* Editorial Serenity tokens — dark */
+    --parchment: #141210;
+    --bone: #1c1a17;
+    --moss: #7a8b42;
+    --moss-foreground: #141210;
+    --es-surface: #141210;
+    --es-surface-variant: #1c1a17;
+    --es-surface-container-lowest: #0f0e0c;
+    --es-surface-container-low: #181614;
+    --es-surface-container: #1c1a17;
+    --es-surface-container-high: #252320;
+    --es-surface-container-highest: #2e2b27;
+    --es-on-surface: #ede9e0;
+    --es-on-surface-variant: #9b968b;
 }
 
 @layer base {
@@ -138,6 +240,10 @@
     }
 
     body {
-        @apply bg-background text-foreground;
+        @apply bg-background text-foreground antialiased;
+        font-feature-settings:
+            'liga' 1,
+            'calt' 1;
+        text-rendering: optimizeLegibility;
     }
 }
