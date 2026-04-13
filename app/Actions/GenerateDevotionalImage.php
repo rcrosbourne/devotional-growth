@@ -6,6 +6,7 @@ namespace App\Actions;
 
 use App\Models\DevotionalEntry;
 use App\Models\GeneratedImage;
+use App\Services\ImagePromptBuilder;
 use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Ai\Image;
@@ -13,6 +14,8 @@ use Laravel\Ai\Responses\ImageResponse;
 
 final readonly class GenerateDevotionalImage
 {
+    public function __construct(private ImagePromptBuilder $promptBuilder) {}
+
     /**
      * @param  bool  $replace  Whether to replace an existing image
      */
@@ -53,15 +56,11 @@ final readonly class GenerateDevotionalImage
 
         $bodyExcerpt = mb_substr(strip_tags($entry->body), 0, 300);
 
-        return sprintf('Create a serene, inspirational image for a Christian devotional titled "%s". ', $entry->title)
+        $context = sprintf('For a Christian devotional titled "%s". ', $entry->title)
             .sprintf('Scripture references: %s. ', $scriptureRefs)
-            .sprintf('Theme of the devotional: %s. ', $bodyExcerpt)
-            .'The image should be warm, peaceful, and suitable for spiritual reflection. '
-            .'When depicting people, primarily feature Black individuals of Caribbean descent, '
-            .'though occasionally vary to include other races and ethnicities. '
-            .'Incorporate Caribbean-relatable scenery such as tropical landscapes, coastal settings, '
-            .'lush greenery, warm sunlight, and island life where appropriate. '
-            .'Do not include any text or words in the image.';
+            .sprintf('Theme of the devotional: %s. ', $bodyExcerpt);
+
+        return $this->promptBuilder->build($context);
     }
 
     private function stripExtendedAttributes(string $path): void
