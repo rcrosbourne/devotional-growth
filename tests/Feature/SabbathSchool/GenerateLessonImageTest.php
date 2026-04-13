@@ -23,14 +23,26 @@ it('skips image generation when lesson already has an image', function (): void 
     expect($lesson->fresh()->image_path)->toBe($originalPath);
 });
 
-it('builds a prompt from lesson title and memory text', function (): void {
-    // The action should not fail even if image generation is unavailable
-    // Since we can't easily mock Image::of(), we test the skip-if-has-image path
-    $lesson = Lesson::factory()->create(['image_path' => null]);
+it('builds a prompt with Caribbean representation and scenery', function (): void {
+    $lesson = Lesson::factory()->create([
+        'image_path' => null,
+        'title' => 'Walking in Faith',
+        'memory_text' => 'For we walk by faith, not by sight.',
+        'memory_text_reference' => '2 Corinthians 5:7',
+    ]);
 
-    // The action will try to call the AI SDK which isn't available in tests
-    // This is covered by the job dispatch tests which verify the flow
-    expect($lesson->image_path)->toBeNull();
+    $action = new GenerateLessonImage();
+    $method = new ReflectionMethod($action, 'buildPrompt');
+    $prompt = $method->invoke($action, $lesson);
+
+    expect($prompt)
+        ->toContain('Walking in Faith')
+        ->toContain('For we walk by faith, not by sight.')
+        ->toContain('2 Corinthians 5:7')
+        ->toContain('Caribbean descent')
+        ->toContain('Caribbean-relatable scenery')
+        ->toContain('tropical landscapes')
+        ->toContain('Do not include any text or words');
 });
 
 // GenerateLessonImageJob
