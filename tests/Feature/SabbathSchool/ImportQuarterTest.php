@@ -7,7 +7,9 @@ use App\Models\Lesson;
 use App\Models\LessonDay;
 use App\Models\LessonDayScriptureReference;
 use App\Models\Quarterly;
+use App\Services\ScriptureReferenceParser;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 beforeEach(function (): void {
     $this->fixtureHtml = file_get_contents(base_path('tests/fixtures/ssnet_lesson_03.html'));
@@ -362,4 +364,23 @@ it('catches throwable when parser returns unparseable date', function (): void {
 
     // Should import successfully (date falls back to current date)
     expect($result['lessons_imported'])->toBe(13);
+});
+
+it('logs unparseable scripture references without failing', function (): void {
+    Log::spy();
+
+    $lessonDay = LessonDay::factory()->create();
+    $parser = new ScriptureReferenceParser();
+
+    $action = resolve(ImportQuarter::class);
+    $method = new ReflectionMethod($action, 'upsertScriptureReferences');
+    $method->invoke($action, $lessonDay, ['not a reference', 'John 3:16'], $parser);
+
+    expect(LessonDayScriptureReference::query()->where('lesson_day_id', $lessonDay->id)->count())->toBe(1);
+    expect(LessonDayScriptureReference::query()->where('lesson_day_id', $lessonDay->id)->first()->book)->toBe('John');
+
+    Log::shouldHaveReceived('info')
+        ->withArgs(fn (string $message, array $context): bool => $message === 'ImportQuarter: Could not parse scripture reference'
+            && $context['reference'] === 'not a reference')
+        ->once();
 });
