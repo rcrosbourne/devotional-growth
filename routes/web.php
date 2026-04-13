@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\Admin\AiContentController as AdminAiContentController;
 use App\Http\Controllers\Admin\DevotionalEntryController as AdminDevotionalEntryController;
+use App\Http\Controllers\Admin\SabbathSchool\QuarterlyController as AdminSabbathSchoolController;
 use App\Http\Controllers\Admin\ThemeController as AdminThemeController;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\DevotionalEntryController;
@@ -14,6 +15,11 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ObservationController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\ReadingPlanController;
+use App\Http\Controllers\SabbathSchool\LessonController as SabbathSchoolLessonController;
+use App\Http\Controllers\SabbathSchool\LessonDayCompletionController as SabbathSchoolCompletionController;
+use App\Http\Controllers\SabbathSchool\LessonDayController as SabbathSchoolLessonDayController;
+use App\Http\Controllers\SabbathSchool\LessonDayObservationController as SabbathSchoolObservationController;
+use App\Http\Controllers\SabbathSchool\QuarterlyController as SabbathSchoolQuarterlyController;
 use App\Http\Controllers\ScriptureController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SocialLoginController;
@@ -68,6 +74,17 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
     // Word Study...
     Route::get('bible-study/word-study/search', [WordStudyController::class, 'search'])->name('bible-study.word-study.search');
     Route::get('bible-study/word-study/{wordStudy}', [WordStudyController::class, 'show'])->name('bible-study.word-study.show');
+
+    // Sabbath School...
+    Route::get('sabbath-school', new SabbathSchoolQuarterlyController()->index(...))->name('sabbath-school.index');
+    Route::get('sabbath-school/{quarterly}', new SabbathSchoolQuarterlyController()->show(...))->name('sabbath-school.show');
+    Route::get('sabbath-school/{quarterly}/lessons/{lesson}', new SabbathSchoolLessonController()->show(...))->name('sabbath-school.lessons.show');
+    Route::get('sabbath-school/{quarterly}/lessons/{lesson}/days/{lessonDay}', new SabbathSchoolLessonDayController()->show(...))->name('sabbath-school.lessons.days.show');
+    Route::post('sabbath-school/days/{lessonDay}/complete', new SabbathSchoolCompletionController()->store(...))->name('sabbath-school.days.complete');
+    Route::delete('sabbath-school/days/{lessonDay}/complete', new SabbathSchoolCompletionController()->destroy(...))->name('sabbath-school.days.uncomplete');
+    Route::post('sabbath-school/days/{lessonDay}/observations', new SabbathSchoolObservationController()->store(...))->name('sabbath-school.observations.store');
+    Route::put('sabbath-school/observations/{lessonDayObservation}', new SabbathSchoolObservationController()->update(...))->name('sabbath-school.observations.update');
+    Route::delete('sabbath-school/observations/{lessonDayObservation}', new SabbathSchoolObservationController()->destroy(...))->name('sabbath-school.observations.destroy');
 
     // Notifications...
     Route::get('notifications', new NotificationController()->index(...))->name('notifications.index');
@@ -175,6 +192,12 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('ai-content/generate', new AdminAiContentController()->create(...))->name('ai-content.create');
     Route::post('ai-content/generate', new AdminAiContentController()->store(...))->name('ai-content.store');
     Route::post('ai-content/save', new AdminAiContentController()->save(...))->name('ai-content.save');
+
+    // Admin Sabbath School...
+    Route::get('sabbath-school', new AdminSabbathSchoolController()->index(...))->name('sabbath-school.index');
+    Route::post('sabbath-school/import', new AdminSabbathSchoolController()->import(...))->name('sabbath-school.import');
+    Route::post('sabbath-school/{quarterly}/sync', new AdminSabbathSchoolController()->sync(...))->name('sabbath-school.sync');
+    Route::put('sabbath-school/{quarterly}/activate', new AdminSabbathSchoolController()->activate(...))->name('sabbath-school.activate');
 });
 
 Route::middleware('auth')->group(function (): void {

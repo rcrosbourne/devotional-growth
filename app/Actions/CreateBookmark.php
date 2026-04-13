@@ -6,6 +6,8 @@ namespace App\Actions;
 
 use App\Models\Bookmark;
 use App\Models\DevotionalEntry;
+use App\Models\Lesson;
+use App\Models\LessonDay;
 use App\Models\ScriptureReference;
 use App\Models\User;
 use App\Models\WordStudy;
@@ -20,6 +22,8 @@ final readonly class CreateBookmark
         DevotionalEntry::class,
         ScriptureReference::class,
         WordStudy::class,
+        Lesson::class,
+        LessonDay::class,
     ];
 
     public function handle(User $user, string $bookmarkableType, int $bookmarkableId): Bookmark
