@@ -1,12 +1,11 @@
 import { Button } from '@/components/ui/button';
-import AppLayout from '@/layouts/app-layout';
+import DevotionalLayout from '@/layouts/devotional-layout';
 import {
     activate,
     importMethod,
     index,
     sync,
 } from '@/routes/admin/sabbath-school';
-import { type BreadcrumbItem } from '@/types';
 import { Head, router, useForm } from '@inertiajs/react';
 import {
     BookOpen,
@@ -16,10 +15,6 @@ import {
     RefreshCw,
     Star,
 } from 'lucide-react';
-
-const breadcrumbs: BreadcrumbItem[] = [
-    { title: 'Sabbath School', href: index.url() },
-];
 
 interface Quarterly {
     id: number;
@@ -73,7 +68,7 @@ export default function SabbathSchoolIndex({ quarterlies }: Props) {
     }
 
     return (
-        <AppLayout breadcrumbs={breadcrumbs}>
+        <DevotionalLayout>
             <Head title="Manage Sabbath School" />
 
             <div className="px-6 py-6 md:px-8">
@@ -262,6 +257,6 @@ export default function SabbathSchoolIndex({ quarterlies }: Props) {
                     </div>
                 )}
             </div>
-        </AppLayout>
+        </DevotionalLayout>
     );
 }

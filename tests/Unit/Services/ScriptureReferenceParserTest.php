@@ -59,6 +59,34 @@ it('handles verse range with spaces around dash', function (): void {
         ->and($result->verse_end)->toBe(39);
 });
 
+it('parses abbreviated book names with periods', function (string $input, string $expectedBook, int $chapter, int $verseStart, ?int $verseEnd): void {
+    $result = $this->parser->parse($input);
+
+    expect($result->book)->toBe($expectedBook)
+        ->and($result->chapter)->toBe($chapter)
+        ->and($result->verse_start)->toBe($verseStart)
+        ->and($result->verse_end)->toBe($verseEnd);
+})->with([
+    'Rev.' => ['Rev. 3:14', 'Rev.', 3, 14, null],
+    'Gen. with range' => ['Gen. 2:7', 'Gen.', 2, 7, null],
+    '1 Sam.' => ['1 Sam. 2:2', '1 Sam.', 2, 2, null],
+    'Exod.' => ['Exod. 34:29', 'Exod.', 34, 29, null],
+    '2 Chron.' => ['2 Chron. 20:5-6', '2 Chron.', 20, 5, 6],
+    '1 Thess.' => ['1 Thess. 4:16', '1 Thess.', 4, 16, null],
+    'Isa. with range' => ['Isa. 46:9-10', 'Isa.', 46, 9, 10],
+    'Ps.' => ['Ps. 119:105', 'Ps.', 119, 105, null],
+    'Matt.' => ['Matt. 1:23', 'Matt.', 1, 23, null],
+]);
+
+it('parses verse ranges with en-dashes', function (): void {
+    $result = $this->parser->parse("Romans 8:28\u{2013}39");
+
+    expect($result->book)->toBe('Romans')
+        ->and($result->chapter)->toBe(8)
+        ->and($result->verse_start)->toBe(28)
+        ->and($result->verse_end)->toBe(39);
+});
+
 it('throws on invalid format', function (): void {
     $this->parser->parse('not a reference');
 })->throws(InvalidArgumentException::class);
