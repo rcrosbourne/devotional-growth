@@ -120,7 +120,7 @@ final readonly class GenerateLessonImage
             'a Caribbean coastal setting',
             'a cozy indoor setting with warm lamplight and open Bibles',
             'an ancient Middle Eastern village reminiscent of biblical times',
-            'a vibrant Caribbean marketplace',
+            'a warm community gathering under a large tree',
             'a sunlit church courtyard with stone arches',
             'a tropical garden gathering space',
             'a hillside overlooking a valley',
