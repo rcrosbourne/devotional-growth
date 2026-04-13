@@ -57,6 +57,10 @@ final readonly class GenerateDevotionalImage
             .sprintf('Scripture references: %s. ', $scriptureRefs)
             .sprintf('Theme of the devotional: %s. ', $bodyExcerpt)
             .'The image should be warm, peaceful, and suitable for spiritual reflection. '
+            .'When depicting people, primarily feature Black individuals of Caribbean descent, '
+            .'though occasionally vary to include other races and ethnicities. '
+            .'Incorporate Caribbean-relatable scenery such as tropical landscapes, coastal settings, '
+            .'lush greenery, warm sunlight, and island life where appropriate. '
             .'Do not include any text or words in the image.';
     }
 
