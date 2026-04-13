@@ -1,11 +1,6 @@
 import { Button } from '@/components/ui/button';
 import DevotionalLayout from '@/layouts/devotional-layout';
-import {
-    activate,
-    importMethod,
-    index,
-    sync,
-} from '@/routes/admin/sabbath-school';
+import { activate, importMethod, sync } from '@/routes/admin/sabbath-school';
 import { Head, router, useForm } from '@inertiajs/react';
 import {
     BookOpen,
