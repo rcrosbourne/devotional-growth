@@ -21,19 +21,26 @@ final readonly class GenerateLessonImage
 
         $prompt = $this->buildPrompt($lesson);
 
+        $lesson->loadMissing('quarterly');
+
+        if ($lesson->quarterly === null) {
+            Log::warning('GenerateLessonImage: Lesson has no quarterly', [
+                'lesson_id' => $lesson->id,
+                'lesson_title' => $lesson->title,
+            ]);
+
+            return;
+        }
+
         try {
             // @codeCoverageIgnoreStart
             $response = Image::of($prompt)
                 ->square()
                 ->quality('medium')
-                ->timeout(120)
+                ->timeout(180)
                 ->generate();
 
-            $lesson->loadMissing('quarterly');
-
-            /** @var \App\Models\Quarterly $quarterly */
-            $quarterly = $lesson->quarterly;
-            $directory = sprintf('images/sabbath-school/%s', $quarterly->quarter_code);
+            $directory = sprintf('images/sabbath-school/%s', $lesson->quarterly->quarter_code);
 
             /** @var string $path */
             $path = $response->store($directory, 'public');
