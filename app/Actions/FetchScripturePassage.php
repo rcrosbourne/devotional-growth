@@ -78,6 +78,60 @@ final readonly class FetchScripturePassage
         }
     }
 
+    /**
+     * Fetch an entire chapter, checking cache first then calling the appropriate Bible API.
+     */
+    public function handleChapter(string $book, int $chapter, string $bibleVersion = 'KJV'): string
+    {
+        $cached = ScriptureCache::query()
+            ->where('book', $book)
+            ->where('chapter', $chapter)
+            ->where('verse_start', 0)
+            ->whereNull('verse_end')
+            ->where('bible_version', $bibleVersion)
+            ->first();
+
+        if ($cached) {
+            return $cached->text;
+        }
+
+        $reference = sprintf('%s %d', $book, $chapter);
+
+        try {
+            $text = $this->usesApiBible($bibleVersion)
+                ? $this->fetchChapterFromApiBible($book, $chapter, $bibleVersion)
+                : $this->fetchFromBibleApiCom($reference, $bibleVersion);
+
+            if ($text === '') {
+                Log::warning('Bible API returned empty text for chapter', [
+                    'reference' => $reference,
+                    'version' => $bibleVersion,
+                ]);
+
+                return sprintf('Unable to load %s. Please try again later.', $reference);
+            }
+
+            ScriptureCache::query()->create([
+                'book' => $book,
+                'chapter' => $chapter,
+                'verse_start' => 0,
+                'verse_end' => null,
+                'bible_version' => $bibleVersion,
+                'text' => $text,
+            ]);
+
+            return $text;
+        } catch (ConnectionException|RequestException $e) {
+            Log::warning('Bible API connection failed for chapter', [
+                'reference' => $reference,
+                'version' => $bibleVersion,
+                'error' => $e->getMessage(),
+            ]);
+
+            return sprintf('Unable to load %s. Please try again later.', $reference);
+        }
+    }
+
     private function usesApiBible(string $version): bool
     {
         return isset(self::API_BIBLE_IDS[$version]);
@@ -224,6 +278,65 @@ final readonly class FetchScripturePassage
         ];
 
         return $map[$book] ?? mb_strtoupper(mb_substr($book, 0, 3));
+    }
+
+    /**
+     * @throws ConnectionException
+     */
+    private function fetchChapterFromApiBible(string $book, int $chapter, string $bibleVersion): string
+    {
+        $apiKey = config('services.api_bible.key');
+
+        if (! is_string($apiKey) || $apiKey === '') {
+            Log::warning('API.Bible key is not configured');
+
+            return '';
+        }
+
+        $bibleId = self::API_BIBLE_IDS[$bibleVersion];
+        $bookId = $this->bookToApiBibleId($book);
+        $passageId = sprintf('%s.%d', $bookId, $chapter);
+
+        $url = sprintf('https://rest.api.bible/v1/bibles/%s/passages/%s', $bibleId, $passageId);
+
+        $response = Http::retry(3, 500, throw: false)
+            ->timeout(10)
+            ->withHeader('api-key', $apiKey)
+            ->get($url, [
+                'content-type' => 'text',
+                'include-notes' => 'false',
+                'include-titles' => 'false',
+                'include-chapter-numbers' => 'false',
+                'include-verse-numbers' => 'true',
+                'include-verse-spans' => 'false',
+            ]);
+
+        if ($response->failed()) {
+            Log::warning('API.Bible returned error response for chapter', [
+                'passage' => $passageId,
+                'version' => $bibleVersion,
+                'status' => $response->status(),
+            ]);
+
+            return '';
+        }
+
+        /** @var array<string, mixed>|null $json */
+        $json = $response->json();
+
+        $data = $json['data'] ?? null;
+
+        if (! is_array($data)) {
+            return '';
+        }
+
+        $content = $data['content'] ?? null;
+
+        if (! is_string($content)) {
+            return '';
+        }
+
+        return mb_trim($content);
     }
 
     private function buildReference(string $book, int $chapter, int $verseStart, ?int $verseEnd): string

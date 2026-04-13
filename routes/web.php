@@ -52,6 +52,7 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
 
     // Scripture passages...
     Route::get('scripture', [ScriptureController::class, 'show'])->name('scripture.show');
+    Route::get('scripture/chapter', [ScriptureController::class, 'chapter'])->name('scripture.chapter');
 
     // Bookmarks...
     Route::get('bookmarks', new BookmarkController()->index(...))->name('bookmarks.index');
