@@ -9,6 +9,8 @@ use App\Actions\DeleteBookmark;
 use App\Http\Requests\CreateBookmarkRequest;
 use App\Models\Bookmark;
 use App\Models\DevotionalEntry;
+use App\Models\Lesson;
+use App\Models\LessonDay;
 use App\Models\ScriptureReference;
 use App\Models\User;
 use App\Models\WordStudy;
@@ -35,6 +37,12 @@ final readonly class BookmarkController
             )->values(),
             'wordStudies' => $bookmarks->filter(
                 fn (Bookmark $bookmark): bool => $bookmark->bookmarkable_type === WordStudy::class,
+            )->values(),
+            'lessons' => $bookmarks->filter(
+                fn (Bookmark $bookmark): bool => $bookmark->bookmarkable_type === Lesson::class,
+            )->values(),
+            'lessonDays' => $bookmarks->filter(
+                fn (Bookmark $bookmark): bool => $bookmark->bookmarkable_type === LessonDay::class,
             )->values(),
         ]);
     }
