@@ -247,3 +247,141 @@
         text-rendering: optimizeLegibility;
     }
 }
+
+/* ─────────────────────────────────────────────────
+   Sabbath School Lesson Body
+   ───────────────────────────────────────────────── */
+
+.lesson-body p {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    line-height: 1.85;
+    margin-bottom: 1.25rem;
+    color: var(--es-on-surface);
+}
+
+@media (min-width: 768px) {
+    .lesson-body p {
+        font-size: 1.2rem;
+    }
+}
+
+.lesson-body i,
+.lesson-body em {
+    color: var(--es-on-surface);
+}
+
+/* ── Read for This Week's Study ── */
+
+.lesson-body .read-for-study {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    border-bottom: 1px solid color-mix(in srgb, var(--moss) 25%, transparent);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.lesson-body .read-for-study .a-emphasis {
+    font-weight: 700;
+    font-style: italic;
+}
+
+/* ── Memory Text ── */
+
+.lesson-body .memory-text {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    border-left: 3px solid color-mix(in srgb, var(--moss) 50%, transparent);
+    padding: 0.75rem 1rem;
+    margin-bottom: 2rem;
+    background: color-mix(in srgb, var(--moss) 5%, transparent);
+    border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.lesson-body .memory-text .a-emphasis {
+    font-weight: 700;
+    font-style: italic;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ── Drop Cap on first body paragraph ── */
+
+.lesson-body .first-body-para::first-letter {
+    float: left;
+    font-family: var(--font-serif);
+    font-size: 3.5rem;
+    line-height: 0.8;
+    font-weight: 600;
+    margin-right: 0.1em;
+    margin-top: 0.1em;
+    color: color-mix(in srgb, var(--moss) 70%, var(--es-on-surface));
+}
+
+/* ── Scripture Prompts ("Read X. What does it teach?") ── */
+
+.lesson-body .scripture-prompt {
+    margin: 1.75rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid color-mix(in srgb, var(--moss) 40%, transparent);
+}
+
+.lesson-body .scripture-prompt strong {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-weight: 600;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--es-on-surface);
+}
+
+/* ── Study Notes ── */
+
+.lesson-body .study-note {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+    margin-top: 2rem;
+    color: var(--es-on-surface-variant);
+}
+
+/* ── EGW Blockquotes ── */
+
+.lesson-body .egw-quote {
+    border-left: 3px solid color-mix(in srgb, var(--moss) 40%, transparent);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: var(--es-surface-container-low);
+    border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.lesson-body .egw-quote p {
+    font-style: italic;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.lesson-body .egw-quote footer {
+    font-size: 0.8rem;
+    font-style: normal;
+    color: var(--es-on-surface-variant);
+    text-align: right;
+}
+
+/* ── Reflection / Summary ── */
+
+.lesson-body .reflection {
+    background: var(--es-surface-container-low);
+    padding: 1rem 1.25rem;
+    border-radius: 0.5rem;
+    margin: 1.5rem 0;
+}
+
+.lesson-body .reflection p {
+    font-style: italic;
+    font-size: 1rem;
+    margin-bottom: 0;
+    color: var(--es-on-surface-variant);
+}

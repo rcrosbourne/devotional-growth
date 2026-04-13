@@ -81,11 +81,11 @@ it('extracts discussion questions from Friday', function (): void {
 it('extracts scripture references from day sections', function (): void {
     $result = $this->parser->handle($this->html, 3);
 
-    // Sunday has "Read 1 John 2:15-17"
+    // Sunday has "Read 1 John 2:15-17" and inline references
     $sunday = $result['days'][1];
     expect($sunday['scripture_references'])->toBeArray();
     expect($sunday['scripture_references'])->not->toBeEmpty();
-    expect($sunday['scripture_references'][0])->toContain('1 John 2:15-17');
+    expect($sunday['scripture_references'])->toContain('1 John 2:15-17');
 });
 
 it('extracts multiple scripture references from a single day', function (): void {

@@ -396,7 +396,7 @@ final readonly class ParseQuarterlyLesson
     }
 
     /**
-     * Extract scripture references from "Read [reference]" patterns in aques elements.
+     * Extract scripture references from all elements in the day's content.
      *
      * @param  array<int, DOMElement>  $elements
      * @return array<int, string>
@@ -406,17 +406,18 @@ final readonly class ParseQuarterlyLesson
         $references = [];
 
         foreach ($elements as $el) {
-            $class = $el->getAttribute('class');
             $text = mb_trim($el->textContent);
 
-            if (str_contains($class, 'aques') || str_contains($class, 'read_para')) {
-                preg_match_all('/(?:Read\s+)?(\d?\s*[A-Za-z]+(?:\.\s*)?(?:\s+[A-Za-z]+)*\s+\d+:\d+(?:\s*[-–]\s*\d+)?)/i', $text, $matches);
+            if ($text === '') {
+                continue;
+            }
 
-                foreach ($matches[1] as $ref) {
-                    $ref = mb_trim($ref);
-                    if ($ref !== '' && ! in_array($ref, $references, true)) {
-                        $references[] = $ref;
-                    }
+            preg_match_all('/(?:Read\s+)?(\d?\s*[A-Za-z]+(?:\.\s*)?(?:\s+[A-Za-z]+)*\s+\d+:\d+(?:\s*[-–]\s*\d+)?)/i', $text, $matches);
+
+            foreach ($matches[1] as $ref) {
+                $ref = mb_trim($ref);
+                if ($ref !== '' && ! in_array($ref, $references, true)) {
+                    $references[] = $ref;
                 }
             }
         }
