@@ -8,6 +8,7 @@ use App\Jobs\GenerateLessonImageJob;
 use App\Models\Lesson;
 use App\Models\Quarterly;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Queue;
 use Laravel\Ai\Image;
 
@@ -57,6 +58,24 @@ it('generates varied prompts across multiple calls', function (): void {
     $prompts = collect(range(1, 20))->map(fn (): mixed => $method->invoke($action, $lesson));
 
     expect($prompts->unique()->count())->toBeGreaterThan(1);
+});
+
+it('skips image generation and logs warning when lesson has no quarterly', function (): void {
+    Log::spy();
+
+    $lesson = Lesson::factory()->create(['image_path' => null]);
+
+    // Simulate orphaned lesson by nullifying the loaded relationship
+    $lesson->setRelation('quarterly', null);
+
+    $action = new GenerateLessonImage();
+    $action->handle($lesson);
+
+    expect($lesson->fresh()->image_path)->toBeNull();
+
+    Log::shouldHaveReceived('warning')
+        ->withArgs(fn (string $message): bool => $message === 'GenerateLessonImage: Lesson has no quarterly')
+        ->once();
 });
 
 // GenerateLessonImageJob
