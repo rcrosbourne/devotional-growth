@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Actions;
 
 use App\Models\Theme;
+use App\Services\ImagePromptBuilder;
 use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Ai\Image;
@@ -12,6 +13,8 @@ use Laravel\Ai\Responses\ImageResponse;
 
 final readonly class GenerateThemeImage
 {
+    public function __construct(private ImagePromptBuilder $promptBuilder) {}
+
     public function handle(Theme $theme, bool $replace = false): Theme
     {
         if (! $replace && $theme->image_path !== null) {
@@ -42,15 +45,11 @@ final readonly class GenerateThemeImage
             ? mb_substr($theme->description, 0, 300)
             : $theme->name;
 
-        return sprintf('Create a beautiful, evocative cover image for a Christian devotional theme titled "%s". ', $theme->name)
+        $context = sprintf('For a Christian devotional theme cover titled "%s". ', $theme->name)
             .sprintf('Theme description: %s. ', $description)
-            .'The image should be atmospheric, warm, and contemplative — suitable as a cover for a spiritual journal or devotional series. '
-            .'Use rich tones, natural imagery, and a sense of peaceful reverence. '
-            .'When depicting people, primarily feature Black individuals of Caribbean descent, '
-            .'though occasionally vary to include other races and ethnicities. '
-            .'Incorporate Caribbean-relatable scenery such as tropical landscapes, coastal settings, '
-            .'lush greenery, warm sunlight, and island life where appropriate. '
-            .'Do not include any text or words in the image.';
+            .'The image should be atmospheric and contemplative — suitable as a cover for a spiritual journal or devotional series. ';
+
+        return $this->promptBuilder->build($context);
     }
 
     private function stripExtendedAttributes(string $path): void

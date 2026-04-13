@@ -66,14 +66,14 @@ it('uses theme name in prompt when description is null', function (): void {
     Image::assertGenerated(fn ($prompt): bool => str_contains((string) $prompt->prompt, 'Mercy'));
 });
 
-it('includes Caribbean cultural context in the prompt', function (): void {
+it('uses the shared ImagePromptBuilder for varied prompts', function (): void {
     $theme = Theme::factory()->create();
 
     $action = resolve(GenerateThemeImage::class);
     $action->handle($theme);
 
-    Image::assertGenerated(fn ($prompt): bool => str_contains((string) $prompt->prompt, 'Caribbean')
-        && str_contains((string) $prompt->prompt, 'Black individuals'));
+    Image::assertGenerated(fn ($prompt): bool => str_contains((string) $prompt->prompt, 'Do not include any text or words')
+        && str_contains((string) $prompt->prompt, 'spiritual reflection'));
 });
 
 it('strips extended attributes from generated images', function (): void {
