@@ -9,7 +9,7 @@ use stdClass;
 
 final readonly class ScriptureReferenceParser
 {
-    private const string PATTERN = '/^(\d?\s*[A-Za-z]+(?:\s+[A-Za-z]+)*)\s+(\d+):(\d+)(?:\s*-\s*(\d+))?$/';
+    private const string PATTERN = '/^(\d?\s*[A-Za-z]+\.?(?:\s+[A-Za-z]+\.?)*)\s+(\d+):(\d+)(?:\s*[-–]\s*(\d+))?$/u';
 
     public function parse(string $raw): stdClass
     {

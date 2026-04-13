@@ -412,7 +412,7 @@ final readonly class ParseQuarterlyLesson
                 continue;
             }
 
-            preg_match_all('/(?:Read\s+)?(\d?\s*[A-Za-z]+(?:\.\s*)?(?:\s+[A-Za-z]+)*\s+\d+:\d+(?:\s*[-–]\s*\d+)?)/i', $text, $matches);
+            preg_match_all('/(?:Read\s+)?(\d?\s*[A-Z][a-z]+\.?(?:\s+[A-Za-z]+\.?){0,2}\s+\d+:\d+(?:\s*[-–]\s*\d+)?)/u', $text, $matches);
 
             foreach ($matches[1] as $ref) {
                 $ref = mb_trim($ref);
