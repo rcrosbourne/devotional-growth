@@ -18,7 +18,7 @@ final class FetchScriptureRequest extends FormRequest
             'chapter' => ['required', 'integer', 'min:1'],
             'verse_start' => ['required', 'integer', 'min:1'],
             'verse_end' => ['nullable', 'integer', 'min:1'],
-            'bible_version' => ['nullable', 'string', 'in:KJV,NIV,ESV,NKJV,NLT,ASV,WEB'],
+            'bible_version' => ['nullable', 'string', 'in:KJV,NKJV,NIV,NLT,ASV,WEB,BBE,DARBY,HEBREW'],
         ];
     }
 }

@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read int $created_by
  * @property-read string $name
  * @property-read string|null $description
+ * @property-read string|null $image_path
  * @property-read ContentStatus $status
  * @property-read CarbonInterface $created_at
  * @property-read CarbonInterface $updated_at
@@ -64,6 +65,7 @@ final class Theme extends Model
             'created_by' => 'integer',
             'name' => 'string',
             'description' => 'string',
+            'image_path' => 'string',
             'status' => ContentStatus::class,
             'created_at' => 'datetime',
             'updated_at' => 'datetime',

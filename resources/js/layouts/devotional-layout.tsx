@@ -4,10 +4,12 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
 import { logout } from '@/routes';
 import { create as aiContentCreate } from '@/routes/admin/ai-content';
+import { index as adminSabbathSchoolIndex } from '@/routes/admin/sabbath-school';
 import { index as adminThemesIndex } from '@/routes/admin/themes';
 import { index as bibleStudyIndex } from '@/routes/bible-study';
 import { index as bookmarksIndex } from '@/routes/bookmarks';
 import { index as notificationsIndex } from '@/routes/notifications';
+import { index as sabbathSchoolIndex } from '@/routes/sabbath-school';
 import { index as settingsIndex } from '@/routes/settings';
 import { index as themesIndex } from '@/routes/themes';
 import { edit as settingsEdit } from '@/routes/user-profile';
@@ -52,6 +54,11 @@ const sidebarNavItems: SidebarNavItem[] = [
         icon: <Palette className="size-4" />,
     },
     {
+        title: 'Sabbath School',
+        href: sabbathSchoolIndex.url(),
+        icon: <BookOpen className="size-4" />,
+    },
+    {
         title: 'Bible Study',
         href: bibleStudyIndex.url(),
         icon: <GraduationCap className="size-4" />,
@@ -79,19 +86,25 @@ const adminNavItems: SidebarNavItem[] = [
         href: aiContentCreate.url(),
         icon: <Sparkles className="size-4" />,
     },
+    {
+        title: 'Sabbath School',
+        href: adminSabbathSchoolIndex.url(),
+        icon: <BookOpen className="size-4" />,
+    },
 ];
 
 const topTabs: TopTab[] = [
     { title: 'DEVOTIONS', href: themesIndex.url() },
+    { title: 'SABBATH SCHOOL', href: sabbathSchoolIndex.url() },
     { title: 'BIBLE STUDY', href: bibleStudyIndex.url() },
     { title: 'BOOKMARKS', href: bookmarksIndex.url() },
 ];
 
 const mobileNavItems = [
-    { title: 'Themes', href: themesIndex.url(), icon: BookOpen },
+    { title: 'Themes', href: themesIndex.url(), icon: Palette },
+    { title: 'Sabbath School', href: sabbathSchoolIndex.url(), icon: BookOpen },
     { title: 'Study', href: bibleStudyIndex.url(), icon: GraduationCap },
     { title: 'Bookmarks', href: bookmarksIndex.url(), icon: Bookmark },
-    { title: 'Settings', href: settingsIndex.url(), icon: Settings },
 ];
 
 export default function DevotionalLayout({ children }: DevotionalLayoutProps) {
@@ -170,7 +183,7 @@ function DesktopSidebar({
     const isAdmin = Boolean(user?.is_admin);
 
     return (
-        <aside className="flex w-60 shrink-0 flex-col bg-sidebar">
+        <aside className="sticky top-0 flex h-screen w-60 shrink-0 flex-col bg-sidebar">
             {/* Branding */}
             <div className="px-5 pt-6 pb-4">
                 <Link href={themesIndex.url()} className="block">

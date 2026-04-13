@@ -351,6 +351,45 @@ it('denies non-admin from publishing an entry', function (): void {
     $response->assertForbidden();
 });
 
+// Unpublish
+
+it('unpublishes a published entry', function (): void {
+    $admin = User::factory()->admin()->create();
+    $theme = Theme::factory()->published()->create(['created_by' => $admin->id]);
+    $entry = DevotionalEntry::factory()->published()->for($theme)->create();
+    DevotionalEntry::factory()->published()->for($theme)->create();
+
+    $response = $this->actingAs($admin)
+        ->put(route('admin.themes.entries.unpublish', [$theme, $entry]));
+
+    $response->assertRedirectToRoute('admin.themes.entries.index', $theme);
+
+    expect($entry->refresh()->status)->toBe(ContentStatus::Draft);
+});
+
+it('unpublishes the theme when the last published entry is unpublished', function (): void {
+    $admin = User::factory()->admin()->create();
+    $theme = Theme::factory()->published()->create(['created_by' => $admin->id]);
+    $entry = DevotionalEntry::factory()->published()->for($theme)->create();
+
+    $this->actingAs($admin)
+        ->put(route('admin.themes.entries.unpublish', [$theme, $entry]));
+
+    expect($entry->refresh()->status)->toBe(ContentStatus::Draft)
+        ->and($theme->refresh()->status)->toBe(ContentStatus::Draft);
+});
+
+it('denies non-admin from unpublishing an entry', function (): void {
+    $user = User::factory()->create();
+    $theme = Theme::factory()->published()->create();
+    $entry = DevotionalEntry::factory()->published()->for($theme)->create();
+
+    $response = $this->actingAs($user)
+        ->put(route('admin.themes.entries.unpublish', [$theme, $entry]));
+
+    $response->assertForbidden();
+});
+
 // Reorder
 
 it('reorders entries within a theme', function (): void {

@@ -118,6 +118,19 @@ it('calls the image ai provider', function (): void {
     Image::assertGenerated(fn ($prompt): bool => str_contains((string) $prompt->prompt, 'Forgiveness'));
 });
 
+it('includes Caribbean cultural context in the prompt', function (): void {
+    $entry = DevotionalEntry::factory()
+        ->for(Theme::factory())
+        ->create();
+
+    $action = resolve(GenerateDevotionalImage::class);
+
+    $result = $action->handle($entry);
+
+    expect($result->prompt)->toContain('Caribbean')
+        ->and($result->prompt)->toContain('Black individuals');
+});
+
 it('truncates long body text in the prompt', function (): void {
     $longBody = str_repeat('A word of faith. ', 100);
     $entry = DevotionalEntry::factory()

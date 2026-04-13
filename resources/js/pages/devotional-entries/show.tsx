@@ -1,4 +1,5 @@
 import { ConfirmationDialog } from '@/components/devotional/confirmation-dialog';
+import { ScriptureBody } from '@/components/devotional/scripture-body';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
     Select,
@@ -27,6 +28,7 @@ import {
     update as updateObservation,
 } from '@/routes/observations';
 import { show as showScripture } from '@/routes/scripture';
+import { show as showTheme } from '@/routes/themes';
 import {
     complete as completeEntry,
     show as showEntry,
@@ -368,6 +370,15 @@ export default function DevotionalEntriesShow({
     const [generatingImage, setGeneratingImage] = useState(false);
     const [confirmRegenerate, setConfirmRegenerate] = useState(false);
 
+    const [imageFailed, setImageFailed] = useState(false);
+    const [imageLoaded, setImageLoaded] = useState(false);
+    const imagePath = entry.generated_image?.path ?? null;
+
+    useEffect(() => {
+        setImageFailed(false);
+        setImageLoaded(false);
+    }, [imagePath]);
+
     const [bibleVersion, setBibleVersion] = useState(getPreferredVersion);
     const [passageTexts, setPassageTexts] = useState<Record<number, string>>(
         {},
@@ -490,7 +501,7 @@ export default function DevotionalEntriesShow({
         setConfirmRegenerate(false);
         router.post(
             generateImage.url(entry.id),
-            {},
+            { replace: entry.generated_image ? true : false },
             {
                 preserveScroll: true,
                 onFinish: () => setGeneratingImage(false),
@@ -505,6 +516,14 @@ export default function DevotionalEntriesShow({
             <section className="mx-auto max-w-4xl px-6 pt-8 pb-24 md:px-8 md:pt-16">
                 {/* Header */}
                 <div className="mb-16">
+                    <Link
+                        href={showTheme.url(theme.id)}
+                        prefetch
+                        className="group mb-5 inline-flex items-center gap-2 text-[10px] font-medium tracking-[0.2em] text-on-surface-variant/50 uppercase transition-colors hover:text-moss"
+                    >
+                        <ArrowLeft className="size-3 transition-transform duration-300 group-hover:-translate-x-0.5" />
+                        {theme.name}
+                    </Link>
                     <span className="mb-3 block text-[10px] font-bold tracking-[0.3em] text-moss uppercase">
                         Contemplation {entryPosition}
                     </span>
@@ -572,17 +591,23 @@ export default function DevotionalEntriesShow({
                 </div>
 
                 {/* Hero Image */}
-                {entry.generated_image && (
-                    <div className="relative -mx-6 mb-16 overflow-hidden rounded-3xl md:-mx-8">
+                {entry.generated_image && !imageFailed && (
+                    <div
+                        className={cn(
+                            'relative -mx-6 mb-16 overflow-hidden rounded-3xl transition-all duration-700 md:-mx-8',
+                            imageLoaded
+                                ? 'translate-y-0 opacity-100'
+                                : 'translate-y-4 opacity-0',
+                        )}
+                    >
                         <img
                             src={storageUrl(entry.generated_image.path)}
                             alt={`Visual for ${entry.title}`}
-                            className="h-auto max-h-[520px] w-full object-cover"
+                            onLoad={() => setImageLoaded(true)}
+                            onError={() => setImageFailed(true)}
+                            className="h-auto max-h-[520px] w-full object-cover grayscale transition-[filter] duration-700 hover:grayscale-0"
                         />
                         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
-                        <p className="absolute right-4 bottom-4 text-[9px] tracking-[0.2em] text-on-surface/40 uppercase italic">
-                            AI-Generated Visual Study
-                        </p>
                     </div>
                 )}
 
@@ -627,26 +652,21 @@ export default function DevotionalEntriesShow({
                     </div>
                 )}
 
-                {/* Additional Scripture References */}
-                {entry.scripture_references.length > 1 && (
-                    <div className="mb-10 flex flex-wrap gap-2">
-                        {entry.scripture_references.slice(1).map((ref) => (
-                            <span
-                                key={ref.id}
-                                className="rounded-full bg-surface-container-high px-3 py-1 text-[11px] font-medium text-on-surface-variant"
-                            >
-                                {ref.raw_reference}
-                            </span>
-                        ))}
-                    </div>
-                )}
-
-                {/* Main Body Content */}
-                <div className="mx-auto mb-20 max-w-2xl md:mx-0 md:mr-auto md:ml-auto">
-                    <div
-                        className="prose-editorial font-serif text-lg leading-relaxed text-on-surface/90 md:text-xl [&>p]:mb-6"
-                        dangerouslySetInnerHTML={{ __html: entry.body }}
-                    />
+                {/* Additional Scripture References + Body */}
+                <div className="mx-auto mb-20 max-w-2xl">
+                    {entry.scripture_references.length > 1 && (
+                        <div className="mb-10 flex flex-wrap justify-center gap-2">
+                            {entry.scripture_references.slice(1).map((ref) => (
+                                <span
+                                    key={ref.id}
+                                    className="rounded-full bg-surface-container-high px-3 py-1 text-[11px] font-medium text-on-surface-variant"
+                                >
+                                    {ref.raw_reference}
+                                </span>
+                            ))}
+                        </div>
+                    )}
+                    <ScriptureBody body={entry.body} />
                 </div>
 
                 {/* Reflection Prompts */}

@@ -18,9 +18,8 @@ import {
     SelectValue,
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import AppLayout from '@/layouts/app-layout';
+import DevotionalLayout from '@/layouts/devotional-layout';
 import { save as aiSave, store as aiStore } from '@/routes/admin/ai-content';
-import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
 import {
     BookOpen,
@@ -31,11 +30,6 @@ import {
     Sparkles,
 } from 'lucide-react';
 import { useState } from 'react';
-
-const breadcrumbs: BreadcrumbItem[] = [
-    { title: 'AI Content', href: '#' },
-    { title: 'Generate', href: '#' },
-];
 
 interface GeneratedContent {
     title?: string;
@@ -229,7 +223,7 @@ export default function AiContentGenerate({ themes }: Props) {
         content && result?.status === 'completed' && !saved && !generating;
 
     return (
-        <AppLayout breadcrumbs={breadcrumbs}>
+        <DevotionalLayout>
             <Head title="AI Content Assistant" />
 
             <div className="px-6 py-6 md:px-8">
@@ -619,6 +613,6 @@ export default function AiContentGenerate({ themes }: Props) {
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
-        </AppLayout>
+        </DevotionalLayout>
     );
 }

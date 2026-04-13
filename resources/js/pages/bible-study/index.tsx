@@ -1,3 +1,4 @@
+import { ChapterReaderModal } from '@/components/devotional/chapter-reader-modal';
 import { ProgressBar } from '@/components/devotional/progress-bar';
 import DevotionalLayout from '@/layouts/devotional-layout';
 import { cn } from '@/lib/utils';
@@ -42,22 +43,32 @@ const DAILY_VERSES = [
     {
         text: 'The Lord is my shepherd; I shall not want. He maketh me to lie down in green pastures: he leadeth me beside the still waters.',
         reference: 'Psalm 23:1\u20132',
+        book: 'Psalm',
+        chapter: 23,
     },
     {
         text: 'Trust in the Lord with all thine heart; and lean not unto thine own understanding.',
         reference: 'Proverbs 3:5',
+        book: 'Proverbs',
+        chapter: 3,
     },
     {
         text: 'For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.',
         reference: 'John 3:16',
+        book: 'John',
+        chapter: 3,
     },
     {
         text: 'I can do all things through Christ which strengtheneth me.',
         reference: 'Philippians 4:13',
+        book: 'Philippians',
+        chapter: 4,
     },
     {
         text: 'And we know that all things work together for good to them that love God, to them who are the called according to his purpose.',
         reference: 'Romans 8:28',
+        book: 'Romans',
+        chapter: 8,
     },
 ];
 
@@ -223,6 +234,7 @@ export default function BibleStudyIndex({
     progressByPlan,
 }: Props) {
     const verse = getDailyVerse();
+    const [chapterOpen, setChapterOpen] = useState(false);
     const activePlans = plans.filter((p) => activePlanIds.includes(p.id));
     const inactivePlans = plans.filter((p) => !activePlanIds.includes(p.id));
 
@@ -249,6 +261,7 @@ export default function BibleStudyIndex({
                             <div className="mt-8 flex gap-3">
                                 <button
                                     type="button"
+                                    onClick={() => setChapterOpen(true)}
                                     className="inline-flex items-center gap-2 rounded-lg bg-moss px-6 py-3 text-xs font-bold tracking-widest text-moss-foreground uppercase transition-opacity hover:opacity-90"
                                 >
                                     <BookOpen className="size-4" />
@@ -416,6 +429,13 @@ export default function BibleStudyIndex({
                     </section>
                 </div>
             </div>
+
+            <ChapterReaderModal
+                open={chapterOpen}
+                onOpenChange={setChapterOpen}
+                book={verse.book}
+                chapter={verse.chapter}
+            />
         </DevotionalLayout>
     );
 }

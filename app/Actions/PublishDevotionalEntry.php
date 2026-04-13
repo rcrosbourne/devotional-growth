@@ -6,15 +6,26 @@ namespace App\Actions;
 
 use App\Enums\ContentStatus;
 use App\Models\DevotionalEntry;
+use Illuminate\Support\Facades\DB;
 
 final readonly class PublishDevotionalEntry
 {
     public function handle(DevotionalEntry $entry): DevotionalEntry
     {
-        $entry->update([
-            'status' => ContentStatus::Published,
-        ]);
+        return DB::transaction(function () use ($entry): DevotionalEntry {
+            $entry->update([
+                'status' => ContentStatus::Published,
+            ]);
 
-        return $entry->refresh();
+            $theme = $entry->theme;
+
+            if ($theme !== null && $theme->status !== ContentStatus::Published) {
+                $theme->update([
+                    'status' => ContentStatus::Published,
+                ]);
+            }
+
+            return $entry->refresh();
+        });
     }
 }

@@ -40,7 +40,7 @@ test('factory with verse range sets verse end', function (): void {
 });
 
 test('factory with version overrides bible version', function (): void {
-    $cache = ScriptureCache::factory()->withVersion('NIV')->create();
+    $cache = ScriptureCache::factory()->withVersion('ASV')->create();
 
-    expect($cache->bible_version)->toBe('NIV');
+    expect($cache->bible_version)->toBe('ASV');
 });
