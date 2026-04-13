@@ -46,6 +46,10 @@ final readonly class GenerateThemeImage
             .sprintf('Theme description: %s. ', $description)
             .'The image should be atmospheric, warm, and contemplative — suitable as a cover for a spiritual journal or devotional series. '
             .'Use rich tones, natural imagery, and a sense of peaceful reverence. '
+            .'When depicting people, primarily feature Black individuals of Caribbean descent, '
+            .'though occasionally vary to include other races and ethnicities. '
+            .'Incorporate Caribbean-relatable scenery such as tropical landscapes, coastal settings, '
+            .'lush greenery, warm sunlight, and island life where appropriate. '
             .'Do not include any text or words in the image.';
     }
 
