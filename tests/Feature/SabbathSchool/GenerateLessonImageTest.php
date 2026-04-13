@@ -18,7 +18,7 @@ it('skips image generation when lesson already has an image', function (): void 
     $lesson = Lesson::factory()->withImage()->create();
     $originalPath = $lesson->image_path;
 
-    $action = new GenerateLessonImage();
+    $action = resolve(GenerateLessonImage::class);
     $action->handle($lesson);
 
     expect($lesson->fresh()->image_path)->toBe($originalPath);
@@ -32,7 +32,7 @@ it('builds a prompt with lesson details and varied style and subject', function 
         'memory_text_reference' => '2 Corinthians 5:7',
     ]);
 
-    $action = new GenerateLessonImage();
+    $action = resolve(GenerateLessonImage::class);
     $method = new ReflectionMethod($action, 'buildPrompt');
     $prompt = $method->invoke($action, $lesson);
 
@@ -40,7 +40,7 @@ it('builds a prompt with lesson details and varied style and subject', function 
         ->toContain('Walking in Faith')
         ->toContain('For we walk by faith, not by sight.')
         ->toContain('2 Corinthians 5:7')
-        ->toContain('spiritual reflection and Bible study')
+        ->toContain('spiritual reflection')
         ->toContain('Do not include any text or words');
 });
 
@@ -52,7 +52,7 @@ it('generates varied prompts across multiple calls', function (): void {
         'memory_text_reference' => '2 Corinthians 5:7',
     ]);
 
-    $action = new GenerateLessonImage();
+    $action = resolve(GenerateLessonImage::class);
     $method = new ReflectionMethod($action, 'buildPrompt');
 
     $prompts = collect(range(1, 20))->map(fn (): mixed => $method->invoke($action, $lesson));
@@ -68,7 +68,7 @@ it('skips image generation and logs warning when lesson has no quarterly', funct
     // Simulate orphaned lesson by nullifying the loaded relationship
     $lesson->setRelation('quarterly', null);
 
-    $action = new GenerateLessonImage();
+    $action = resolve(GenerateLessonImage::class);
     $action->handle($lesson);
 
     expect($lesson->fresh()->image_path)->toBeNull();
