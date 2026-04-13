@@ -23,7 +23,7 @@ it('skips image generation when lesson already has an image', function (): void 
     expect($lesson->fresh()->image_path)->toBe($originalPath);
 });
 
-it('builds a prompt with Caribbean representation and scenery', function (): void {
+it('builds a prompt with lesson details and varied style and subject', function (): void {
     $lesson = Lesson::factory()->create([
         'image_path' => null,
         'title' => 'Walking in Faith',
@@ -39,10 +39,24 @@ it('builds a prompt with Caribbean representation and scenery', function (): voi
         ->toContain('Walking in Faith')
         ->toContain('For we walk by faith, not by sight.')
         ->toContain('2 Corinthians 5:7')
-        ->toContain('Caribbean descent')
-        ->toContain('Caribbean-relatable scenery')
-        ->toContain('tropical landscapes')
+        ->toContain('spiritual reflection and Bible study')
         ->toContain('Do not include any text or words');
+});
+
+it('generates varied prompts across multiple calls', function (): void {
+    $lesson = Lesson::factory()->create([
+        'image_path' => null,
+        'title' => 'Walking in Faith',
+        'memory_text' => 'For we walk by faith, not by sight.',
+        'memory_text_reference' => '2 Corinthians 5:7',
+    ]);
+
+    $action = new GenerateLessonImage();
+    $method = new ReflectionMethod($action, 'buildPrompt');
+
+    $prompts = collect(range(1, 20))->map(fn (): mixed => $method->invoke($action, $lesson));
+
+    expect($prompts->unique()->count())->toBeGreaterThan(1);
 });
 
 // GenerateLessonImageJob
