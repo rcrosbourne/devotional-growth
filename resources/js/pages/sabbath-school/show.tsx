@@ -3,6 +3,7 @@ import { index } from '@/routes/sabbath-school';
 import { show as lessonShow } from '@/routes/sabbath-school/lessons';
 import { Head, Link } from '@inertiajs/react';
 import { ArrowLeft, BookOpen, ChevronRight } from 'lucide-react';
+import { useState } from 'react';
 
 interface Lesson {
     id: number;
@@ -31,9 +32,14 @@ interface Props {
     lessonProgress: Record<number, number>;
 }
 
+function parseDate(value: string): Date {
+    const dateOnly = value.split('T')[0];
+    return new Date(dateOnly + 'T00:00:00');
+}
+
 function formatDateRange(start: string, end: string) {
-    const startDate = new Date(start + 'T00:00:00');
-    const endDate = new Date(end + 'T00:00:00');
+    const startDate = parseDate(start);
+    const endDate = parseDate(end);
     const startStr = startDate.toLocaleDateString('en-US', {
         month: 'short',
         day: 'numeric',
@@ -47,9 +53,42 @@ function formatDateRange(start: string, end: string) {
 
 function isCurrentLesson(start: string, end: string) {
     const now = new Date();
-    const startDate = new Date(start + 'T00:00:00');
-    const endDate = new Date(end + 'T23:59:59');
+    const startDate = parseDate(start);
+    const endDate = new Date(end.split('T')[0] + 'T23:59:59');
     return now >= startDate && now <= endDate;
+}
+
+function LessonThumbnail({
+    lesson,
+    isCurrent,
+}: {
+    lesson: Lesson;
+    isCurrent: boolean;
+}) {
+    const [imgFailed, setImgFailed] = useState(false);
+
+    if (lesson.image_path && !imgFailed) {
+        return (
+            <img
+                src={`/storage/${lesson.image_path}`}
+                alt={lesson.title}
+                onError={() => setImgFailed(true)}
+                className="size-12 shrink-0 rounded-lg object-cover"
+            />
+        );
+    }
+
+    return (
+        <div
+            className={`flex size-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold ${
+                isCurrent
+                    ? 'bg-moss text-moss-foreground'
+                    : 'bg-surface-container-high text-on-surface-variant'
+            }`}
+        >
+            {lesson.lesson_number}
+        </div>
+    );
 }
 
 export default function QuarterlyShow({ quarterly, lessonProgress }: Props) {
@@ -101,23 +140,10 @@ export default function QuarterlyShow({ quarterly, lessonProgress }: Props) {
                             >
                                 <div className="flex items-center gap-4 p-4">
                                     {/* Lesson image or number */}
-                                    {lesson.image_path ? (
-                                        <img
-                                            src={`/storage/${lesson.image_path}`}
-                                            alt={lesson.title}
-                                            className="size-12 shrink-0 rounded-lg object-cover"
-                                        />
-                                    ) : (
-                                        <div
-                                            className={`flex size-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold ${
-                                                isCurrent
-                                                    ? 'bg-moss text-moss-foreground'
-                                                    : 'bg-surface-container-high text-on-surface-variant'
-                                            }`}
-                                        >
-                                            {lesson.lesson_number}
-                                        </div>
-                                    )}
+                                    <LessonThumbnail
+                                        lesson={lesson}
+                                        isCurrent={isCurrent}
+                                    />
 
                                     {/* Content */}
                                     <div className="min-w-0 flex-1">

@@ -19,7 +19,7 @@ import {
    Types
    ───────────────────────────────────────────── */
 
-interface ParsedReference {
+export interface ParsedReference {
     book: string;
     chapter: number;
     verseStart: number;
@@ -37,9 +37,9 @@ interface ScriptureBodyProps {
    Reference Parsing
    ───────────────────────────────────────────── */
 
-const BOOK_PATTERN =
+export const BOOK_PATTERN =
     '(?:(?:[123]\\s)?[A-Z][a-zA-Z]+(?:\\s(?:of\\s)?[A-Z][a-zA-Z]+)*)';
-const REF_REGEX = new RegExp(
+export const REF_REGEX = new RegExp(
     `\\(?\\s*(${BOOK_PATTERN})\\s+(\\d+):(\\d+)(?:[-–](\\d+))?\\s*\\)?`,
     'g',
 );
@@ -47,7 +47,7 @@ const REF_REGEX = new RegExp(
 /**
  * Filter out false positives — the book name must be a known Bible book.
  */
-const BIBLE_BOOKS = new Set([
+export const BIBLE_BOOKS = new Set([
     'Genesis',
     'Exodus',
     'Leviticus',
@@ -117,7 +117,7 @@ const BIBLE_BOOKS = new Set([
     'Revelation',
 ]);
 
-function parseReference(match: RegExpExecArray): ParsedReference | null {
+export function parseReference(match: RegExpExecArray): ParsedReference | null {
     if (!BIBLE_BOOKS.has(match[1])) {
         return null;
     }
@@ -168,7 +168,7 @@ function parseBodyText(text: string): TextSegment[] {
    Scripture Popover
    ───────────────────────────────────────────── */
 
-function ScripturePopover({
+export function ScripturePopover({
     reference,
     onClose,
     anchorRect,

@@ -9,6 +9,7 @@ import {
     ChevronRight,
     Trophy,
 } from 'lucide-react';
+import { useState } from 'react';
 
 interface LessonDay {
     id: number;
@@ -43,9 +44,14 @@ interface Props {
     completedDayIds: number[];
 }
 
+function parseDate(value: string): Date {
+    const dateOnly = value.split('T')[0];
+    return new Date(dateOnly + 'T00:00:00');
+}
+
 function formatDateRange(start: string, end: string) {
-    const startDate = new Date(start + 'T00:00:00');
-    const endDate = new Date(end + 'T00:00:00');
+    const startDate = parseDate(start);
+    const endDate = parseDate(end);
     const startStr = startDate.toLocaleDateString('en-US', {
         month: 'short',
         day: 'numeric',
@@ -64,6 +70,7 @@ export default function LessonView({
     nextLesson,
     completedDayIds,
 }: Props) {
+    const [imageFailed, setImageFailed] = useState(false);
     const completedCount = completedDayIds.length;
     const totalDays = lesson.days.length;
     const isLessonComplete = totalDays > 0 && completedCount === totalDays;
@@ -93,11 +100,12 @@ export default function LessonView({
                 </div>
 
                 {/* Hero Image */}
-                {lesson.image_path && (
+                {lesson.image_path && !imageFailed && (
                     <div className="mt-6 overflow-hidden rounded-xl">
                         <img
                             src={`/storage/${lesson.image_path}`}
                             alt={lesson.title}
+                            onError={() => setImageFailed(true)}
                             className="aspect-[2/1] w-full object-cover"
                         />
                     </div>

@@ -64,6 +64,10 @@ final readonly class GenerateLessonImage
             .sprintf('Memory verse: "%s" (%s). ', $lesson->memory_text, $lesson->memory_text_reference)
             .'The image should be warm, peaceful, and suitable for spiritual reflection and Bible study. '
             .'Use soft, natural lighting and biblical themes. '
+            .'When depicting people, primarily feature Black individuals of Caribbean descent, '
+            .'though occasionally vary to include other races and ethnicities. '
+            .'Incorporate Caribbean-relatable scenery such as tropical landscapes, coastal settings, '
+            .'lush greenery, warm sunlight, and island life where appropriate. '
             .'Do not include any text or words in the image.';
     }
 }

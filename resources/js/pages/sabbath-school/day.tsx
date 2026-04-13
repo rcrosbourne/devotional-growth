@@ -1,3 +1,8 @@
+import {
+    extractReferencesFromHtml,
+    HtmlScriptureBody,
+} from '@/components/devotional/html-scripture-body';
+import type { ParsedReference } from '@/components/devotional/scripture-body';
 import { Button } from '@/components/ui/button';
 import DevotionalLayout from '@/layouts/devotional-layout';
 import { complete, uncomplete } from '@/routes/sabbath-school/days';
@@ -25,15 +30,6 @@ import { useState } from 'react';
 
 const BIBLE_VERSIONS = ['KJV', 'NKJV', 'ESV', 'NLT', 'NASB', 'NIV'];
 
-interface ScriptureReference {
-    id: number;
-    book: string;
-    chapter: number;
-    verse_start: number;
-    verse_end: number | null;
-    raw_reference: string;
-}
-
 interface Observation {
     id: number;
     user_id: number;
@@ -50,7 +46,6 @@ interface LessonDay {
     title: string;
     body: string;
     discussion_questions: string[] | null;
-    scripture_references: ScriptureReference[];
     observations: Observation[];
 }
 
@@ -58,6 +53,7 @@ interface Lesson {
     id: number;
     lesson_number: number;
     title: string;
+    date_start: string;
 }
 
 interface Quarterly {
@@ -90,8 +86,19 @@ function buildDayUrl(nav: DayNav) {
     return `/sabbath-school/${nav.quarterly_id}/lessons/${nav.lesson_id}/days/${nav.lesson_day_id}`;
 }
 
-function buildScriptureUrl(ref: ScriptureReference, version: string) {
-    return `/scripture?book=${encodeURIComponent(ref.book)}&chapter=${ref.chapter}&verse_start=${ref.verse_start}${ref.verse_end ? `&verse_end=${ref.verse_end}` : ''}&bible_version=${version}`;
+function buildScriptureUrl(ref: ParsedReference, version: string) {
+    return `/scripture?book=${encodeURIComponent(ref.book)}&chapter=${ref.chapter}&verse_start=${ref.verseStart}${ref.verseEnd ? `&verse_end=${ref.verseEnd}` : ''}&bible_version=${version}`;
+}
+
+function formatDayDate(lessonStart: string, dayPosition: number): string {
+    const dateOnly = lessonStart.split('T')[0];
+    const date = new Date(dateOnly + 'T00:00:00');
+    date.setDate(date.getDate() + dayPosition);
+    return date.toLocaleDateString('en-US', {
+        weekday: 'long',
+        month: 'long',
+        day: 'numeric',
+    });
 }
 
 function ObservationsSection({
@@ -288,15 +295,21 @@ export default function DayView({
     >({});
     const [loadingRef, setLoadingRef] = useState<string | null>(null);
 
-    async function fetchScripture(ref: ScriptureReference, version: string) {
-        const cacheKey = `${ref.id}-${version}`;
+    const bodyRefs = extractReferencesFromHtml(lessonDay.body);
+
+    async function fetchScripture(
+        ref: ParsedReference,
+        index: number,
+        version: string,
+    ) {
+        const cacheKey = `${index}-${version}`;
         if (scriptureTexts[cacheKey]) {
-            setExpandedRef(expandedRef === ref.id ? null : ref.id);
+            setExpandedRef(expandedRef === index ? null : index);
             return;
         }
 
         setLoadingRef(cacheKey);
-        setExpandedRef(ref.id);
+        setExpandedRef(index);
 
         try {
             const response = await fetch(buildScriptureUrl(ref, version));
@@ -318,11 +331,9 @@ export default function DayView({
     function handleVersionChange(version: string) {
         setSelectedVersion(version);
         if (expandedRef !== null) {
-            const ref = lessonDay.scripture_references.find(
-                (r) => r.id === expandedRef,
-            );
+            const ref = bodyRefs[expandedRef];
             if (ref) {
-                fetchScripture(ref, version);
+                fetchScripture(ref, expandedRef, version);
             }
         }
     }
@@ -391,12 +402,18 @@ export default function DayView({
                             ? lessonDay.title
                             : `${lessonDay.day_name} Study`}
                     </h1>
+                    <p className="mt-1.5 text-sm text-on-surface-variant">
+                        {formatDayDate(
+                            lesson.date_start,
+                            lessonDay.day_position,
+                        )}
+                    </p>
                 </div>
 
                 {/* Body Content */}
-                <div
-                    className="prose prose-sm prose-headings:font-serif prose-headings:text-on-surface prose-p:leading-relaxed prose-a:text-moss prose-blockquote:border-moss/30 prose-blockquote:text-on-surface-variant mt-6 max-w-none text-on-surface"
-                    dangerouslySetInnerHTML={{ __html: lessonDay.body }}
+                <HtmlScriptureBody
+                    html={lessonDay.body}
+                    className="lesson-body mt-8"
                 />
 
                 {/* Discussion Questions (Friday) */}
@@ -422,7 +439,7 @@ export default function DayView({
                     )}
 
                 {/* Scripture References */}
-                {lessonDay.scripture_references.length > 0 && (
+                {bodyRefs.length > 0 && (
                     <div className="mt-8">
                         <div className="flex items-center justify-between">
                             <h2 className="text-xs font-medium tracking-[0.15em] text-on-surface-variant uppercase">
@@ -443,15 +460,16 @@ export default function DayView({
                             </select>
                         </div>
                         <div className="mt-3 space-y-2">
-                            {lessonDay.scripture_references.map((ref) => {
-                                const cacheKey = `${ref.id}-${selectedVersion}`;
-                                const isExpanded = expandedRef === ref.id;
+                            {bodyRefs.map((ref, index) => {
+                                const cacheKey = `${index}-${selectedVersion}`;
+                                const isExpanded = expandedRef === index;
                                 const isLoading = loadingRef === cacheKey;
                                 const text = scriptureTexts[cacheKey];
+                                const label = `${ref.book} ${ref.chapter}:${ref.verseStart}${ref.verseEnd ? `\u2013${ref.verseEnd}` : ''}`;
 
                                 return (
                                     <div
-                                        key={ref.id}
+                                        key={label}
                                         className="overflow-hidden rounded-lg border border-border"
                                     >
                                         <button
@@ -459,6 +477,7 @@ export default function DayView({
                                             onClick={() =>
                                                 fetchScripture(
                                                     ref,
+                                                    index,
                                                     selectedVersion,
                                                 )
                                             }
@@ -466,7 +485,7 @@ export default function DayView({
                                         >
                                             <span className="flex items-center gap-2 text-sm font-medium text-on-surface">
                                                 <BookOpen className="size-3.5 text-moss" />
-                                                {ref.raw_reference}
+                                                {label}
                                             </span>
                                             <ChevronRight
                                                 className={`size-4 text-on-surface-variant/50 transition-transform ${isExpanded ? 'rotate-90' : ''}`}
