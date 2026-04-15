@@ -20,7 +20,7 @@ import {
     update as entriesUpdate,
 } from '@/routes/admin/themes/entries';
 import { generateImage } from '@/routes/entries';
-import { Head, Link, router, useForm } from '@inertiajs/react';
+import { Head, Link, router, useForm, usePoll } from '@inertiajs/react';
 import {
     ArrowLeft,
     BookOpen,
@@ -31,7 +31,7 @@ import {
     Trash2,
     X,
 } from 'lucide-react';
-import { type FormEventHandler, useRef, useState } from 'react';
+import { type FormEventHandler, useEffect, useRef, useState } from 'react';
 
 interface ScriptureRefItem {
     key: number;
@@ -82,8 +82,27 @@ export default function EditEntry({ theme, entry }: Props) {
     const [isDeleting, setIsDeleting] = useState(false);
     const [isPublishing, setIsPublishing] = useState(false);
     const [generatingImage, setGeneratingImage] = useState(false);
+    const [imageIdAtStart, setImageIdAtStart] = useState<number | null>(null);
     const [confirmRegenerate, setConfirmRegenerate] = useState(false);
     const [imageFailed, setImageFailed] = useState(false);
+
+    const { start: startPolling, stop: stopPolling } = usePoll(
+        3000,
+        { only: ['entry'] },
+        { autoStart: false },
+    );
+
+    useEffect(() => {
+        if (!generatingImage) {
+            return;
+        }
+
+        const currentImageId = entry.generated_image?.id ?? null;
+        if (currentImageId !== null && currentImageId !== imageIdAtStart) {
+            stopPolling();
+            setGeneratingImage(false);
+        }
+    }, [generatingImage, entry.generated_image?.id, imageIdAtStart]);
     const nextKeyRef = useRef(
         entry.scripture_references.length > 0
             ? entry.scripture_references.length
@@ -142,6 +161,7 @@ export default function EditEntry({ theme, entry }: Props) {
 
     function doGenerateImage() {
         setGeneratingImage(true);
+        setImageIdAtStart(entry.generated_image?.id ?? null);
         setConfirmRegenerate(false);
         setImageFailed(false);
         router.post(
@@ -149,7 +169,8 @@ export default function EditEntry({ theme, entry }: Props) {
             { replace: entry.generated_image ? true : false },
             {
                 preserveScroll: true,
-                onFinish: () => setGeneratingImage(false),
+                onSuccess: () => startPolling(),
+                onError: () => setGeneratingImage(false),
             },
         );
     }

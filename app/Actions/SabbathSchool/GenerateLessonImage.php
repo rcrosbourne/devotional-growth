@@ -10,15 +10,16 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Ai\Image;
+use RuntimeException;
 use Throwable;
 
 final readonly class GenerateLessonImage
 {
     public function __construct(private ImagePromptBuilder $promptBuilder) {}
 
-    public function handle(Lesson $lesson): void
+    public function handle(Lesson $lesson, bool $replace = false): void
     {
-        if ($lesson->image_path !== null) {
+        if (! $replace && $lesson->image_path !== null) {
             return;
         }
 
@@ -43,6 +44,8 @@ final readonly class GenerateLessonImage
                 ->timeout(180)
                 ->generate();
 
+            throw_if($response->count() === 0, RuntimeException::class, 'Image provider returned no images — prompt may have been flagged by content moderation.');
+
             $directory = sprintf('images/sabbath-school/%s', $lesson->quarterly->quarter_code);
 
             /** @var string $path */
@@ -50,6 +53,10 @@ final readonly class GenerateLessonImage
 
             $fullPath = Storage::disk('public')->path($path);
             Process::run(['xattr', '-c', $fullPath]);
+
+            if ($replace && $lesson->image_path !== null) {
+                Storage::disk('public')->delete($lesson->image_path);
+            }
 
             $lesson->update([
                 'image_path' => $path,
@@ -70,6 +77,6 @@ final readonly class GenerateLessonImage
         $context = sprintf('For a Sabbath School Bible study lesson titled "%s". ', $lesson->title)
             .sprintf('Memory verse: "%s" (%s). ', $lesson->memory_text, $lesson->memory_text_reference);
 
-        return $this->promptBuilder->build($context);
+        return $this->promptBuilder->build($context, $lesson->memory_text);
     }
 }

@@ -2,21 +2,20 @@
 
 declare(strict_types=1);
 
+use App\Jobs\GenerateDevotionalImageJob;
 use App\Models\DevotionalEntry;
 use App\Models\GeneratedImage;
 use App\Models\Theme;
 use App\Models\User;
-use Illuminate\Support\Facades\Storage;
-use Laravel\Ai\Image;
+use Illuminate\Support\Facades\Queue;
 
 beforeEach(function (): void {
-    Storage::fake('public');
-    Image::fake();
+    Queue::fake();
 });
 
 // Store
 
-it('generates an image for a devotional entry', function (): void {
+it('dispatches a job to generate an image for a devotional entry', function (): void {
     $user = User::factory()->create();
     $entry = DevotionalEntry::factory()->for(Theme::factory())->create();
 
@@ -25,63 +24,33 @@ it('generates an image for a devotional entry', function (): void {
 
     $response->assertRedirect();
 
-    expect(GeneratedImage::query()->count())->toBe(1);
+    Queue::assertPushed(GenerateDevotionalImageJob::class, fn (GenerateDevotionalImageJob $job): bool => $job->entry->id === $entry->id && $job->replace === false);
 });
 
-it('stores the image in the correct storage path', function (): void {
+it('dispatches a job with replace flag when replace is true', function (): void {
     $user = User::factory()->create();
     $entry = DevotionalEntry::factory()->for(Theme::factory())->create();
-
-    $this->actingAs($user)
-        ->post(route('entries.generate-image', $entry));
-
-    $image = GeneratedImage::query()->first();
-
-    expect($image->path)->toStartWith('images/devotionals/');
-});
-
-it('replaces an existing image when replace flag is true', function (): void {
-    $user = User::factory()->create();
-    $entry = DevotionalEntry::factory()->for(Theme::factory())->create();
-    GeneratedImage::factory()->for($entry)->create([
-        'path' => 'images/devotionals/old.png',
-    ]);
-    Storage::disk('public')->put('images/devotionals/old.png', 'old');
+    GeneratedImage::factory()->for($entry)->create();
 
     $response = $this->actingAs($user)
         ->post(route('entries.generate-image', $entry), ['replace' => true]);
 
     $response->assertRedirect();
 
-    expect(GeneratedImage::query()->count())->toBe(1);
-    Storage::disk('public')->assertMissing('images/devotionals/old.png');
+    Queue::assertPushed(GenerateDevotionalImageJob::class, fn (GenerateDevotionalImageJob $job): bool => $job->entry->id === $entry->id && $job->replace);
 });
 
-it('returns existing image without regenerating when replace is false', function (): void {
+it('returns existing image without dispatching job when replace is false', function (): void {
     $user = User::factory()->create();
     $entry = DevotionalEntry::factory()->for(Theme::factory())->create();
-    $existing = GeneratedImage::factory()->for($entry)->create();
+    GeneratedImage::factory()->for($entry)->create();
 
     $response = $this->actingAs($user)
         ->post(route('entries.generate-image', $entry), ['replace' => false]);
 
     $response->assertRedirect();
 
-    expect(GeneratedImage::query()->count())->toBe(1);
-    expect($existing->refresh()->id)->toBe($existing->id);
-});
-
-it('redirects back with error when image generation fails', function (): void {
-    Image::fake(fn () => throw new RuntimeException('Provider error'));
-
-    $user = User::factory()->create();
-    $entry = DevotionalEntry::factory()->for(Theme::factory())->create();
-
-    $response = $this->actingAs($user)
-        ->post(route('entries.generate-image', $entry));
-
-    $response->assertRedirect()
-        ->assertSessionHas('error', 'Image generation is currently unavailable. Please try again later.');
+    Queue::assertNotPushed(GenerateDevotionalImageJob::class);
 });
 
 // Authentication

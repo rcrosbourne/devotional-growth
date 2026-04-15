@@ -34,7 +34,7 @@ import {
     show as showEntry,
 } from '@/routes/themes/entries';
 import { type SharedData } from '@/types';
-import { Head, Link, router, usePage } from '@inertiajs/react';
+import { Head, Link, router, usePage, usePoll } from '@inertiajs/react';
 import {
     ArrowLeft,
     ArrowRight,
@@ -368,7 +368,26 @@ export default function DevotionalEntriesShow({
     const [completing, setCompleting] = useState(false);
     const [bookmarking, setBookmarking] = useState(false);
     const [generatingImage, setGeneratingImage] = useState(false);
+    const [imageIdAtStart, setImageIdAtStart] = useState<number | null>(null);
     const [confirmRegenerate, setConfirmRegenerate] = useState(false);
+
+    const { start: startPolling, stop: stopPolling } = usePoll(
+        3000,
+        { only: ['entry'] },
+        { autoStart: false },
+    );
+
+    useEffect(() => {
+        if (!generatingImage) {
+            return;
+        }
+
+        const currentImageId = entry.generated_image?.id ?? null;
+        if (currentImageId !== null && currentImageId !== imageIdAtStart) {
+            stopPolling();
+            setGeneratingImage(false);
+        }
+    }, [generatingImage, entry.generated_image?.id, imageIdAtStart]);
 
     const [imageFailed, setImageFailed] = useState(false);
     const [imageLoaded, setImageLoaded] = useState(false);
@@ -498,13 +517,15 @@ export default function DevotionalEntriesShow({
 
     function doGenerateImage() {
         setGeneratingImage(true);
+        setImageIdAtStart(entry.generated_image?.id ?? null);
         setConfirmRegenerate(false);
         router.post(
             generateImage.url(entry.id),
             { replace: entry.generated_image ? true : false },
             {
                 preserveScroll: true,
-                onFinish: () => setGeneratingImage(false),
+                onSuccess: () => startPolling(),
+                onError: () => setGeneratingImage(false),
             },
         );
     }
