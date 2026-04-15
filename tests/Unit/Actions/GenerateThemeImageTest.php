@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 use App\Actions\GenerateThemeImage;
 use App\Models\Theme;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Ai\Image;
+use Laravel\Ai\Responses\Data\Meta;
+use Laravel\Ai\Responses\Data\Usage;
+use Laravel\Ai\Responses\ImageResponse;
 
 beforeEach(function (): void {
     Storage::fake('public');
@@ -87,4 +91,19 @@ it('strips extended attributes from generated images', function (): void {
     Process::assertRan(fn ($process): bool => $process->command[0] === 'xattr'
         && $process->command[1] === '-c'
         && str_contains((string) $process->command[2], (string) $result->image_path));
+});
+
+it('throws a clear error when the image provider returns no images', function (): void {
+    Image::fake(fn (): ImageResponse => new ImageResponse(
+        new Collection([]),
+        new Usage,
+        new Meta('openai', 'gpt-image-1'),
+    ));
+
+    $theme = Theme::factory()->create();
+
+    $action = resolve(GenerateThemeImage::class);
+
+    expect(fn () => $action->handle($theme))
+        ->toThrow(RuntimeException::class, 'Image provider returned no images');
 });

@@ -5,11 +5,14 @@ declare(strict_types=1);
 use App\Actions\GenerateDevotionalImage;
 use App\Models\DevotionalEntry;
 use App\Models\GeneratedImage;
-use App\Models\ScriptureReference;
 use App\Models\Theme;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Ai\Image;
+use Laravel\Ai\Responses\Data\Meta;
+use Laravel\Ai\Responses\Data\Usage;
+use Laravel\Ai\Responses\ImageResponse;
 
 beforeEach(function (): void {
     Storage::fake('public');
@@ -19,7 +22,6 @@ beforeEach(function (): void {
 it('generates an image and creates a generated image record', function (): void {
     $entry = DevotionalEntry::factory()
         ->for(Theme::factory())
-        ->has(ScriptureReference::factory()->count(2))
         ->create(['title' => 'Walking in Faith', 'body' => 'Trust in the Lord with all your heart.']);
 
     $action = resolve(GenerateDevotionalImage::class);
@@ -46,19 +48,16 @@ it('constructs a prompt containing the entry title and body', function (): void 
         ->and($result->prompt)->toContain('For by grace you have been saved.');
 });
 
-it('includes scripture references in the prompt', function (): void {
+it('omits scripture references from the prompt', function (): void {
     $entry = DevotionalEntry::factory()
         ->for(Theme::factory())
-        ->create();
-    ScriptureReference::factory()->for($entry)->create(['raw_reference' => 'John 3:16']);
-    ScriptureReference::factory()->for($entry)->create(['raw_reference' => 'Romans 8:28']);
+        ->create(['body' => 'Trust in the Lord.']);
 
     $action = resolve(GenerateDevotionalImage::class);
 
     $result = $action->handle($entry);
 
-    expect($result->prompt)->toContain('John 3:16')
-        ->and($result->prompt)->toContain('Romans 8:28');
+    expect($result->prompt)->not->toContain('Scripture references');
 });
 
 it('stores the image file on the public disk', function (): void {
@@ -171,4 +170,21 @@ it('persists the generated image in the database', function (): void {
 
     expect(GeneratedImage::query()->count())->toBe(1)
         ->and(GeneratedImage::query()->first()->devotional_entry_id)->toBe($entry->id);
+});
+
+it('throws a clear error when the image provider returns no images', function (): void {
+    Image::fake(fn (): ImageResponse => new ImageResponse(
+        new Collection([]),
+        new Usage,
+        new Meta('openai', 'gpt-image-1'),
+    ));
+
+    $entry = DevotionalEntry::factory()
+        ->for(Theme::factory())
+        ->create();
+
+    $action = resolve(GenerateDevotionalImage::class);
+
+    expect(fn () => $action->handle($entry))
+        ->toThrow(RuntimeException::class, 'Image provider returned no images');
 });
