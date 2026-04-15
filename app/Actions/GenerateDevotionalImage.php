@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Ai\Image;
 use Laravel\Ai\Responses\ImageResponse;
+use RuntimeException;
 
 final readonly class GenerateDevotionalImage
 {
@@ -21,8 +22,6 @@ final readonly class GenerateDevotionalImage
      */
     public function handle(DevotionalEntry $entry, bool $replace = false): GeneratedImage
     {
-        $entry->loadMissing('scriptureReferences');
-
         if (! $replace && $entry->generatedImage !== null) {
             return $entry->generatedImage;
         }
@@ -50,17 +49,12 @@ final readonly class GenerateDevotionalImage
 
     private function buildPrompt(DevotionalEntry $entry): string
     {
-        $scriptureRefs = $entry->scriptureReferences
-            ->pluck('raw_reference')
-            ->implode(', ');
-
-        $bodyExcerpt = mb_substr(strip_tags($entry->body), 0, 300);
+        $thesis = $this->promptBuilder->firstSentence($entry->body);
 
         $context = sprintf('For a Christian devotional titled "%s". ', $entry->title)
-            .sprintf('Scripture references: %s. ', $scriptureRefs)
-            .sprintf('Theme of the devotional: %s. ', $bodyExcerpt);
+            .sprintf('Theme of the devotional: %s. ', $thesis);
 
-        return $this->promptBuilder->build($context);
+        return $this->promptBuilder->build($context, $entry->title);
     }
 
     private function stripExtendedAttributes(string $path): void
@@ -72,10 +66,14 @@ final readonly class GenerateDevotionalImage
 
     private function generateImage(string $prompt): ImageResponse
     {
-        return Image::of($prompt)
+        $response = Image::of($prompt)
             ->square()
             ->quality('medium')
             ->timeout(120)
             ->generate();
+
+        throw_if($response->count() === 0, RuntimeException::class, 'Image provider returned no images — prompt may have been flagged by content moderation.');
+
+        return $response;
     }
 }

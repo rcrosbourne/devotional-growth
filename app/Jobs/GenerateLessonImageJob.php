@@ -23,10 +23,10 @@ final class GenerateLessonImageJob implements ShouldQueue
 
     public int $timeout = 180;
 
-    public function __construct(public Lesson $lesson) {}
+    public function __construct(public Lesson $lesson, public bool $replace = false) {}
 
     public function handle(GenerateLessonImage $action): void
     {
-        $action->handle($this->lesson);
+        $action->handle($this->lesson, $this->replace);
     }
 }
