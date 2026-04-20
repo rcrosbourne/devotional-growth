@@ -24,7 +24,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->index(['user_id', 'book', 'chapter'], 'bsr_user_passage');
-            $table->index(['book', 'chapter', 'verse_start'], 'bsr_partner_lookup');
+            $table->index(['book', 'chapter', 'verse_start'], 'bsr_passage_lookup');
         });
     }
 
