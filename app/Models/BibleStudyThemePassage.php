@@ -9,6 +9,7 @@ use Database\Factories\BibleStudyThemePassageFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property-read int $id
@@ -34,6 +35,14 @@ final class BibleStudyThemePassage extends Model
     public function theme(): BelongsTo
     {
         return $this->belongsTo(BibleStudyTheme::class, 'bible_study_theme_id');
+    }
+
+    /**
+     * @return HasOne<BibleStudyInsight, $this>
+     */
+    public function insight(): HasOne
+    {
+        return $this->hasOne(BibleStudyInsight::class, 'bible_study_theme_passage_id');
     }
 
     /**
