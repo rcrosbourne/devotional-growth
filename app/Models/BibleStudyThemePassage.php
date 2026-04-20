@@ -9,6 +9,7 @@ use Database\Factories\BibleStudyThemePassageFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
@@ -51,6 +52,16 @@ final class BibleStudyThemePassage extends Model
     public function historicalContext(): HasOne
     {
         return $this->hasOne(BibleStudyHistoricalContext::class, 'bible_study_theme_passage_id');
+    }
+
+    /**
+     * @return HasMany<BibleStudyWordHighlight, $this>
+     */
+    public function wordHighlights(): HasMany
+    {
+        return $this->hasMany(BibleStudyWordHighlight::class, 'bible_study_theme_passage_id')
+            ->orderBy('verse_number')
+            ->orderBy('word_index_in_verse');
     }
 
     /**
