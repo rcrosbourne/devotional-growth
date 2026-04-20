@@ -14,14 +14,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property-read int $id
- * @property string $slug
- * @property string $title
- * @property string $short_description
- * @property string $long_intro
- * @property BibleStudyThemeStatus $status
- * @property int $requested_count
- * @property CarbonInterface|null $approved_at
- * @property int|null $approved_by_user_id
+ * @property-read string $slug
+ * @property-read string $title
+ * @property-read string $short_description
+ * @property-read string $long_intro
+ * @property-read BibleStudyThemeStatus $status
+ * @property-read int $requested_count
+ * @property-read CarbonInterface|null $approved_at
+ * @property-read int|null $approved_by_user_id
  * @property-read CarbonInterface $created_at
  * @property-read CarbonInterface $updated_at
  */

@@ -12,11 +12,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property-read int $id
- * @property int $bible_study_theme_passage_id
- * @property string $interpretation
- * @property string $application
- * @property array<int, array{book: string, chapter: int, verse_start: int, verse_end?: int, note?: string}> $cross_references
- * @property string $literary_context
+ * @property-read int $bible_study_theme_passage_id
+ * @property-read string $interpretation
+ * @property-read string $application
+ * @property-read array<int, array{book: string, chapter: int, verse_start: int, verse_end?: int, note?: string}> $cross_references
+ * @property-read string $literary_context
  * @property-read CarbonInterface $created_at
  * @property-read CarbonInterface $updated_at
  */

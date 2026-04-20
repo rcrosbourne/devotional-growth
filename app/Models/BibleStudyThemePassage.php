@@ -13,14 +13,14 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property-read int $id
- * @property int $bible_study_theme_id
- * @property int $position
- * @property bool $is_guided_path
- * @property string $book
- * @property int $chapter
- * @property int $verse_start
- * @property int|null $verse_end
- * @property string|null $passage_intro
+ * @property-read int $bible_study_theme_id
+ * @property-read int $position
+ * @property-read bool $is_guided_path
+ * @property-read string $book
+ * @property-read int $chapter
+ * @property-read int $verse_start
+ * @property-read int|null $verse_end
+ * @property-read string|null $passage_intro
  * @property-read CarbonInterface $created_at
  * @property-read CarbonInterface $updated_at
  */
