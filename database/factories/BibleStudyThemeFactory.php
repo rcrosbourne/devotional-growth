@@ -20,6 +20,7 @@ final class BibleStudyThemeFactory extends Factory
      */
     public function definition(): array
     {
+        /** @var string $title */
         $title = fake()->unique()->words(2, true);
 
         return [

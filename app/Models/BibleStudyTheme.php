@@ -10,6 +10,7 @@ use Database\Factories\BibleStudyThemeFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property-read int $id
@@ -35,6 +36,14 @@ final class BibleStudyTheme extends Model
     public function approvedBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'approved_by_user_id');
+    }
+
+    /**
+     * @return HasMany<BibleStudyThemePassage, $this>
+     */
+    public function passages(): HasMany
+    {
+        return $this->hasMany(BibleStudyThemePassage::class, 'bible_study_theme_id')->orderBy('position');
     }
 
     /**
