@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read bool $observation_notifications
  * @property-read bool $new_theme_notifications
  * @property-read bool $reminder_notifications
+ * @property-read bool $bible_study_partner_share_notifications
  * @property-read CarbonInterface $created_at
  * @property-read CarbonInterface $updated_at
  */
@@ -45,6 +46,7 @@ final class NotificationPreference extends Model
             'observation_notifications' => 'boolean',
             'new_theme_notifications' => 'boolean',
             'reminder_notifications' => 'boolean',
+            'bible_study_partner_share_notifications' => 'boolean',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];

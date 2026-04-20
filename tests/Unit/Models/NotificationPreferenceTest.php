@@ -18,6 +18,7 @@ test('to array', function (): void {
             'reminder_notifications',
             'created_at',
             'updated_at',
+            'bible_study_partner_share_notifications',
         ]);
 });
 
@@ -36,7 +37,8 @@ test('factory defaults all notifications to true', function (): void {
     expect($pref->completion_notifications)->toBeTrue()
         ->and($pref->observation_notifications)->toBeTrue()
         ->and($pref->new_theme_notifications)->toBeTrue()
-        ->and($pref->reminder_notifications)->toBeTrue();
+        ->and($pref->reminder_notifications)->toBeTrue()
+        ->and($pref->bible_study_partner_share_notifications)->toBeTrue();
 });
 
 test('factory all disabled state sets all notifications to false', function (): void {
@@ -45,5 +47,6 @@ test('factory all disabled state sets all notifications to false', function (): 
     expect($pref->completion_notifications)->toBeFalse()
         ->and($pref->observation_notifications)->toBeFalse()
         ->and($pref->new_theme_notifications)->toBeFalse()
-        ->and($pref->reminder_notifications)->toBeFalse();
+        ->and($pref->reminder_notifications)->toBeFalse()
+        ->and($pref->bible_study_partner_share_notifications)->toBeFalse();
 });
