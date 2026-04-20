@@ -14,7 +14,8 @@ it('stores structured historical fields', function (): void {
 
     expect($context->author)->toBe('Matthew')
         ->and($context->date_range)->toBe('ca. 70–90 AD')
-        ->and($passage->historicalContext->is($context))->toBeTrue();
+        ->and($passage->historicalContext->is($context))->toBeTrue()
+        ->and($context->passage->is($passage))->toBeTrue();
 });
 
 it('is unique per passage', function (): void {
