@@ -46,6 +46,14 @@ final class BibleStudyThemePassage extends Model
     }
 
     /**
+     * @return HasOne<BibleStudyHistoricalContext, $this>
+     */
+    public function historicalContext(): HasOne
+    {
+        return $this->hasOne(BibleStudyHistoricalContext::class, 'bible_study_theme_passage_id');
+    }
+
+    /**
      * @return array<string, string>
      */
     protected function casts(): array
