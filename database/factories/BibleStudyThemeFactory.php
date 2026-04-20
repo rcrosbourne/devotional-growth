@@ -6,6 +6,7 @@ namespace Database\Factories;
 
 use App\Enums\BibleStudyThemeStatus;
 use App\Models\BibleStudyTheme;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -35,7 +36,7 @@ final class BibleStudyThemeFactory extends Factory
 
     public function draft(): self
     {
-        return $this->state(fn (): array => [
+        return $this->state(fn (array $attributes): array => [
             'status' => BibleStudyThemeStatus::Draft,
             'approved_at' => null,
             'approved_by_user_id' => null,
@@ -44,15 +45,16 @@ final class BibleStudyThemeFactory extends Factory
 
     public function approved(): self
     {
-        return $this->state(fn (): array => [
+        return $this->state(fn (array $attributes): array => [
             'status' => BibleStudyThemeStatus::Approved,
             'approved_at' => now(),
+            'approved_by_user_id' => User::factory(),
         ]);
     }
 
     public function archived(): self
     {
-        return $this->state(fn (): array => [
+        return $this->state(fn (array $attributes): array => [
             'status' => BibleStudyThemeStatus::Archived,
         ]);
     }

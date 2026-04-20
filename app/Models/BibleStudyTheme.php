@@ -29,8 +29,6 @@ final class BibleStudyTheme extends Model
     /** @use HasFactory<BibleStudyThemeFactory> */
     use HasFactory;
 
-    protected $guarded = [];
-
     /**
      * @return BelongsTo<User, $this>
      */
@@ -46,6 +44,10 @@ final class BibleStudyTheme extends Model
     {
         return [
             'id' => 'integer',
+            'slug' => 'string',
+            'title' => 'string',
+            'short_description' => 'string',
+            'long_intro' => 'string',
             'status' => BibleStudyThemeStatus::class,
             'requested_count' => 'integer',
             'approved_at' => 'datetime',
