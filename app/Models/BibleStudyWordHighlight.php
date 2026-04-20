@@ -38,7 +38,7 @@ final class BibleStudyWordHighlight extends Model
      */
     public function wordStudy(): BelongsTo
     {
-        return $this->belongsTo(WordStudy::class);
+        return $this->belongsTo(WordStudy::class, 'word_study_id');
     }
 
     /**
