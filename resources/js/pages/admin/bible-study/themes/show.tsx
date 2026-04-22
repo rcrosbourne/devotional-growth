@@ -15,7 +15,7 @@ interface WordHighlight {
     verse_number: number;
     word_index_in_verse: number;
     display_word: string;
-    word_study: WordStudy;
+    word_study: WordStudy | null;
 }
 
 interface Insight {

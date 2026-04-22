@@ -26,7 +26,8 @@ it('returns the full review payload for a draft theme', function (): void {
         ->where('theme.id', $theme->id)
         ->has('theme.passages.0.insight')
         ->has('theme.passages.0.historical_context')
-        ->has('theme.passages.0.word_highlights.0')
+        ->has('theme.passages.0.word_highlights.0.word_study')
+        ->where('theme.passages.0.word_highlights.0.word_study.strongs_number', $wordStudy->strongs_number)
     );
 });
 
