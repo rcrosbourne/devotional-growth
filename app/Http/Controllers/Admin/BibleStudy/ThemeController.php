@@ -4,10 +4,19 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin\BibleStudy;
 
+use App\Actions\BibleStudy\DraftBibleStudyTheme;
+use App\Actions\BibleStudy\PublishBibleStudyTheme;
 use App\Enums\BibleStudyThemeStatus;
+use App\Http\Requests\Admin\BibleStudy\StoreDraftRequest;
+use App\Http\Requests\Admin\BibleStudy\UpdateThemeRequest;
 use App\Models\BibleStudyTheme;
 use App\Models\BibleStudyThemePassage;
 use App\Models\BibleStudyWordHighlight;
+use App\Models\User;
+use DomainException;
+use Illuminate\Container\Attributes\CurrentUser;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -72,6 +81,39 @@ final readonly class ThemeController
                 ])->all(),
             ],
         ]);
+    }
+
+    public function store(StoreDraftRequest $request, #[CurrentUser] User $admin, DraftBibleStudyTheme $action): RedirectResponse
+    {
+        $log = $action->handle($admin, $request->string('title')->value());
+
+        return to_route('admin.bible-study.themes.index')
+            ->with('status', sprintf('Draft generation queued (log #%d).', $log->id));
+    }
+
+    public function update(UpdateThemeRequest $request, BibleStudyTheme $theme): RedirectResponse
+    {
+        $theme->update($request->validated());
+
+        return back()->with('status', 'Theme updated.');
+    }
+
+    public function publish(BibleStudyTheme $theme, #[CurrentUser] User $admin, PublishBibleStudyTheme $action): RedirectResponse
+    {
+        try {
+            $action->handle($admin, $theme);
+        } catch (DomainException $domainException) {
+            throw ValidationException::withMessages(['status' => $domainException->getMessage()]);
+        }
+
+        return back()->with('status', 'Theme published.');
+    }
+
+    public function destroy(BibleStudyTheme $theme): RedirectResponse
+    {
+        $theme->delete();
+
+        return to_route('admin.bible-study.themes.index')->with('status', 'Theme deleted.');
     }
 
     public function index(): Response

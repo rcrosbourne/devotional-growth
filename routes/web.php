@@ -202,7 +202,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     // Admin Bible Study...
     Route::get('bible-study/themes', new AdminBibleStudyThemeController()->index(...))->name('bible-study.themes.index');
+    Route::post('bible-study/themes', new AdminBibleStudyThemeController()->store(...))->name('bible-study.themes.store');
     Route::get('bible-study/themes/{theme}', new AdminBibleStudyThemeController()->show(...))->name('bible-study.themes.show');
+    Route::put('bible-study/themes/{theme}', new AdminBibleStudyThemeController()->update(...))->name('bible-study.themes.update');
+    Route::put('bible-study/themes/{theme}/publish', new AdminBibleStudyThemeController()->publish(...))->name('bible-study.themes.publish');
+    Route::delete('bible-study/themes/{theme}', new AdminBibleStudyThemeController()->destroy(...))->name('bible-study.themes.destroy');
 });
 
 Route::middleware('auth')->group(function (): void {
