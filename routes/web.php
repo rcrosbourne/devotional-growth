@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Admin\AiContentController as AdminAiContentController;
+use App\Http\Controllers\Admin\BibleStudy\ThemeController as AdminBibleStudyThemeController;
 use App\Http\Controllers\Admin\DevotionalEntryController as AdminDevotionalEntryController;
 use App\Http\Controllers\Admin\SabbathSchool\QuarterlyController as AdminSabbathSchoolController;
 use App\Http\Controllers\Admin\ThemeController as AdminThemeController;
@@ -198,6 +199,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::post('sabbath-school/import', new AdminSabbathSchoolController()->import(...))->name('sabbath-school.import');
     Route::post('sabbath-school/{quarterly}/sync', new AdminSabbathSchoolController()->sync(...))->name('sabbath-school.sync');
     Route::put('sabbath-school/{quarterly}/activate', new AdminSabbathSchoolController()->activate(...))->name('sabbath-school.activate');
+
+    // Admin Bible Study...
+    Route::get('bible-study/themes', new AdminBibleStudyThemeController()->index(...))->name('bible-study.themes.index');
 });
 
 Route::middleware('auth')->group(function (): void {
