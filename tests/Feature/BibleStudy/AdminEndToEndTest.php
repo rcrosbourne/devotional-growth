@@ -4,12 +4,19 @@ declare(strict_types=1);
 
 use App\Ai\Agents\BibleStudyThemeDrafter;
 use App\Enums\BibleStudyThemeStatus;
+use App\Jobs\DraftBibleStudyThemeJob;
 use App\Models\BibleStudyTheme;
 use App\Models\BibleStudyWordHighlight;
 use App\Models\User;
 use App\Models\WordStudy;
+use App\Notifications\BibleStudyDraftReady;
+use Illuminate\Support\Facades\Bus;
+use Illuminate\Support\Facades\Notification;
 
 it('walks from draft trigger to publish end-to-end', function (): void {
+    Bus::fake();
+    Notification::fake();
+
     $admin = User::factory()->admin()->create();
 
     BibleStudyThemeDrafter::fake([
@@ -47,10 +54,18 @@ it('walks from draft trigger to publish end-to-end', function (): void {
         ],
     ]);
 
-    // 1. Admin triggers a draft via the store endpoint
+    // 1. Admin triggers a draft via the store endpoint (dispatches a background job)
     $this->actingAs($admin)
         ->post(route('admin.bible-study.themes.store'), ['title' => 'Resilience'])
         ->assertRedirect();
+
+    Bus::assertDispatched(DraftBibleStudyThemeJob::class);
+
+    // Simulate the worker running the job synchronously.
+    new DraftBibleStudyThemeJob($admin, 'Resilience')
+        ->handle(resolve(App\Actions\BibleStudy\DraftBibleStudyTheme::class));
+
+    Notification::assertSentTo($admin, BibleStudyDraftReady::class);
 
     $theme = BibleStudyTheme::query()->where('slug', 'resilience')->firstOrFail();
     $passage = $theme->passages()->firstOrFail();

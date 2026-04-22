@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin\BibleStudy;
 
-use App\Actions\BibleStudy\DraftBibleStudyTheme;
 use App\Actions\BibleStudy\PublishBibleStudyTheme;
 use App\Enums\BibleStudyThemeStatus;
 use App\Http\Requests\Admin\BibleStudy\StoreDraftRequest;
 use App\Http\Requests\Admin\BibleStudy\UpdateThemeRequest;
+use App\Jobs\DraftBibleStudyThemeJob;
 use App\Models\BibleStudyTheme;
 use App\Models\BibleStudyThemePassage;
 use App\Models\BibleStudyWordHighlight;
@@ -83,12 +83,14 @@ final readonly class ThemeController
         ]);
     }
 
-    public function store(StoreDraftRequest $request, #[CurrentUser] User $admin, DraftBibleStudyTheme $action): RedirectResponse
+    public function store(StoreDraftRequest $request, #[CurrentUser] User $admin): RedirectResponse
     {
-        $log = $action->handle($admin, $request->string('title')->value());
+        $title = $request->string('title')->value();
+
+        dispatch(new DraftBibleStudyThemeJob($admin, $title));
 
         return to_route('admin.bible-study.themes.index')
-            ->with('status', sprintf('Draft generation queued (log #%d).', $log->id));
+            ->with('status', sprintf('Drafting "%s" in the background — you\'ll be notified when it\'s ready.', $title));
     }
 
     public function update(UpdateThemeRequest $request, BibleStudyTheme $theme): RedirectResponse

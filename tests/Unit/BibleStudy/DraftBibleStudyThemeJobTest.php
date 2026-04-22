@@ -2,23 +2,52 @@
 
 declare(strict_types=1);
 
+use App\Actions\BibleStudy\DraftBibleStudyTheme;
 use App\Ai\Agents\BibleStudyThemeDrafter;
+use App\Enums\AiGenerationStatus;
 use App\Jobs\DraftBibleStudyThemeJob;
 use App\Models\AiGenerationLog;
 use App\Models\BibleStudyTheme;
 use App\Models\User;
+use App\Notifications\BibleStudyDraftReady;
+use Illuminate\Support\Facades\Notification;
 
-it('delegates to the DraftBibleStudyTheme action', function (): void {
+it('runs the action and notifies the admin on success', function (): void {
+    Notification::fake();
     BibleStudyThemeDrafter::fake([jobFixtureDraftResponse()]);
 
     $admin = User::factory()->admin()->create();
     $job = new DraftBibleStudyThemeJob($admin, 'Resilience');
 
-    $job->handle(resolve(App\Actions\BibleStudy\DraftBibleStudyTheme::class));
+    $job->handle(resolve(DraftBibleStudyTheme::class));
 
-    expect(AiGenerationLog::query()->count())->toBe(1)
-        ->and(AiGenerationLog::query()->first()->status)->toBe(App\Enums\AiGenerationStatus::Completed)
+    expect(AiGenerationLog::query()->first()->status)->toBe(AiGenerationStatus::Completed)
         ->and(BibleStudyTheme::query()->count())->toBe(1);
+
+    Notification::assertSentTo(
+        $admin,
+        BibleStudyDraftReady::class,
+        fn (BibleStudyDraftReady $n): bool => $n->theme instanceof BibleStudyTheme && $n->themeTitle === 'Resilience',
+    );
+});
+
+it('notifies the admin with a failed state when the agent throws', function (): void {
+    Notification::fake();
+    BibleStudyThemeDrafter::fake([new RuntimeException('AI unavailable')]);
+
+    $admin = User::factory()->admin()->create();
+    $job = new DraftBibleStudyThemeJob($admin, 'Resilience');
+
+    $job->handle(resolve(DraftBibleStudyTheme::class));
+
+    expect(AiGenerationLog::query()->first()->status)->toBe(AiGenerationStatus::Failed)
+        ->and(BibleStudyTheme::query()->count())->toBe(0);
+
+    Notification::assertSentTo(
+        $admin,
+        BibleStudyDraftReady::class,
+        fn (BibleStudyDraftReady $n): bool => ! $n->theme instanceof BibleStudyTheme,
+    );
 });
 
 /**

@@ -49,7 +49,7 @@ final class BibleStudyThemeDrafter implements Agent, HasStructuredOutput
             'book' => $schema->string()->required(),
             'chapter' => $schema->integer()->required(),
             'verse_start' => $schema->integer()->required(),
-            'verse_end' => $schema->integer(),
+            'verse_end' => $schema->integer()->nullable()->required(),
             'note' => $schema->string()->required(),
         ]);
 
@@ -64,7 +64,7 @@ final class BibleStudyThemeDrafter implements Agent, HasStructuredOutput
             'book' => $schema->string()->required(),
             'chapter' => $schema->integer()->required(),
             'verse_start' => $schema->integer()->required(),
-            'verse_end' => $schema->integer(),
+            'verse_end' => $schema->integer()->nullable()->required(),
             'position' => $schema->integer()->required(),
             'is_guided_path' => $schema->boolean()->required(),
             'passage_intro' => $schema->string()->required(),
