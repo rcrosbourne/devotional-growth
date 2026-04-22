@@ -202,6 +202,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     // Admin Bible Study...
     Route::get('bible-study/themes', new AdminBibleStudyThemeController()->index(...))->name('bible-study.themes.index');
+    Route::get('bible-study/themes/{theme}', new AdminBibleStudyThemeController()->show(...))->name('bible-study.themes.show');
 });
 
 Route::middleware('auth')->group(function (): void {
