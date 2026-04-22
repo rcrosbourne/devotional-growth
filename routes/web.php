@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Admin\AiContentController as AdminAiContentController;
+use App\Http\Controllers\Admin\BibleStudy\InsightController as AdminBibleStudyInsightController;
 use App\Http\Controllers\Admin\BibleStudy\PassageController as AdminBibleStudyPassageController;
 use App\Http\Controllers\Admin\BibleStudy\ThemeController as AdminBibleStudyThemeController;
 use App\Http\Controllers\Admin\DevotionalEntryController as AdminDevotionalEntryController;
@@ -214,6 +215,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::put('bible-study/themes/{theme}/passages/reorder', new AdminBibleStudyPassageController()->reorder(...))->name('bible-study.themes.passages.reorder');
     Route::put('bible-study/themes/{theme}/passages/{passage}', new AdminBibleStudyPassageController()->update(...))->name('bible-study.themes.passages.update');
     Route::delete('bible-study/themes/{theme}/passages/{passage}', new AdminBibleStudyPassageController()->destroy(...))->name('bible-study.themes.passages.destroy');
+
+    // Admin Bible Study Passage Insight...
+    Route::put('bible-study/passages/{passage}/insight', new AdminBibleStudyInsightController()->update(...))->name('bible-study.passages.insight.update');
 });
 
 Route::middleware('auth')->group(function (): void {
