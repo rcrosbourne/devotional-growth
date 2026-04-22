@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\BibleStudy\HistoricalContextController as AdminBi
 use App\Http\Controllers\Admin\BibleStudy\InsightController as AdminBibleStudyInsightController;
 use App\Http\Controllers\Admin\BibleStudy\PassageController as AdminBibleStudyPassageController;
 use App\Http\Controllers\Admin\BibleStudy\ThemeController as AdminBibleStudyThemeController;
+use App\Http\Controllers\Admin\BibleStudy\WordHighlightController as AdminBibleStudyWordHighlightController;
 use App\Http\Controllers\Admin\DevotionalEntryController as AdminDevotionalEntryController;
 use App\Http\Controllers\Admin\SabbathSchool\QuarterlyController as AdminSabbathSchoolController;
 use App\Http\Controllers\Admin\ThemeController as AdminThemeController;
@@ -222,6 +223,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     // Admin Bible Study Passage Historical Context...
     Route::put('bible-study/passages/{passage}/historical-context', new AdminBibleStudyHistoricalContextController()->update(...))->name('bible-study.passages.historical-context.update');
+
+    // Admin Bible Study Passage Word Highlights...
+    Route::post('bible-study/passages/{passage}/word-highlights', new AdminBibleStudyWordHighlightController()->store(...))->name('bible-study.passages.word-highlights.store');
+    Route::delete('bible-study/passages/{passage}/word-highlights/{highlight}', new AdminBibleStudyWordHighlightController()->destroy(...))->name('bible-study.passages.word-highlights.destroy');
 });
 
 Route::middleware('auth')->group(function (): void {
