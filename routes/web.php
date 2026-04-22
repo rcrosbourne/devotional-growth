@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Admin\AiContentController as AdminAiContentController;
+use App\Http\Controllers\Admin\BibleStudy\HistoricalContextController as AdminBibleStudyHistoricalContextController;
 use App\Http\Controllers\Admin\BibleStudy\InsightController as AdminBibleStudyInsightController;
 use App\Http\Controllers\Admin\BibleStudy\PassageController as AdminBibleStudyPassageController;
 use App\Http\Controllers\Admin\BibleStudy\ThemeController as AdminBibleStudyThemeController;
@@ -218,6 +219,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     // Admin Bible Study Passage Insight...
     Route::put('bible-study/passages/{passage}/insight', new AdminBibleStudyInsightController()->update(...))->name('bible-study.passages.insight.update');
+
+    // Admin Bible Study Passage Historical Context...
+    Route::put('bible-study/passages/{passage}/historical-context', new AdminBibleStudyHistoricalContextController()->update(...))->name('bible-study.passages.historical-context.update');
 });
 
 Route::middleware('auth')->group(function (): void {
