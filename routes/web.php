@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Admin\AiContentController as AdminAiContentController;
+use App\Http\Controllers\Admin\BibleStudy\PassageController as AdminBibleStudyPassageController;
 use App\Http\Controllers\Admin\BibleStudy\ThemeController as AdminBibleStudyThemeController;
 use App\Http\Controllers\Admin\DevotionalEntryController as AdminDevotionalEntryController;
 use App\Http\Controllers\Admin\SabbathSchool\QuarterlyController as AdminSabbathSchoolController;
@@ -207,6 +208,12 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::put('bible-study/themes/{theme}', new AdminBibleStudyThemeController()->update(...))->name('bible-study.themes.update');
     Route::put('bible-study/themes/{theme}/publish', new AdminBibleStudyThemeController()->publish(...))->name('bible-study.themes.publish');
     Route::delete('bible-study/themes/{theme}', new AdminBibleStudyThemeController()->destroy(...))->name('bible-study.themes.destroy');
+
+    // Admin Bible Study Passages...
+    Route::post('bible-study/themes/{theme}/passages', new AdminBibleStudyPassageController()->store(...))->name('bible-study.themes.passages.store');
+    Route::put('bible-study/themes/{theme}/passages/reorder', new AdminBibleStudyPassageController()->reorder(...))->name('bible-study.themes.passages.reorder');
+    Route::put('bible-study/themes/{theme}/passages/{passage}', new AdminBibleStudyPassageController()->update(...))->name('bible-study.themes.passages.update');
+    Route::delete('bible-study/themes/{theme}/passages/{passage}', new AdminBibleStudyPassageController()->destroy(...))->name('bible-study.themes.passages.destroy');
 });
 
 Route::middleware('auth')->group(function (): void {
