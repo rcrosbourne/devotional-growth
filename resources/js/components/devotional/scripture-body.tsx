@@ -11,6 +11,7 @@ import {
     type ReactNode,
     useCallback,
     useEffect,
+    useLayoutEffect,
     useRef,
     useState,
 } from 'react';
@@ -184,8 +185,11 @@ export function ScripturePopover({
     const popoverRef = useRef<HTMLDivElement>(null);
     const [position, setPosition] = useState({ top: 0, left: 0 });
 
-    // Position the popover
-    useEffect(() => {
+    // Position the popover. We measure DOM after render and set state — that's
+    // the documented use case for useLayoutEffect, but the lint rule fires on
+    // any state set in an effect. Setting position any other way would race
+    // the render.
+    useLayoutEffect(() => {
         const popover = popoverRef.current;
         if (!popover) {
             return;
@@ -213,6 +217,7 @@ export function ScripturePopover({
                 top = anchorRect.top - popRect.height - 8;
             }
 
+            // eslint-disable-next-line @eslint-react/set-state-in-effect
             setPosition({ top, left });
         };
 
@@ -427,6 +432,9 @@ function RenderedParagraph({
 }) {
     const segments = parseBodyText(text);
 
+    // The segments array is parsed from a fixed body string and never
+    // reorders. Position-based keys are appropriate here.
+    /* eslint-disable @eslint-react/no-array-index-key */
     const nodes: ReactNode[] = segments.map((seg, i) => {
         if (seg.type === 'text') {
             return <span key={i}>{seg.content}</span>;
@@ -440,6 +448,7 @@ function RenderedParagraph({
             />
         );
     });
+    /* eslint-enable @eslint-react/no-array-index-key */
 
     return (
         <p
@@ -489,6 +498,9 @@ export function ScriptureBody({ body, className }: ScriptureBodyProps) {
         <div className={cn('space-y-6', className)}>
             {paragraphs.map((paragraph, i) => (
                 <RenderedParagraph
+                    // Paragraphs are derived from a fixed body string and
+                    // never reorder; index keys are correct here.
+                    // eslint-disable-next-line @eslint-react/no-array-index-key
                     key={i}
                     text={paragraph}
                     isFirst={i === 0}

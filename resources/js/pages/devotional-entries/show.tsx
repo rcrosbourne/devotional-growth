@@ -377,6 +377,10 @@ export default function DevotionalEntriesShow({
         { autoStart: false },
     );
 
+    // When polling refreshes `entry`, end the polling/loading state if the
+    // generated image id has changed. See the equivalent comment in the
+    // admin edit page.
+
     useEffect(() => {
         if (!generatingImage) {
             return;
@@ -385,18 +389,30 @@ export default function DevotionalEntriesShow({
         const currentImageId = entry.generated_image?.id ?? null;
         if (currentImageId !== null && currentImageId !== imageIdAtStart) {
             stopPolling();
+            // eslint-disable-next-line @eslint-react/set-state-in-effect
             setGeneratingImage(false);
         }
-    }, [generatingImage, entry.generated_image?.id, imageIdAtStart]);
+    }, [
+        generatingImage,
+        entry.generated_image?.id,
+        imageIdAtStart,
+        stopPolling,
+    ]);
 
+    const imagePath = entry.generated_image?.path ?? null;
+    // Track the path the load/fail flags belong to. When imagePath changes,
+    // we reset both flags during render — this is the documented React idiom
+    // for "derive state from props" and avoids an extra render that an
+    // effect-based reset would cause.
+    const [trackedPath, setTrackedPath] = useState<string | null>(imagePath);
     const [imageFailed, setImageFailed] = useState(false);
     const [imageLoaded, setImageLoaded] = useState(false);
-    const imagePath = entry.generated_image?.path ?? null;
 
-    useEffect(() => {
+    if (trackedPath !== imagePath) {
+        setTrackedPath(imagePath);
         setImageFailed(false);
         setImageLoaded(false);
-    }, [imagePath]);
+    }
 
     const [bibleVersion, setBibleVersion] = useState(getPreferredVersion);
     const [passageTexts, setPassageTexts] = useState<Record<number, string>>(
@@ -705,6 +721,9 @@ export default function DevotionalEntriesShow({
                                     entry.reflection_prompts,
                                 ).map((prompt, i) => (
                                     <div
+                                        // Prompts derive from a fixed string;
+                                        // index keys are stable here.
+                                        // eslint-disable-next-line @eslint-react/no-array-index-key
                                         key={i}
                                         className="border-l-2 border-moss/20 pl-6 md:pl-8"
                                     >
@@ -729,6 +748,10 @@ export default function DevotionalEntriesShow({
                             </h3>
                             <div
                                 className="font-serif text-base leading-relaxed md:text-lg [&>p]:mb-4"
+                                // Admin-authored HTML from the AI content workflow,
+                                // already reviewed before publish. No user-supplied
+                                // input is rendered through this path.
+                                // eslint-disable-next-line @eslint-react/dom-no-dangerously-set-innerhtml
                                 dangerouslySetInnerHTML={{
                                     __html: entry.adventist_insights,
                                 }}
