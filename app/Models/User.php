@@ -29,6 +29,12 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property-read CarbonInterface $created_at
  * @property-read CarbonInterface $updated_at
  */
+#[\Illuminate\Database\Eloquent\Attributes\Hidden([
+    'password',
+    'remember_token',
+    'two_factor_secret',
+    'two_factor_recovery_codes',
+])]
 final class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<UserFactory> */
@@ -36,16 +42,6 @@ final class User extends Authenticatable implements MustVerifyEmail
 
     use Notifiable;
     use TwoFactorAuthenticatable;
-
-    /**
-     * @var list<string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-        'two_factor_secret',
-        'two_factor_recovery_codes',
-    ];
 
     /**
      * @return BelongsTo<self, $this>
