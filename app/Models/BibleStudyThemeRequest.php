@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Carbon\CarbonInterface;
-use Database\Factories\NotificationPreferenceFactory;
+use Database\Factories\BibleStudyThemeRequestFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,17 +13,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @property-read int $id
  * @property-read int $user_id
- * @property-read bool $completion_notifications
- * @property-read bool $observation_notifications
- * @property-read bool $new_theme_notifications
- * @property-read bool $reminder_notifications
- * @property-read bool $bible_study_partner_share_notifications
+ * @property-read string $search_query
+ * @property-read string $normalized_query
+ * @property-read int|null $generated_bible_study_theme_id
  * @property-read CarbonInterface $created_at
  * @property-read CarbonInterface $updated_at
  */
-final class NotificationPreference extends Model
+final class BibleStudyThemeRequest extends Model
 {
-    /** @use HasFactory<NotificationPreferenceFactory> */
+    /** @use HasFactory<BibleStudyThemeRequestFactory> */
     use HasFactory;
 
     /**
@@ -31,7 +29,15 @@ final class NotificationPreference extends Model
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    /**
+     * @return BelongsTo<BibleStudyTheme, $this>
+     */
+    public function generatedTheme(): BelongsTo
+    {
+        return $this->belongsTo(BibleStudyTheme::class, 'generated_bible_study_theme_id');
     }
 
     /**
@@ -42,11 +48,9 @@ final class NotificationPreference extends Model
         return [
             'id' => 'integer',
             'user_id' => 'integer',
-            'completion_notifications' => 'boolean',
-            'observation_notifications' => 'boolean',
-            'new_theme_notifications' => 'boolean',
-            'reminder_notifications' => 'boolean',
-            'bible_study_partner_share_notifications' => 'boolean',
+            'search_query' => 'string',
+            'normalized_query' => 'string',
+            'generated_bible_study_theme_id' => 'integer',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];

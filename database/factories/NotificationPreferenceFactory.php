@@ -24,6 +24,7 @@ final class NotificationPreferenceFactory extends Factory
             'observation_notifications' => true,
             'new_theme_notifications' => true,
             'reminder_notifications' => true,
+            'bible_study_partner_share_notifications' => true,
         ];
     }
 
@@ -34,6 +35,7 @@ final class NotificationPreferenceFactory extends Factory
             'observation_notifications' => false,
             'new_theme_notifications' => false,
             'reminder_notifications' => false,
+            'bible_study_partner_share_notifications' => false,
         ]);
     }
 }

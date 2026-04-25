@@ -4,6 +4,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
 import { logout } from '@/routes';
 import { create as aiContentCreate } from '@/routes/admin/ai-content';
+import { index as adminBibleStudyThemesIndex } from '@/routes/admin/bible-study/themes';
 import { index as adminSabbathSchoolIndex } from '@/routes/admin/sabbath-school';
 import { index as adminThemesIndex } from '@/routes/admin/themes';
 import { index as bibleStudyIndex } from '@/routes/bible-study';
@@ -90,6 +91,11 @@ const adminNavItems: SidebarNavItem[] = [
         title: 'Sabbath School',
         href: adminSabbathSchoolIndex.url(),
         icon: <BookOpen className="size-4" />,
+    },
+    {
+        title: 'Bible Study',
+        href: adminBibleStudyThemesIndex.url(),
+        icon: <GraduationCap className="size-4" />,
     },
 ];
 

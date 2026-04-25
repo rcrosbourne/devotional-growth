@@ -3,6 +3,11 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Admin\AiContentController as AdminAiContentController;
+use App\Http\Controllers\Admin\BibleStudy\HistoricalContextController as AdminBibleStudyHistoricalContextController;
+use App\Http\Controllers\Admin\BibleStudy\InsightController as AdminBibleStudyInsightController;
+use App\Http\Controllers\Admin\BibleStudy\PassageController as AdminBibleStudyPassageController;
+use App\Http\Controllers\Admin\BibleStudy\ThemeController as AdminBibleStudyThemeController;
+use App\Http\Controllers\Admin\BibleStudy\WordHighlightController as AdminBibleStudyWordHighlightController;
 use App\Http\Controllers\Admin\DevotionalEntryController as AdminDevotionalEntryController;
 use App\Http\Controllers\Admin\SabbathSchool\QuarterlyController as AdminSabbathSchoolController;
 use App\Http\Controllers\Admin\ThemeController as AdminThemeController;
@@ -198,6 +203,30 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::post('sabbath-school/import', new AdminSabbathSchoolController()->import(...))->name('sabbath-school.import');
     Route::post('sabbath-school/{quarterly}/sync', new AdminSabbathSchoolController()->sync(...))->name('sabbath-school.sync');
     Route::put('sabbath-school/{quarterly}/activate', new AdminSabbathSchoolController()->activate(...))->name('sabbath-school.activate');
+
+    // Admin Bible Study...
+    Route::get('bible-study/themes', new AdminBibleStudyThemeController()->index(...))->name('bible-study.themes.index');
+    Route::post('bible-study/themes', new AdminBibleStudyThemeController()->store(...))->name('bible-study.themes.store');
+    Route::get('bible-study/themes/{theme}', new AdminBibleStudyThemeController()->show(...))->name('bible-study.themes.show');
+    Route::put('bible-study/themes/{theme}', new AdminBibleStudyThemeController()->update(...))->name('bible-study.themes.update');
+    Route::put('bible-study/themes/{theme}/publish', new AdminBibleStudyThemeController()->publish(...))->name('bible-study.themes.publish');
+    Route::delete('bible-study/themes/{theme}', new AdminBibleStudyThemeController()->destroy(...))->name('bible-study.themes.destroy');
+
+    // Admin Bible Study Passages...
+    Route::post('bible-study/themes/{theme}/passages', new AdminBibleStudyPassageController()->store(...))->name('bible-study.themes.passages.store');
+    Route::put('bible-study/themes/{theme}/passages/reorder', new AdminBibleStudyPassageController()->reorder(...))->name('bible-study.themes.passages.reorder');
+    Route::put('bible-study/themes/{theme}/passages/{passage}', new AdminBibleStudyPassageController()->update(...))->name('bible-study.themes.passages.update');
+    Route::delete('bible-study/themes/{theme}/passages/{passage}', new AdminBibleStudyPassageController()->destroy(...))->name('bible-study.themes.passages.destroy');
+
+    // Admin Bible Study Passage Insight...
+    Route::put('bible-study/passages/{passage}/insight', new AdminBibleStudyInsightController()->update(...))->name('bible-study.passages.insight.update');
+
+    // Admin Bible Study Passage Historical Context...
+    Route::put('bible-study/passages/{passage}/historical-context', new AdminBibleStudyHistoricalContextController()->update(...))->name('bible-study.passages.historical-context.update');
+
+    // Admin Bible Study Passage Word Highlights...
+    Route::post('bible-study/passages/{passage}/word-highlights', new AdminBibleStudyWordHighlightController()->store(...))->name('bible-study.passages.word-highlights.store');
+    Route::delete('bible-study/passages/{passage}/word-highlights/{highlight}', new AdminBibleStudyWordHighlightController()->destroy(...))->name('bible-study.passages.word-highlights.destroy');
 });
 
 Route::middleware('auth')->group(function (): void {
