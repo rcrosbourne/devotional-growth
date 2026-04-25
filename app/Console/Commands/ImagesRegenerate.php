@@ -11,6 +11,7 @@ use App\Models\DevotionalEntry;
 use App\Models\Lesson;
 use App\Models\Theme;
 use Illuminate\Console\Command;
+use Override;
 use Throwable;
 
 final class ImagesRegenerate extends Command
@@ -26,6 +27,7 @@ final class ImagesRegenerate extends Command
     /**
      * @var string
      */
+    #[Override]
     protected $signature = 'images:regenerate
                             {--type=all : What to regenerate (all|devotionals|themes|lessons)}
                             {--limit=0 : Maximum number of images to regenerate per type (0 = no limit)}
@@ -34,6 +36,7 @@ final class ImagesRegenerate extends Command
     /**
      * @var string
      */
+    #[Override]
     protected $description = 'Regenerate AI-generated images for devotional entries, themes, and Sabbath School lessons using the current prompt builder.';
 
     public function handle(

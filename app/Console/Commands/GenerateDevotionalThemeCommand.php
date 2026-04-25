@@ -8,6 +8,7 @@ use App\Actions\GenerateThemeWithEntries;
 use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
+use Override;
 use Throwable;
 
 final class GenerateDevotionalThemeCommand extends Command
@@ -15,6 +16,7 @@ final class GenerateDevotionalThemeCommand extends Command
     /**
      * @var string
      */
+    #[Override]
     protected $signature = 'devotional:generate
                             {prompt : The topic or prompt for the theme}
                             {--count=1 : Number of themes to generate}';
@@ -22,6 +24,7 @@ final class GenerateDevotionalThemeCommand extends Command
     /**
      * @var string
      */
+    #[Override]
     protected $description = 'Generate devotional themes with entries using AI and notify admins for review';
 
     public function handle(GenerateThemeWithEntries $generateThemeWithEntries): int
