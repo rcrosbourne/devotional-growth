@@ -92,6 +92,10 @@ export default function EditEntry({ theme, entry }: Props) {
         { autoStart: false },
     );
 
+    // When polling refreshes `entry`, end the polling/loading state if the
+    // generated image id has changed. Setting state inside the effect is the
+    // simplest way to react to async server-pushed prop changes here.
+
     useEffect(() => {
         if (!generatingImage) {
             return;
@@ -100,9 +104,15 @@ export default function EditEntry({ theme, entry }: Props) {
         const currentImageId = entry.generated_image?.id ?? null;
         if (currentImageId !== null && currentImageId !== imageIdAtStart) {
             stopPolling();
+            // eslint-disable-next-line @eslint-react/set-state-in-effect
             setGeneratingImage(false);
         }
-    }, [generatingImage, entry.generated_image?.id, imageIdAtStart]);
+    }, [
+        generatingImage,
+        entry.generated_image?.id,
+        imageIdAtStart,
+        stopPolling,
+    ]);
     const nextKeyRef = useRef(
         entry.scripture_references.length > 0
             ? entry.scripture_references.length

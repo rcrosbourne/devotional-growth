@@ -427,6 +427,10 @@ export default function DayView({
                                 {lessonDay.discussion_questions.map(
                                     (q, index) => (
                                         <li
+                                            // Discussion questions come from a
+                                            // frozen JSON column; index keys are
+                                            // stable here.
+                                            // eslint-disable-next-line @eslint-react/no-array-index-key
                                             key={index}
                                             className="text-sm leading-relaxed text-on-surface-variant"
                                         >
