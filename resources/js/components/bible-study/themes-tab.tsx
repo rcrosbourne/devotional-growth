@@ -1,3 +1,4 @@
+import { PassageSearchBar } from '@/components/bible-study/passage-search-bar';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { show as showPassage } from '@/routes/bible-study/passage';
@@ -61,6 +62,13 @@ export function ThemesTab({ themes, recentPassages }: Props) {
 
     return (
         <div className="space-y-8">
+            <section>
+                <h3 className="mb-3 text-xs font-medium tracking-[0.15em] text-on-surface-variant uppercase">
+                    Open any passage
+                </h3>
+                <PassageSearchBar />
+            </section>
+
             <form onSubmit={handleSearch} className="flex gap-2">
                 <div className="relative flex-1">
                     <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-on-surface-variant" />
