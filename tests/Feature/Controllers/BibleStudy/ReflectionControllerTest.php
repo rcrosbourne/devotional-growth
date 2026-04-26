@@ -65,3 +65,21 @@ it("forbids destroying someone else's reflection", function (): void {
 
     $this->actingAs($user)->delete(route('bible-study.reflections.destroy', $reflection))->assertForbidden();
 });
+
+it('redirects unauthenticated users from store', function (): void {
+    $this->post(route('bible-study.reflections.store'), [])->assertRedirectToRoute('login');
+});
+
+it('redirects unauthenticated users from update', function (): void {
+    $reflection = BibleStudyReflection::factory()->create();
+
+    $this->put(route('bible-study.reflections.update', $reflection), [
+        'body' => 'x', 'is_shared_with_partner' => false,
+    ])->assertRedirectToRoute('login');
+});
+
+it('redirects unauthenticated users from destroy', function (): void {
+    $reflection = BibleStudyReflection::factory()->create();
+
+    $this->delete(route('bible-study.reflections.destroy', $reflection))->assertRedirectToRoute('login');
+});
