@@ -1,3 +1,4 @@
+import { ThemesTab } from '@/components/bible-study/themes-tab';
 import { ChapterReaderModal } from '@/components/devotional/chapter-reader-modal';
 import { ProgressBar } from '@/components/devotional/progress-bar';
 import DevotionalLayout from '@/layouts/devotional-layout';
@@ -33,16 +34,43 @@ interface PlanProgress {
     started_at: string | null;
 }
 
+interface ThemeRow {
+    id: number;
+    slug: string;
+    title: string;
+    short_description: string;
+    passage_count: number;
+}
+
+interface RecentPassageRow {
+    theme_id: number | null;
+    book: string;
+    chapter: number;
+    verse_start: number;
+    verse_end: number | null;
+    last_accessed_at: string;
+}
+
 interface Props {
     plans: ReadingPlan[];
     activePlanIds: number[];
     progressByPlan: Record<number, PlanProgress>;
+    themes: ThemeRow[];
+    recentPassages: RecentPassageRow[];
 }
+
+type TabKey = 'themes' | 'plans' | 'words';
+
+const TABS: ReadonlyArray<{ key: TabKey; label: string }> = [
+    { key: 'themes', label: 'Themes' },
+    { key: 'plans', label: 'Reading Plans' },
+    { key: 'words', label: 'Word Studies' },
+];
 
 const DAILY_VERSES = [
     {
         text: 'The Lord is my shepherd; I shall not want. He maketh me to lie down in green pastures: he leadeth me beside the still waters.',
-        reference: 'Psalm 23:1\u20132',
+        reference: 'Psalm 23:1–2',
         book: 'Psalm',
         chapter: 23,
     },
@@ -232,8 +260,11 @@ export default function BibleStudyIndex({
     plans,
     activePlanIds,
     progressByPlan,
+    themes,
+    recentPassages,
 }: Props) {
     const verse = getDailyVerse();
+    const [tab, setTab] = useState<TabKey>('themes');
     const [chapterOpen, setChapterOpen] = useState(false);
     const activePlans = plans.filter((p) => activePlanIds.includes(p.id));
     const inactivePlans = plans.filter((p) => !activePlanIds.includes(p.id));
@@ -242,95 +273,44 @@ export default function BibleStudyIndex({
         <DevotionalLayout>
             <Head title="Bible Study" />
 
-            <div className="px-6 py-8 md:px-12 lg:px-16">
-                <div className="mx-auto max-w-7xl space-y-16">
-                    {/* ── Verse of the Day ── */}
-                    <section className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12">
-                        <div className="lg:col-span-8">
-                            <p className="mb-4 text-[11px] font-semibold tracking-[0.3em] text-moss uppercase">
-                                Verse of the Day
-                            </p>
-                            <blockquote className="space-y-6">
-                                <p className="font-serif text-3xl leading-snug tracking-tight text-on-surface md:text-4xl lg:text-5xl">
-                                    &ldquo;{verse.text}&rdquo;
-                                </p>
-                                <cite className="block text-sm font-medium tracking-widest text-on-surface-variant uppercase not-italic">
-                                    &mdash; {verse.reference}
-                                </cite>
-                            </blockquote>
-                            <div className="mt-8 flex gap-3">
-                                <button
-                                    type="button"
-                                    onClick={() => setChapterOpen(true)}
-                                    className="inline-flex items-center gap-2 rounded-lg bg-moss px-6 py-3 text-xs font-bold tracking-widest text-moss-foreground uppercase transition-opacity hover:opacity-90"
-                                >
-                                    <BookOpen className="size-4" />
-                                    Read Chapter
-                                </button>
-                            </div>
-                        </div>
-                        <div className="hidden lg:col-span-4 lg:block">
-                            <div className="aspect-[4/5] overflow-hidden rounded-3xl bg-gradient-to-br from-surface-container-high to-surface-container-highest">
-                                <div className="flex h-full w-full items-center justify-center">
-                                    <BookOpen className="size-20 text-on-surface-variant/10" />
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+            <div className="mx-auto max-w-5xl px-4 py-8 md:px-8">
+                <header className="mb-6">
+                    <h1 className="font-serif text-4xl font-medium tracking-tight text-on-surface">
+                        Bible Study
+                    </h1>
+                </header>
 
-                    {/* ── Deep Word Study ── */}
-                    <section className="overflow-hidden rounded-[2rem] bg-surface-container-low p-8 lg:p-12">
-                        <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
-                            <div>
-                                <p className="mb-2 text-[10px] font-semibold tracking-[0.2em] text-on-surface-variant uppercase">
-                                    Lexicon Tool
-                                </p>
-                                <h3 className="mb-4 font-serif text-3xl tracking-tight">
-                                    Deep Word Study
-                                </h3>
-                                <p className="mb-6 max-w-sm leading-relaxed text-on-surface-variant">
-                                    Unpack the original Hebrew and Greek
-                                    meanings. Discover the cultural context
-                                    behind every verse.
-                                </p>
-                                <WordStudySearchBox />
-                            </div>
-                            <div className="grid grid-cols-2 gap-4">
-                                <Link
-                                    href={wordStudySearch.url({
-                                        query: { q: 'logos' },
-                                    })}
-                                    prefetch
-                                    className="group rounded-2xl bg-surface-container-highest p-6 transition-colors hover:bg-surface-container-high"
-                                >
-                                    <span className="font-serif text-2xl text-moss italic">
-                                        Logos
-                                    </span>
-                                    <p className="mt-2 text-xs tracking-tight text-on-surface-variant uppercase">
-                                        Greek: Word, Reason
-                                    </p>
-                                    <Languages className="mt-3 size-4 text-on-surface-variant/30 transition-colors group-hover:text-moss" />
-                                </Link>
-                                <Link
-                                    href={wordStudySearch.url({
-                                        query: { q: 'hesed' },
-                                    })}
-                                    prefetch
-                                    className="group rounded-2xl bg-surface-container-highest p-6 transition-colors hover:bg-surface-container-high"
-                                >
-                                    <span className="font-serif text-2xl text-moss italic">
-                                        Hesed
-                                    </span>
-                                    <p className="mt-2 text-xs tracking-tight text-on-surface-variant uppercase">
-                                        Hebrew: Lovingkindness
-                                    </p>
-                                    <Languages className="mt-3 size-4 text-on-surface-variant/30 transition-colors group-hover:text-moss" />
-                                </Link>
-                            </div>
-                        </div>
-                    </section>
+                <div
+                    role="tablist"
+                    className="mb-8 flex gap-2 border-b border-border"
+                >
+                    {TABS.map((t) => (
+                        <button
+                            key={t.key}
+                            type="button"
+                            role="tab"
+                            aria-selected={tab === t.key}
+                            onClick={() => setTab(t.key)}
+                            className={cn(
+                                'border-b-2 px-3 pt-1 pb-2 text-sm transition-colors',
+                                tab === t.key
+                                    ? 'border-moss font-medium text-on-surface'
+                                    : 'border-transparent text-on-surface-variant hover:text-on-surface',
+                            )}
+                        >
+                            {t.label}
+                        </button>
+                    ))}
+                </div>
 
-                    {/* ── Reading Journeys ── */}
+                {tab === 'themes' && (
+                    <ThemesTab
+                        themes={themes}
+                        recentPassages={recentPassages}
+                    />
+                )}
+
+                {tab === 'plans' && (
                     <section>
                         <div className="mb-8 flex items-end justify-between">
                             <div>
@@ -427,7 +407,97 @@ export default function BibleStudyIndex({
                             </>
                         )}
                     </section>
-                </div>
+                )}
+
+                {tab === 'words' && (
+                    <div className="space-y-16">
+                        {/* ── Verse of the Day ── */}
+                        <section className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12">
+                            <div className="lg:col-span-8">
+                                <p className="mb-4 text-[11px] font-semibold tracking-[0.3em] text-moss uppercase">
+                                    Verse of the Day
+                                </p>
+                                <blockquote className="space-y-6">
+                                    <p className="font-serif text-3xl leading-snug tracking-tight text-on-surface md:text-4xl lg:text-5xl">
+                                        &ldquo;{verse.text}&rdquo;
+                                    </p>
+                                    <cite className="block text-sm font-medium tracking-widest text-on-surface-variant uppercase not-italic">
+                                        &mdash; {verse.reference}
+                                    </cite>
+                                </blockquote>
+                                <div className="mt-8 flex gap-3">
+                                    <button
+                                        type="button"
+                                        onClick={() => setChapterOpen(true)}
+                                        className="inline-flex items-center gap-2 rounded-lg bg-moss px-6 py-3 text-xs font-bold tracking-widest text-moss-foreground uppercase transition-opacity hover:opacity-90"
+                                    >
+                                        <BookOpen className="size-4" />
+                                        Read Chapter
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="hidden lg:col-span-4 lg:block">
+                                <div className="aspect-[4/5] overflow-hidden rounded-3xl bg-gradient-to-br from-surface-container-high to-surface-container-highest">
+                                    <div className="flex h-full w-full items-center justify-center">
+                                        <BookOpen className="size-20 text-on-surface-variant/10" />
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* ── Deep Word Study ── */}
+                        <section className="overflow-hidden rounded-[2rem] bg-surface-container-low p-8 lg:p-12">
+                            <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
+                                <div>
+                                    <p className="mb-2 text-[10px] font-semibold tracking-[0.2em] text-on-surface-variant uppercase">
+                                        Lexicon Tool
+                                    </p>
+                                    <h3 className="mb-4 font-serif text-3xl tracking-tight">
+                                        Deep Word Study
+                                    </h3>
+                                    <p className="mb-6 max-w-sm leading-relaxed text-on-surface-variant">
+                                        Unpack the original Hebrew and Greek
+                                        meanings. Discover the cultural context
+                                        behind every verse.
+                                    </p>
+                                    <WordStudySearchBox />
+                                </div>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <Link
+                                        href={wordStudySearch.url({
+                                            query: { q: 'logos' },
+                                        })}
+                                        prefetch
+                                        className="group rounded-2xl bg-surface-container-highest p-6 transition-colors hover:bg-surface-container-high"
+                                    >
+                                        <span className="font-serif text-2xl text-moss italic">
+                                            Logos
+                                        </span>
+                                        <p className="mt-2 text-xs tracking-tight text-on-surface-variant uppercase">
+                                            Greek: Word, Reason
+                                        </p>
+                                        <Languages className="mt-3 size-4 text-on-surface-variant/30 transition-colors group-hover:text-moss" />
+                                    </Link>
+                                    <Link
+                                        href={wordStudySearch.url({
+                                            query: { q: 'hesed' },
+                                        })}
+                                        prefetch
+                                        className="group rounded-2xl bg-surface-container-highest p-6 transition-colors hover:bg-surface-container-high"
+                                    >
+                                        <span className="font-serif text-2xl text-moss italic">
+                                            Hesed
+                                        </span>
+                                        <p className="mt-2 text-xs tracking-tight text-on-surface-variant uppercase">
+                                            Hebrew: Lovingkindness
+                                        </p>
+                                        <Languages className="mt-3 size-4 text-on-surface-variant/30 transition-colors group-hover:text-moss" />
+                                    </Link>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                )}
             </div>
 
             <ChapterReaderModal
