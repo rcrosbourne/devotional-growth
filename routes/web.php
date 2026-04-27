@@ -11,6 +11,10 @@ use App\Http\Controllers\Admin\BibleStudy\WordHighlightController as AdminBibleS
 use App\Http\Controllers\Admin\DevotionalEntryController as AdminDevotionalEntryController;
 use App\Http\Controllers\Admin\SabbathSchool\QuarterlyController as AdminSabbathSchoolController;
 use App\Http\Controllers\Admin\ThemeController as AdminThemeController;
+use App\Http\Controllers\BibleStudy\PassageController as BibleStudyPassageController;
+use App\Http\Controllers\BibleStudy\ReflectionController as BibleStudyReflectionController;
+use App\Http\Controllers\BibleStudy\SearchController as BibleStudySearchController;
+use App\Http\Controllers\BibleStudy\ThemeController as BibleStudyThemeController;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\DevotionalEntryController;
 use App\Http\Controllers\DevotionalImageController;
@@ -79,6 +83,15 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
     // Word Study...
     Route::get('bible-study/word-study/search', [WordStudyController::class, 'search'])->name('bible-study.word-study.search');
     Route::get('bible-study/word-study/{wordStudy}', [WordStudyController::class, 'show'])->name('bible-study.word-study.show');
+
+    // Bible Study Themes (user-facing)...
+    Route::get('bible-study/themes', new BibleStudyThemeController()->index(...))->name('bible-study.themes.index');
+    Route::get('bible-study/themes/{slug}', new BibleStudyThemeController()->show(...))->name('bible-study.themes.show');
+    Route::get('bible-study/passage', new BibleStudyPassageController()->show(...))->name('bible-study.passage.show');
+    Route::get('bible-study/search', new BibleStudySearchController()->show(...))->name('bible-study.search');
+    Route::post('bible-study/reflections', new BibleStudyReflectionController()->store(...))->name('bible-study.reflections.store');
+    Route::put('bible-study/reflections/{reflection}', new BibleStudyReflectionController()->update(...))->name('bible-study.reflections.update');
+    Route::delete('bible-study/reflections/{reflection}', new BibleStudyReflectionController()->destroy(...))->name('bible-study.reflections.destroy');
 
     // Sabbath School...
     Route::get('sabbath-school', new SabbathSchoolQuarterlyController()->index(...))->name('sabbath-school.index');

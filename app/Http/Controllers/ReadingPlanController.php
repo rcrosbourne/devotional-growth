@@ -6,6 +6,9 @@ namespace App\Http\Controllers;
 
 use App\Actions\ActivateReadingPlan;
 use App\Actions\CompleteReadingDay;
+use App\Enums\BibleStudyThemeStatus;
+use App\Models\BibleStudySession;
+use App\Models\BibleStudyTheme;
 use App\Models\ReadingPlan;
 use App\Models\ReadingPlanDay;
 use App\Models\ReadingPlanProgress;
@@ -51,10 +54,39 @@ final readonly class ReadingPlanController
             ];
         }
 
+        $themes = BibleStudyTheme::query()
+            ->where('status', BibleStudyThemeStatus::Approved)
+            ->withCount('passages')
+            ->orderBy('title')
+            ->get()
+            ->map(fn (BibleStudyTheme $t): array => [
+                'id' => $t->id,
+                'slug' => $t->slug,
+                'title' => $t->title,
+                'short_description' => $t->short_description,
+                'passage_count' => $t->passages_count,
+            ])->all();
+
+        $recentPassages = BibleStudySession::query()
+            ->where('user_id', $user->id)
+            ->latest('last_accessed_at')
+            ->limit(5)
+            ->get()
+            ->map(fn (BibleStudySession $s): array => [
+                'theme_id' => $s->bible_study_theme_id,
+                'book' => $s->current_book,
+                'chapter' => $s->current_chapter,
+                'verse_start' => $s->current_verse_start,
+                'verse_end' => $s->current_verse_end,
+                'last_accessed_at' => $s->last_accessed_at,
+            ])->all();
+
         return Inertia::render('bible-study/index', [
             'plans' => $plans,
             'activePlanIds' => $activePlanIds->values(),
             'progressByPlan' => $progressByPlan,
+            'themes' => $themes,
+            'recentPassages' => $recentPassages,
         ]);
     }
 
