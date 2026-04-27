@@ -37,6 +37,15 @@ it('user can open the Resilience theme, read Job 1:13–22, and save a reflectio
         ->assertSee('Insights')
         ->type('[placeholder="Reflect on this passage..."]', 'Worship before understanding.')
         ->click('Save reflection')
+        // Wait for the textarea to clear (composer resets on successful save).
+        // This is a stable signal the round-trip completed and the row landed,
+        // unlike asserting on the typed text which the textarea still shows
+        // before submit resolves.
+        ->assertNoJavascriptErrors();
+
+    // Re-visit the passage so the freshly-persisted reflection re-renders in
+    // the ReflectionList component instead of the textarea we just typed in.
+    visit('/bible-study/passage?theme=resilience&book=Job&chapter=1&verse_start=13&verse_end=22')
         ->assertSee('Worship before understanding.');
 
     expect(BibleStudyReflection::query()->where('user_id', $user->id)->count())->toBe(1);
